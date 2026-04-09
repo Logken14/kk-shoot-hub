@@ -13,7 +13,6 @@
     --border: #ddd8d0;
     --accent: #9a6e32;
     --accent2: #2e7a8c;
-    --accent3: #a04040;
     --text: #1c1a17;
     --muted: #7a7468;
     --cam: #9a6e32;
@@ -21,9 +20,7 @@
     --shot: #4a7a32;
     --cta: #8c2e6a;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -33,343 +30,122 @@
     padding: 0 0 80px 0;
   }
 
-  /* STICKY HEADER */
+  /* PROGRESS */
+  .progress-bar { height: 3px; background: var(--border); position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.1s; }
+
+  /* HEADER */
   .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: sticky; top: 0; z-index: 100;
     background: rgba(250,248,245,0.96);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .site-header .brand {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .site-header .day-tag {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  /* NAV PILLS */
-  .nav-scroll {
-    overflow-x: auto;
-    scrollbar-width: none;
     padding: 12px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 8px;
-    background: var(--bg);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
   }
-  .nav-scroll::-webkit-scrollbar { display: none; }
-  .nav-pill {
-    flex-shrink: 0;
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-  .nav-pill:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-  }
+  .site-header .brand { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .day-tag { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; }
 
-  /* INTRO BANNER */
-  .intro {
-    padding: 32px 20px 24px;
-    border-bottom: 1px solid var(--border);
+  /* LANGUAGE TOGGLE */
+  .lang-toggle {
+    display: flex; align-items: center; gap: 2px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 3px;
   }
-  .intro h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--text);
-    line-height: 1.2;
-    margin-bottom: 8px;
+  .lang-btn {
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; padding: 4px 12px; border-radius: 16px;
+    border: none; cursor: pointer; transition: all 0.15s;
+    background: transparent; color: var(--muted);
   }
+  .lang-btn.active { background: var(--accent); color: #fff; }
+
+  /* NAV */
+  .nav-scroll { overflow-x: auto; scrollbar-width: none; padding: 10px 20px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; background: var(--bg); }
+  .nav-scroll::-webkit-scrollbar { display: none; }
+  .nav-pill { flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; cursor: pointer; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
+  .nav-pill:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* INTRO */
+  .intro { padding: 28px 20px 22px; border-bottom: 1px solid var(--border); }
+  .intro h1 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
   .intro h1 span { color: var(--accent); }
-  .intro p {
-    color: var(--muted);
-    font-size: 13px;
-    max-width: 560px;
-  }
-  .meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
-  }
-  .meta-tag {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
+  .intro p { color: var(--muted); font-size: 13px; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .meta-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); color: var(--muted); }
   .meta-tag.platform { border-color: var(--accent); color: var(--accent); }
   .meta-tag.style { border-color: var(--accent2); color: var(--accent2); }
 
-  /* EPISODE CARD */
-  .episode {
-    margin: 0;
-    border-bottom: 1px solid var(--border);
-    scroll-margin-top: 100px;
-  }
-
-  .ep-header {
-    padding: 24px 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    user-select: none;
-  }
+  /* EPISODE */
+  .episode { border-bottom: 1px solid var(--border); scroll-margin-top: 110px; }
+  .ep-header { padding: 22px 44px 14px 20px; cursor: pointer; user-select: none; position: relative; transition: background 0.15s; }
   .ep-header:hover { background: #edeae4; }
-
-  .ep-number {
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .ep-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.3;
-  }
-  .ep-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
-  }
-  .ep-badge {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
+  .ep-number { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .ep-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .ep-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .ep-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
   .badge-cam { background: rgba(154,110,50,0.10); color: var(--cam); border: 1px solid rgba(154,110,50,0.25); }
   .badge-vo  { background: rgba(46,122,140,0.10); color: var(--vo);  border: 1px solid rgba(46,122,140,0.25); }
   .badge-solo { background: rgba(74,122,50,0.10); color: var(--shot); border: 1px solid rgba(74,122,50,0.25); }
-
-  .ep-toggle {
-    position: absolute;
-    right: 20px;
-    top: 28px;
-    font-size: 18px;
-    color: var(--muted);
-    transition: transform 0.2s;
-  }
-  .ep-header { position: relative; }
+  .ep-toggle { position: absolute; right: 18px; top: 26px; font-size: 16px; color: var(--muted); transition: transform 0.2s; }
   .episode.open .ep-toggle { transform: rotate(180deg); }
 
-  /* SCRIPT BODY */
-  .ep-body {
-    display: none;
-    padding: 0 20px 28px;
-  }
+  /* BODY */
+  .ep-body { display: none; padding: 4px 20px 26px; }
   .episode.open .ep-body { display: block; }
 
-  /* SCENE BLOCKS */
-  .scene {
-    margin-bottom: 20px;
-    border-left: 3px solid var(--border);
-    padding-left: 16px;
-  }
+  /* SCENES */
+  .scene { margin-bottom: 18px; border-left: 3px solid var(--border); padding-left: 14px; }
   .scene.cam-scene { border-color: var(--cam); }
-  .scene.vo-scene  { border-color: var(--vo);  }
-  .scene.shot-scene { border-color: var(--shot); }
+  .scene.vo-scene  { border-color: var(--vo); }
   .scene.cta-scene { border-color: var(--cta); }
+  .scene-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .scene-label.cam { color: var(--cam); }
+  .scene-label.vo  { color: var(--vo); }
+  .scene-label.cta { color: var(--cta); }
+  .scene-label .icon { font-size: 12px; }
+  .scene-subtitle { font-size: 11px; color: var(--muted); font-style: italic; margin-bottom: 7px; }
+  .lines { font-size: 15px; line-height: 1.75; color: var(--text); }
+  .lines p { margin-bottom: 5px; }
+  .lines .beat { color: var(--muted); font-size: 12px; font-style: italic; margin: 3px 0; }
+  .lines .emphasis { color: var(--accent); font-weight: 500; }
+  .cta-block { display: flex; flex-direction: column; gap: 8px; }
+  .cta-item { display: flex; gap: 10px; align-items: flex-start; }
+  .cta-platform { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cta); min-width: 80px; padding-top: 2px; flex-shrink: 0; }
+  .cta-line { font-size: 14px; color: var(--text); font-style: italic; }
+  .shoot-note { margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .shoot-note-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .shoot-note ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .shoot-note ul li { font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; }
+  .shoot-note ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
 
-  .scene-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .scene-label.cam  { color: var(--cam); }
-  .scene-label.vo   { color: var(--vo);  }
-  .scene-label.shot { color: var(--shot); }
-  .scene-label.cta  { color: var(--cta); }
-
-  .scene-label .icon { font-size: 13px; }
-
-  .scene-subtitle {
-    font-size: 11px;
-    color: var(--muted);
-    font-style: italic;
-    margin-bottom: 8px;
-    letter-spacing: 0.02em;
-  }
-
-  /* SPOKEN LINES */
-  .lines {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--text);
-  }
-  .lines p {
-    margin-bottom: 6px;
-  }
-  .lines .beat {
-    color: var(--muted);
-    font-size: 12px;
-    font-style: italic;
-    margin: 4px 0;
-  }
-  .lines .emphasis {
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* SHOT DIRECTION */
-  .shot-dir {
-    font-size: 13px;
-    color: var(--shot);
-    font-style: italic;
-    line-height: 1.6;
-  }
-  .shot-dir p { margin-bottom: 4px; }
-
-  /* CTA BLOCK */
-  .cta-block {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .cta-item {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .cta-platform {
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--cta);
-    min-width: 90px;
-    padding-top: 2px;
-    flex-shrink: 0;
-  }
-  .cta-line {
-    font-size: 14px;
-    color: var(--text);
-    font-style: italic;
-  }
-
-  /* SHOOT NOTE */
-  .shoot-note {
-    margin-top: 16px;
-    background: #f0ece6;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-  }
-  .shoot-note-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-  .shoot-note ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .shoot-note ul li {
-    font-size: 13px;
-    color: var(--muted);
-    padding-left: 14px;
-    position: relative;
-  }
-  .shoot-note ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 11px;
-  }
-
-  /* DIVIDER */
-  .scene-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 16px 0;
-  }
-
-  /* PROGRESS */
-  .progress-bar {
-    height: 2px;
-    background: var(--border);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 200;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    width: 0%;
-    transition: width 0.1s;
-  }
+  /* LANG HIDDEN */
+  [data-lang] { display: none; }
+  body.lang-en [data-lang="en"] { display: block; }
+  body.lang-ja [data-lang="ja"] { display: block; }
+  /* inline spans */
+  span[data-lang] { display: none; }
+  body.lang-en span[data-lang="en"] { display: inline; }
+  body.lang-ja span[data-lang="ja"] { display: inline; }
 </style>
 </head>
-<body>
+<body class="lang-en">
 
 <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
 
 <header class="site-header">
   <span class="brand">Kawanishi Kaban</span>
-  <span class="day-tag">📅 Day 1 · Apr 12 · 9 Episodes</span>
+  <div class="header-right">
+    <span class="day-tag">
+      <span data-lang="en">📅 Day 1 · Apr 12 · 9 Episodes</span>
+      <span data-lang="ja">📅 Day 1 · 4/12 · 9本</span>
+    </span>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+    </div>
+  </div>
 </header>
 
 <nav class="nav-scroll">
@@ -385,80 +161,124 @@
 </nav>
 
 <div class="intro">
-  <h1>Shoot Scripts<br><span>Day 1 — Talking Heads</span></h1>
-  <p>All on-camera episodes. Set up once, run through all 9. Prepare your key points the night before so you're not writing on set.</p>
+  <div data-lang="en">
+    <h1>Shoot Scripts<br><span>Day 1 — Talking Heads</span></h1>
+    <p>All on-camera episodes. Set up once, run through all 9. Prepare your key points the night before.</p>
+  </div>
+  <div data-lang="ja">
+    <h1>撮影スクリプト<br><span>Day 1 — トーキングヘッド</span></h1>
+    <p>全てカメラ正面のエピソードです。セッティングは一度だけ、9本まとめて撮影します。前日に要点を確認しておいてください。</p>
+  </div>
   <div class="meta-row">
     <span class="meta-tag platform">TikTok + YouTube Shorts</span>
-    <span class="meta-tag style">Under 60 sec · 30–45 sec ideal</span>
-    <span class="meta-tag">Solo shoot</span>
-    <span class="meta-tag">Workshop — on-camera corner</span>
+    <span class="meta-tag style">
+      <span data-lang="en">Under 60 sec · 30–45 sec ideal</span>
+      <span data-lang="ja">60秒以内 · 30〜45秒が理想</span>
+    </span>
+    <span class="meta-tag">
+      <span data-lang="en">Solo shoot</span>
+      <span data-lang="ja">一人撮影</span>
+    </span>
+    <span class="meta-tag">
+      <span data-lang="en">Workshop · On-camera corner</span>
+      <span data-lang="ja">工房 · カメラ正面コーナー</span>
+    </span>
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 1 -->
+<!-- ═══ EP 1 ═══ -->
 <div class="episode open" id="ep1">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 01 · Day 1 · Discovery</div>
-    <div class="ep-title">The Japanese bag brand the rest of the world hasn't found yet</div>
+    <div class="ep-number">Episode 01 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+    <div class="ep-title">
+      <span data-lang="en">The Japanese bag brand the rest of the world hasn't found yet</span>
+      <span data-lang="ja">世界がまだ知らない、日本のバッグブランド</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
       <span class="ep-badge badge-vo">Voiceover</span>
-      <span class="ep-badge badge-solo">Series Opener</span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Series Opener</span><span data-lang="ja">シリーズ初回</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
 
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera · Direct</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Hook — On Camera · Direct</span><span data-lang="ja">フック — カメラ正面・直接話しかける</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"There's a bag brand in Japan that 70,000 people already love —"</p>
         <p>"and almost none of them are outside Japan."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「日本に、7万人がすでに愛しているバッグブランドがあります。」</p>
+        <p>「でも、そのほとんどは日本国内のファンだけです。」</p>
+      </div></div>
     </div>
 
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — On Camera · Walking toward camera</div>
-      <div class="scene-subtitle">Medium shot. Bag held naturally. Takamatsu ambient sound. No music yet.</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — Walking toward camera</span><span data-lang="ja">シーン1 — カメラに向かって歩く</span></div>
+      <div class="scene-subtitle"><span data-lang="en">Medium shot. Bag held naturally. Takamatsu ambient sound. No music yet.</span><span data-lang="ja">ミディアムショット。バッグは自然に持つ。高松の環境音。BGMはまだ入れない。</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"There's a bag brand in Japan with 70,000 subscribers on YouTube —"</p>
         <p>"and almost none of them are outside Japan."</p>
         <p class="beat">[pause — let it land]</p>
         <p>"I've been working here for six months."</p>
         <p>"I'm just now starting to understand why it's this good."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「YouTubeで7万人の登録者を持つバッグブランドが日本にあります。」</p>
+        <p>「でも、そのほとんどは日本国内の人たちです。」</p>
+        <p class="beat">【間を置く — 言葉を届ける】</p>
+        <p>「私はここで働いて6ヶ月になります。」</p>
+        <p>「なぜこのブランドがこんなに良いのか、ようやく分かってきました。」</p>
+      </div></div>
     </div>
 
     <div class="scene vo-scene">
-      <div class="scene-label vo"><span class="icon">🎙</span> Scene 2 — Voiceover · Product detail shots</div>
-      <div class="scene-subtitle">Slow pan across abb exterior → handle close-up. Music in low.</div>
-      <div class="lines">
+      <div class="scene-label vo"><span class="icon">🎙</span> <span data-lang="en">Scene 2 — Voiceover · Product detail shots</span><span data-lang="ja">シーン2 — VO · 商品ディテール映像</span></div>
+      <div class="scene-subtitle"><span data-lang="en">Slow pan across abb exterior → handle close-up. Music in low.</span><span data-lang="ja">abbの外側をゆっくりパン → ハンドルのクローズアップ。BGMを小さく入れる。</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"The brand is called Kawanishi Kaban."</p>
         <p>"Based in Kagawa — the smallest prefecture in Japan."</p>
         <p>"No visible stitching on the body."</p>
         <p>"Setouchi leather on the handle."</p>
-        <p class="beat">[hold on the handle texture — 1 sec]</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「ブランド名は川西鞄。」</p>
+        <p>「拠点は香川県 — 日本一小さな都道府県です。」</p>
+        <p>「バッグ本体に縫い目は見えません。」</p>
+        <p>「ハンドルには瀬戸内レザーを使用しています。」</p>
+      </div></div>
     </div>
 
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — On Camera · Series hook</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Series hook</span><span data-lang="ja">シーン3 — シリーズの告知</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"Every day this month I'm going to show you something about this brand that surprised me."</p>
         <p>"Starting with this."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「今月は毎日、このブランドについて私が驚いたことをお伝えします。」</p>
+        <p>「まずはこれから。」</p>
+      </div></div>
     </div>
 
     <div class="scene vo-scene">
-      <div class="scene-label vo"><span class="icon">🎙</span> Scene 4 — Voiceover · Macro close-up</div>
-      <div class="scene-subtitle">Extreme close-up of abb exterior — find the bonded area, no seam.</div>
-      <div class="lines">
+      <div class="scene-label vo"><span class="icon">🎙</span> <span data-lang="en">Scene 4 — Voiceover · Macro close-up</span><span data-lang="ja">シーン4 — VO · マクロ接写</span></div>
+      <div class="scene-subtitle"><span data-lang="en">Extreme close-up of abb exterior — bonded area, no seam.</span><span data-lang="ja">abbの外側を極限まで寄る — 接着部分、縫い目なし。</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"No stitching on the outside."</p>
         <p>"The whole bag is bonded."</p>
         <p class="beat">[hold]</p>
         <p>"That's not normal."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「外側に縫い目がありません。」</p>
+        <p>「バッグ全体が接着されています。」</p>
+        <p class="beat">【間を置く】</p>
+        <p>「これは普通ではありません。」</p>
+      </div></div>
     </div>
 
     <div class="scene cta-scene">
@@ -466,643 +286,703 @@
       <div class="cta-block">
         <div class="cta-item">
           <span class="cta-platform">TikTok</span>
-          <span class="cta-line">"Follow if you want to see what else this brand is hiding."</span>
+          <span class="cta-line">
+            <span data-lang="en">"Follow if you want to see what else this brand is hiding."</span>
+            <span data-lang="ja">「このブランドが隠しているものが気になる方はフォローを。」</span>
+          </span>
         </div>
         <div class="cta-item">
           <span class="cta-platform">YT Shorts</span>
-          <span class="cta-line">"Subscribe — tomorrow I'll show you where this brand actually came from."</span>
+          <span class="cta-line">
+            <span data-lang="en">"Subscribe — tomorrow I'll show you where this brand actually came from."</span>
+            <span data-lang="ja">「チャンネル登録を。明日はこのブランドの原点をお見せします。」</span>
+          </span>
         </div>
       </div>
     </div>
 
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Shoot Priorities</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Shoot Priorities</span><span data-lang="ja">撮影の優先事項</span></div>
       <ul>
-        <li>Walk toward camera naturally — not posed, just moving</li>
-        <li>Wide Takamatsu shot behind you — not Tokyo</li>
-        <li>Slow pan across abb exterior — bonded seam area</li>
-        <li>Handle close-up — Setouchi leather texture</li>
-        <li>One moment holding bag, no words</li>
+        <li><span data-lang="en">Walk toward camera naturally — not posed</span><span data-lang="ja">カメラに向かって自然に歩く — ポーズをとらない</span></li>
+        <li><span data-lang="en">Wide Takamatsu shot behind you — not Tokyo</span><span data-lang="ja">後ろに高松の広角ショット — 東京ではなく</span></li>
+        <li><span data-lang="en">Slow pan across abb exterior — bonded seam area</span><span data-lang="ja">abbの外側をゆっくりパン — 接着部分</span></li>
+        <li><span data-lang="en">Handle close-up — Setouchi leather texture</span><span data-lang="ja">ハンドルのクローズアップ — 瀬戸内レザーの質感</span></li>
+        <li><span data-lang="en">One silent moment holding the bag</span><span data-lang="ja">バッグを持ちながら無言のシーンを1カット</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 7 -->
+<!-- ═══ EP 7 ═══ -->
 <div class="episode" id="ep7">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 07 · Day 1 · Reaction</div>
-    <div class="ep-title">Western people have some wild assumptions about Japanese bags</div>
+    <div class="ep-number">Episode 07 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+    <div class="ep-title">
+      <span data-lang="en">Western people have some wild assumptions about Japanese bags</span>
+      <span data-lang="ja">海外の人が持つ、日本のバッグに対する意外な思い込み</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Solo · Casual</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Casual</span><span data-lang="ja">カジュアル</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera · Direct</div>
-      <div class="scene-subtitle">Prepare 3–4 real comments or Reddit posts in advance. Have them on your phone.</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Hook</span><span data-lang="ja">フック</span></div>
+      <div class="scene-subtitle"><span data-lang="en">Have 3–4 real comments ready on your phone.</span><span data-lang="ja">本物のコメントを3〜4件、スマホに用意しておく。</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"I've been reading what people outside Japan actually think about Japanese bag brands."</p>
         <p class="beat">[beat]</p>
         <p>"Some of these comments are wild."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「海外の人が日本のバッグブランドについて実際にどう思っているか、コメントを読んでみました。」</p>
+        <p class="beat">【間】</p>
+        <p>「なかなかびっくりするものがありました。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — React to Comment 1</div>
-      <div class="scene-subtitle">Read or show the comment. React naturally. Don't over-perform.</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — React to Comment 1</span><span data-lang="ja">シーン1 — コメント1への反応</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"Okay so someone said: <span class="emphasis">[read comment]</span>"</p>
         <p class="beat">[genuine reaction — short, real]</p>
         <p>"Here's what's actually true:"</p>
         <p>"<span class="emphasis">[correct it in 1–2 sentences]</span>"</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「こんなコメントがありました：<span class="emphasis">【コメントを読む】</span>」</p>
+        <p class="beat">【自然なリアクション — 短く、本音で】</p>
+        <p>「実際のところはこうです：」</p>
+        <p>「<span class="emphasis">【1〜2文で訂正する】</span>」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — React to Comment 2</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — React to Comment 2</span><span data-lang="ja">シーン2 — コメント2への反応</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"This one actually made me laugh —"</p>
         <p>"<span class="emphasis">[read comment]</span>"</p>
         <p class="beat">[beat]</p>
-        <p>"<span class="emphasis">[real honest reaction]</span>"</p>
-      </div>
+        <p>"<span class="emphasis">[honest reaction]</span>"</p>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「これは思わず笑ってしまいました —」</p>
+        <p>「<span class="emphasis">【コメントを読む】</span>」</p>
+        <p class="beat">【間】</p>
+        <p>「<span class="emphasis">【正直な反応】</span>」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Closer</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Close</span><span data-lang="ja">まとめ</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"I had the same assumptions before I moved here."</p>
         <p>"Being inside the workshop kind of changed all of that."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「日本に来る前は、私も同じように思っていました。」</p>
+        <p>「工房の中に入って、全部変わりました。」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
       <div class="cta-block">
         <div class="cta-item">
-          <span class="cta-platform">TikTok</span>
-          <span class="cta-line">"Drop your assumption in the comments — I'll tell you if it's true."</span>
-        </div>
-        <div class="cta-item">
-          <span class="cta-platform">YT Shorts</span>
-          <span class="cta-line">"What do you think Japanese bags actually cost? Guess in the comments."</span>
+          <span class="cta-platform">Both</span>
+          <span class="cta-line">
+            <span data-lang="en">"Drop your assumption in the comments — I'll tell you if it's true."</span>
+            <span data-lang="ja">「あなたが思い込んでいることをコメントに書いてください。本当かどうかお答えします。」</span>
+          </span>
         </div>
       </div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Prep Before Shoot</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Prep</span><span data-lang="ja">事前準備</span></div>
       <ul>
-        <li>Find 3–4 real Reddit/TikTok comments about Japanese bag brands tonight</li>
-        <li>Pick ones that are wrong in an interesting way — not mean, just genuinely mistaken</li>
-        <li>No props needed. Casual setup. Energy slightly playful, not defensive.</li>
+        <li><span data-lang="en">Find 3–4 real Reddit/TikTok comments about Japanese bag brands tonight</span><span data-lang="ja">今夜、日本のバッグブランドに関するコメントを3〜4件調べておく</span></li>
+        <li><span data-lang="en">Pick ones that are wrong in an interesting way — not mean</span><span data-lang="ja">面白い形で間違っているものを選ぶ — 悪意のあるものは避ける</span></li>
+        <li><span data-lang="en">No props needed. Casual energy.</span><span data-lang="ja">小道具不要。リラックスした雰囲気で。</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 8 -->
+<!-- ═══ EP 8 ═══ -->
 <div class="episode" id="ep8">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 08 · Day 1 · Discovery</div>
-    <div class="ep-title">What I noticed after one week of daily use</div>
+    <div class="ep-number">Episode 08 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+    <div class="ep-title">
+      <span data-lang="en">What I noticed after one week of daily use</span>
+      <span data-lang="ja">1週間毎日使って気づいたこと</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Honest · Personal</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Honest · Personal</span><span data-lang="ja">正直・個人的</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
-      <div class="lines">
-        <p>"I've been using this bag every day for a week."</p>
-        <p>"A few things I didn't expect."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
+      <div data-lang="en"><div class="lines"><p>"I've been using this bag every day for a week. A few things I didn't expect."</p></div></div>
+      <div data-lang="ja"><div class="lines"><p>「このバッグを1週間、毎日使いました。予想外だったことが何点かあります。」</p></div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — Observation 1</div>
-      <div class="scene-subtitle">Hold abb naturally. Don't look at it too much — talk from experience.</div>
-      <div class="lines">
-        <p>"The handle."</p>
-        <p>"I didn't think it would matter which leather they used there."</p>
-        <p>"But after a week of holding it in summer heat —"</p>
-        <p>"it actually feels different. Better. Less slippery."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — Observation 1</span><span data-lang="ja">シーン1 — 気づき1</span></div>
+      <div class="scene-subtitle"><span data-lang="en">Hold abb naturally. Talk from experience, not script.</span><span data-lang="ja">abbを自然に持つ。スクリプトではなく経験から話す。</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"The handle. I didn't think it would matter which leather they used there."</p>
+        <p>"But after a week of holding it in summer heat — it actually feels different. Better."</p>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「ハンドルです。どのレザーを使うかなんてあまり気にしていませんでした。」</p>
+        <p>「でも夏の暑さの中で1週間持ち続けると — 明らかに違いを感じます。より良いです。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — Observation 2</div>
-      <div class="lines">
-        <p>"The weight."</p>
-        <p>"I thought it'd be heavier for how solid it feels."</p>
-        <p>"It's not. It sits well."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — Observation 2</span><span data-lang="ja">シーン2 — 気づき2</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"The weight. I thought it'd be heavier for how solid it feels. It's not. It sits well."</p>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「重さです。あれだけしっかりしているので重いと思っていました。でも違います。持ちやすいです。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Honest Observation</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Honest observation (fill in yourself)</span><span data-lang="ja">シーン3 — 正直な気づき（自分で追加）</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"One thing I'm still figuring out —"</p>
         <p>"<span class="emphasis">[add your own genuine observation here]</span>"</p>
-        <p class="beat">[this keeps it real, not promotional]</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「まだ分かりかねていることが一つあります —」</p>
+        <p>「<span class="emphasis">【自分の正直な気づきをここに入れる】</span>」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">Both</span>
-          <span class="cta-line">"I'll keep updating this as I use it longer. Follow if you want to see how it holds up."</span>
-        </div>
-      </div>
+      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
+        <span class="cta-line">
+          <span data-lang="en">"I'll keep updating this as I use it longer. Follow to see how it holds up."</span>
+          <span data-lang="ja">「使い続けながら更新していきます。経過が気になる方はフォローを。」</span>
+        </span>
+      </div></div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
       <ul>
-        <li>Use abb as the hero bag — hold it, don't set it on a table</li>
-        <li>Tone: relaxed, honest — like talking to a friend, not reviewing a product</li>
-        <li>Fill in Scene 3 with something real you've actually noticed</li>
+        <li><span data-lang="en">Use abb — hold it, don't set it on a table</span><span data-lang="ja">abbを使う — テーブルに置かず、持ったまま話す</span></li>
+        <li><span data-lang="en">Relaxed, honest tone — like talking to a friend</span><span data-lang="ja">リラックスして正直に — 友達に話すような感覚で</span></li>
+        <li><span data-lang="en">Scene 3: fill in with something you actually noticed</span><span data-lang="ja">シーン3：実際に気づいたことを入れる</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 14 -->
+<!-- ═══ EP 14 ═══ -->
 <div class="episode" id="ep14">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 14 · Day 1 · Discovery</div>
-    <div class="ep-title">The thing foreigners always ask me about this bag</div>
+    <div class="ep-number">Episode 14 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+    <div class="ep-title">
+      <span data-lang="en">The thing foreigners always ask me about this bag</span>
+      <span data-lang="ja">外国人が必ずこのバッグについて聞いてくること</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Conversational</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Conversational</span><span data-lang="ja">会話調</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
-      <div class="lines">
-        <p>"Every time I have this bag outside the workshop —"</p>
-        <p>"someone asks me the same question."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
+      <div data-lang="en"><div class="lines"><p>"Every time I have this bag outside the workshop — someone asks me the same question."</p></div></div>
+      <div data-lang="ja"><div class="lines"><p>「このバッグを工房の外で持っていると — 必ず同じ質問をされます。」</p></div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Question</div>
-      <div class="scene-subtitle">Pick one: price / where to buy / brand name / why it looks different. Choose the most real one.</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Question</span><span data-lang="ja">シーン1 — 質問</span></div>
+      <div class="scene-subtitle"><span data-lang="en">Pick one: price / where to buy / why it looks different.</span><span data-lang="ja">一つ選ぶ：値段 / どこで買えるか / なぜ見た目が違うか</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"They ask: <span class="emphasis">'How much is it?'</span>"</p>
-        <p class="beat">[or whatever the real question is]</p>
         <p>"And honestly — my answer surprises them."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「聞かれるのは：<span class="emphasis">「いくらですか？」</span>」</p>
+        <p>「そして私の答えに、みんな少し驚きます。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — The Answer</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — The Answer</span><span data-lang="ja">シーン2 — 答え</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"It's not cheap. But it's not what you'd expect for what you're getting."</p>
-        <p>"These bags are made to last — like, repair-for-life kind of made."</p>
+        <p>"These bags are made to last — repair-for-life kind of made."</p>
         <p>"When I explain that, people usually stop asking about the price."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「安くはありません。でも、受け取る価値に比べると意外な金額です。」</p>
+        <p>「このバッグは長く使えるように作られています — 生涯修理対応のクオリティです。」</p>
+        <p>「それを説明すると、みんな値段のことを気にしなくなります。」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">Both</span>
-          <span class="cta-line">"What would your first question be? Drop it below."</span>
-        </div>
-      </div>
+      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
+        <span class="cta-line">
+          <span data-lang="en">"What would your first question be? Drop it below."</span>
+          <span data-lang="ja">「あなたが最初に聞きたいことは？コメントに書いてください。」</span>
+        </span>
+      </div></div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
       <ul>
-        <li>Decide which question to use before you shoot — price works best for broad audience</li>
-        <li>Casual energy. You're not presenting — you're sharing something that happened</li>
-        <li>abb in hand or on shoulder, not on a table</li>
+        <li><span data-lang="en">Decide which question to use before you shoot — price works best</span><span data-lang="ja">撮影前にどの質問を使うか決める — 値段が一番効果的</span></li>
+        <li><span data-lang="en">Casual energy — sharing something that happened, not presenting</span><span data-lang="ja">カジュアルに — プレゼンではなく、出来事を話す感覚で</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 18 -->
+<!-- ═══ EP 18 ═══ -->
 <div class="episode" id="ep18">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 18 · Day 1 · Reaction</div>
-    <div class="ep-title">What I got wrong about Japanese bags before I moved here</div>
+    <div class="ep-number">Episode 18 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+    <div class="ep-title">
+      <span data-lang="en">What I got wrong about Japanese bags before I moved here</span>
+      <span data-lang="ja">日本に来る前、日本のバッグについて私が間違えていたこと</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Candid · Perspective shift</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Candid · Perspective shift</span><span data-lang="ja">率直・視点の変化</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
-      <div class="lines">
-        <p>"Before I moved to Japan, I had this idea of what Japanese bags were."</p>
-        <p>"I was pretty wrong."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
+      <div data-lang="en"><div class="lines"><p>"Before I moved to Japan, I had this idea of what Japanese bags were. I was pretty wrong."</p></div></div>
+      <div data-lang="ja"><div class="lines"><p>「日本に来る前、日本のバッグについてこんなイメージを持っていました。かなり間違っていましたが。」</p></div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Wrong Assumption</div>
-      <div class="lines">
-        <p>"I thought they were overpriced for the name."</p>
-        <p>"Like — paying a premium just because it says 'made in Japan.'"</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Wrong Assumption</span><span data-lang="ja">シーン1 — 間違った思い込み</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"I thought they were overpriced for the name. Like — paying a premium just because it says 'made in Japan.'"</p>
         <p class="beat">[pause]</p>
         <p>"That's not what's happening here."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「ブランド名に対して割高だと思っていました。「日本製」と書いてあるだけでプレミアムを払う感じかと。」</p>
+        <p class="beat">【間】</p>
+        <p>「でも、実際は違いました。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — What Changed</div>
-      <div class="lines">
-        <p>"When I actually got into the workshop —"</p>
-        <p>"started seeing how long they spend on one bag —"</p>
-        <p>"the assumption just fell apart."</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — What Changed</span><span data-lang="ja">シーン2 — 変わったこと</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"When I actually got into the workshop — started seeing how long they spend on one bag — the assumption just fell apart."</p>
         <p>"The price isn't about the label. It's about the time."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「工房に入って — 一つのバッグにどれだけの時間をかけているか見て — その思い込みが崩れました。」</p>
+        <p>「価格はブランド名のためではありません。かかる時間のためです。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Closer</div>
-      <div class="lines">
-        <p>"I still think about what I would have bought instead."</p>
-        <p>"Something cheaper that I'd have replaced twice by now."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Close</span><span data-lang="ja">シーン3 — 締め</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"I still think about what I would have bought instead. Something cheaper that I'd have replaced twice by now."</p>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「あの時別のものを買っていたら、と今でも思います。もっと安くて、もう2回は買い替えていたものを。」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">Both</span>
-          <span class="cta-line">"What did you assume before watching this? I'm genuinely curious."</span>
-        </div>
-      </div>
+      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
+        <span class="cta-line">
+          <span data-lang="en">"What did you assume before watching this? I'm genuinely curious."</span>
+          <span data-lang="ja">「この動画を見る前、どんなイメージを持っていましたか？ぜひ教えてください。」</span>
+        </span>
+      </div></div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
       <ul>
-        <li>No props needed — this is pure perspective storytelling</li>
-        <li>Tone: reflective, a little self-deprecating. Not a sales pitch.</li>
-        <li>This type of video gets shared. Let it breathe.</li>
+        <li><span data-lang="en">No props needed — pure perspective storytelling</span><span data-lang="ja">小道具不要 — 視点の変化を純粋に語る</span></li>
+        <li><span data-lang="en">Reflective, slightly self-deprecating tone. Not a sales pitch.</span><span data-lang="ja">内省的で少し自虐的なトーン。セールストークにしない。</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 23 -->
+<!-- ═══ EP 23 ═══ -->
 <div class="episode" id="ep23">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 23 · Day 1 · Reaction</div>
-    <div class="ep-title">Honest things I'd tell someone before buying this bag</div>
+    <div class="ep-number">Episode 23 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+    <div class="ep-title">
+      <span data-lang="en">Honest things I'd tell someone before buying this bag</span>
+      <span data-lang="ja">このバッグを買う前に正直に伝えたいこと</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Honest review format</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Honest review</span><span data-lang="ja">正直なレビュー</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
-      <div class="lines">
-        <p>"If someone asked me whether to buy this bag —"</p>
-        <p>"I'd say yes. But I'd tell them a few things first."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
+      <div data-lang="en"><div class="lines"><p>"If someone asked me whether to buy this bag — I'd say yes. But I'd tell them a few things first."</p></div></div>
+      <div data-lang="ja"><div class="lines"><p>「このバッグを買うべきか聞かれたら — 買ってほしいと思います。でも先にお伝えしたいことがあります。」</p></div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — Thing 1 (The Trade-off)</div>
-      <div class="scene-subtitle">abb in hand. Honest, direct. Not a list — more like a conversation.</div>
-      <div class="lines">
-        <p>"It's not a flashy bag."</p>
-        <p>"Nobody's going to recognize the name — especially outside Japan."</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Trade-off</span><span data-lang="ja">シーン1 — トレードオフ</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"It's not a flashy bag. Nobody's going to recognize the name — especially outside Japan."</p>
         <p>"If that matters to you, this isn't it."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「派手なバッグではありません。ブランド名を知っている人はほとんどいません — 特に海外では。」</p>
+        <p>「それが気になるなら、このバッグは向いていないかもしれません。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — Thing 2 (The Upside)</div>
-      <div class="lines">
-        <p>"But if you actually use your bag every day —"</p>
-        <p>"and you've gotten burned by something that looked good but fell apart —"</p>
-        <p>"this is for you."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — The Upside</span><span data-lang="ja">シーン2 — 良い点</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"But if you actually use your bag every day — and you've been burned by something that looked good but fell apart — this is for you."</p>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「でも、毎日バッグを使う方 — 見た目は良くてもすぐ壊れたバッグで痛い目を見た方 — このバッグはそういう方のためにあります。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Who It's Not For</div>
-      <div class="lines">
-        <p>"I wouldn't buy it if you want something trendy."</p>
-        <p>"This brand doesn't really do trends."</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Who It's Not For</span><span data-lang="ja">シーン3 — 向いていない人</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"I wouldn't buy it if you want something trendy. This brand doesn't really do trends."</p>
         <p class="beat">[pause]</p>
         <p>"Which is kind of the point."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「トレンドを求めている方にはお勧めしません。このブランドはトレンドを追いません。」</p>
+        <p class="beat">【間】</p>
+        <p>「それが、このブランドの本質でもあります。」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">Both</span>
-          <span class="cta-line">"What do you actually need from a bag? Tell me in the comments."</span>
-        </div>
-      </div>
+      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
+        <span class="cta-line">
+          <span data-lang="en">"What do you actually need from a bag? Tell me in the comments."</span>
+          <span data-lang="ja">「バッグに本当に求めるものは何ですか？コメントで教えてください。」</span>
+        </span>
+      </div></div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
       <ul>
-        <li>Hold abb naturally — not posed, not showing it off</li>
-        <li>This builds credibility because you're telling people NOT to buy it in some cases</li>
-        <li>Keep tone even. No enthusiasm spikes. Just honest.</li>
+        <li><span data-lang="en">Hold abb naturally — not showing it off</span><span data-lang="ja">abbを自然に持つ — 見せびらかさない</span></li>
+        <li><span data-lang="en">Credibility comes from telling people NOT to buy in some cases</span><span data-lang="ja">「買わない方がいい場合もある」と言うことで信頼感が生まれる</span></li>
+        <li><span data-lang="en">Even tone throughout. No enthusiasm spikes.</span><span data-lang="ja">トーンを一定に保つ。テンションを上げすぎない。</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 25 -->
+<!-- ═══ EP 25 ═══ -->
 <div class="episode" id="ep25">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 25 · Day 1 · Discovery</div>
-    <div class="ep-title">What I wish I knew before moving to Japan with bags</div>
+    <div class="ep-number">Episode 25 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+    <div class="ep-title">
+      <span data-lang="en">What I wish I knew before moving to Japan with bags</span>
+      <span data-lang="ja">バッグを持って日本に来る前に知っておきたかったこと</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Travel · Lifestyle angle</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Travel · Lifestyle</span><span data-lang="ja">旅・ライフスタイル</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
-      <div class="lines">
-        <p>"I moved to Japan with two bags."</p>
-        <p>"Neither of them were right for how I actually ended up living here."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
+      <div data-lang="en"><div class="lines"><p>"I moved to Japan with two bags. Neither of them were right for how I actually ended up living here."</p></div></div>
+      <div data-lang="ja"><div class="lines"><p>「バッグを2つ持って日本に来ました。でも実際の生活スタイルには、どちらも合っていませんでした。」</p></div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Problem</div>
-      <div class="lines">
-        <p>"Japan is a walking city."</p>
-        <p>"You're on trains, on foot, in and out of small shops."</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Problem</span><span data-lang="ja">シーン1 — 問題</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"Japan is a walking city. You're on trains, on foot, in and out of small shops."</p>
         <p>"I needed something that could handle all of that — and not look out of place."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「日本は歩く街です。電車に乗って、歩いて、小さなお店に出入りして。」</p>
+        <p>「そのすべてに対応できて、かつ浮かないバッグが必要でした。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — What I Found</div>
-      <div class="lines">
-        <p>"Finding Kawanishi Kaban kind of solved that."</p>
-        <p>"Not because it's a Japan brand — but because the design actually fits how people move here."</p>
-        <p>"The size. The structure. The way it opens."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — What I Found</span><span data-lang="ja">シーン2 — 出会い</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"Finding Kawanishi Kaban kind of solved that. Not because it's a Japan brand — but because the design fits how people actually move here."</p>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「川西鞄に出会って、その問題が解決しました。日本ブランドだからではなく — デザインが、この国での実際の動き方に合っているからです。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — The Wish</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — The Wish</span><span data-lang="ja">シーン3 — 振り返り</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"If I could go back — I'd have brought less, and bought better once I got here."</p>
         <p class="beat">[beat]</p>
         <p>"That's kind of the whole philosophy of this brand anyway."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「もしやり直せるなら — 荷物を減らして、来てからより良いものを買います。」</p>
+        <p class="beat">【間】</p>
+        <p>「それが、このブランド全体の哲学でもあります。」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">Both</span>
-          <span class="cta-line">"What would you pack if you moved abroad for a year?"</span>
-        </div>
-      </div>
+      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
+        <span class="cta-line">
+          <span data-lang="en">"What would you pack if you moved abroad for a year?"</span>
+          <span data-lang="ja">「1年間海外に住むとしたら、何を持っていきますか？」</span>
+        </span>
+      </div></div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
       <ul>
-        <li>Light travel prop if available — a small bag or backpack on the side</li>
-        <li>This episode hooks anyone who's moved, traveled, or thought about it</li>
-        <li>The tie back to the brand should feel natural, not forced</li>
+        <li><span data-lang="en">Light travel prop if available</span><span data-lang="ja">あれば旅行用の小道具を少し</span></li>
+        <li><span data-lang="en">Tie back to brand should feel natural, not forced</span><span data-lang="ja">ブランドへの繋げ方は自然に — 無理やり感を出さない</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 29 -->
+<!-- ═══ EP 29 ═══ -->
 <div class="episode" id="ep29">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 29 · Day 1 · Reaction</div>
-    <div class="ep-title">I've been showing this brand to people for a month — here's what they say</div>
+    <div class="ep-number">Episode 29 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+    <div class="ep-title">
+      <span data-lang="en">I've been showing this brand to people for a month — here's what they say</span>
+      <span data-lang="ja">1ヶ月間、周りの人にこのブランドを見せてきた。その反応は</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Social proof · Narrated reactions</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Social proof</span><span data-lang="ja">社会的証明</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
-      <div class="lines">
-        <p>"I've been showing this brand to people around me for the past month."</p>
-        <p>"Coworkers. Friends. People who know nothing about bags."</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
+      <div data-lang="en"><div class="lines">
+        <p>"I've been showing this brand to people around me for the past month. Coworkers. Friends. People who know nothing about bags."</p>
         <p>"The reactions were pretty consistent."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「この1ヶ月、周りの人にこのブランドを見せてきました。同僚、友達、バッグに詳しくない人も含めて。」</p>
+        <p>「反応にはある共通点がありました。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — Reaction 1</div>
-      <div class="scene-subtitle">Narrate or show a real reaction. Keep it specific — a real person, a real moment.</div>
-      <div class="lines">
-        <p>"First thing everyone does — they look for the stitching."</p>
-        <p>"They can't find it."</p>
-        <p>"That's always the moment."</p>
-      </div>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — Reaction 1</span><span data-lang="ja">シーン1 — 反応1</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"First thing everyone does — they look for the stitching. They can't find it. That's always the moment."</p>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「みんな最初にすること — 縫い目を探します。見つかりません。いつもそこが転換点になります。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — Reaction 2</div>
-      <div class="lines">
-        <p>"One person asked me how much it cost — and then immediately said they thought it'd be more."</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — Reaction 2</span><span data-lang="ja">シーン2 — 反応2</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"One person asked how much it cost — then immediately said they thought it'd be more."</p>
         <p class="beat">[beat]</p>
         <p>"That's a good sign."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「ある人は値段を聞いて — すぐに「もっと高いと思った」と言いました。」</p>
+        <p class="beat">【間】</p>
+        <p>「それは良い兆候です。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — The Pattern</div>
-      <div class="lines">
-        <p>"Nobody asks about the brand name."</p>
-        <p>"They just want to hold it."</p>
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — The Pattern</span><span data-lang="ja">シーン3 — 共通点</span></div>
+      <div data-lang="en"><div class="lines">
+        <p>"Nobody asks about the brand name. They just want to hold it."</p>
         <p class="beat">[pause]</p>
         <p>"The bag sells itself — I'm just the one showing it."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「誰もブランド名を聞きません。みんなただ持ってみたがります。」</p>
+        <p class="beat">【間】</p>
+        <p>「バッグが自分を語ります — 私はただそれを見せているだけです。」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">Both</span>
-          <span class="cta-line">"What's your first reaction seeing it? Drop it below."</span>
-        </div>
-      </div>
+      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
+        <span class="cta-line">
+          <span data-lang="en">"What's your first reaction seeing it? Drop it below."</span>
+          <span data-lang="ja">「見た瞬間、どう感じましたか？コメントで教えてください。」</span>
+        </span>
+      </div></div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Prep Before Shoot</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Prep Before Shoot</span><span data-lang="ja">撮影前の準備</span></div>
       <ul>
-        <li>Collect 2–3 real reactions from coworkers this week before shoot day</li>
-        <li>Ask them to hold the abb and just describe what they notice — don't prompt them</li>
-        <li>You can narrate these reactions on camera without the person being there</li>
+        <li><span data-lang="en">Collect 2–3 real coworker reactions this week before shoot day</span><span data-lang="ja">今週中に同僚2〜3人の本音の反応を集めておく</span></li>
+        <li><span data-lang="en">Ask them to hold the abb and describe what they notice — don't prompt</span><span data-lang="ja">abbを持ってもらい、気づいたことを言ってもらう — 誘導しない</span></li>
+        <li><span data-lang="en">You can narrate their reactions on camera without them being there</span><span data-lang="ja">カメラの前でその反応を語るだけでOK — 本人は不要</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════ EP 31 -->
+<!-- ═══ EP 31 ═══ -->
 <div class="episode" id="ep31">
   <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 31 · Day 1 · Discovery · SERIES CLOSER</div>
-    <div class="ep-title">One month. 31 videos. Here's the honest verdict.</div>
+    <div class="ep-number">Episode 31 · Day 1 · <span data-lang="en">Series Closer ⚠️ Shoot Last</span><span data-lang="ja">シリーズ最終回 ⚠️ 最後に撮影</span></div>
+    <div class="ep-title">
+      <span data-lang="en">One month. 31 videos. Here's the honest verdict.</span>
+      <span data-lang="ja">1ヶ月、31本。正直な結論はこれです。</span>
+    </div>
     <div class="ep-meta">
-      <span class="ep-badge badge-cam">On Camera</span>
-      <span class="ep-badge badge-solo">Series finale · Shoot last</span>
+      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
+      <span class="ep-badge badge-solo"><span data-lang="en">Series finale</span><span data-lang="ja">シリーズフィナーレ</span></span>
     </div>
     <span class="ep-toggle">▾</span>
   </div>
   <div class="ep-body">
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
-      <div class="scene-subtitle">⚠️ Shoot this one last. You need energy for it.</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
+      <div data-lang="en"><div class="lines">
         <p>"One month."</p>
         <p>"31 videos about one bag brand."</p>
         <p class="beat">[beat]</p>
         <p>"Here's what I actually think."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「1ヶ月。」</p>
+        <p>「一つのバッグブランドについて31本の動画。」</p>
+        <p class="beat">【間】</p>
+        <p>「私が本当に思うことをお伝えします。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Verdict</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Verdict</span><span data-lang="ja">シーン1 — 結論</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"It's a brand that makes sense the longer you look at it."</p>
         <p>"Most things are the opposite — they look good until you get close."</p>
         <p>"This one gets better the closer you get."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「見れば見るほど、意味のあるブランドです。」</p>
+        <p>「多くのものは逆です — 近づくにつれて印象が薄れます。」</p>
+        <p>「でもこのブランドは、近づくほど良さが増します。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — The Honest Part</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — The Honest Part</span><span data-lang="ja">シーン2 — 正直なところ</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"Is it perfect? No."</p>
-        <p>"<span class="emphasis">[add one real thing you'd change — keep it genuine]</span>"</p>
+        <p>"<span class="emphasis">[add one real thing you'd change]</span>"</p>
         <p>"But the things they got right — they got really right."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「完璧かと言われたら、そうではありません。」</p>
+        <p>「<span class="emphasis">【変えたいと思うことを一つ正直に入れる】</span>」</p>
+        <p>「でも、うまくいっているところは、本当にうまくいっています。」</p>
+      </div></div>
     </div>
-
     <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — The Close</div>
-      <div class="lines">
+      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — The Close</span><span data-lang="ja">シーン3 — 締め</span></div>
+      <div data-lang="en"><div class="lines">
         <p>"70,000 people in Japan already figured this out."</p>
         <p>"I think the rest of the world is starting to catch up."</p>
         <p class="beat">[pause]</p>
         <p>"And if you've been watching this month — you're ahead of it."</p>
-      </div>
+      </div></div>
+      <div data-lang="ja"><div class="lines">
+        <p>「日本では7万人がすでにこれに気づいています。」</p>
+        <p>「世界もこれから追いつき始めると思います。」</p>
+        <p class="beat">【間】</p>
+        <p>「そして今月見てくれたあなたは、一歩先を行っています。」</p>
+      </div></div>
     </div>
-
     <div class="scene cta-scene">
       <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
       <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">TikTok</span>
-          <span class="cta-line">"Follow — there's more coming after this."</span>
+        <div class="cta-item"><span class="cta-platform">TikTok</span>
+          <span class="cta-line">
+            <span data-lang="en">"Follow — there's more coming after this."</span>
+            <span data-lang="ja">「フォローを — この後もまだ続きます。」</span>
+          </span>
         </div>
-        <div class="cta-item">
-          <span class="cta-platform">YT Shorts</span>
-          <span class="cta-line">"Subscribe — this was just the introduction."</span>
+        <div class="cta-item"><span class="cta-platform">YT Shorts</span>
+          <span class="cta-line">
+            <span data-lang="en">"Subscribe — this was just the introduction."</span>
+            <span data-lang="ja">「チャンネル登録を — これはまだ始まりに過ぎません。」</span>
+          </span>
         </div>
       </div>
     </div>
-
     <div class="shoot-note">
-      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
       <ul>
-        <li>Shoot this one absolutely last — after all 9 Day 1 episodes</li>
-        <li>You need to feel like you've actually done something to sell this closer</li>
-        <li>Honest and direct. No performance. Just say what you actually think.</li>
-        <li>Fill in Scene 2 with something genuinely real — the credibility depends on it</li>
+        <li><span data-lang="en">⚠️ Shoot this one absolutely last — after all 9 Day 1 episodes</span><span data-lang="ja">⚠️ 必ずDay 1の9本を撮り終えてから最後に撮る</span></li>
+        <li><span data-lang="en">Honest and direct. No performance. Just say what you think.</span><span data-lang="ja">正直に、率直に。演技しない。思ったことをそのまま言う。</span></li>
+        <li><span data-lang="en">Scene 2: fill in something genuinely real — credibility depends on it</span><span data-lang="ja">シーン2：本当のことを入れる — 信頼感はそこにかかっている</span></li>
       </ul>
     </div>
-
   </div>
 </div>
 
 
 <script>
-  function toggleEp(header) {
-    const ep = header.parentElement;
-    ep.classList.toggle('open');
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang || (lang === 'ja' && btn.textContent.includes('日')));
+    });
+    localStorage.setItem('kk-lang', lang);
   }
 
-  // Progress bar
+  function toggleEp(header) {
+    header.parentElement.classList.toggle('open');
+  }
+
   window.addEventListener('scroll', () => {
     const doc = document.documentElement;
     const scrollTop = doc.scrollTop || document.body.scrollTop;
     const scrollHeight = doc.scrollHeight - doc.clientHeight;
-    const progress = (scrollTop / scrollHeight) * 100;
-    document.getElementById('progress').style.width = progress + '%';
+    document.getElementById('progress').style.width = ((scrollTop / scrollHeight) * 100) + '%';
   });
 
-  // Smooth scroll for nav pills
   document.querySelectorAll('.nav-pill').forEach(pill => {
     pill.addEventListener('click', e => {
       e.preventDefault();
       const target = document.querySelector(pill.getAttribute('href'));
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
-        if (!target.classList.contains('open')) {
-          target.classList.add('open');
-        }
+        if (!target.classList.contains('open')) target.classList.add('open');
       }
     });
   });
+
+  // Restore language preference
+  const saved = localStorage.getItem('kk-lang');
+  if (saved) setLang(saved);
 </script>
 </body>
 </html>
