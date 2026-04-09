@@ -3,128 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kawanishi Kaban — Shoot Scripts · Day 1</title>
+<title>Kawanishi Kaban — Shoot Scripts · All Days</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf8f5;
-    --surface: #f0ece6;
-    --surface2: #e8e3db;
-    --border: #ddd8d0;
-    --accent: #9a6e32;
-    --accent2: #2e7a8c;
-    --text: #1c1a17;
-    --muted: #7a7468;
-    --cam: #9a6e32;
-    --vo: #2e7a8c;
-    --shot: #4a7a32;
-    --cta: #8c2e6a;
+    --bg: #faf8f5; --surface: #f0ece6; --surface2: #e8e3db; --border: #ddd8d0;
+    --accent: #9a6e32; --accent2: #2e7a8c; --text: #1c1a17; --muted: #7a7468;
+    --cam: #9a6e32; --vo: #2e7a8c; --shot: #4a7a32; --cta: #8c2e6a;
+    --d1: #9a6e32; --d2: #2e7a8c; --d3: #4a7a32; --d4: #8c2e6a; --d5: #7a5a32;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.65;
-    padding: 0 0 80px 0;
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.65; padding-bottom: 80px; }
 
-  /* PROGRESS */
-  .progress-bar { height: 3px; background: var(--border); position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+  .progress-bar { height: 3px; background: var(--border); position: fixed; top: 0; left: 0; right: 0; z-index: 300; }
   .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.1s; }
 
-  /* HEADER */
-  .site-header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(250,248,245,0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 20px;
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  }
-  .site-header .brand { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
-  .header-right { display: flex; align-items: center; gap: 10px; }
-  .day-tag { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; }
-
-  /* LANGUAGE TOGGLE */
-  .lang-toggle {
-    display: flex; align-items: center; gap: 2px;
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 20px; padding: 3px;
-  }
-  .lang-btn {
-    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.06em; padding: 4px 12px; border-radius: 16px;
-    border: none; cursor: pointer; transition: all 0.15s;
-    background: transparent; color: var(--muted);
-  }
+  .site-header { position: sticky; top: 0; z-index: 200; background: rgba(250,248,245,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 11px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .brand { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 8px; }
+  .lang-toggle { display: flex; align-items: center; gap: 2px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 3px; }
+  .lang-btn { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 16px; border: none; cursor: pointer; transition: all 0.15s; background: transparent; color: var(--muted); }
   .lang-btn.active { background: var(--accent); color: #fff; }
 
-  /* NAV */
-  .nav-scroll { overflow-x: auto; scrollbar-width: none; padding: 10px 20px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; background: var(--bg); }
-  .nav-scroll::-webkit-scrollbar { display: none; }
-  .nav-pill { flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; cursor: pointer; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
-  .nav-pill:hover { color: var(--accent); border-color: var(--accent); }
+  /* DAY TABS */
+  .day-tabs { overflow-x: auto; scrollbar-width: none; display: flex; gap: 0; border-bottom: 2px solid var(--border); background: var(--bg); position: sticky; top: 49px; z-index: 190; }
+  .day-tabs::-webkit-scrollbar { display: none; }
+  .day-tab { flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 16px; border: none; background: transparent; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; white-space: nowrap; }
+  .day-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .day-tab:hover { color: var(--accent); }
 
-  /* INTRO */
-  .intro { padding: 28px 20px 22px; border-bottom: 1px solid var(--border); }
-  .intro h1 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
-  .intro h1 span { color: var(--accent); }
-  .intro p { color: var(--muted); font-size: 13px; }
-  .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-  .meta-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; border: 1px solid var(--border); color: var(--muted); }
-  .meta-tag.platform { border-color: var(--accent); color: var(--accent); }
-  .meta-tag.style { border-color: var(--accent2); color: var(--accent2); }
+  /* EP NAV */
+  .ep-nav { overflow-x: auto; scrollbar-width: none; padding: 8px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 6px; background: var(--surface); }
+  .ep-nav::-webkit-scrollbar { display: none; }
+  .ep-pill { flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--bg); border: 1px solid var(--border); padding: 5px 11px; border-radius: 20px; cursor: pointer; text-decoration: none; transition: all 0.15s; white-space: nowrap; }
+  .ep-pill:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* DAY SECTION */
+  .day-section { display: none; }
+  .day-section.active { display: block; }
+  .day-intro { padding: 22px 16px 18px; border-bottom: 1px solid var(--border); }
+  .day-intro h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+  .day-intro p { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+  .day-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .day-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; border: 1px solid var(--border); color: var(--muted); }
+  .day-tag.loc { border-color: var(--accent2); color: var(--accent2); }
+  .day-tag.prod { border-color: var(--shot); color: var(--shot); }
 
   /* EPISODE */
-  .episode { border-bottom: 1px solid var(--border); scroll-margin-top: 110px; }
-  .ep-header { padding: 22px 44px 14px 20px; cursor: pointer; user-select: none; position: relative; transition: background 0.15s; }
+  .episode { border-bottom: 1px solid var(--border); scroll-margin-top: 130px; }
+  .ep-header { padding: 18px 40px 12px 16px; cursor: pointer; user-select: none; position: relative; transition: background 0.15s; }
   .ep-header:hover { background: #edeae4; }
-  .ep-number { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
-  .ep-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.3; }
-  .ep-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-  .ep-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
-  .badge-cam { background: rgba(154,110,50,0.10); color: var(--cam); border: 1px solid rgba(154,110,50,0.25); }
-  .badge-vo  { background: rgba(46,122,140,0.10); color: var(--vo);  border: 1px solid rgba(46,122,140,0.25); }
-  .badge-solo { background: rgba(74,122,50,0.10); color: var(--shot); border: 1px solid rgba(74,122,50,0.25); }
-  .ep-toggle { position: absolute; right: 18px; top: 26px; font-size: 16px; color: var(--muted); transition: transform 0.2s; }
+  .ep-num { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; }
+  .ep-title-text { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .ep-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+  .badge { font-size: 10px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
+  .b-cam  { background: rgba(154,110,50,0.10); color: var(--cam);  border: 1px solid rgba(154,110,50,0.25); }
+  .b-vo   { background: rgba(46,122,140,0.10); color: var(--vo);   border: 1px solid rgba(46,122,140,0.25); }
+  .b-out  { background: rgba(74,122,50,0.10);  color: var(--shot); border: 1px solid rgba(74,122,50,0.25); }
+  .b-mac  { background: rgba(140,46,106,0.10); color: var(--cta);  border: 1px solid rgba(140,46,106,0.25); }
+  .ep-toggle { position: absolute; right: 14px; top: 22px; font-size: 14px; color: var(--muted); transition: transform 0.2s; }
   .episode.open .ep-toggle { transform: rotate(180deg); }
 
-  /* BODY */
-  .ep-body { display: none; padding: 4px 20px 26px; }
+  .ep-body { display: none; padding: 2px 16px 22px; }
   .episode.open .ep-body { display: block; }
 
   /* SCENES */
-  .scene { margin-bottom: 18px; border-left: 3px solid var(--border); padding-left: 14px; }
-  .scene.cam-scene { border-color: var(--cam); }
-  .scene.vo-scene  { border-color: var(--vo); }
-  .scene.cta-scene { border-color: var(--cta); }
-  .scene-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-  .scene-label.cam { color: var(--cam); }
-  .scene-label.vo  { color: var(--vo); }
-  .scene-label.cta { color: var(--cta); }
-  .scene-label .icon { font-size: 12px; }
-  .scene-subtitle { font-size: 11px; color: var(--muted); font-style: italic; margin-bottom: 7px; }
+  .scene { margin-bottom: 16px; border-left: 3px solid var(--border); padding-left: 12px; }
+  .scene.cam  { border-color: var(--cam); }
+  .scene.vo   { border-color: var(--vo); }
+  .scene.shot { border-color: var(--shot); }
+  .scene.cta  { border-color: var(--cta); }
+  .slabel { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+  .slabel.cam  { color: var(--cam); }
+  .slabel.vo   { color: var(--vo); }
+  .slabel.shot { color: var(--shot); }
+  .slabel.cta  { color: var(--cta); }
+  .ssub { font-size: 11px; color: var(--muted); font-style: italic; margin-bottom: 6px; }
   .lines { font-size: 15px; line-height: 1.75; color: var(--text); }
-  .lines p { margin-bottom: 5px; }
-  .lines .beat { color: var(--muted); font-size: 12px; font-style: italic; margin: 3px 0; }
-  .lines .emphasis { color: var(--accent); font-weight: 500; }
-  .cta-block { display: flex; flex-direction: column; gap: 8px; }
-  .cta-item { display: flex; gap: 10px; align-items: flex-start; }
-  .cta-platform { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cta); min-width: 80px; padding-top: 2px; flex-shrink: 0; }
+  .lines p { margin-bottom: 4px; }
+  .beat { color: var(--muted); font-size: 12px; font-style: italic; }
+  .em { color: var(--accent); font-weight: 500; }
+  .cta-block { display: flex; flex-direction: column; gap: 7px; }
+  .cta-row { display: flex; gap: 8px; align-items: flex-start; }
+  .cta-plat { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--cta); min-width: 75px; padding-top: 2px; flex-shrink: 0; }
   .cta-line { font-size: 14px; color: var(--text); font-style: italic; }
-  .shoot-note { margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
-  .shoot-note-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-  .shoot-note ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  .shoot-note ul li { font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; }
-  .shoot-note ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+  .note-box { margin-top: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; }
+  .note-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .note-box ul { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+  .note-box li { font-size: 13px; color: var(--muted); padding-left: 13px; position: relative; }
+  .note-box li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 2px; }
 
-  /* LANG HIDDEN */
+  /* LANG */
   [data-lang] { display: none; }
   body.lang-en [data-lang="en"] { display: block; }
   body.lang-ja [data-lang="ja"] { display: block; }
-  /* inline spans */
   span[data-lang] { display: none; }
   body.lang-en span[data-lang="en"] { display: inline; }
   body.lang-ja span[data-lang="ja"] { display: inline; }
@@ -132,15 +104,11 @@
 </head>
 <body class="lang-en">
 
-<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+<div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
 
 <header class="site-header">
   <span class="brand">Kawanishi Kaban</span>
   <div class="header-right">
-    <span class="day-tag">
-      <span data-lang="en">📅 Day 1 · Apr 12 · 9 Episodes</span>
-      <span data-lang="ja">📅 Day 1 · 4/12 · 9本</span>
-    </span>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('ja')">日本語</button>
@@ -148,841 +116,971 @@
   </div>
 </header>
 
-<nav class="nav-scroll">
-  <a class="nav-pill" href="#ep1">Ep 1</a>
-  <a class="nav-pill" href="#ep7">Ep 7</a>
-  <a class="nav-pill" href="#ep8">Ep 8</a>
-  <a class="nav-pill" href="#ep14">Ep 14</a>
-  <a class="nav-pill" href="#ep18">Ep 18</a>
-  <a class="nav-pill" href="#ep23">Ep 23</a>
-  <a class="nav-pill" href="#ep25">Ep 25</a>
-  <a class="nav-pill" href="#ep29">Ep 29</a>
-  <a class="nav-pill" href="#ep31">Ep 31</a>
-</nav>
-
-<div class="intro">
-  <div data-lang="en">
-    <h1>Shoot Scripts<br><span>Day 1 — Talking Heads</span></h1>
-    <p>All on-camera episodes. Set up once, run through all 9. Prepare your key points the night before.</p>
-  </div>
-  <div data-lang="ja">
-    <h1>撮影スクリプト<br><span>Day 1 — トーキングヘッド</span></h1>
-    <p>全てカメラ正面のエピソードです。セッティングは一度だけ、9本まとめて撮影します。前日に要点を確認しておいてください。</p>
-  </div>
-  <div class="meta-row">
-    <span class="meta-tag platform">TikTok + YouTube Shorts</span>
-    <span class="meta-tag style">
-      <span data-lang="en">Under 60 sec · 30–45 sec ideal</span>
-      <span data-lang="ja">60秒以内 · 30〜45秒が理想</span>
-    </span>
-    <span class="meta-tag">
-      <span data-lang="en">Solo shoot</span>
-      <span data-lang="ja">一人撮影</span>
-    </span>
-    <span class="meta-tag">
-      <span data-lang="en">Workshop · On-camera corner</span>
-      <span data-lang="ja">工房 · カメラ正面コーナー</span>
-    </span>
-  </div>
+<div class="day-tabs">
+  <button class="day-tab active" onclick="showDay(1)">Day 1 · Apr 12</button>
+  <button class="day-tab" onclick="showDay(2)">Day 2 · Apr 13</button>
+  <button class="day-tab" onclick="showDay(3)">Day 3 · Apr 14</button>
+  <button class="day-tab" onclick="showDay(4)">Day 4 · Apr 15</button>
+  <button class="day-tab" onclick="showDay(5)">Day 5 · Apr 22</button>
 </div>
 
 
-<!-- ═══ EP 1 ═══ -->
-<div class="episode open" id="ep1">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 01 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
-    <div class="ep-title">
-      <span data-lang="en">The Japanese bag brand the rest of the world hasn't found yet</span>
-      <span data-lang="ja">世界がまだ知らない、日本のバッグブランド</span>
-    </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-vo">Voiceover</span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Series Opener</span><span data-lang="ja">シリーズ初回</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
+<!-- ████████████████████ DAY 1 ████████████████████ -->
+<div class="day-section active" id="day1">
+  <div class="ep-nav">
+    <a class="ep-pill" href="#ep1">Ep 1</a><a class="ep-pill" href="#ep7">Ep 7</a><a class="ep-pill" href="#ep8">Ep 8</a><a class="ep-pill" href="#ep14">Ep 14</a><a class="ep-pill" href="#ep18">Ep 18</a><a class="ep-pill" href="#ep23">Ep 23</a><a class="ep-pill" href="#ep25">Ep 25</a><a class="ep-pill" href="#ep29">Ep 29</a><a class="ep-pill" href="#ep31">Ep 31</a>
   </div>
-  <div class="ep-body">
-
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Hook — On Camera · Direct</span><span data-lang="ja">フック — カメラ正面・直接話しかける</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"There's a bag brand in Japan that 70,000 people already love —"</p>
-        <p>"and almost none of them are outside Japan."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「日本に、7万人がすでに愛しているバッグブランドがあります。」</p>
-        <p>「でも、そのほとんどは日本国内のファンだけです。」</p>
-      </div></div>
+  <div class="day-intro">
+    <div data-lang="en"><h2>Day 1 — <span style="color:var(--accent)">Talking Heads</span></h2><p>All on-camera episodes. One setup, 9 episodes. Prepare your key points the night before. Shoot Ep 31 absolutely last.</p></div>
+    <div data-lang="ja"><h2>Day 1 — <span style="color:var(--accent)">トーキングヘッド</span></h2><p>全てカメラ正面のエピソード。セッティングは一度。9本まとめて撮影。前日に要点を確認。Ep 31は必ず最後に。</p></div>
+    <div class="day-meta">
+      <span class="day-tag loc">📍 <span data-lang="en">Workshop — On-Camera Corner</span><span data-lang="ja">工房 — カメラ前コーナー</span></span>
+      <span class="day-tag prod">🎒 abb (hero)</span>
     </div>
+  </div>
 
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — Walking toward camera</span><span data-lang="ja">シーン1 — カメラに向かって歩く</span></div>
-      <div class="scene-subtitle"><span data-lang="en">Medium shot. Bag held naturally. Takamatsu ambient sound. No music yet.</span><span data-lang="ja">ミディアムショット。バッグは自然に持つ。高松の環境音。BGMはまだ入れない。</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"There's a bag brand in Japan with 70,000 subscribers on YouTube —"</p>
-        <p>"and almost none of them are outside Japan."</p>
-        <p class="beat">[pause — let it land]</p>
-        <p>"I've been working here for six months."</p>
-        <p>"I'm just now starting to understand why it's this good."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「YouTubeで7万人の登録者を持つバッグブランドが日本にあります。」</p>
-        <p>「でも、そのほとんどは日本国内の人たちです。」</p>
-        <p class="beat">【間を置く — 言葉を届ける】</p>
-        <p>「私はここで働いて6ヶ月になります。」</p>
-        <p>「なぜこのブランドがこんなに良いのか、ようやく分かってきました。」</p>
-      </div></div>
+  <!-- EP 1 -->
+  <div class="episode open" id="ep1">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 01 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+      <div class="ep-title-text"><span data-lang="en">The Japanese bag brand the rest of the world hasn't found yet</span><span data-lang="ja">世界がまだ知らない、日本のバッグブランド</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span><span class="badge b-vo">Voiceover</span><span class="badge b-out"><span data-lang="en">Series Opener</span><span data-lang="ja">初回</span></span></div>
+      <span class="ep-toggle">▾</span>
     </div>
-
-    <div class="scene vo-scene">
-      <div class="scene-label vo"><span class="icon">🎙</span> <span data-lang="en">Scene 2 — Voiceover · Product detail shots</span><span data-lang="ja">シーン2 — VO · 商品ディテール映像</span></div>
-      <div class="scene-subtitle"><span data-lang="en">Slow pan across abb exterior → handle close-up. Music in low.</span><span data-lang="ja">abbの外側をゆっくりパン → ハンドルのクローズアップ。BGMを小さく入れる。</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"The brand is called Kawanishi Kaban."</p>
-        <p>"Based in Kagawa — the smallest prefecture in Japan."</p>
-        <p>"No visible stitching on the body."</p>
-        <p>"Setouchi leather on the handle."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「ブランド名は川西鞄。」</p>
-        <p>「拠点は香川県 — 日本一小さな都道府県です。」</p>
-        <p>「バッグ本体に縫い目は見えません。」</p>
-        <p>「ハンドルには瀬戸内レザーを使用しています。」</p>
-      </div></div>
-    </div>
-
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Series hook</span><span data-lang="ja">シーン3 — シリーズの告知</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"Every day this month I'm going to show you something about this brand that surprised me."</p>
-        <p>"Starting with this."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「今月は毎日、このブランドについて私が驚いたことをお伝えします。」</p>
-        <p>「まずはこれから。」</p>
-      </div></div>
-    </div>
-
-    <div class="scene vo-scene">
-      <div class="scene-label vo"><span class="icon">🎙</span> <span data-lang="en">Scene 4 — Voiceover · Macro close-up</span><span data-lang="ja">シーン4 — VO · マクロ接写</span></div>
-      <div class="scene-subtitle"><span data-lang="en">Extreme close-up of abb exterior — bonded area, no seam.</span><span data-lang="ja">abbの外側を極限まで寄る — 接着部分、縫い目なし。</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"No stitching on the outside."</p>
-        <p>"The whole bag is bonded."</p>
-        <p class="beat">[hold]</p>
-        <p>"That's not normal."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「外側に縫い目がありません。」</p>
-        <p>「バッグ全体が接着されています。」</p>
-        <p class="beat">【間を置く】</p>
-        <p>「これは普通ではありません。」</p>
-      </div></div>
-    </div>
-
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">TikTok</span>
-          <span class="cta-line">
-            <span data-lang="en">"Follow if you want to see what else this brand is hiding."</span>
-            <span data-lang="ja">「このブランドが隠しているものが気になる方はフォローを。」</span>
-          </span>
+    <div class="ep-body">
+      <div class="scene cam">
+        <div class="slabel cam">🎬 <span data-lang="en">Hook — Direct to Camera</span><span data-lang="ja">フック — カメラ目線</span></div>
+        <div data-lang="en"><div class="lines"><p>"There's a bag brand in Japan that 70,000 people already love —"</p><p>"and almost none of them are outside Japan."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「日本に、7万人がすでに愛しているバッグブランドがあります。」</p><p>「でも、そのほとんどは日本国内のファンだけです。」</p></div></div>
+      </div>
+      <div class="scene cam">
+        <div class="slabel cam">🎬 <span data-lang="en">Scene 1 — Walking toward camera</span><span data-lang="ja">シーン1 — カメラに向かって歩く</span></div>
+        <div class="ssub"><span data-lang="en">Medium shot. Bag held naturally. Takamatsu ambient sound. No music yet.</span><span data-lang="ja">ミディアムショット。バッグは自然に持つ。高松の環境音。BGMはまだなし。</span></div>
+        <div data-lang="en"><div class="lines"><p>"There's a bag brand in Japan with 70,000 subscribers on YouTube —"</p><p>"and almost none of them are outside Japan."</p><p class="beat">[pause — let it land]</p><p>"I've been working here for six months."</p><p>"I'm just now starting to understand why it's this good."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「YouTubeで7万人の登録者を持つバッグブランドが日本にあります。」</p><p>「でも、そのほとんどは日本国内の人たちです。」</p><p class="beat">【間を置く】</p><p>「私はここで働いて6ヶ月になります。」</p><p>「なぜこのブランドがこんなに良いのか、ようやく分かってきました。」</p></div></div>
+      </div>
+      <div class="scene vo">
+        <div class="slabel vo">🎙 <span data-lang="en">Scene 2 — Voiceover · Product detail</span><span data-lang="ja">シーン2 — VO · 商品ディテール</span></div>
+        <div class="ssub"><span data-lang="en">Slow pan across abb exterior → handle close-up. Music in low.</span><span data-lang="ja">abbの外側をゆっくりパン → ハンドルのクローズアップ。BGMを小さく。</span></div>
+        <div data-lang="en"><div class="lines"><p>"The brand is called Kawanishi Kaban."</p><p>"Based in Kagawa — the smallest prefecture in Japan."</p><p>"No visible stitching on the body. Setouchi leather on the handle."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ブランド名は川西鞄。」</p><p>「拠点は香川県 — 日本一小さな都道府県です。」</p><p>「本体に縫い目は見えません。ハンドルには瀬戸内レザーを使用。」</p></div></div>
+      </div>
+      <div class="scene cam">
+        <div class="slabel cam">🎬 <span data-lang="en">Scene 3 — Series hook + detail</span><span data-lang="ja">シーン3 — シリーズ告知 + ディテール</span></div>
+        <div data-lang="en"><div class="lines"><p>"Every day this month I'm going to show you something about this brand that surprised me. Starting with this."</p><p class="beat">[CUT TO: macro close-up of bonded exterior]</p><p>"No stitching on the outside. The whole bag is bonded."</p><p class="beat">[hold]</p><p>"That's not normal."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「今月は毎日、このブランドについて私が驚いたことをお伝えします。まずはこれから。」</p><p class="beat">【CUT TO: 接着部分のマクロ接写】</p><p>「外側に縫い目がありません。バッグ全体が接着されています。」</p><p class="beat">【間】</p><p>「これは普通ではありません。」</p></div></div>
+      </div>
+      <div class="scene cta">
+        <div class="slabel cta">📲 CTA</div>
+        <div class="cta-block">
+          <div class="cta-row"><span class="cta-plat">TikTok</span><span class="cta-line"><span data-lang="en">"Follow if you want to see what else this brand is hiding."</span><span data-lang="ja">「このブランドが隠しているものが気になる方はフォローを。」</span></span></div>
+          <div class="cta-row"><span class="cta-plat">YT Shorts</span><span class="cta-line"><span data-lang="en">"Subscribe — tomorrow I'll show you where this brand actually came from."</span><span data-lang="ja">「チャンネル登録を。明日はこのブランドの原点をお見せします。」</span></span></div>
         </div>
-        <div class="cta-item">
-          <span class="cta-platform">YT Shorts</span>
-          <span class="cta-line">
-            <span data-lang="en">"Subscribe — tomorrow I'll show you where this brand actually came from."</span>
-            <span data-lang="ja">「チャンネル登録を。明日はこのブランドの原点をお見せします。」</span>
-          </span>
+      </div>
+      <div class="note-box">
+        <div class="note-label">📋 <span data-lang="en">Shoot priorities</span><span data-lang="ja">撮影優先事項</span></div>
+        <ul>
+          <li><span data-lang="en">Walk toward camera naturally — not posed</span><span data-lang="ja">カメラに向かって自然に歩く</span></li>
+          <li><span data-lang="en">Wide Takamatsu shot behind you — not Tokyo</span><span data-lang="ja">後ろに高松の広角ショット</span></li>
+          <li><span data-lang="en">Macro close-up of bonded seam area</span><span data-lang="ja">接着部分のマクロ接写</span></li>
+          <li><span data-lang="en">Handle close-up — Setouchi leather texture</span><span data-lang="ja">ハンドルのクローズアップ — 瀬戸内レザーの質感</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 7 -->
+  <div class="episode" id="ep7">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 07 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+      <div class="ep-title-text"><span data-lang="en">Western people have some wild assumptions about Japanese bags</span><span data-lang="ja">海外の人が持つ、日本のバッグへの意外な思い込み</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam">
+        <div class="slabel cam">🎬 <span data-lang="en">Hook</span><span data-lang="ja">フック</span></div>
+        <div class="ssub"><span data-lang="en">Have 3–4 real Reddit/TikTok comments ready on your phone.</span><span data-lang="ja">本物のコメントを3〜4件、スマホに用意しておく。</span></div>
+        <div data-lang="en"><div class="lines"><p>"I've been reading what people outside Japan actually think about Japanese bag brands."</p><p class="beat">[beat]</p><p>"Some of these comments are wild."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「海外の人が日本のバッグについて実際にどう思っているか、コメントを読んでみました。」</p><p class="beat">【間】</p><p>「なかなかびっくりするものがありました。」</p></div></div>
+      </div>
+      <div class="scene cam">
+        <div class="slabel cam">🎬 <span data-lang="en">Scene 1–2 — React to 2 comments</span><span data-lang="ja">シーン1–2 — コメントに反応</span></div>
+        <div data-lang="en"><div class="lines"><p>"Okay so someone said: <span class="em">[read comment]</span>"</p><p class="beat">[genuine reaction — short, real]</p><p>"Here's what's actually true: <span class="em">[correct in 1–2 sentences]</span>"</p><p class="beat">[beat — move to second comment]</p><p>"This one made me laugh — <span class="em">[read comment]</span>"</p><p>"<span class="em">[honest reaction]</span>"</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「こんなコメントがありました：<span class="em">【コメントを読む】</span>」</p><p class="beat">【自然なリアクション】</p><p>「実際は：<span class="em">【1〜2文で訂正】</span>」</p><p class="beat">【次のコメントへ】</p><p>「これは笑いました —<span class="em">【コメントを読む】</span>」</p><p>「<span class="em">【正直な反応】</span>」</p></div></div>
+      </div>
+      <div class="scene cam">
+        <div class="slabel cam">🎬 <span data-lang="en">Close</span><span data-lang="ja">まとめ</span></div>
+        <div data-lang="en"><div class="lines"><p>"I had the same assumptions before I moved here. Being inside the workshop changed all of that."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「日本に来る前は、私も同じように思っていました。工房の中に入って、全部変わりました。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Drop your assumption in the comments — I'll tell you if it's true."</span><span data-lang="ja">「あなたの思い込みをコメントに書いてください。本当かどうかお答えします。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 <span data-lang="en">Prep tonight</span><span data-lang="ja">今夜の準備</span></div><ul>
+        <li><span data-lang="en">Find 3–4 real comments on Reddit r/BuyItForLife or TikTok Japanese bag videos</span><span data-lang="ja">Reddit r/BuyItForLifeかTikTokで本物のコメントを3〜4件調べる</span></li>
+        <li><span data-lang="en">Pick ones that are interestingly wrong — not mean</span><span data-lang="ja">面白い形で間違っているものを選ぶ</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- EP 8 -->
+  <div class="episode" id="ep8">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 08 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+      <div class="ep-title-text"><span data-lang="en">What I noticed after one week of daily use</span><span data-lang="ja">1週間毎日使って気づいたこと</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"I've been using this bag every day for a week. A few things I didn't expect."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「このバッグを1週間、毎日使いました。予想外だったことが何点かあります。」</p></div></div>
+      </div>
+      <div class="scene cam"><div class="slabel cam">🎬 <span data-lang="en">Observations 1–3</span><span data-lang="ja">気づき1〜3</span></div>
+        <div class="ssub"><span data-lang="en">Hold abb. Talk from actual experience — don't read a list.</span><span data-lang="ja">abbを持って。リストを読まず、経験から話す。</span></div>
+        <div data-lang="en"><div class="lines"><p>"The handle. I didn't think the leather choice would matter — but after a week in summer heat, it genuinely feels different. Better grip."</p><p class="beat">[beat]</p><p>"The weight surprised me. Feels solid but sits lighter than I expected."</p><p class="beat">[beat]</p><p>"One thing I'm still figuring out — <span class="em">[add your own honest observation]</span>"</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ハンドルです。レザーの違いなんて関係ないと思っていました。でも夏の暑さの中で1週間持つと、明らかに違います。持ちやすい。」</p><p class="beat">【間】</p><p>「重さも驚きました。しっかりしているのに、思ったより軽く感じます。」</p><p class="beat">【間】</p><p>「まだ分かりかねていることが一つあります — <span class="em">【正直な気づきを入れる】</span>」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"I'll keep updating this as I use it longer. Follow to see how it holds up."</span><span data-lang="ja">「使い続けながら更新していきます。経過が気になる方はフォローを。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Hold abb — don't set it on a table</span><span data-lang="ja">abbを手に持ったまま話す</span></li>
+        <li><span data-lang="en">Relaxed tone — like talking to a friend, not reviewing</span><span data-lang="ja">友達に話すようなリラックスしたトーン</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- EP 14 -->
+  <div class="episode" id="ep14">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 14 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+      <div class="ep-title-text"><span data-lang="en">The thing foreigners always ask me about this bag</span><span data-lang="ja">外国人が必ずこのバッグについて聞いてくること</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"Every time I have this bag outside the workshop — someone asks me the same question."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「このバッグを工房の外で持っていると — 必ず同じ質問をされます。」</p></div></div>
+      </div>
+      <div class="scene cam"><div class="slabel cam">🎬 <span data-lang="en">The question + answer</span><span data-lang="ja">質問と答え</span></div>
+        <div class="ssub"><span data-lang="en">Pick one: price works best for broad audience.</span><span data-lang="ja">一つ選ぶ：値段が一番幅広い視聴者に刺さる。</span></div>
+        <div data-lang="en"><div class="lines"><p>"They ask: <span class="em">'How much is it?'</span>"</p><p>"And my answer surprises them."</p><p class="beat">[beat]</p><p>"It's not cheap. But it's not what you'd expect for what you're getting."</p><p>"These bags are made to last — repair-for-life kind of made."</p><p>"When I explain that, people stop asking about the price."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「聞かれるのは：<span class="em">「いくらですか？」</span>」</p><p>「そして私の答えに、みんな少し驚きます。」</p><p class="beat">【間】</p><p>「安くはありません。でも、受け取る価値に比べると意外な金額です。」</p><p>「このバッグは長く使えるように作られています — 生涯修理対応のクオリティです。」</p><p>「それを説明すると、値段のことを気にしなくなります。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What would your first question be? Drop it below."</span><span data-lang="ja">「あなたが最初に聞きたいことは？コメントに書いてください。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 18 -->
+  <div class="episode" id="ep18">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 18 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+      <div class="ep-title-text"><span data-lang="en">What I got wrong about Japanese bags before I moved here</span><span data-lang="ja">日本に来る前、日本のバッグについて私が間違えていたこと</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div data-lang="en"><div class="lines"><p>"Before I moved to Japan, I had this idea of what Japanese bags were. I was pretty wrong."</p><p class="beat">[beat]</p><p>"I thought they were overpriced for the name. Paying a premium just because it says 'made in Japan.'"</p><p class="beat">[pause]</p><p>"That's not what's happening here."</p><p class="beat">[beat]</p><p>"When I got into the workshop — saw how long they spend on one bag — the assumption just fell apart."</p><p>"The price isn't about the label. It's about the time."</p><p class="beat">[beat]</p><p>"I still think about what I would have bought instead. Something cheaper I'd have replaced twice by now."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「日本に来る前、日本のバッグについてこんなイメージを持っていました。かなり間違っていましたが。」</p><p class="beat">【間】</p><p>「ブランド名に対して割高だと思っていました。『日本製』と書いてあるだけでプレミアムを払う感じかと。」</p><p class="beat">【間】</p><p>「でも、実際は違いました。」</p><p class="beat">【間】</p><p>「工房に入って、一つのバッグにどれだけの時間をかけているか見て、その思い込みが崩れました。」</p><p>「価格はブランド名のためではありません。かかる時間のためです。」</p><p class="beat">【間】</p><p>「あの時別のものを買っていたら、と今でも思います。もっと安くて、もう2回は買い替えていたものを。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What did you assume before watching this? I'm genuinely curious."</span><span data-lang="ja">「この動画を見る前、どんなイメージを持っていましたか？ぜひ教えてください。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">No props. Pure perspective storytelling. Slightly self-deprecating.</span><span data-lang="ja">小道具不要。視点の変化を語る。少し自虐的なトーンで。</span></li>
+        <li><span data-lang="en">This type of video gets shared. Let it breathe.</span><span data-lang="ja">シェアされやすい動画。間を大切に。</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- EP 23 -->
+  <div class="episode" id="ep23">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 23 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+      <div class="ep-title-text"><span data-lang="en">Honest things I'd tell someone before buying this bag</span><span data-lang="ja">このバッグを買う前に正直に伝えたいこと</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div class="ssub"><span data-lang="en">Hold abb naturally. Even tone throughout — no enthusiasm spikes.</span><span data-lang="ja">abbを自然に持つ。トーンを一定に保つ。テンション上げすぎない。</span></div>
+        <div data-lang="en"><div class="lines"><p>"If someone asked me whether to buy this bag — I'd say yes. But I'd tell them a few things first."</p><p class="beat">[beat]</p><p>"It's not a flashy bag. Nobody's going to recognize the name — especially outside Japan. If that matters to you, this isn't it."</p><p class="beat">[beat]</p><p>"But if you actually use your bag every day — and you've been burned by something that looked good but fell apart — this is for you."</p><p class="beat">[beat]</p><p>"I wouldn't buy it if you want something trendy. This brand doesn't do trends."</p><p class="beat">[pause]</p><p>"Which is kind of the point."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「このバッグを買うべきか聞かれたら — 買ってほしいと思います。でも先にお伝えしたいことがあります。」</p><p class="beat">【間】</p><p>「派手なバッグではありません。ブランド名を知っている人はほとんどいません。それが気になるなら向いていないかもしれません。」</p><p class="beat">【間】</p><p>「でも毎日バッグを使う方、見た目は良くてもすぐ壊れたもので痛い目を見た方 — このバッグはそういう方のためにあります。」</p><p class="beat">【間】</p><p>「トレンドを求めている方にはお勧めしません。このブランドはトレンドを追いません。」</p><p class="beat">【間】</p><p>「それが、このブランドの本質でもあります。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What do you actually need from a bag? Tell me in the comments."</span><span data-lang="ja">「バッグに本当に求めるものは何ですか？コメントで教えてください。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 25 -->
+  <div class="episode" id="ep25">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 25 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
+      <div class="ep-title-text"><span data-lang="en">What I wish I knew before moving to Japan with bags</span><span data-lang="ja">バッグを持って日本に来る前に知っておきたかったこと</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div data-lang="en"><div class="lines"><p>"I moved to Japan with two bags. Neither of them were right for how I ended up living here."</p><p class="beat">[beat]</p><p>"Japan is a walking city. Trains, on foot, in and out of small shops. I needed something that handled all of that — and didn't look out of place."</p><p class="beat">[beat]</p><p>"Finding Kawanishi Kaban kind of solved that. Not because it's a Japan brand — because the design fits how people actually move here. The size. The structure. The way it opens."</p><p class="beat">[beat]</p><p>"If I could go back — I'd have brought less, and bought better once I got here."</p><p class="beat">[pause]</p><p>"That's kind of the whole philosophy of this brand anyway."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「バッグを2つ持って日本に来ました。でも実際の生活スタイルには、どちらも合っていませんでした。」</p><p class="beat">【間】</p><p>「日本は歩く街です。電車、徒歩、小さなお店への出入り。それ全てに対応できて、浮かないバッグが必要でした。」</p><p class="beat">【間】</p><p>「川西鞄に出会って、その問題が解決しました。日本ブランドだからではなく、デザインがこの国での動き方に合っているからです。サイズ、構造、開き方。」</p><p class="beat">【間】</p><p>「もしやり直せるなら — 荷物を減らして、来てからより良いものを買います。」</p><p class="beat">【間】</p><p>「それが、このブランド全体の哲学でもあります。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What would you pack if you moved abroad for a year?"</span><span data-lang="ja">「1年間海外に住むとしたら、何を持っていきますか？」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 29 -->
+  <div class="episode" id="ep29">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 29 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
+      <div class="ep-title-text"><span data-lang="en">I've been showing this brand to people for a month — here's what they say</span><span data-lang="ja">1ヶ月間、周りの人にこのブランドを見せてきた。その反応は</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div class="ssub"><span data-lang="en">Collect 2–3 real coworker reactions before shoot day.</span><span data-lang="ja">撮影前に同僚2〜3人の本音の反応を集めておく。</span></div>
+        <div data-lang="en"><div class="lines"><p>"I've been showing this brand to people around me for the past month. Coworkers. Friends. People who know nothing about bags. The reactions were pretty consistent."</p><p class="beat">[beat]</p><p>"First thing everyone does — they look for the stitching. They can't find it. That's always the moment."</p><p class="beat">[beat]</p><p>"One person asked how much it cost — then immediately said they thought it'd be more."</p><p class="beat">[pause]</p><p>"That's a good sign."</p><p class="beat">[beat]</p><p>"Nobody asks about the brand name. They just want to hold it."</p><p class="beat">[pause]</p><p>"The bag sells itself — I'm just the one showing it."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「この1ヶ月、周りの人にこのブランドを見せてきました。同僚、友達、バッグに詳しくない人も。反応に共通点がありました。」</p><p class="beat">【間】</p><p>「みんな最初にすること — 縫い目を探します。見つかりません。いつもそこが転換点になります。」</p><p class="beat">【間】</p><p>「ある人は値段を聞いて — すぐに「もっと高いと思った」と言いました。」</p><p class="beat">【間】</p><p>「それは良い兆候です。」</p><p class="beat">【間】</p><p>「誰もブランド名を聞きません。みんなただ持ってみたがります。」</p><p class="beat">【間】</p><p>「バッグが自分を語ります — 私はただそれを見せているだけです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What's your first reaction seeing it? Drop it below."</span><span data-lang="ja">「見た瞬間、どう感じましたか？コメントで教えてください。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 31 -->
+  <div class="episode" id="ep31">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 31 · <span data-lang="en">⚠️ SHOOT LAST — Series Finale</span><span data-lang="ja">⚠️ 必ず最後に撮影 — シリーズ最終回</span></div>
+      <div class="ep-title-text"><span data-lang="en">One month. 31 videos. Here's the honest verdict.</span><span data-lang="ja">1ヶ月、31本。正直な結論はこれです。</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Full Script</div>
+        <div class="ssub"><span data-lang="en">Shoot after all 9 Day 1 episodes. Honest and direct. No performance.</span><span data-lang="ja">Day 1の9本を全て撮り終えてから最後に。正直に、率直に。演技しない。</span></div>
+        <div data-lang="en"><div class="lines"><p>"One month."</p><p>"31 videos about one bag brand."</p><p class="beat">[beat]</p><p>"Here's what I actually think."</p><p class="beat">[beat]</p><p>"It's a brand that makes sense the longer you look at it. Most things are the opposite — they look good until you get close. This one gets better the closer you get."</p><p class="beat">[beat]</p><p>"Is it perfect? No."</p><p>"<span class="em">[add one real thing you'd genuinely change]</span>"</p><p>"But the things they got right — they got really right."</p><p class="beat">[beat]</p><p>"70,000 people in Japan already figured this out. I think the rest of the world is starting to catch up."</p><p class="beat">[pause]</p><p>"And if you've been watching this month — you're ahead of it."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「1ヶ月。」</p><p>「一つのバッグブランドについて31本の動画。」</p><p class="beat">【間】</p><p>「私が本当に思うことをお伝えします。」</p><p class="beat">【間】</p><p>「見れば見るほど、意味のあるブランドです。多くのものは逆です — 近づくにつれて印象が薄れます。でもこのブランドは、近づくほど良さが増します。」</p><p class="beat">【間】</p><p>「完璧かと言われたら、そうではありません。」</p><p>「<span class="em">【変えたいと思うことを一つ正直に入れる】</span>」</p><p>「でも、うまくいっているところは、本当にうまくいっています。」</p><p class="beat">【間】</p><p>「日本では7万人がすでにこれに気づいています。世界もこれから追いつき始めると思います。」</p><p class="beat">【間】</p><p>「そして今月見てくれたあなたは、一歩先を行っています。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block">
+          <div class="cta-row"><span class="cta-plat">TikTok</span><span class="cta-line"><span data-lang="en">"Follow — there's more coming after this."</span><span data-lang="ja">「フォローを — この後もまだ続きます。」</span></span></div>
+          <div class="cta-row"><span class="cta-plat">YT Shorts</span><span class="cta-line"><span data-lang="en">"Subscribe — this was just the introduction."</span><span data-lang="ja">「チャンネル登録を — これはまだ始まりに過ぎません。」</span></span></div>
         </div>
       </div>
     </div>
+  </div>
+</div><!-- end day1 -->
 
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Shoot Priorities</span><span data-lang="ja">撮影の優先事項</span></div>
-      <ul>
-        <li><span data-lang="en">Walk toward camera naturally — not posed</span><span data-lang="ja">カメラに向かって自然に歩く — ポーズをとらない</span></li>
-        <li><span data-lang="en">Wide Takamatsu shot behind you — not Tokyo</span><span data-lang="ja">後ろに高松の広角ショット — 東京ではなく</span></li>
-        <li><span data-lang="en">Slow pan across abb exterior — bonded seam area</span><span data-lang="ja">abbの外側をゆっくりパン — 接着部分</span></li>
-        <li><span data-lang="en">Handle close-up — Setouchi leather texture</span><span data-lang="ja">ハンドルのクローズアップ — 瀬戸内レザーの質感</span></li>
-        <li><span data-lang="en">One silent moment holding the bag</span><span data-lang="ja">バッグを持ちながら無言のシーンを1カット</span></li>
-      </ul>
+
+<!-- ████████████████████ DAY 2 ████████████████████ -->
+<div class="day-section" id="day2">
+  <div class="ep-nav">
+    <a class="ep-pill" href="#ep1b">Ep 1 B-roll</a><a class="ep-pill" href="#ep2">Ep 2</a><a class="ep-pill" href="#ep4">Ep 4</a><a class="ep-pill" href="#ep19">Ep 19</a><a class="ep-pill" href="#ep26">Ep 26</a>
+  </div>
+  <div class="day-intro">
+    <div data-lang="en"><h2>Day 2 — <span style="color:var(--accent2)">Outdoor Takamatsu</span></h2><p>Light-dependent day. Shoot Ep 19 (abb hero) in the best light window — plan your morning around that. Grab wide city shots first thing.</p></div>
+    <div data-lang="ja"><h2>Day 2 — <span style="color:var(--accent2)">屋外・高松</span></h2><p>光に左右される日。Ep 19（abbのヒーローショット）を最良の光の時間帯に撮影。朝一番で広角の街撮りから始める。</p></div>
+    <div class="day-meta">
+      <span class="day-tag loc">📍 <span data-lang="en">Outdoor Takamatsu — streets, coastal, aesthetic spots</span><span data-lang="ja">屋外 高松 — 街中、海沿い、映えスポット</span></span>
+      <span class="day-tag prod">🎒 abb (hero) · comame</span>
     </div>
   </div>
-</div>
 
-
-<!-- ═══ EP 7 ═══ -->
-<div class="episode" id="ep7">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 07 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
-    <div class="ep-title">
-      <span data-lang="en">Western people have some wild assumptions about Japanese bags</span>
-      <span data-lang="ja">海外の人が持つ、日本のバッグに対する意外な思い込み</span>
+  <!-- EP 1 B-ROLL -->
+  <div class="episode" id="ep1b">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num"><span data-lang="en">Ep 1 — B-roll · Outdoor Supplement</span><span data-lang="ja">Ep 1 — Bロール · 屋外補足素材</span></div>
+      <div class="ep-title-text"><span data-lang="en">Wide Takamatsu shots + walking with bag</span><span data-lang="ja">高松の広角ショット + バッグを持って歩く</span></div>
+      <div class="ep-badges"><span class="badge b-out"><span data-lang="en">Outdoor B-roll</span><span data-lang="ja">屋外Bロール</span></span></div>
+      <span class="ep-toggle">▾</span>
     </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Casual</span><span data-lang="ja">カジュアル</span></span>
+    <div class="ep-body">
+      <div class="scene shot">
+        <div class="slabel shot">🎥 <span data-lang="en">Shots needed for Ep 1 edit</span><span data-lang="ja">Ep 1の編集に必要なショット</span></div>
+        <div data-lang="en"><div class="lines"><p>"Wide establishing shot of Takamatsu — somewhere that reads 'small Japanese city,' not tourist landmark."</p><p>"You walking naturally with abb. Medium shot from front, side."</p><p>"One moment standing still, bag held at your side — no words."</p><p>"Slow cinematic pan across a quiet street or coastal view."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「高松の広角確立ショット — 観光地ではなく『小さな日本の街』に見える場所。」</p><p>「abbを持って自然に歩く。正面・横からのミディアムショット。」</p><p>「静止してバッグを持つ無言のシーン。」</p><p>「静かな街並みや海沿いの景色のゆっくりとした映画的パン。」</p></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div><ul>
+        <li><span data-lang="en">Shoot early morning for best light — before 9am if possible</span><span data-lang="ja">できれば午前9時前に撮影 — 光が最も良い時間帯</span></li>
+        <li><span data-lang="en">This feeds Ep 1 edit — don't skip it</span><span data-lang="ja">Ep 1の編集に直結する素材 — 必ず撮る</span></li>
+        <li><span data-lang="en">Get 3–5 min of footage — more than you think you need</span><span data-lang="ja">3〜5分の素材を確保 — 思ったより多めに</span></li>
+      </ul></div>
     </div>
-    <span class="ep-toggle">▾</span>
   </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Hook</span><span data-lang="ja">フック</span></div>
-      <div class="scene-subtitle"><span data-lang="en">Have 3–4 real comments ready on your phone.</span><span data-lang="ja">本物のコメントを3〜4件、スマホに用意しておく。</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"I've been reading what people outside Japan actually think about Japanese bag brands."</p>
-        <p class="beat">[beat]</p>
-        <p>"Some of these comments are wild."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「海外の人が日本のバッグブランドについて実際にどう思っているか、コメントを読んでみました。」</p>
-        <p class="beat">【間】</p>
-        <p>「なかなかびっくりするものがありました。」</p>
-      </div></div>
+
+  <!-- EP 2 -->
+  <div class="episode" id="ep2">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 02 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">This brand just opened in Tokyo — here's where it actually started</span><span data-lang="ja">このブランドは東京に進出した — でも始まりはここだった</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated</span><span data-lang="ja">ナレーション</span></span><span class="badge b-out"><span data-lang="en">Outdoor</span><span data-lang="ja">屋外</span></span></div>
+      <span class="ep-toggle">▾</span>
     </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — React to Comment 1</span><span data-lang="ja">シーン1 — コメント1への反応</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"Okay so someone said: <span class="emphasis">[read comment]</span>"</p>
-        <p class="beat">[genuine reaction — short, real]</p>
-        <p>"Here's what's actually true:"</p>
-        <p>"<span class="emphasis">[correct it in 1–2 sentences]</span>"</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「こんなコメントがありました：<span class="emphasis">【コメントを読む】</span>」</p>
-        <p class="beat">【自然なリアクション — 短く、本音で】</p>
-        <p>「実際のところはこうです：」</p>
-        <p>「<span class="emphasis">【1〜2文で訂正する】</span>」</p>
-      </div></div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"This brand just opened a location in Tokyo."</p><p class="beat">[beat]</p><p>"But it didn't start there."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「このブランドは東京に新しい拠点を開きました。」</p><p class="beat">【間】</p><p>「でも始まりはそこではありませんでした。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Outdoor Takamatsu shots</span><span data-lang="ja">VO · 高松屋外ショット</span></div>
+        <div class="ssub"><span data-lang="en">Walking through a quiet Takamatsu street or near the workshop.</span><span data-lang="ja">高松の静かな街を歩きながら、または工房付近で。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Kawanishi Kaban started in Kagawa — the smallest prefecture in Japan. Population under a million. Most people outside Japan have never heard of it."</p><p class="beat">[beat]</p><p>"The founder started the brand as a subcontract factory — making bags for other people. Around 2015 he decided to go his own way."</p><p class="beat">[beat]</p><p>"Now they're in Tokyo. But the craft still comes from here."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「川西鞄は香川県から始まりました — 日本一小さな都道府県。人口は100万人以下。海外ではほとんど知られていません。」</p><p class="beat">【間】</p><p>「創業者は他社のバッグを作る下請け工場としてスタートしました。2015年頃、自分のブランドを立ち上げることを決めました。」</p><p class="beat">【間】</p><p>「今は東京にも進出しています。でも職人技はここから生まれています。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Follow — tomorrow I'll show you the detail that made people take notice."</span><span data-lang="ja">「フォローを。明日は人々が注目したディテールをお見せします。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Find one wall or street that reads 'small Japanese city' — nothing flashy</span><span data-lang="ja">「小さな日本の街」に見える壁や通りを1つ探す</span></li>
+        <li><span data-lang="en">Underdog framing — this is a growth story, not a origin lecture</span><span data-lang="ja">アンダードッグの視点で — 起源の説明ではなく成長の物語</span></li>
+      </ul></div>
     </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — React to Comment 2</span><span data-lang="ja">シーン2 — コメント2への反応</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"This one actually made me laugh —"</p>
-        <p>"<span class="emphasis">[read comment]</span>"</p>
-        <p class="beat">[beat]</p>
-        <p>"<span class="emphasis">[honest reaction]</span>"</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「これは思わず笑ってしまいました —」</p>
-        <p>「<span class="emphasis">【コメントを読む】</span>」</p>
-        <p class="beat">【間】</p>
-        <p>「<span class="emphasis">【正直な反応】</span>」</p>
-      </div></div>
+  </div>
+
+  <!-- EP 4 -->
+  <div class="episode" id="ep4">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 04 · <span data-lang="en">Kagawa / Light Ref</span><span data-lang="ja">香川 / 軽い言及</span></div>
+      <div class="ep-title-text"><span data-lang="en">The smallest prefecture in Japan is quietly obsessed with craft</span><span data-lang="ja">日本一小さな県が、静かに職人技にこだわっている</span></div>
+      <div class="ep-badges"><span class="badge b-out"><span data-lang="en">Outdoor</span><span data-lang="ja">屋外</span></span><span class="badge b-vo">Voiceover</span></div>
+      <span class="ep-toggle">▾</span>
     </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Close</span><span data-lang="ja">まとめ</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"I had the same assumptions before I moved here."</p>
-        <p>"Being inside the workshop kind of changed all of that."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「日本に来る前は、私も同じように思っていました。」</p>
-        <p>「工房の中に入って、全部変わりました。」</p>
-      </div></div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"Kagawa is the smallest prefecture in Japan."</p><p>"Most people visit for the udon. But there's something else going on here."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「香川県は日本一小さな都道府県です。」</p><p>「ほとんどの人はうどんを目当てに来ます。でも、この地にはもう一つ別の顔があります。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Outdoor shots</span><span data-lang="ja">VO · 屋外ショット</span></div>
+        <div data-lang="en"><div class="lines"><p>"This place has been making things by hand for centuries. Fans, lacquerware, gloves — ninety percent of Japan's gloves come from here."</p><p class="beat">[beat]</p><p>"It's not loud about it. That's kind of the point."</p><p class="beat">[beat]</p><p>"Kawanishi Kaban fits that same pattern. Quietly making something really good — in a place most people overlook."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「この地は何世紀にもわたって手作業でものを作り続けてきました。うちわ、漆器、手袋 — 日本の手袋の90%がここで作られています。」</p><p class="beat">【間】</p><p>「でも派手に主張しません。それがこの地らしいところです。」</p><p class="beat">【間】</p><p>「川西鞄も同じパターンです。ほとんどの人が見過ごしてきた場所で、静かに本当に良いものを作っています。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Have you ever heard of Kagawa before this? Drop it in the comments."</span><span data-lang="ja">「この動画を見る前、香川を知っていましたか？コメントで教えてください。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Light Kagawa reference — don't over-explain, let the visual carry it</span><span data-lang="ja">香川への言及は軽く — 説明しすぎず、映像に語らせる</span></li>
+        <li><span data-lang="en">Calm, observational tone. Not a tourism video.</span><span data-lang="ja">穏やかな観察者のトーン。観光動画にしない。</span></li>
+      </ul></div>
     </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item">
-          <span class="cta-platform">Both</span>
-          <span class="cta-line">
-            <span data-lang="en">"Drop your assumption in the comments — I'll tell you if it's true."</span>
-            <span data-lang="ja">「あなたが思い込んでいることをコメントに書いてください。本当かどうかお答えします。」</span>
-          </span>
-        </div>
+  </div>
+
+  <!-- EP 19 -->
+  <div class="episode" id="ep19">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 19 · <span data-lang="en">Discovery · abb Hero</span><span data-lang="ja">発見 · abbヒーロー</span></div>
+      <div class="ep-title-text"><span data-lang="en">The bag that started everything for this brand</span><span data-lang="ja">このブランドの全ての始まりとなったバッグ</span></div>
+      <div class="ep-badges"><span class="badge b-out"><span data-lang="en">Outdoor · Hero treatment</span><span data-lang="ja">屋外 · ヒーロー演出</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"Every brand has one bag that started it all."</p><p class="beat">[hold on abb in natural light]</p><p>"For Kawanishi Kaban — this is it."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「どのブランドにも、全ての始まりとなった一つのバッグがあります。」</p><p class="beat">【自然光の中でabbを映す】</p><p>「川西鞄にとって — それがこれです。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Cinematic abb shots</span><span data-lang="ja">VO · 映画的なabbショット</span></div>
+        <div class="ssub"><span data-lang="en">Slow pan across exterior. Best natural light of the day. Give this the most time.</span><span data-lang="ja">外側をゆっくりパン。この日の最良の自然光で。一番時間をかけるシーン。</span></div>
+        <div data-lang="en"><div class="lines"><p>"The abb. It became the brand's signature because it didn't look like anything else."</p><p class="beat">[beat]</p><p>"No visible stitching on the body. Bonded construction. Setouchi leather handle that ages differently from the rest of the bag."</p><p class="beat">[beat]</p><p>"It was the bag that made people stop and ask — 'where did you get that?'"</p><p class="beat">[beat]</p><p>"70,000 YouTube subscribers later — still the one they're known for."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「abb。他にはない見た目でブランドのシグネチャーになりました。」</p><p class="beat">【間】</p><p>「本体に縫い目は見えません。接着構造。ハンドルは瀬戸内レザーで、バッグ本体とは異なるエイジングをします。」</p><p class="beat">【間】</p><p>「人々が立ち止まって聞くようになったバッグです — 『それどこで買ったの？』」</p><p class="beat">【間】</p><p>「YouTube登録者7万人を獲得した今も、このブランドの代名詞として在り続けています。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Tomorrow I'll show you something about this bag that most people miss."</span><span data-lang="ja">「明日は、ほとんどの人が見逃しているこのバッグのある特徴をお見せします。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">⭐ Give this the best light of the day — plan outdoor schedule around it</span><span data-lang="ja">⭐ この日の最良の光をここに使う — 屋外スケジュールはここを中心に組む</span></li>
+        <li><span data-lang="en">Slow. Cinematic. Let the bag breathe on screen.</span><span data-lang="ja">ゆっくり。映画的に。バッグに画面の中で存在感を持たせる。</span></li>
+        <li><span data-lang="en">This is your highest-production episode of Day 2.</span><span data-lang="ja">Day 2で最も力を入れるエピソード。</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- EP 26 -->
+  <div class="episode" id="ep26">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 26 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">The bean-shaped bag that travels everywhere</span><span data-lang="ja">どこにでも連れていきたい、豆型バッグ</span></div>
+      <div class="ep-badges"><span class="badge b-out"><span data-lang="en">Outdoor · comame</span><span data-lang="ja">屋外 · comame</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"This is the comame."</p><p class="beat">[hold it up — let the shape speak]</p><p>"The shape is the whole thing."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「これがcomameです。」</p><p class="beat">【持ち上げて — 形に語らせる】</p><p>「この形が全てです。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Multiple carry positions</span><span data-lang="ja">VO · さまざまな持ち方</span></div>
+        <div class="ssub"><span data-lang="en">Shot from multiple angles — side, top, carried in hand, across body. Let the shape do the work.</span><span data-lang="ja">複数の角度から — 横、上、手持ち、ショルダー。形に語らせる。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Most bags are rectangles. This one isn't."</p><p class="beat">[beat]</p><p>"Bean-shaped. Sits against your body differently. Takes up less space than it looks."</p><p class="beat">[beat]</p><p>"It's the bag you grab when you don't want to think about your bag."</p><p class="beat">[beat]</p><p>"Day trips. Errands. Weekend markets. It handles all of it without looking like it's trying."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ほとんどのバッグは長方形です。このバッグは違います。」</p><p class="beat">【間】</p><p>「豆型。体への当たり方が違います。見た目より省スペースです。」</p><p class="beat">【間】</p><p>「バッグのことを考えたくない時に手が伸びるバッグです。」</p><p class="beat">【間】</p><p>「日帰り旅行。買い物。週末のマーケット。頑張っている感を出さずに全てこなします。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Would you go bean-shaped? Drop your reaction below."</span><span data-lang="ja">「豆型バッグ、アリだと思いますか？コメントで教えてください。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">The shape is the visual hook — shoot from side profile first</span><span data-lang="ja">形が視覚的フック — まず横のプロファイルから撮る</span></li>
+        <li><span data-lang="en">Show it in motion — carried, not just displayed</span><span data-lang="ja">動きの中で見せる — 飾るのではなく持ち歩く姿を</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div><!-- end day2 -->
+
+
+<!-- ████████████████████ DAY 3 ████████████████████ -->
+<div class="day-section" id="day3">
+  <div class="ep-nav">
+    <a class="ep-pill" href="#ep3">Ep 3</a><a class="ep-pill" href="#ep6">Ep 6</a><a class="ep-pill" href="#ep10">Ep 10</a><a class="ep-pill" href="#ep12">Ep 12</a><a class="ep-pill" href="#ep15">Ep 15</a><a class="ep-pill" href="#ep17">Ep 17</a><a class="ep-pill" href="#ep20">Ep 20</a><a class="ep-pill" href="#ep22">Ep 22</a>
+  </div>
+  <div class="day-intro">
+    <div data-lang="en"><h2>Day 3 — <span style="color:var(--shot)">Tabletop Macro</span></h2><p>Set up once. All product detail shots. Natural light from the side. Hands in frame throughout. Take your time on Ep 3 — the macro IS the video.</p></div>
+    <div data-lang="ja"><h2>Day 3 — <span style="color:var(--shot)">テーブルトップ・マクロ</span></h2><p>セッティングは一度。全て商品ディテール撮影。横からの自然光。手を画面内に入れる。Ep 3に時間をかける — マクロがそのまま動画になる。</p></div>
+    <div class="day-meta">
+      <span class="day-tag loc">📍 <span data-lang="en">Workshop — Tabletop / Macro Setup</span><span data-lang="ja">工房 — テーブルトップ / マクロ設置</span></span>
+      <span class="day-tag prod">🎒 abb · minimon · seowL · lauff · comame · canvas + Cordura samples</span>
+    </div>
+  </div>
+
+  <!-- EP 3 -->
+  <div class="episode" id="ep3">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 03 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">Find the seam. You can't.</span><span data-lang="ja">縫い目を探してみてください。見つかりません。</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Tabletop Macro</span><span data-lang="ja">テーブルトップ・マクロ</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Extreme macro</span><span data-lang="ja">VO · 極限マクロ</span></div>
+        <div class="ssub"><span data-lang="en">Let the viewer search for the seam with you. Move slowly across the exterior.</span><span data-lang="ja">視聴者と一緒に縫い目を探す。外側をゆっくり動かす。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Most bags have a seam. A line where two pieces of material are stitched together."</p><p class="beat">[macro shot — searching the abb exterior]</p><p>"Find it on this one."</p><p class="beat">[hold — let it sink in]</p><p>"You can't. Because it's not there."</p><p class="beat">[beat]</p><p>"The entire body is bonded. No stitching on the outside."</p><p class="beat">[beat]</p><p>"That's not how bags are usually made. It takes longer. It's harder to get right."</p><p class="beat">[pause]</p><p>"That's why they do it."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ほとんどのバッグには縫い目があります。2つの素材を縫い合わせた線です。」</p><p class="beat">【マクロショット — abbの外側を探す】</p><p>「このバッグで探してみてください。」</p><p class="beat">【間 — 沈黙させる】</p><p>「見つかりません。存在しないからです。」</p><p class="beat">【間】</p><p>「本体全体が接着されています。外側に縫い目はありません。」</p><p class="beat">【間】</p><p>「これは通常のバッグの作り方ではありません。時間がかかります。正確に仕上げるのが難しい。」</p><p class="beat">【間】</p><p>「だから彼らはそれをしています。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Follow — tomorrow I'll show you something else that shouldn't be possible."</span><span data-lang="ja">「フォローを。明日はありえないと思うような別のことをお見せします。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">⭐ Take the most time on this one — the macro IS the video</span><span data-lang="ja">⭐ このエピソードに一番時間をかける — マクロが動画そのもの</span></li>
+        <li><span data-lang="en">Move slowly — let the viewer's eyes search with you</span><span data-lang="ja">ゆっくり動かす — 視聴者が一緒に目で追えるように</span></li>
+        <li><span data-lang="en">Find the bonded area where the seam would normally be</span><span data-lang="ja">通常縫い目があるはずの接着部分を見つけて映す</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- EP 6 -->
+  <div class="episode" id="ep6">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 06 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">Why the handle is a different leather than the bag</span><span data-lang="ja">なぜハンドルはバッグ本体と異なるレザーなのか</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Macro · abb</span><span data-lang="ja">マクロ · abb</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Handle macro + contrast shots</span><span data-lang="ja">VO · ハンドルのマクロ + コントラストショット</span></div>
+        <div class="ssub"><span data-lang="en">Show the contrast: bag body texture vs handle texture. Two different materials side by side.</span><span data-lang="ja">コントラストを見せる：バッグ本体の質感 vs ハンドルの質感。2つの素材を並べる。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Look at the handle. Then look at the rest of the bag."</p><p class="beat">[macro — close on each]</p><p>"Different leather. On purpose."</p><p class="beat">[beat]</p><p>"The body uses Cordura or canvas. The handle uses Setouchi leather — from the coastal region right here in Kagawa."</p><p class="beat">[beat]</p><p>"The reason is simple. You hold the handle. That's the part that touches you most."</p><p>"Setouchi leather ages well. Gets better with use. Grips differently in heat."</p><p class="beat">[beat]</p><p>"That's a design decision most brands don't make. This one did."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ハンドルを見てください。それからバッグ本体を見てください。」</p><p class="beat">【マクロ — それぞれにクローズアップ】</p><p>「異なるレザーです。意図的に。」</p><p class="beat">【間】</p><p>「本体はコーデュラまたはキャンバスを使用。ハンドルは香川のここ、瀬戸内沿岸地域の瀬戸内レザーです。」</p><p class="beat">【間】</p><p>「理由はシンプルです。ハンドルを持ちます。最も手に触れる部分です。」</p><p>「瀬戸内レザーは経年変化が良いです。使えば使うほど良くなります。暑い時の握り感が違います。」</p><p class="beat">【間】</p><p>「ほとんどのブランドがしないデザインの決断です。このブランドはしました。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Have you ever noticed a brand doing this before? Let me know."</span><span data-lang="ja">「こういうことをしているブランドを見たことがありますか？教えてください。」</span></span></div></div>
       </div>
     </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Prep</span><span data-lang="ja">事前準備</span></div>
-      <ul>
-        <li><span data-lang="en">Find 3–4 real Reddit/TikTok comments about Japanese bag brands tonight</span><span data-lang="ja">今夜、日本のバッグブランドに関するコメントを3〜4件調べておく</span></li>
-        <li><span data-lang="en">Pick ones that are wrong in an interesting way — not mean</span><span data-lang="ja">面白い形で間違っているものを選ぶ — 悪意のあるものは避ける</span></li>
-        <li><span data-lang="en">No props needed. Casual energy.</span><span data-lang="ja">小道具不要。リラックスした雰囲気で。</span></li>
-      </ul>
+  </div>
+
+  <!-- EP 10 -->
+  <div class="episode" id="ep10">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 10 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">What Cordura actually is</span><span data-lang="ja">コーデュラって実際何なの？</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Tabletop · Material comparison</span><span data-lang="ja">テーブルトップ · 素材比較</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Both materials side by side</span><span data-lang="ja">VO · 両素材を並べて</span></div>
+        <div class="ssub"><span data-lang="en">Canvas bag AND Cordura bag on the table. Hands touching both. Show texture difference.</span><span data-lang="ja">キャンバスとコーデュラの両方をテーブルに。手で両方に触れる。質感の違いを見せる。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Two bags. Different materials. People ask me which one to get — so let me actually explain the difference."</p><p class="beat">[show canvas first]</p><p>"This is canvas. Natural. Gets a patina over time. Feels more traditional."</p><p class="beat">[show Cordura]</p><p>"This is Cordura. A technical nylon fabric. Originally developed for military gear."</p><p class="beat">[beat]</p><p>"It's extremely light. Tear and abrasion resistant. Doesn't absorb water."</p><p class="beat">[beat]</p><p>"Canvas ages more visibly. Cordura ages more quietly."</p><p class="beat">[pause]</p><p>"Neither is better. It depends on how you live."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「2つのバッグ。異なる素材。どちらを選べばいいか聞かれるので、実際に違いを説明します。」</p><p class="beat">【まずキャンバスを見せる】</p><p>「これはキャンバスです。天然素材。使い込むほどに味が出ます。より伝統的な雰囲気。」</p><p class="beat">【コーデュラを見せる】</p><p>「これはコーデュラです。技術的なナイロン素材。元々は軍用品のために開発されました。」</p><p class="beat">【間】</p><p>「非常に軽量です。引き裂きや摩耗に強い。水を吸いません。」</p><p class="beat">【間】</p><p>「キャンバスは経年変化が分かりやすいです。コーデュラは静かに変化します。」</p><p class="beat">【間】</p><p>「どちらが良いということはありません。ライフスタイルによります。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Canvas or Cordura — which suits your lifestyle? Tell me below."</span><span data-lang="ja">「キャンバスとコーデュラ、あなたのライフスタイルに合うのはどちら？コメントで教えてください。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Bring both canvas AND Cordura versions to set</span><span data-lang="ja">キャンバスとコーデュラ両方を用意する</span></li>
+        <li><span data-lang="en">Hands in frame — touch both materials on camera</span><span data-lang="ja">手を画面内に入れる — カメラの前で両方に触れる</span></li>
+      </ul></div>
     </div>
   </div>
-</div>
 
-
-<!-- ═══ EP 8 ═══ -->
-<div class="episode" id="ep8">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 08 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
-    <div class="ep-title">
-      <span data-lang="en">What I noticed after one week of daily use</span>
-      <span data-lang="ja">1週間毎日使って気づいたこと</span>
+  <!-- EP 12 -->
+  <div class="episode" id="ep12">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 12 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">Small bag. Suspicious amount of pockets.</span><span data-lang="ja">小さいバッグ。不審なほどポケットが多い。</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Tabletop Demo · minimon</span><span data-lang="ja">テーブルトップデモ · minimon</span></span></div>
+      <span class="ep-toggle">▾</span>
     </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Honest · Personal</span><span data-lang="ja">正直・個人的</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
-  </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
-      <div data-lang="en"><div class="lines"><p>"I've been using this bag every day for a week. A few things I didn't expect."</p></div></div>
-      <div data-lang="ja"><div class="lines"><p>「このバッグを1週間、毎日使いました。予想外だったことが何点かあります。」</p></div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — Observation 1</span><span data-lang="ja">シーン1 — 気づき1</span></div>
-      <div class="scene-subtitle"><span data-lang="en">Hold abb naturally. Talk from experience, not script.</span><span data-lang="ja">abbを自然に持つ。スクリプトではなく経験から話す。</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"The handle. I didn't think it would matter which leather they used there."</p>
-        <p>"But after a week of holding it in summer heat — it actually feels different. Better."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「ハンドルです。どのレザーを使うかなんてあまり気にしていませんでした。」</p>
-        <p>「でも夏の暑さの中で1週間持ち続けると — 明らかに違いを感じます。より良いです。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — Observation 2</span><span data-lang="ja">シーン2 — 気づき2</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"The weight. I thought it'd be heavier for how solid it feels. It's not. It sits well."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「重さです。あれだけしっかりしているので重いと思っていました。でも違います。持ちやすいです。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Honest observation (fill in yourself)</span><span data-lang="ja">シーン3 — 正直な気づき（自分で追加）</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"One thing I'm still figuring out —"</p>
-        <p>"<span class="emphasis">[add your own genuine observation here]</span>"</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「まだ分かりかねていることが一つあります —」</p>
-        <p>「<span class="emphasis">【自分の正直な気づきをここに入れる】</span>」</p>
-      </div></div>
-    </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
-        <span class="cta-line">
-          <span data-lang="en">"I'll keep updating this as I use it longer. Follow to see how it holds up."</span>
-          <span data-lang="ja">「使い続けながら更新していきます。経過が気になる方はフォローを。」</span>
-        </span>
-      </div></div>
-    </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
-      <ul>
-        <li><span data-lang="en">Use abb — hold it, don't set it on a table</span><span data-lang="ja">abbを使う — テーブルに置かず、持ったまま話す</span></li>
-        <li><span data-lang="en">Relaxed, honest tone — like talking to a friend</span><span data-lang="ja">リラックスして正直に — 友達に話すような感覚で</span></li>
-        <li><span data-lang="en">Scene 3: fill in with something you actually noticed</span><span data-lang="ja">シーン3：実際に気づいたことを入れる</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ EP 14 ═══ -->
-<div class="episode" id="ep14">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 14 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
-    <div class="ep-title">
-      <span data-lang="en">The thing foreigners always ask me about this bag</span>
-      <span data-lang="ja">外国人が必ずこのバッグについて聞いてくること</span>
-    </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Conversational</span><span data-lang="ja">会話調</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
-  </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
-      <div data-lang="en"><div class="lines"><p>"Every time I have this bag outside the workshop — someone asks me the same question."</p></div></div>
-      <div data-lang="ja"><div class="lines"><p>「このバッグを工房の外で持っていると — 必ず同じ質問をされます。」</p></div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Question</span><span data-lang="ja">シーン1 — 質問</span></div>
-      <div class="scene-subtitle"><span data-lang="en">Pick one: price / where to buy / why it looks different.</span><span data-lang="ja">一つ選ぶ：値段 / どこで買えるか / なぜ見た目が違うか</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"They ask: <span class="emphasis">'How much is it?'</span>"</p>
-        <p>"And honestly — my answer surprises them."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「聞かれるのは：<span class="emphasis">「いくらですか？」</span>」</p>
-        <p>「そして私の答えに、みんな少し驚きます。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — The Answer</span><span data-lang="ja">シーン2 — 答え</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"It's not cheap. But it's not what you'd expect for what you're getting."</p>
-        <p>"These bags are made to last — repair-for-life kind of made."</p>
-        <p>"When I explain that, people usually stop asking about the price."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「安くはありません。でも、受け取る価値に比べると意外な金額です。」</p>
-        <p>「このバッグは長く使えるように作られています — 生涯修理対応のクオリティです。」</p>
-        <p>「それを説明すると、みんな値段のことを気にしなくなります。」</p>
-      </div></div>
-    </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
-        <span class="cta-line">
-          <span data-lang="en">"What would your first question be? Drop it below."</span>
-          <span data-lang="ja">「あなたが最初に聞きたいことは？コメントに書いてください。」</span>
-        </span>
-      </div></div>
-    </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
-      <ul>
-        <li><span data-lang="en">Decide which question to use before you shoot — price works best</span><span data-lang="ja">撮影前にどの質問を使うか決める — 値段が一番効果的</span></li>
-        <li><span data-lang="en">Casual energy — sharing something that happened, not presenting</span><span data-lang="ja">カジュアルに — プレゼンではなく、出来事を話す感覚で</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ EP 18 ═══ -->
-<div class="episode" id="ep18">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 18 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
-    <div class="ep-title">
-      <span data-lang="en">What I got wrong about Japanese bags before I moved here</span>
-      <span data-lang="ja">日本に来る前、日本のバッグについて私が間違えていたこと</span>
-    </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Candid · Perspective shift</span><span data-lang="ja">率直・視点の変化</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
-  </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
-      <div data-lang="en"><div class="lines"><p>"Before I moved to Japan, I had this idea of what Japanese bags were. I was pretty wrong."</p></div></div>
-      <div data-lang="ja"><div class="lines"><p>「日本に来る前、日本のバッグについてこんなイメージを持っていました。かなり間違っていましたが。」</p></div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Wrong Assumption</span><span data-lang="ja">シーン1 — 間違った思い込み</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"I thought they were overpriced for the name. Like — paying a premium just because it says 'made in Japan.'"</p>
-        <p class="beat">[pause]</p>
-        <p>"That's not what's happening here."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「ブランド名に対して割高だと思っていました。「日本製」と書いてあるだけでプレミアムを払う感じかと。」</p>
-        <p class="beat">【間】</p>
-        <p>「でも、実際は違いました。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — What Changed</span><span data-lang="ja">シーン2 — 変わったこと</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"When I actually got into the workshop — started seeing how long they spend on one bag — the assumption just fell apart."</p>
-        <p>"The price isn't about the label. It's about the time."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「工房に入って — 一つのバッグにどれだけの時間をかけているか見て — その思い込みが崩れました。」</p>
-        <p>「価格はブランド名のためではありません。かかる時間のためです。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Close</span><span data-lang="ja">シーン3 — 締め</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"I still think about what I would have bought instead. Something cheaper that I'd have replaced twice by now."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「あの時別のものを買っていたら、と今でも思います。もっと安くて、もう2回は買い替えていたものを。」</p>
-      </div></div>
-    </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
-        <span class="cta-line">
-          <span data-lang="en">"What did you assume before watching this? I'm genuinely curious."</span>
-          <span data-lang="ja">「この動画を見る前、どんなイメージを持っていましたか？ぜひ教えてください。」</span>
-        </span>
-      </div></div>
-    </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
-      <ul>
-        <li><span data-lang="en">No props needed — pure perspective storytelling</span><span data-lang="ja">小道具不要 — 視点の変化を純粋に語る</span></li>
-        <li><span data-lang="en">Reflective, slightly self-deprecating tone. Not a sales pitch.</span><span data-lang="ja">内省的で少し自虐的なトーン。セールストークにしない。</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ EP 23 ═══ -->
-<div class="episode" id="ep23">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 23 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
-    <div class="ep-title">
-      <span data-lang="en">Honest things I'd tell someone before buying this bag</span>
-      <span data-lang="ja">このバッグを買う前に正直に伝えたいこと</span>
-    </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Honest review</span><span data-lang="ja">正直なレビュー</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
-  </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
-      <div data-lang="en"><div class="lines"><p>"If someone asked me whether to buy this bag — I'd say yes. But I'd tell them a few things first."</p></div></div>
-      <div data-lang="ja"><div class="lines"><p>「このバッグを買うべきか聞かれたら — 買ってほしいと思います。でも先にお伝えしたいことがあります。」</p></div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Trade-off</span><span data-lang="ja">シーン1 — トレードオフ</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"It's not a flashy bag. Nobody's going to recognize the name — especially outside Japan."</p>
-        <p>"If that matters to you, this isn't it."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「派手なバッグではありません。ブランド名を知っている人はほとんどいません — 特に海外では。」</p>
-        <p>「それが気になるなら、このバッグは向いていないかもしれません。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — The Upside</span><span data-lang="ja">シーン2 — 良い点</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"But if you actually use your bag every day — and you've been burned by something that looked good but fell apart — this is for you."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「でも、毎日バッグを使う方 — 見た目は良くてもすぐ壊れたバッグで痛い目を見た方 — このバッグはそういう方のためにあります。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — Who It's Not For</span><span data-lang="ja">シーン3 — 向いていない人</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"I wouldn't buy it if you want something trendy. This brand doesn't really do trends."</p>
-        <p class="beat">[pause]</p>
-        <p>"Which is kind of the point."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「トレンドを求めている方にはお勧めしません。このブランドはトレンドを追いません。」</p>
-        <p class="beat">【間】</p>
-        <p>「それが、このブランドの本質でもあります。」</p>
-      </div></div>
-    </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
-        <span class="cta-line">
-          <span data-lang="en">"What do you actually need from a bag? Tell me in the comments."</span>
-          <span data-lang="ja">「バッグに本当に求めるものは何ですか？コメントで教えてください。」</span>
-        </span>
-      </div></div>
-    </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
-      <ul>
-        <li><span data-lang="en">Hold abb naturally — not showing it off</span><span data-lang="ja">abbを自然に持つ — 見せびらかさない</span></li>
-        <li><span data-lang="en">Credibility comes from telling people NOT to buy in some cases</span><span data-lang="ja">「買わない方がいい場合もある」と言うことで信頼感が生まれる</span></li>
-        <li><span data-lang="en">Even tone throughout. No enthusiasm spikes.</span><span data-lang="ja">トーンを一定に保つ。テンションを上げすぎない。</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ EP 25 ═══ -->
-<div class="episode" id="ep25">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 25 · Day 1 · <span data-lang="en">Discovery</span><span data-lang="ja">発見</span></div>
-    <div class="ep-title">
-      <span data-lang="en">What I wish I knew before moving to Japan with bags</span>
-      <span data-lang="ja">バッグを持って日本に来る前に知っておきたかったこと</span>
-    </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Travel · Lifestyle</span><span data-lang="ja">旅・ライフスタイル</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
-  </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
-      <div data-lang="en"><div class="lines"><p>"I moved to Japan with two bags. Neither of them were right for how I actually ended up living here."</p></div></div>
-      <div data-lang="ja"><div class="lines"><p>「バッグを2つ持って日本に来ました。でも実際の生活スタイルには、どちらも合っていませんでした。」</p></div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Problem</span><span data-lang="ja">シーン1 — 問題</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"Japan is a walking city. You're on trains, on foot, in and out of small shops."</p>
-        <p>"I needed something that could handle all of that — and not look out of place."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「日本は歩く街です。電車に乗って、歩いて、小さなお店に出入りして。」</p>
-        <p>「そのすべてに対応できて、かつ浮かないバッグが必要でした。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — What I Found</span><span data-lang="ja">シーン2 — 出会い</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"Finding Kawanishi Kaban kind of solved that. Not because it's a Japan brand — but because the design fits how people actually move here."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「川西鞄に出会って、その問題が解決しました。日本ブランドだからではなく — デザインが、この国での実際の動き方に合っているからです。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — The Wish</span><span data-lang="ja">シーン3 — 振り返り</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"If I could go back — I'd have brought less, and bought better once I got here."</p>
-        <p class="beat">[beat]</p>
-        <p>"That's kind of the whole philosophy of this brand anyway."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「もしやり直せるなら — 荷物を減らして、来てからより良いものを買います。」</p>
-        <p class="beat">【間】</p>
-        <p>「それが、このブランド全体の哲学でもあります。」</p>
-      </div></div>
-    </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
-        <span class="cta-line">
-          <span data-lang="en">"What would you pack if you moved abroad for a year?"</span>
-          <span data-lang="ja">「1年間海外に住むとしたら、何を持っていきますか？」</span>
-        </span>
-      </div></div>
-    </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
-      <ul>
-        <li><span data-lang="en">Light travel prop if available</span><span data-lang="ja">あれば旅行用の小道具を少し</span></li>
-        <li><span data-lang="en">Tie back to brand should feel natural, not forced</span><span data-lang="ja">ブランドへの繋げ方は自然に — 無理やり感を出さない</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ EP 29 ═══ -->
-<div class="episode" id="ep29">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 29 · Day 1 · <span data-lang="en">Reaction</span><span data-lang="ja">リアクション</span></div>
-    <div class="ep-title">
-      <span data-lang="en">I've been showing this brand to people for a month — here's what they say</span>
-      <span data-lang="ja">1ヶ月間、周りの人にこのブランドを見せてきた。その反応は</span>
-    </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Social proof</span><span data-lang="ja">社会的証明</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
-  </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
-      <div data-lang="en"><div class="lines">
-        <p>"I've been showing this brand to people around me for the past month. Coworkers. Friends. People who know nothing about bags."</p>
-        <p>"The reactions were pretty consistent."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「この1ヶ月、周りの人にこのブランドを見せてきました。同僚、友達、バッグに詳しくない人も含めて。」</p>
-        <p>「反応にはある共通点がありました。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — Reaction 1</span><span data-lang="ja">シーン1 — 反応1</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"First thing everyone does — they look for the stitching. They can't find it. That's always the moment."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「みんな最初にすること — 縫い目を探します。見つかりません。いつもそこが転換点になります。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — Reaction 2</span><span data-lang="ja">シーン2 — 反応2</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"One person asked how much it cost — then immediately said they thought it'd be more."</p>
-        <p class="beat">[beat]</p>
-        <p>"That's a good sign."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「ある人は値段を聞いて — すぐに「もっと高いと思った」と言いました。」</p>
-        <p class="beat">【間】</p>
-        <p>「それは良い兆候です。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — The Pattern</span><span data-lang="ja">シーン3 — 共通点</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"Nobody asks about the brand name. They just want to hold it."</p>
-        <p class="beat">[pause]</p>
-        <p>"The bag sells itself — I'm just the one showing it."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「誰もブランド名を聞きません。みんなただ持ってみたがります。」</p>
-        <p class="beat">【間】</p>
-        <p>「バッグが自分を語ります — 私はただそれを見せているだけです。」</p>
-      </div></div>
-    </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block"><div class="cta-item"><span class="cta-platform">Both</span>
-        <span class="cta-line">
-          <span data-lang="en">"What's your first reaction seeing it? Drop it below."</span>
-          <span data-lang="ja">「見た瞬間、どう感じましたか？コメントで教えてください。」</span>
-        </span>
-      </div></div>
-    </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Prep Before Shoot</span><span data-lang="ja">撮影前の準備</span></div>
-      <ul>
-        <li><span data-lang="en">Collect 2–3 real coworker reactions this week before shoot day</span><span data-lang="ja">今週中に同僚2〜3人の本音の反応を集めておく</span></li>
-        <li><span data-lang="en">Ask them to hold the abb and describe what they notice — don't prompt</span><span data-lang="ja">abbを持ってもらい、気づいたことを言ってもらう — 誘導しない</span></li>
-        <li><span data-lang="en">You can narrate their reactions on camera without them being there</span><span data-lang="ja">カメラの前でその反応を語るだけでOK — 本人は不要</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ EP 31 ═══ -->
-<div class="episode" id="ep31">
-  <div class="ep-header" onclick="toggleEp(this)">
-    <div class="ep-number">Episode 31 · Day 1 · <span data-lang="en">Series Closer ⚠️ Shoot Last</span><span data-lang="ja">シリーズ最終回 ⚠️ 最後に撮影</span></div>
-    <div class="ep-title">
-      <span data-lang="en">One month. 31 videos. Here's the honest verdict.</span>
-      <span data-lang="ja">1ヶ月、31本。正直な結論はこれです。</span>
-    </div>
-    <div class="ep-meta">
-      <span class="ep-badge badge-cam"><span data-lang="en">On Camera</span><span data-lang="ja">カメラ正面</span></span>
-      <span class="ep-badge badge-solo"><span data-lang="en">Series finale</span><span data-lang="ja">シリーズフィナーレ</span></span>
-    </div>
-    <span class="ep-toggle">▾</span>
-  </div>
-  <div class="ep-body">
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> Hook</div>
-      <div data-lang="en"><div class="lines">
-        <p>"One month."</p>
-        <p>"31 videos about one bag brand."</p>
-        <p class="beat">[beat]</p>
-        <p>"Here's what I actually think."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「1ヶ月。」</p>
-        <p>「一つのバッグブランドについて31本の動画。」</p>
-        <p class="beat">【間】</p>
-        <p>「私が本当に思うことをお伝えします。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 1 — The Verdict</span><span data-lang="ja">シーン1 — 結論</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"It's a brand that makes sense the longer you look at it."</p>
-        <p>"Most things are the opposite — they look good until you get close."</p>
-        <p>"This one gets better the closer you get."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「見れば見るほど、意味のあるブランドです。」</p>
-        <p>「多くのものは逆です — 近づくにつれて印象が薄れます。」</p>
-        <p>「でもこのブランドは、近づくほど良さが増します。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 2 — The Honest Part</span><span data-lang="ja">シーン2 — 正直なところ</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"Is it perfect? No."</p>
-        <p>"<span class="emphasis">[add one real thing you'd change]</span>"</p>
-        <p>"But the things they got right — they got really right."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「完璧かと言われたら、そうではありません。」</p>
-        <p>「<span class="emphasis">【変えたいと思うことを一つ正直に入れる】</span>」</p>
-        <p>「でも、うまくいっているところは、本当にうまくいっています。」</p>
-      </div></div>
-    </div>
-    <div class="scene cam-scene">
-      <div class="scene-label cam"><span class="icon">🎬</span> <span data-lang="en">Scene 3 — The Close</span><span data-lang="ja">シーン3 — 締め</span></div>
-      <div data-lang="en"><div class="lines">
-        <p>"70,000 people in Japan already figured this out."</p>
-        <p>"I think the rest of the world is starting to catch up."</p>
-        <p class="beat">[pause]</p>
-        <p>"And if you've been watching this month — you're ahead of it."</p>
-      </div></div>
-      <div data-lang="ja"><div class="lines">
-        <p>「日本では7万人がすでにこれに気づいています。」</p>
-        <p>「世界もこれから追いつき始めると思います。」</p>
-        <p class="beat">【間】</p>
-        <p>「そして今月見てくれたあなたは、一歩先を行っています。」</p>
-      </div></div>
-    </div>
-    <div class="scene cta-scene">
-      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
-      <div class="cta-block">
-        <div class="cta-item"><span class="cta-platform">TikTok</span>
-          <span class="cta-line">
-            <span data-lang="en">"Follow — there's more coming after this."</span>
-            <span data-lang="ja">「フォローを — この後もまだ続きます。」</span>
-          </span>
-        </div>
-        <div class="cta-item"><span class="cta-platform">YT Shorts</span>
-          <span class="cta-line">
-            <span data-lang="en">"Subscribe — this was just the introduction."</span>
-            <span data-lang="ja">「チャンネル登録を — これはまだ始まりに過ぎません。」</span>
-          </span>
-        </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"This bag is smaller than it looks."</p><p class="beat">[hold up minimon]</p><p>"But it has more pockets than bags twice its size."</p><p class="beat">[beat]</p><p>"Let me show you."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「このバッグ、見た目より小さいです。」</p><p class="beat">【minimonを持ち上げる】</p><p>「でも、2倍のサイズのバッグより多くのポケットがあります。」</p><p class="beat">【間】</p><p>「お見せします。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Fast pocket reveal</span><span data-lang="ja">VO · テンポよくポケット公開</span></div>
+        <div class="ssub"><span data-lang="en">Hands in frame. Open each pocket one by one. Keep energy slightly playful.</span><span data-lang="ja">手を画面内に。ポケットを一つずつ開ける。少し遊び心のある雰囲気で。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Front pocket — fits your phone, keys, card."</p><p>"Side pocket — water bottle."</p><p>"Back slip pocket — flat documents, passport."</p><p>"Main compartment — more than you'd think."</p><p class="beat">[beat]</p><p>"The minimon. It's the bag that makes you feel like you packed smarter than everyone else."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「フロントポケット — スマホ、鍵、カードが入ります。」</p><p>「サイドポケット — ウォーターボトル。」</p><p>「バックのスリップポケット — 書類、パスポートなどのフラットなもの。」</p><p>「メインコンパートメント — 思った以上に入ります。」</p><p class="beat">【間】</p><p>「minimon。みんなより賢く荷物をまとめた気分になれるバッグです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What do you actually carry every day? I'm curious."</span><span data-lang="ja">「毎日実際に何を持ち歩いていますか？気になります。」</span></span></div></div>
       </div>
     </div>
-    <div class="shoot-note">
-      <div class="shoot-note-label">📋 <span data-lang="en">Notes</span><span data-lang="ja">メモ</span></div>
-      <ul>
-        <li><span data-lang="en">⚠️ Shoot this one absolutely last — after all 9 Day 1 episodes</span><span data-lang="ja">⚠️ 必ずDay 1の9本を撮り終えてから最後に撮る</span></li>
-        <li><span data-lang="en">Honest and direct. No performance. Just say what you think.</span><span data-lang="ja">正直に、率直に。演技しない。思ったことをそのまま言う。</span></li>
-        <li><span data-lang="en">Scene 2: fill in something genuinely real — credibility depends on it</span><span data-lang="ja">シーン2：本当のことを入れる — 信頼感はそこにかかっている</span></li>
-      </ul>
+  </div>
+
+  <!-- EP 15 -->
+  <div class="episode" id="ep15">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 15 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">What makes a Japanese tote different from a Western one</span><span data-lang="ja">日本のトートバッグと海外のトートバッグの違い</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Tabletop Comparison</span><span data-lang="ja">テーブルトップ比較</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Side by side comparison</span><span data-lang="ja">VO · 並べて比較</span></div>
+        <div class="ssub"><span data-lang="en">abb next to a plain Western tote. Let the visual make the point before you speak.</span><span data-lang="ja">abbを普通の西洋スタイルのトートの隣に置く。話す前に映像に語らせる。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Two tote bags. Similar size."</p><p class="beat">[let them sit side by side in silence for 2 seconds]</p><p>"The difference isn't obvious until you get close."</p><p class="beat">[beat]</p><p>"This one — generic tote. Stitched at the seams. Canvas base. Standard handles."</p><p>"This one — abb. Bonded construction. Setouchi leather handle. Interior lining that doesn't feel like an afterthought."</p><p class="beat">[beat]</p><p>"Both carry your things. Only one was designed to last."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「2つのトートバッグ。サイズは似ています。」</p><p class="beat">【2秒間、無言で並べて映す】</p><p>「近づくまで違いは分かりません。」</p><p class="beat">【間】</p><p>「こちら — 一般的なトート。縫い目で接合。キャンバスベース。スタンダードなハンドル。」</p><p>「こちら — abb。接着構造。瀬戸内レザーのハンドル。後付け感のない内側の仕上げ。」</p><p class="beat">【間】</p><p>「どちらも荷物を運べます。長く使えるように設計されているのは一つだけです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Which detail surprised you most? Tell me in the comments."</span><span data-lang="ja">「最も驚いたディテールはどれですか？コメントで教えてください。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Bring a plain comparison tote — any basic bag works, doesn't need to be branded</span><span data-lang="ja">比較用の普通のトートを用意する — ブランドものでなくて良い</span></li>
+        <li><span data-lang="en">Let the visual do the work — don't rush to explain</span><span data-lang="ja">映像に語らせる — 急いで説明しない</span></li>
+      </ul></div>
     </div>
   </div>
-</div>
+
+  <!-- EP 17 -->
+  <div class="episode" id="ep17">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 17 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">The backpack built like a portable office</span><span data-lang="ja">持ち歩けるオフィスのように設計されたバックパック</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Tabletop Demo · seowL</span><span data-lang="ja">テーブルトップデモ · seowL</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"If you've ever opened your bag at a meeting and felt embarrassed by the state of it —"</p><p class="beat">[beat]</p><p>"this one was designed for you."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「会議でバッグを開けて、その中の状態に恥ずかしくなったことがあるなら —」</p><p class="beat">【間】</p><p>「このバッグはあなたのために設計されています。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Unpacking demo</span><span data-lang="ja">VO · 荷物を出すデモ</span></div>
+        <div class="ssub"><span data-lang="en">Slowly unpack seowL compartments. Let the organization reveal itself. Hands in frame.</span><span data-lang="ja">seowLのコンパートメントをゆっくり開けていく。整理の仕方が自然に分かるように。手を画面内に。</span></div>
+        <div data-lang="en"><div class="lines"><p>"The seowL. Named after the Korean word for Seoul — because the design team kept thinking about the commuter."</p><p class="beat">[open main compartment]</p><p>"Main compartment — laptop sleeve, internal pockets, everything has a place."</p><p class="beat">[show leather piping]</p><p>"Leather piping on the edges. Structural. Prevents the bag from losing its shape over years."</p><p class="beat">[beat]</p><p>"It doesn't look like a work bag. But it works harder than most that do."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「seowL。韓国語のソウルから名付けられました — デザインチームが通勤者のことを考え続けていたから。」</p><p class="beat">【メインコンパートメントを開ける】</p><p>「メインコンパートメント — ラップトップスリーブ、内ポケット、全てに定位置があります。」</p><p class="beat">【レザーパイピングを見せる】</p><p>「エッジのレザーパイピング。構造的なもの。何年経ってもバッグの形を保ちます。」</p><p class="beat">【間】</p><p>「仕事用バッグには見えません。でも多くの仕事用バッグよりも機能します。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Do you organize your bag or just throw everything in? Honest answers only."</span><span data-lang="ja">「バッグを整理して入れますか？それとも全部投げ込む派ですか？正直に答えてください。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 20 -->
+  <div class="episode" id="ep20">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 20 · <span data-lang="en">Product · Personal</span><span data-lang="ja">商品 · 個人的</span></div>
+      <div class="ep-title-text"><span data-lang="en">The camera bag built for mirrorless shooters</span><span data-lang="ja">ミラーレスカメラを使う人のために作られたカメラバッグ</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Real use · lauff · Your camera gear</span><span data-lang="ja">実際の使用 · lauff · 自分のカメラ機材</span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"I film everything I post here with a mirrorless camera."</p><p class="beat">[show camera + lauff together]</p><p>"This is the bag I carry it in."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ここに投稿する全ての映像をミラーレスカメラで撮影しています。」</p><p class="beat">【カメラとlauffを一緒に見せる】</p><p>「これがそのカメラを入れて持ち歩いているバッグです。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Real gear packed in lauff</span><span data-lang="ja">VO · lauffに実際の機材を入れた状態</span></div>
+        <div class="ssub"><span data-lang="en">Use your actual camera gear. Pack it live on camera. This is personal — lean into it.</span><span data-lang="ja">実際のカメラ機材を使う。カメラの前でパッキング。個人的な話 — それを活かす。</span></div>
+        <div data-lang="en"><div class="lines"><p>"The lauff was designed for creators who carry gear but don't want to look like they're carrying gear."</p><p class="beat">[show padded interior]</p><p>"Padded sleeve fits a mirrorless body and a lens. Quick-access side pocket for cards, batteries."</p><p class="beat">[beat]</p><p>"The outside looks like a regular bag. The inside is built around a camera."</p><p class="beat">[beat]</p><p>"I've been using this for shoots here at the workshop and outside. It works the way a bag should — without me thinking about it."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「lauffは機材を持ち歩くクリエイターのために、でも機材を運んでいるように見せたくない人のために設計されました。」</p><p class="beat">【パッド入りの内側を見せる】</p><p>「パッド入りスリーブにミラーレスボディとレンズが入ります。サイドの素早くアクセスできるポケットにカードや電池。」</p><p class="beat">【間】</p><p>「外側は普通のバッグに見えます。内側はカメラのために設計されています。」</p><p class="beat">【間】</p><p>「工房や外でのシュートにこれを使っています。バッグのことを考えなくて良い — それが良いバッグです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What do you use to carry your camera gear? Drop it below."</span><span data-lang="ja">「カメラ機材を何に入れて持ち歩いていますか？コメントで教えてください。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Use your actual mirrorless + lenses — make it personal</span><span data-lang="ja">実際のミラーレスとレンズを使う — 個人的な話にする</span></li>
+        <li><span data-lang="en">This episode connects you (the creator) to the product authentically</span><span data-lang="ja">このエピソードでクリエイターとしての自分と商品を自然に繋げる</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- EP 22 -->
+  <div class="episode" id="ep22">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 22 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">Why this canvas bag costs more than a leather one</span><span data-lang="ja">なぜこのキャンバスバッグはレザーより高いのか</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Macro · Canvas detail</span><span data-lang="ja">マクロ · キャンバスディテール</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"People see the price of this canvas bag and they ask me — why does it cost more than a leather one?"</p><p class="beat">[beat]</p><p>"Fair question. Let me show you why."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「このキャンバスバッグの価格を見て、よく聞かれます — なぜレザーより高いの？」</p><p class="beat">【間】</p><p>「もっともな疑問です。理由をお見せします。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Canvas macro shots</span><span data-lang="ja">VO · キャンバスのマクロショット</span></div>
+        <div class="ssub"><span data-lang="en">Extreme close-up of canvas weave, finish, edges. Make the viewer see the quality.</span><span data-lang="ja">キャンバスの織り、仕上げ、エッジを極限まで寄って撮る。視聴者にクオリティを感じさせる。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Not all canvas is the same. Cheap canvas frays. Absorbs water. Loses shape."</p><p class="beat">[beat]</p><p>"Otona Hanfu canvas — the material used here — is a tightly woven, treated canvas. The finish you're seeing isn't coating. It's the weave itself."</p><p class="beat">[beat]</p><p>"It holds its shape. Resists moisture. And unlike most canvas bags — it doesn't go limp after a year."</p><p class="beat">[beat]</p><p>"The price isn't about the material name. It's about the grade."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「キャンバスにも色々あります。安いキャンバスはほつれます。水を吸います。形が崩れます。」</p><p class="beat">【間】</p><p>「ここで使われている大人帆布は、目の細かい処理済みのキャンバスです。見えているのはコーティングではありません。織り方そのものです。」</p><p class="beat">【間】</p><p>「形を保ちます。湿気に強い。ほとんどのキャンバスバッグと違い、1年でだらっとなりません。」</p><p class="beat">【間】</p><p>「価格は素材の名前のためではありません。グレードのためです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Canvas or leather — which do you prefer? I'm building a list."</span><span data-lang="ja">「キャンバスとレザー、どちら派ですか？集計中です。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- end day3 -->
+
+
+<!-- ████████████████████ DAY 4 ████████████████████ -->
+<div class="day-section" id="day4">
+  <div class="ep-nav">
+    <a class="ep-pill" href="#ep5">Ep 5</a><a class="ep-pill" href="#ep9">Ep 9</a><a class="ep-pill" href="#ep11">Ep 11</a><a class="ep-pill" href="#ep13">Ep 13</a><a class="ep-pill" href="#ep16">Ep 16</a><a class="ep-pill" href="#ep21">Ep 21</a><a class="ep-pill" href="#ep24">Ep 24</a><a class="ep-pill" href="#ep27">Ep 27</a><a class="ep-pill" href="#ep28">Ep 28</a>
+  </div>
+  <div class="day-intro">
+    <div data-lang="en"><h2>Day 4 — <span style="color:var(--cta)">Brand Story + Interior Detail</span></h2><p>Slower, more deliberate day. Narrated episodes and hidden craft shots. Find the most surprising interior detail across any bag — it carries multiple episodes.</p></div>
+    <div data-lang="ja"><h2>Day 4 — <span style="color:var(--cta)">ブランドストーリー + 内側ディテール</span></h2><p>ゆっくり丁寧な日。ナレーションエピソードと職人技の隠れたショット。どのバッグでも最も驚くべき内側のディテールを見つける — 複数のエピソードに使える。</p></div>
+    <div class="day-meta">
+      <span class="day-tag loc">📍 <span data-lang="en">Workshop — Clean Surface + Interior Macro</span><span data-lang="ja">工房 — クリーンな面 + 内側マクロ</span></span>
+      <span class="day-tag prod">🎒 abb · minimon · comame · any bag with interesting interior</span>
+    </div>
+  </div>
+
+  <!-- EP 5 -->
+  <div class="episode" id="ep5">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 05 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">The Japanese phrase that runs this company</span><span data-lang="ja">このブランドを動かしている日本語のフレーズ</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated</span><span data-lang="ja">ナレーション</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"There's a phrase printed on the wall of this workshop."</p><p>"愛されるものづくり"</p><p class="beat">[beat]</p><p>"Let me tell you what it actually means."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「この工房の壁に書かれているフレーズがあります。」</p><p>「愛されるものづくり」</p><p class="beat">【間】</p><p>「その本当の意味をお伝えします。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Products on clean surface</span><span data-lang="ja">VO · クリーンな面に置いた商品</span></div>
+        <div data-lang="en"><div class="lines"><p>"Literally — 'making things that are loved.'"</p><p class="beat">[beat]</p><p>"Not 'making things that sell.' Not 'making things that are good.' Making things that are loved."</p><p class="beat">[beat]</p><p>"It's a subtle difference. Loved means someone picked it out of everything else. Used it until it shaped to them. Brought it in for repair instead of throwing it away."</p><p class="beat">[beat]</p><p>"You can see it in the details. The leather they chose for the handle. The way the interior is finished. Nobody sees those things — but someone decided they mattered."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「直訳すると — 『愛されるものを作る』です。」</p><p class="beat">【間】</p><p>「『売れるものを作る』でも、『良いものを作る』でもありません。『愛されるものを作る』です。」</p><p class="beat">【間】</p><p>「微妙な違いです。愛されるとは、誰かが他の全てのものの中からそれを選んだということ。使い込んで、自分の形に馴染ませた。捨てる代わりに修理に持ってきた。」</p><p class="beat">【間】</p><p>「それはディテールに表れています。ハンドルに選んだレザー。内側の仕上げ方。誰も見ないことですが、誰かがそれが大切だと決めました。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What's one thing you own that you actually love? I'm curious."</span><span data-lang="ja">「本当に愛着を持っている持ち物はありますか？気になります。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 9 -->
+  <div class="episode" id="ep9">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 09 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">Why this brand repairs your bag for life</span><span data-lang="ja">なぜこのブランドは生涯バッグを修理してくれるのか</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated</span><span data-lang="ja">ナレーション</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"When's the last time a brand offered to fix something you bought from them?"</p><p class="beat">[beat]</p><p>"This one does. For life."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「購入したものを修理してくれると申し出たブランド、最後にいつありましたか？」</p><p class="beat">【間】</p><p>「このブランドはします。生涯にわたって。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Stitching, hardware, wear areas close-up</span><span data-lang="ja">VO · 縫い目、金具、摩耗箇所のクローズアップ</span></div>
+        <div data-lang="en"><div class="lines"><p>"Kawanishi Kaban offers repairs and maintenance. Not just warranty — actual repairs. Stitching, hardware, leather conditioning."</p><p class="beat">[beat]</p><p>"In a world where it's cheaper to buy new than fix old — that's a statement."</p><p class="beat">[beat]</p><p>"It changes how you think about the purchase. You're not buying a bag that will wear out. You're buying something you'll maintain."</p><p class="beat">[beat]</p><p>"That's not a feature. That's a philosophy."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「川西鞄は修理とメンテナンスを提供しています。保証だけでなく — 実際の修理です。縫い目、金具、レザーのケア。」</p><p class="beat">【間】</p><p>「修理より新品を買う方が安い世界で — それは一つの主張です。」</p><p class="beat">【間】</p><p>「購入に対する考え方が変わります。消耗するバッグを買うのではありません。メンテナンスしていくものを買うのです。」</p><p class="beat">【間】</p><p>「これは機能ではありません。哲学です。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Would a lifetime repair policy change how you buy things? Tell me."</span><span data-lang="ja">「生涯修理保証があったら、買い物の仕方が変わりますか？教えてください。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 11 -->
+  <div class="episode" id="ep11">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 11 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">The brand that started as a factory — and decided to go its own way</span><span data-lang="ja">下請け工場から始まり、自分たちの道を歩み始めたブランド</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated</span><span data-lang="ja">ナレーション</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div data-lang="en"><div class="lines"><p>"Most brands start with a product. This one started with a factory."</p><p class="beat">[beat]</p><p>"Around 2015, Kawanishi Kaban was a subcontract manufacturer — making bags for other brands. Good work. Invisible work."</p><p class="beat">[beat]</p><p>"The founder decided that wasn't enough. He wanted to make something under his own name. Something that reflected what he actually believed about bags."</p><p class="beat">[beat]</p><p>"He didn't have a marketing budget. He didn't have retail partnerships. He started a YouTube channel."</p><p class="beat">[beat]</p><p>"70,000 subscribers later — his own brand. His own workshop. His own Tokyo location."</p><p class="beat">[beat]</p><p>"That's not a small thing."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ほとんどのブランドは商品から始まります。このブランドは工場から始まりました。」</p><p class="beat">【間】</p><p>「2015年頃、川西鞄は他のブランドのバッグを作る下請け製造業者でした。良い仕事。でも見えない仕事。」</p><p class="beat">【間】</p><p>「創業者はそれだけでは足りないと決めました。自分の名前でものを作りたかった。バッグについて本当に信じていることを表現したかった。」</p><p class="beat">【間】</p><p>「マーケティング予算はありませんでした。小売パートナーシップもありませんでした。YouTubeチャンネルを始めました。」</p><p class="beat">【間】</p><p>「登録者7万人を得て — 自分のブランド。自分の工房。自分の東京拠点。」</p><p class="beat">【間】</p><p>「それは小さなことではありません。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Does knowing the backstory change how you see the bag? Let me know."</span><span data-lang="ja">「背景を知ると、バッグの見え方が変わりますか？教えてください。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 13 -->
+  <div class="episode" id="ep13">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 13 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">What 'made with love' actually looks like</span><span data-lang="ja">「愛情を込めて作る」が実際にどう見えるか</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Detail close-ups</span><span data-lang="ja">ディテールのクローズアップ</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Your most visually interesting construction detail</span><span data-lang="ja">VO · 最も視覚的に面白い構造ディテール</span></div>
+        <div class="ssub"><span data-lang="en">Pick ONE detail from any bag — the most surprising thing you can find. Let that carry the episode.</span><span data-lang="ja">どのバッグからでも一つのディテールを選ぶ — 最も驚くべきもの。それでエピソードを作る。</span></div>
+        <div data-lang="en"><div class="lines"><p>"People say 'made with love' like it's a marketing line."</p><p class="beat">[beat]</p><p>"Let me show you what it actually looks like."</p><p class="beat">[macro shot — chosen detail]</p><p>"<span class="em">[describe the detail: e.g. 'Look at where the lining meets the zipper. It's finished on the inside the same way it is on the outside.']</span>"</p><p class="beat">[beat]</p><p>"Nobody sees that. It doesn't show up in photos. It doesn't affect the function."</p><p class="beat">[beat]</p><p>"But someone decided it mattered. That's what made with love looks like."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「『愛情を込めて』というのはマーケティングの言葉のように使われます。」</p><p class="beat">【間】</p><p>「実際にどう見えるかお見せします。」</p><p class="beat">【マクロショット — 選んだディテール】</p><p>「<span class="em">【ディテールを説明：例えば「裏地とジッパーが合わさる部分を見てください。外側と同じように内側も仕上げられています。」】</span>」</p><p class="beat">【間】</p><p>「誰も見ません。写真にも写りません。機能にも影響しません。」</p><p class="beat">【間】</p><p>「でも誰かがそれが大切だと決めました。それが『愛情を込めて作る』の実際の姿です。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What detail surprised you? Drop it below."</span><span data-lang="ja">「どのディテールに驚きましたか？コメントで教えてください。」</span></span></div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Before shooting — find the most surprising hidden detail across ALL your bags</span><span data-lang="ja">撮影前に — 全てのバッグの中で最も驚くべき隠れたディテールを見つける</span></li>
+        <li><span data-lang="en">Fill in Scene 1 with that specific detail</span><span data-lang="ja">シーン1にそのディテールを入れる</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- EP 16 -->
+  <div class="episode" id="ep16">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 16 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">Why Japanese brands don't do sales</span><span data-lang="ja">なぜ日本のブランドはセールをしないのか</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated</span><span data-lang="ja">ナレーション</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div data-lang="en"><div class="lines"><p>"No Black Friday. No seasonal sales. No clearance rack."</p><p class="beat">[beat]</p><p>"Kawanishi Kaban doesn't do sales. And that's intentional."</p><p class="beat">[beat]</p><p>"A lot of Japanese brands operate the same way. The price is the price because the work is the work."</p><p class="beat">[beat]</p><p>"When you discount something you made carefully — you're saying it was worth less than you charged. That doesn't sit right with how this brand thinks."</p><p class="beat">[beat]</p><p>"It also means every customer pays the same price. The person who bought it last year and the person who buys it today."</p><p class="beat">[beat]</p><p>"There's a kind of respect in that."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ブラックフライデーなし。季節のセールなし。値引き品なし。」</p><p class="beat">【間】</p><p>「川西鞄はセールをしません。それは意図的です。」</p><p class="beat">【間】</p><p>「多くの日本のブランドも同じように運営しています。作業が作業であるから、価格が価格なのです。」</p><p class="beat">【間】</p><p>「丁寧に作ったものを値引きするということは、それがあなたが請求した額より価値が低かったと言っているようなものです。それはこのブランドの考え方と合いません。」</p><p class="beat">【間】</p><p>「全てのお客様が同じ価格を支払うということでもあります。去年買った人も、今日買う人も。」</p><p class="beat">【間】</p><p>「そこには一種の敬意があります。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Would a no-sales policy make you trust a brand more or less? Honest answers."</span><span data-lang="ja">「セールなしのポリシーはブランドへの信頼を上げますか、下げますか？正直に答えてください。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 21 -->
+  <div class="episode" id="ep21">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 21 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">Why Japanese makers still offer repairs when everyone else stopped</span><span data-lang="ja">他が全てやめた今も、なぜ日本のメーカーは修理を続けるのか</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated · Deeper dive</span><span data-lang="ja">ナレーション · より深く</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div class="ssub"><span data-lang="en">Show stitching, hardware, wear areas in close-up. Contrast with throwaway culture.</span><span data-lang="ja">縫い目、金具、摩耗箇所をクローズアップ。使い捨て文化とのコントラスト。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Fast fashion has made repair seem old-fashioned."</p><p class="beat">[beat]</p><p>"Buy. Use. Replace. That's the loop most brands want you in."</p><p class="beat">[beat]</p><p>"Kawanishi Kaban breaks that loop. They repair what they make. Stitching, hardware, leather — they fix it."</p><p class="beat">[beat]</p><p>"In Japan this isn't unusual. There's a concept here called 'monozukuri' — the art of making things. It implies responsibility for what you create. Not just until it sells. For as long as it exists."</p><p class="beat">[beat]</p><p>"That's a different relationship between maker and buyer than most of us are used to."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ファストファッションが修理を時代遅れなものにしてしまいました。」</p><p class="beat">【間】</p><p>「買って。使って。捨てる。ほとんどのブランドがあなたに繰り返してほしいループです。」</p><p class="beat">【間】</p><p>「川西鞄はそのループを断ち切ります。自分たちが作ったものを修理します。縫い目、金具、レザー — 直します。」</p><p class="beat">【間】</p><p>「日本ではこれは珍しくありません。『ものづくり』という概念があります。作るものへの責任を意味します。売れるまでだけでなく。存在し続ける限り。」</p><p class="beat">【間】</p><p>「それは私たちが慣れているよりも違う、作り手と買い手の関係です。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"What's the last thing you had repaired instead of replaced?"</span><span data-lang="ja">「最後に買い替えではなく修理したものは何ですか？」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 24 -->
+  <div class="episode" id="ep24">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 24 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">The sub-brand that experiments with bag design</span><span data-lang="ja">バッグデザインを実験する、このブランドのサブブランド</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated</span><span data-lang="ja">ナレーション</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div class="ssub"><span data-lang="en">Use Bag Lab products if accessible, else narrate over main line products.</span><span data-lang="ja">Bag Labの商品があれば使う。なければメインラインの商品でナレーション。</span></div>
+        <div data-lang="en"><div class="lines"><p>"Most brands have one line and stick to it. This one has a lab."</p><p class="beat">[beat]</p><p>"Kawanishi Bag Lab is the experimental side of the brand. Designs that are being tested. Materials being tried. Ideas that might become products — or might not."</p><p class="beat">[beat]</p><p>"Some of the Bag Lab pieces are made in Vietnam. Same brand standards — but at a lower price point, so more people can try them."</p><p class="beat">[beat]</p><p>"It's how they keep innovating without compromising the main line."</p><p class="beat">[beat]</p><p>"A brand with a lab is a brand that's still asking questions."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ほとんどのブランドは一つのラインを持ち、それを守ります。このブランドにはラボがあります。」</p><p class="beat">【間】</p><p>「川西Bag Labはブランドの実験的な側面です。テスト中のデザイン。試している素材。商品になるかもしれないアイデア — またはならないかもしれない。」</p><p class="beat">【間】</p><p>「Bag Labの一部はベトナムで製造されています。同じブランド基準で — でも価格を下げて、より多くの人が試せるように。」</p><p class="beat">【間】</p><p>「メインラインを妥協せずに革新し続ける方法です。」</p><p class="beat">【間】</p><p>「ラボを持つブランドは、まだ問いを立て続けているブランドです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Would you try a brand's experimental line? Or stick to the classics?"</span><span data-lang="ja">「ブランドの実験的なラインを試しますか？それともクラシックを選びますか？」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 27 -->
+  <div class="episode" id="ep27">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 27 · <span data-lang="en">Brand</span><span data-lang="ja">ブランド</span></div>
+      <div class="ep-title-text"><span data-lang="en">Why Japanese makers obsess over details nobody sees</span><span data-lang="ja">なぜ日本のメーカーは誰も見ないディテールにこだわるのか</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Interior macro · Hidden details</span><span data-lang="ja">内側マクロ · 隠れたディテール</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Interior lining, zipper pulls, hidden stitching</span><span data-lang="ja">VO · 内側の裏地、ジッパー引き手、隠れた縫い目</span></div>
+        <div class="ssub"><span data-lang="en">Go slow. Find the most surprising hidden detail — inside zipper pockets, lining corners, seam finishing.</span><span data-lang="ja">ゆっくり。最も驚くべき隠れたディテールを見つける — ジッパーポケットの内側、裏地の角、縫い目の仕上げ。</span></div>
+        <div data-lang="en"><div class="lines"><p>"I want to show you something most people never look at."</p><p class="beat">[open the bag — show interior]</p><p>"The inside of this bag is finished the same way the outside is."</p><p class="beat">[macro — lining corner, zipper, interior seam]</p><p>"Most bags at this price point cut corners here. You don't see it until the lining starts peeling."</p><p class="beat">[beat]</p><p>"In Japanese craft culture, there's no such thing as 'nobody will see this.' If it's part of the object — it gets the same attention."</p><p class="beat">[beat]</p><p>"That's the whole difference."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「ほとんどの人が見ないものをお見せしたいです。」</p><p class="beat">【バッグを開ける — 内側を見せる】</p><p>「このバッグの内側は、外側と同じように仕上げられています。」</p><p class="beat">【マクロ — 裏地の角、ジッパー、内側の縫い目】</p><p>「この価格帯のほとんどのバッグはここで手を抜きます。裏地が剥がれ始めるまで気づきません。」</p><p class="beat">【間】</p><p>「日本の職人文化では、『誰も見ない』というものは存在しません。それがものの一部であれば — 同じ注意が払われます。」</p><p class="beat">【間】</p><p>「それが全ての違いです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Check the inside of your bag right now. What do you see?"</span><span data-lang="ja">「今すぐバッグの内側を確認してみてください。何が見えますか？」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EP 28 -->
+  <div class="episode" id="ep28">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 28 · <span data-lang="en">Product</span><span data-lang="ja">商品</span></div>
+      <div class="ep-title-text"><span data-lang="en">The mini Boston bag built for people who actually use their bag</span><span data-lang="ja">本当にバッグを使う人のために作られたミニボストンバッグ</span></div>
+      <div class="ep-badges"><span class="badge b-mac"><span data-lang="en">Tabletop · comame</span><span data-lang="ja">テーブルトップ · comame</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook</div>
+        <div data-lang="en"><div class="lines"><p>"There are bags made to look good."</p><p class="beat">[beat]</p><p>"And there are bags made to be used."</p><p class="beat">[hold up comame]</p><p>"This is the second kind."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「見た目のために作られたバッグがあります。」</p><p class="beat">【間】</p><p>「そして使うために作られたバッグがあります。」</p><p class="beat">【comameを持ち上げる】</p><p>「これは後者です。」</p></div></div>
+      </div>
+      <div class="scene vo"><div class="slabel vo">🎙 <span data-lang="en">Voiceover · Tabletop demo</span><span data-lang="ja">VO · テーブルトップデモ</span></div>
+        <div data-lang="en"><div class="lines"><p>"The comame. Boston-inspired shape, but smaller. Designed for the person who doesn't need a big bag — but needs everything to be findable."</p><p class="beat">[open and show interior]</p><p>"Clean interior. No unnecessary pockets. But the ones that are there are where you'd actually put things."</p><p class="beat">[beat]</p><p>"The shape holds itself. Put it down and it doesn't collapse."</p><p class="beat">[beat]</p><p>"It's the bag for the person who knows exactly what they need — and nothing they don't."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「comame。ボストンバッグからインスパイアされた形ですが、よりコンパクト。大きなバッグは不要だけど、全てのものをすぐ見つけたい人のために設計されています。」</p><p class="beat">【内側を開けて見せる】</p><p>「すっきりした内側。不要なポケットはありません。でもあるポケットは、実際に物を入れたい場所にあります。」</p><p class="beat">【間】</p><p>「形が自立します。置いても崩れません。」</p><p class="beat">【間】</p><p>「必要なものを正確に知っていて、それ以外は不要な人のためのバッグです。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Mini bag or full-size — which camp are you in?"</span><span data-lang="ja">「ミニバッグ派ですか？フルサイズ派ですか？」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- end day4 -->
+
+
+<!-- ████████████████████ DAY 5 ████████████████████ -->
+<div class="day-section" id="day5">
+  <div class="ep-nav">
+    <a class="ep-pill" href="#ep30">Ep 30</a><a class="ep-pill" href="#broll">B-roll Bank</a><a class="ep-pill" href="#buffer">Buffer</a>
+  </div>
+  <div class="day-intro">
+    <div data-lang="en"><h2>Day 5 — <span style="color:var(--d5)">Buffer + B-roll + Ep 30</span></h2><p>Post-Osaka makeup day. Ep 30 is the only scripted episode. Protect the rest of the day for reshoots, pickups, and banking B-roll. Do not fill this day with new content.</p></div>
+    <div data-lang="ja"><h2>Day 5 — <span style="color:var(--d5)">バッファー + Bロール + Ep 30</span></h2><p>大阪後の補完日。Ep 30だけがスクリプト済みのエピソード。残りの時間は撮り直し、補足撮影、Bロールの蓄積に使う。新しいコンテンツで埋めない。</p></div>
+    <div class="day-meta">
+      <span class="day-tag loc">📍 <span data-lang="en">Flexible — workshop or outdoor</span><span data-lang="ja">フレキシブル — 工房または屋外</span></span>
+      <span class="day-tag prod">🎒 <span data-lang="en">Whatever is needed for pickups</span><span data-lang="ja">撮り直しに必要なもの</span></span>
+    </div>
+  </div>
+
+  <!-- EP 30 -->
+  <div class="episode" id="ep30">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num">Ep 30 · <span data-lang="en">Brand · Penultimate</span><span data-lang="ja">ブランド · 最終手前</span></div>
+      <div class="ep-title-text"><span data-lang="en">Japan already loves this brand. Now they want the world to.</span><span data-lang="ja">日本はすでにこのブランドを愛している。次は世界に届けたい。</span></div>
+      <div class="ep-badges"><span class="badge b-cam"><span data-lang="en">Narrated</span><span data-lang="ja">ナレーション</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div>
+        <div class="ssub"><span data-lang="en">Products as visual anchor. Calm, confident tone. This sets up Ep 31.</span><span data-lang="ja">商品をビジュアルのアンカーに。穏やかで自信のあるトーン。Ep 31への布石。</span></div>
+        <div data-lang="en"><div class="lines"><p>"70,000 people in Japan have been following this brand on YouTube."</p><p class="beat">[beat]</p><p>"They know the story. They know the workshop. They've watched the founder build this from a factory into something of his own."</p><p class="beat">[beat]</p><p>"Now the brand is opening in Tokyo. And they're starting to think about the rest of the world."</p><p class="beat">[beat]</p><p>"That's where this month of videos comes in. I've been the foreigner who found them — trying to show the people outside Japan what 70,000 people inside Japan already know."</p><p class="beat">[beat]</p><p>"Tomorrow — my honest verdict after 31 videos."</p></div></div>
+        <div data-lang="ja"><div class="lines"><p>「日本では7万人がYouTubeでこのブランドをフォローしています。」</p><p class="beat">【間】</p><p>「ストーリーを知っています。工房を知っています。創業者が工場から自分のものを作り上げていく過程を見てきました。」</p><p class="beat">【間】</p><p>「今、ブランドは東京に進出しています。そして世界のことを考え始めています。」</p><p class="beat">【間】</p><p>「そこに今月の動画の意味があります。私はそのブランドを見つけた外国人として — 日本国内の7万人がすでに知っていることを、日本の外にいる人に伝えようとしてきました。」</p><p class="beat">【間】</p><p>「明日 — 31本の動画を経た、正直な結論をお伝えします。」</p></div></div>
+      </div>
+      <div class="scene cta"><div class="slabel cta">📲 CTA</div>
+        <div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line"><span data-lang="en">"Follow for the final verdict tomorrow."</span><span data-lang="ja">「明日の最終結論のためにフォローを。」</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B-ROLL BANK -->
+  <div class="episode" id="broll">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num"><span data-lang="en">B-roll Bank · All Episodes</span><span data-lang="ja">Bロールバンク · 全エピソード用</span></div>
+      <div class="ep-title-text"><span data-lang="en">General B-roll — bags in motion, textures, workshop atmosphere</span><span data-lang="ja">汎用Bロール — バッグの動き、質感、工房の雰囲気</span></div>
+      <div class="ep-badges"><span class="badge b-out"><span data-lang="en">Unscripted · Freeform</span><span data-lang="ja">スクリプトなし · 自由に</span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="scene shot"><div class="slabel shot">🎥 <span data-lang="en">Shot list — get as many of these as possible</span><span data-lang="ja">ショットリスト — できるだけ多く撮る</span></div>
+        <div data-lang="en"><div class="lines">
+          <p>→ Slow pan across any bag exterior — sunlight preferred</p>
+          <p>→ Hand picking up a bag from a flat surface</p>
+          <p>→ Zipper opening and closing — macro</p>
+          <p>→ Leather handle being gripped — texture focus</p>
+          <p>→ Bag placed on a chair, bench, or table — lifestyle shot</p>
+          <p>→ Workshop tools, thread, materials in background</p>
+          <p>→ Window light hitting any bag at an angle</p>
+          <p>→ Walking shot from behind — bag on shoulder or in hand</p>
+          <p>→ Interior of any bag — slow reveal</p>
+          <p>→ Hands holding two bags side by side</p>
+        </div></div>
+        <div data-lang="ja"><div class="lines">
+          <p>→ どのバッグの外側もゆっくりパン — 陽光があれば理想的</p>
+          <p>→ 平らな面からバッグを手で持ち上げる</p>
+          <p>→ ジッパーを開閉する — マクロ</p>
+          <p>→ レザーハンドルを握る — 質感フォーカス</p>
+          <p>→ 椅子、ベンチ、テーブルに置いたバッグ — ライフスタイルショット</p>
+          <p>→ 背景に工房の道具、糸、素材</p>
+          <p>→ 窓の光がバッグに斜めに当たっている</p>
+          <p>→ 後ろから歩くショット — 肩掛けまたは手持ち</p>
+          <p>→ どのバッグの内側もゆっくりと見せる</p>
+          <p>→ 2つのバッグを並べて持つ手</p>
+        </div></div>
+      </div>
+      <div class="note-box"><div class="note-label">📋 Notes</div><ul>
+        <li><span data-lang="en">Aim for 5–10 min of total B-roll footage across all bags</span><span data-lang="ja">全バッグで合計5〜10分のBロール素材を目標に</span></li>
+        <li><span data-lang="en">This feeds every episode in the edit — don't skip it</span><span data-lang="ja">全エピソードの編集に使える素材 — 必ず撮る</span></li>
+        <li><span data-lang="en">No script needed — just move around and shoot what looks interesting</span><span data-lang="ja">スクリプト不要 — 面白そうなものを自由に撮る</span></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- BUFFER NOTE -->
+  <div class="episode" id="buffer">
+    <div class="ep-header" onclick="tog(this)">
+      <div class="ep-num"><span data-lang="en">Buffer Time · Reshoots + Pickups</span><span data-lang="ja">バッファータイム · 撮り直し + 補足撮影</span></div>
+      <div class="ep-title-text"><span data-lang="en">Use this time for anything that didn't go right on Days 1–4</span><span data-lang="ja">Day 1〜4でうまくいかなかったことの補完に使う</span></div>
+      <div class="ep-badges"><span class="badge b-out"><span data-lang="en">Protected time — no new episodes</span><span data-lang="ja">保護された時間 — 新しいエピソードを追加しない</span></span></div>
+      <span class="ep-toggle">▾</span>
+    </div>
+    <div class="ep-body">
+      <div class="note-box"><div class="note-label">📋 <span data-lang="en">Common things that need pickups</span><span data-lang="ja">よくある補足撮影の内容</span></div><ul>
+        <li><span data-lang="en">Macro shots that were out of focus or poorly lit</span><span data-lang="ja">ピントが合っていない、または光が悪かったマクロショット</span></li>
+        <li><span data-lang="en">Talking head takes where you stumbled on a line</span><span data-lang="ja">セリフに詰まったトーキングヘッドのカット</span></li>
+        <li><span data-lang="en">Any product you forgot to shoot</span><span data-lang="ja">撮り忘れた商品</span></li>
+        <li><span data-lang="en">Outdoor shots that needed better light</span><span data-lang="ja">より良い光が必要だった屋外ショット</span></li>
+        <li><span data-lang="en">B-roll gaps — if you're short on any product</span><span data-lang="ja">特定の商品のBロールが足りない場合</span></li>
+      </ul></div>
+    </div>
+  </div>
+</div><!-- end day5 -->
 
 
 <script>
-  function setLang(lang) {
-    document.body.className = 'lang-' + lang;
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang || (lang === 'ja' && btn.textContent.includes('日')));
-    });
-    localStorage.setItem('kk-lang', lang);
-  }
-
-  function toggleEp(header) {
-    header.parentElement.classList.toggle('open');
-  }
-
-  window.addEventListener('scroll', () => {
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop || document.body.scrollTop;
-    const scrollHeight = doc.scrollHeight - doc.clientHeight;
-    document.getElementById('progress').style.width = ((scrollTop / scrollHeight) * 100) + '%';
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', (lang === 'en' && b.textContent === 'EN') || (lang === 'ja' && b.textContent === '日本語'));
   });
+  localStorage.setItem('kk-lang', lang);
+}
 
-  document.querySelectorAll('.nav-pill').forEach(pill => {
-    pill.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(pill.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-        if (!target.classList.contains('open')) target.classList.add('open');
-      }
-    });
+function showDay(n) {
+  document.querySelectorAll('.day-section').forEach((s, i) => s.classList.toggle('active', i === n - 1));
+  document.querySelectorAll('.day-tab').forEach((t, i) => t.classList.toggle('active', i === n - 1));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function tog(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+window.addEventListener('scroll', () => {
+  const d = document.documentElement;
+  document.getElementById('prog').style.width = ((d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100) + '%';
+});
+
+document.querySelectorAll('.ep-pill').forEach(p => {
+  p.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(p.getAttribute('href'));
+    if (t) { t.scrollIntoView({ behavior: 'smooth' }); if (!t.classList.contains('open')) t.classList.add('open'); }
   });
+});
 
-  // Restore language preference
-  const saved = localStorage.getItem('kk-lang');
-  if (saved) setLang(saved);
+const saved = localStorage.getItem('kk-lang');
+if (saved) setLang(saved);
 </script>
 </body>
 </html>
