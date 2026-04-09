@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kawanishi Kaban — Shoot Scripts · Day 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --surface: #f0ece6;
+    --surface2: #e8e3db;
+    --border: #ddd8d0;
+    --accent: #9a6e32;
+    --accent2: #2e7a8c;
+    --accent3: #a04040;
+    --text: #1c1a17;
+    --muted: #7a7468;
+    --cam: #9a6e32;
+    --vo: #2e7a8c;
+    --shot: #4a7a32;
+    --cta: #8c2e6a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    padding: 0 0 80px 0;
+  }
+
+  /* STICKY HEADER */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,248,245,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .site-header .brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .site-header .day-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  /* NAV PILLS */
+  .nav-scroll {
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    background: var(--bg);
+  }
+  .nav-scroll::-webkit-scrollbar { display: none; }
+  .nav-pill {
+    flex-shrink: 0;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .nav-pill:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* INTRO BANNER */
+  .intro {
+    padding: 32px 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .intro h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .intro h1 span { color: var(--accent); }
+  .intro p {
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 560px;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .meta-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .meta-tag.platform { border-color: var(--accent); color: var(--accent); }
+  .meta-tag.style { border-color: var(--accent2); color: var(--accent2); }
+
+  /* EPISODE CARD */
+  .episode {
+    margin: 0;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 100px;
+  }
+
+  .ep-header {
+    padding: 24px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .ep-header:hover { background: #edeae4; }
+
+  .ep-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .ep-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .ep-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .ep-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .badge-cam { background: rgba(154,110,50,0.10); color: var(--cam); border: 1px solid rgba(154,110,50,0.25); }
+  .badge-vo  { background: rgba(46,122,140,0.10); color: var(--vo);  border: 1px solid rgba(46,122,140,0.25); }
+  .badge-solo { background: rgba(74,122,50,0.10); color: var(--shot); border: 1px solid rgba(74,122,50,0.25); }
+
+  .ep-toggle {
+    position: absolute;
+    right: 20px;
+    top: 28px;
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  .ep-header { position: relative; }
+  .episode.open .ep-toggle { transform: rotate(180deg); }
+
+  /* SCRIPT BODY */
+  .ep-body {
+    display: none;
+    padding: 0 20px 28px;
+  }
+  .episode.open .ep-body { display: block; }
+
+  /* SCENE BLOCKS */
+  .scene {
+    margin-bottom: 20px;
+    border-left: 3px solid var(--border);
+    padding-left: 16px;
+  }
+  .scene.cam-scene { border-color: var(--cam); }
+  .scene.vo-scene  { border-color: var(--vo);  }
+  .scene.shot-scene { border-color: var(--shot); }
+  .scene.cta-scene { border-color: var(--cta); }
+
+  .scene-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .scene-label.cam  { color: var(--cam); }
+  .scene-label.vo   { color: var(--vo);  }
+  .scene-label.shot { color: var(--shot); }
+  .scene-label.cta  { color: var(--cta); }
+
+  .scene-label .icon { font-size: 13px; }
+
+  .scene-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+
+  /* SPOKEN LINES */
+  .lines {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .lines p {
+    margin-bottom: 6px;
+  }
+  .lines .beat {
+    color: var(--muted);
+    font-size: 12px;
+    font-style: italic;
+    margin: 4px 0;
+  }
+  .lines .emphasis {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* SHOT DIRECTION */
+  .shot-dir {
+    font-size: 13px;
+    color: var(--shot);
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .shot-dir p { margin-bottom: 4px; }
+
+  /* CTA BLOCK */
+  .cta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cta-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .cta-platform {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cta);
+    min-width: 90px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .cta-line {
+    font-size: 14px;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  /* SHOOT NOTE */
+  .shoot-note {
+    margin-top: 16px;
+    background: #f0ece6;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .shoot-note-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .shoot-note ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .shoot-note ul li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 14px;
+    position: relative;
+  }
+  .shoot-note ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 11px;
+  }
+
+  /* DIVIDER */
+  .scene-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0;
+  }
+
+  /* PROGRESS */
+  .progress-bar {
+    height: 2px;
+    background: var(--border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.1s;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<header class="site-header">
+  <span class="brand">Kawanishi Kaban</span>
+  <span class="day-tag">📅 Day 1 · Apr 12 · 9 Episodes</span>
+</header>
+
+<nav class="nav-scroll">
+  <a class="nav-pill" href="#ep1">Ep 1</a>
+  <a class="nav-pill" href="#ep7">Ep 7</a>
+  <a class="nav-pill" href="#ep8">Ep 8</a>
+  <a class="nav-pill" href="#ep14">Ep 14</a>
+  <a class="nav-pill" href="#ep18">Ep 18</a>
+  <a class="nav-pill" href="#ep23">Ep 23</a>
+  <a class="nav-pill" href="#ep25">Ep 25</a>
+  <a class="nav-pill" href="#ep29">Ep 29</a>
+  <a class="nav-pill" href="#ep31">Ep 31</a>
+</nav>
+
+<div class="intro">
+  <h1>Shoot Scripts<br><span>Day 1 — Talking Heads</span></h1>
+  <p>All on-camera episodes. Set up once, run through all 9. Prepare your key points the night before so you're not writing on set.</p>
+  <div class="meta-row">
+    <span class="meta-tag platform">TikTok + YouTube Shorts</span>
+    <span class="meta-tag style">Under 60 sec · 30–45 sec ideal</span>
+    <span class="meta-tag">Solo shoot</span>
+    <span class="meta-tag">Workshop — on-camera corner</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 1 -->
+<div class="episode open" id="ep1">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 01 · Day 1 · Discovery</div>
+    <div class="ep-title">The Japanese bag brand the rest of the world hasn't found yet</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-vo">Voiceover</span>
+      <span class="ep-badge badge-solo">Series Opener</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera · Direct</div>
+      <div class="lines">
+        <p>"There's a bag brand in Japan that 70,000 people already love —"</p>
+        <p>"and almost none of them are outside Japan."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — On Camera · Walking toward camera</div>
+      <div class="scene-subtitle">Medium shot. Bag held naturally. Takamatsu ambient sound. No music yet.</div>
+      <div class="lines">
+        <p>"There's a bag brand in Japan with 70,000 subscribers on YouTube —"</p>
+        <p>"and almost none of them are outside Japan."</p>
+        <p class="beat">[pause — let it land]</p>
+        <p>"I've been working here for six months."</p>
+        <p>"I'm just now starting to understand why it's this good."</p>
+      </div>
+    </div>
+
+    <div class="scene vo-scene">
+      <div class="scene-label vo"><span class="icon">🎙</span> Scene 2 — Voiceover · Product detail shots</div>
+      <div class="scene-subtitle">Slow pan across abb exterior → handle close-up. Music in low.</div>
+      <div class="lines">
+        <p>"The brand is called Kawanishi Kaban."</p>
+        <p>"Based in Kagawa — the smallest prefecture in Japan."</p>
+        <p>"No visible stitching on the body."</p>
+        <p>"Setouchi leather on the handle."</p>
+        <p class="beat">[hold on the handle texture — 1 sec]</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — On Camera · Series hook</div>
+      <div class="lines">
+        <p>"Every day this month I'm going to show you something about this brand that surprised me."</p>
+        <p>"Starting with this."</p>
+      </div>
+    </div>
+
+    <div class="scene vo-scene">
+      <div class="scene-label vo"><span class="icon">🎙</span> Scene 4 — Voiceover · Macro close-up</div>
+      <div class="scene-subtitle">Extreme close-up of abb exterior — find the bonded area, no seam.</div>
+      <div class="lines">
+        <p>"No stitching on the outside."</p>
+        <p>"The whole bag is bonded."</p>
+        <p class="beat">[hold]</p>
+        <p>"That's not normal."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">TikTok</span>
+          <span class="cta-line">"Follow if you want to see what else this brand is hiding."</span>
+        </div>
+        <div class="cta-item">
+          <span class="cta-platform">YT Shorts</span>
+          <span class="cta-line">"Subscribe — tomorrow I'll show you where this brand actually came from."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Shoot Priorities</div>
+      <ul>
+        <li>Walk toward camera naturally — not posed, just moving</li>
+        <li>Wide Takamatsu shot behind you — not Tokyo</li>
+        <li>Slow pan across abb exterior — bonded seam area</li>
+        <li>Handle close-up — Setouchi leather texture</li>
+        <li>One moment holding bag, no words</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 7 -->
+<div class="episode" id="ep7">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 07 · Day 1 · Reaction</div>
+    <div class="ep-title">Western people have some wild assumptions about Japanese bags</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Solo · Casual</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera · Direct</div>
+      <div class="scene-subtitle">Prepare 3–4 real comments or Reddit posts in advance. Have them on your phone.</div>
+      <div class="lines">
+        <p>"I've been reading what people outside Japan actually think about Japanese bag brands."</p>
+        <p class="beat">[beat]</p>
+        <p>"Some of these comments are wild."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — React to Comment 1</div>
+      <div class="scene-subtitle">Read or show the comment. React naturally. Don't over-perform.</div>
+      <div class="lines">
+        <p>"Okay so someone said: <span class="emphasis">[read comment]</span>"</p>
+        <p class="beat">[genuine reaction — short, real]</p>
+        <p>"Here's what's actually true:"</p>
+        <p>"<span class="emphasis">[correct it in 1–2 sentences]</span>"</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — React to Comment 2</div>
+      <div class="lines">
+        <p>"This one actually made me laugh —"</p>
+        <p>"<span class="emphasis">[read comment]</span>"</p>
+        <p class="beat">[beat]</p>
+        <p>"<span class="emphasis">[real honest reaction]</span>"</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Closer</div>
+      <div class="lines">
+        <p>"I had the same assumptions before I moved here."</p>
+        <p>"Being inside the workshop kind of changed all of that."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">TikTok</span>
+          <span class="cta-line">"Drop your assumption in the comments — I'll tell you if it's true."</span>
+        </div>
+        <div class="cta-item">
+          <span class="cta-platform">YT Shorts</span>
+          <span class="cta-line">"What do you think Japanese bags actually cost? Guess in the comments."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Prep Before Shoot</div>
+      <ul>
+        <li>Find 3–4 real Reddit/TikTok comments about Japanese bag brands tonight</li>
+        <li>Pick ones that are wrong in an interesting way — not mean, just genuinely mistaken</li>
+        <li>No props needed. Casual setup. Energy slightly playful, not defensive.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 8 -->
+<div class="episode" id="ep8">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 08 · Day 1 · Discovery</div>
+    <div class="ep-title">What I noticed after one week of daily use</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Honest · Personal</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
+      <div class="lines">
+        <p>"I've been using this bag every day for a week."</p>
+        <p>"A few things I didn't expect."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — Observation 1</div>
+      <div class="scene-subtitle">Hold abb naturally. Don't look at it too much — talk from experience.</div>
+      <div class="lines">
+        <p>"The handle."</p>
+        <p>"I didn't think it would matter which leather they used there."</p>
+        <p>"But after a week of holding it in summer heat —"</p>
+        <p>"it actually feels different. Better. Less slippery."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — Observation 2</div>
+      <div class="lines">
+        <p>"The weight."</p>
+        <p>"I thought it'd be heavier for how solid it feels."</p>
+        <p>"It's not. It sits well."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Honest Observation</div>
+      <div class="lines">
+        <p>"One thing I'm still figuring out —"</p>
+        <p>"<span class="emphasis">[add your own genuine observation here]</span>"</p>
+        <p class="beat">[this keeps it real, not promotional]</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">Both</span>
+          <span class="cta-line">"I'll keep updating this as I use it longer. Follow if you want to see how it holds up."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <ul>
+        <li>Use abb as the hero bag — hold it, don't set it on a table</li>
+        <li>Tone: relaxed, honest — like talking to a friend, not reviewing a product</li>
+        <li>Fill in Scene 3 with something real you've actually noticed</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 14 -->
+<div class="episode" id="ep14">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 14 · Day 1 · Discovery</div>
+    <div class="ep-title">The thing foreigners always ask me about this bag</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Conversational</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
+      <div class="lines">
+        <p>"Every time I have this bag outside the workshop —"</p>
+        <p>"someone asks me the same question."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Question</div>
+      <div class="scene-subtitle">Pick one: price / where to buy / brand name / why it looks different. Choose the most real one.</div>
+      <div class="lines">
+        <p>"They ask: <span class="emphasis">'How much is it?'</span>"</p>
+        <p class="beat">[or whatever the real question is]</p>
+        <p>"And honestly — my answer surprises them."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — The Answer</div>
+      <div class="lines">
+        <p>"It's not cheap. But it's not what you'd expect for what you're getting."</p>
+        <p>"These bags are made to last — like, repair-for-life kind of made."</p>
+        <p>"When I explain that, people usually stop asking about the price."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">Both</span>
+          <span class="cta-line">"What would your first question be? Drop it below."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <ul>
+        <li>Decide which question to use before you shoot — price works best for broad audience</li>
+        <li>Casual energy. You're not presenting — you're sharing something that happened</li>
+        <li>abb in hand or on shoulder, not on a table</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 18 -->
+<div class="episode" id="ep18">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 18 · Day 1 · Reaction</div>
+    <div class="ep-title">What I got wrong about Japanese bags before I moved here</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Candid · Perspective shift</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
+      <div class="lines">
+        <p>"Before I moved to Japan, I had this idea of what Japanese bags were."</p>
+        <p>"I was pretty wrong."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Wrong Assumption</div>
+      <div class="lines">
+        <p>"I thought they were overpriced for the name."</p>
+        <p>"Like — paying a premium just because it says 'made in Japan.'"</p>
+        <p class="beat">[pause]</p>
+        <p>"That's not what's happening here."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — What Changed</div>
+      <div class="lines">
+        <p>"When I actually got into the workshop —"</p>
+        <p>"started seeing how long they spend on one bag —"</p>
+        <p>"the assumption just fell apart."</p>
+        <p>"The price isn't about the label. It's about the time."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Closer</div>
+      <div class="lines">
+        <p>"I still think about what I would have bought instead."</p>
+        <p>"Something cheaper that I'd have replaced twice by now."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">Both</span>
+          <span class="cta-line">"What did you assume before watching this? I'm genuinely curious."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <ul>
+        <li>No props needed — this is pure perspective storytelling</li>
+        <li>Tone: reflective, a little self-deprecating. Not a sales pitch.</li>
+        <li>This type of video gets shared. Let it breathe.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 23 -->
+<div class="episode" id="ep23">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 23 · Day 1 · Reaction</div>
+    <div class="ep-title">Honest things I'd tell someone before buying this bag</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Honest review format</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
+      <div class="lines">
+        <p>"If someone asked me whether to buy this bag —"</p>
+        <p>"I'd say yes. But I'd tell them a few things first."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — Thing 1 (The Trade-off)</div>
+      <div class="scene-subtitle">abb in hand. Honest, direct. Not a list — more like a conversation.</div>
+      <div class="lines">
+        <p>"It's not a flashy bag."</p>
+        <p>"Nobody's going to recognize the name — especially outside Japan."</p>
+        <p>"If that matters to you, this isn't it."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — Thing 2 (The Upside)</div>
+      <div class="lines">
+        <p>"But if you actually use your bag every day —"</p>
+        <p>"and you've gotten burned by something that looked good but fell apart —"</p>
+        <p>"this is for you."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — Who It's Not For</div>
+      <div class="lines">
+        <p>"I wouldn't buy it if you want something trendy."</p>
+        <p>"This brand doesn't really do trends."</p>
+        <p class="beat">[pause]</p>
+        <p>"Which is kind of the point."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">Both</span>
+          <span class="cta-line">"What do you actually need from a bag? Tell me in the comments."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <ul>
+        <li>Hold abb naturally — not posed, not showing it off</li>
+        <li>This builds credibility because you're telling people NOT to buy it in some cases</li>
+        <li>Keep tone even. No enthusiasm spikes. Just honest.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 25 -->
+<div class="episode" id="ep25">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 25 · Day 1 · Discovery</div>
+    <div class="ep-title">What I wish I knew before moving to Japan with bags</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Travel · Lifestyle angle</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
+      <div class="lines">
+        <p>"I moved to Japan with two bags."</p>
+        <p>"Neither of them were right for how I actually ended up living here."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Problem</div>
+      <div class="lines">
+        <p>"Japan is a walking city."</p>
+        <p>"You're on trains, on foot, in and out of small shops."</p>
+        <p>"I needed something that could handle all of that — and not look out of place."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — What I Found</div>
+      <div class="lines">
+        <p>"Finding Kawanishi Kaban kind of solved that."</p>
+        <p>"Not because it's a Japan brand — but because the design actually fits how people move here."</p>
+        <p>"The size. The structure. The way it opens."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — The Wish</div>
+      <div class="lines">
+        <p>"If I could go back — I'd have brought less, and bought better once I got here."</p>
+        <p class="beat">[beat]</p>
+        <p>"That's kind of the whole philosophy of this brand anyway."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">Both</span>
+          <span class="cta-line">"What would you pack if you moved abroad for a year?"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <ul>
+        <li>Light travel prop if available — a small bag or backpack on the side</li>
+        <li>This episode hooks anyone who's moved, traveled, or thought about it</li>
+        <li>The tie back to the brand should feel natural, not forced</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 29 -->
+<div class="episode" id="ep29">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 29 · Day 1 · Reaction</div>
+    <div class="ep-title">I've been showing this brand to people for a month — here's what they say</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Social proof · Narrated reactions</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
+      <div class="lines">
+        <p>"I've been showing this brand to people around me for the past month."</p>
+        <p>"Coworkers. Friends. People who know nothing about bags."</p>
+        <p>"The reactions were pretty consistent."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — Reaction 1</div>
+      <div class="scene-subtitle">Narrate or show a real reaction. Keep it specific — a real person, a real moment.</div>
+      <div class="lines">
+        <p>"First thing everyone does — they look for the stitching."</p>
+        <p>"They can't find it."</p>
+        <p>"That's always the moment."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — Reaction 2</div>
+      <div class="lines">
+        <p>"One person asked me how much it cost — and then immediately said they thought it'd be more."</p>
+        <p class="beat">[beat]</p>
+        <p>"That's a good sign."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — The Pattern</div>
+      <div class="lines">
+        <p>"Nobody asks about the brand name."</p>
+        <p>"They just want to hold it."</p>
+        <p class="beat">[pause]</p>
+        <p>"The bag sells itself — I'm just the one showing it."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">Both</span>
+          <span class="cta-line">"What's your first reaction seeing it? Drop it below."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Prep Before Shoot</div>
+      <ul>
+        <li>Collect 2–3 real reactions from coworkers this week before shoot day</li>
+        <li>Ask them to hold the abb and just describe what they notice — don't prompt them</li>
+        <li>You can narrate these reactions on camera without the person being there</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════ EP 31 -->
+<div class="episode" id="ep31">
+  <div class="ep-header" onclick="toggleEp(this)">
+    <div class="ep-number">Episode 31 · Day 1 · Discovery · SERIES CLOSER</div>
+    <div class="ep-title">One month. 31 videos. Here's the honest verdict.</div>
+    <div class="ep-meta">
+      <span class="ep-badge badge-cam">On Camera</span>
+      <span class="ep-badge badge-solo">Series finale · Shoot last</span>
+    </div>
+    <span class="ep-toggle">▾</span>
+  </div>
+  <div class="ep-body">
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Hook — On Camera</div>
+      <div class="scene-subtitle">⚠️ Shoot this one last. You need energy for it.</div>
+      <div class="lines">
+        <p>"One month."</p>
+        <p>"31 videos about one bag brand."</p>
+        <p class="beat">[beat]</p>
+        <p>"Here's what I actually think."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 1 — The Verdict</div>
+      <div class="lines">
+        <p>"It's a brand that makes sense the longer you look at it."</p>
+        <p>"Most things are the opposite — they look good until you get close."</p>
+        <p>"This one gets better the closer you get."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 2 — The Honest Part</div>
+      <div class="lines">
+        <p>"Is it perfect? No."</p>
+        <p>"<span class="emphasis">[add one real thing you'd change — keep it genuine]</span>"</p>
+        <p>"But the things they got right — they got really right."</p>
+      </div>
+    </div>
+
+    <div class="scene cam-scene">
+      <div class="scene-label cam"><span class="icon">🎬</span> Scene 3 — The Close</div>
+      <div class="lines">
+        <p>"70,000 people in Japan already figured this out."</p>
+        <p>"I think the rest of the world is starting to catch up."</p>
+        <p class="beat">[pause]</p>
+        <p>"And if you've been watching this month — you're ahead of it."</p>
+      </div>
+    </div>
+
+    <div class="scene cta-scene">
+      <div class="scene-label cta"><span class="icon">📲</span> CTA</div>
+      <div class="cta-block">
+        <div class="cta-item">
+          <span class="cta-platform">TikTok</span>
+          <span class="cta-line">"Follow — there's more coming after this."</span>
+        </div>
+        <div class="cta-item">
+          <span class="cta-platform">YT Shorts</span>
+          <span class="cta-line">"Subscribe — this was just the introduction."</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-note">
+      <div class="shoot-note-label">📋 Shoot Notes</div>
+      <ul>
+        <li>Shoot this one absolutely last — after all 9 Day 1 episodes</li>
+        <li>You need to feel like you've actually done something to sell this closer</li>
+        <li>Honest and direct. No performance. Just say what you actually think.</li>
+        <li>Fill in Scene 2 with something genuinely real — the credibility depends on it</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  function toggleEp(header) {
+    const ep = header.parentElement;
+    ep.classList.toggle('open');
+  }
+
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('progress').style.width = progress + '%';
+  });
+
+  // Smooth scroll for nav pills
+  document.querySelectorAll('.nav-pill').forEach(pill => {
+    pill.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(pill.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        if (!target.classList.contains('open')) {
+          target.classList.add('open');
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
