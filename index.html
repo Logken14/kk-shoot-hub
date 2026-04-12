@@ -1238,25 +1238,38 @@ function tog(header) {
   header.parentElement.classList.toggle('open');
 }
 
-// ── SHARED SYNC via Google Sheets ──
+// ── SHARED SYNC via Google Sheets (JSONP) ──
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnaRFhcn8lTG1PrmWOc_96Fmzuu8frPDI4-EMznbhyWybPGRFdwYNSeh4CDxBoQ0xq/exec';
 let syncedDone = new Set();
-let syncPending = false;
 
-async function loadProgress() {
-  try {
-    const res = await fetch(SCRIPT_URL);
-    const data = await res.json();
-    syncedDone = new Set(data.done || []);
-    applyDoneState();
-    updateProgress();
-  } catch(e) {
-    // fallback to localStorage if offline
-    const saved = localStorage.getItem('kk-done');
-    syncedDone = new Set(saved ? JSON.parse(saved) : []);
-    applyDoneState();
-    updateProgress();
-  }
+// Load using JSONP to bypass CORS
+function loadProgress() {
+  return new Promise((resolve) => {
+    const callbackName = 'kkCallback_' + Date.now();
+    const script = document.createElement('script');
+
+    window[callbackName] = function(data) {
+      delete window[callbackName];
+      document.body.removeChild(script);
+      syncedDone = new Set(data.done || []);
+      applyDoneState();
+      updateProgress();
+      resolve();
+    };
+
+    script.onerror = function() {
+      delete window[callbackName];
+      // fallback to localStorage
+      const saved = localStorage.getItem('kk-done');
+      syncedDone = new Set(saved ? JSON.parse(saved) : []);
+      applyDoneState();
+      updateProgress();
+      resolve();
+    };
+
+    script.src = SCRIPT_URL + '?callback=' + callbackName;
+    document.body.appendChild(script);
+  });
 }
 
 function applyDoneState() {
@@ -1265,17 +1278,15 @@ function applyDoneState() {
   });
 }
 
-async function saveProgress() {
+// Save using a hidden form POST — works cross-origin
+function saveProgress() {
   const done = [...syncedDone];
   localStorage.setItem('kk-done', JSON.stringify(done));
-  try {
-    await fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ done })
-    });
-  } catch(e) { /* saved to localStorage at least */ }
+
+  // Use sendBeacon or image trick for cross-origin POST
+  const params = encodeURIComponent(JSON.stringify({ done }));
+  const img = new Image();
+  img.src = SCRIPT_URL + '?method=post&data=' + params;
 }
 
 // ── DONE STATE ──
