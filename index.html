@@ -109,6 +109,8 @@
   .day-tab { flex-shrink: 0; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 16px; border: none; background: transparent; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; white-space: nowrap; }
   .day-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
   .day-tab:hover { color: var(--accent); }
+  .day-tab.day-complete { color: var(--shot); }
+  .day-tab.day-complete.active { color: var(--shot); border-bottom-color: var(--shot); }
 
   /* EP NAV */
   .ep-nav { overflow-x: auto; scrollbar-width: none; padding: 8px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 6px; background: var(--surface); }
@@ -119,8 +121,14 @@
   /* DAY SECTION */
   .day-section { display: none; }
   .day-section.active { display: block; }
-  .day-intro { padding: 22px 16px 18px; border-bottom: 1px solid var(--border); }
-  .day-intro h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+  .day-intro {
+    padding: 28px 16px 22px;
+    border-bottom: 3px solid var(--border);
+    border-top: 3px solid var(--accent);
+    background: var(--surface);
+    margin-bottom: 4px;
+  }
+  .day-intro h2 { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; line-height: 1.2; margin-bottom: 6px; letter-spacing: -0.01em; }
   .day-intro p { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
   .day-meta { display: flex; flex-wrap: wrap; gap: 6px; }
   .day-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; border: 1px solid var(--border); color: var(--muted); }
@@ -1230,42 +1238,86 @@ function tog(header) {
   header.parentElement.classList.toggle('open');
 }
 
+// ── SHARED SYNC via Google Sheets ──
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnaRFhcn8lTG1PrmWOc_96Fmzuu8frPDI4-EMznbhyWybPGRFdwYNSeh4CDxBoQ0xq/exec';
+let syncedDone = new Set();
+let syncPending = false;
+
+async function loadProgress() {
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const data = await res.json();
+    syncedDone = new Set(data.done || []);
+    applyDoneState();
+    updateProgress();
+  } catch(e) {
+    // fallback to localStorage if offline
+    const saved = localStorage.getItem('kk-done');
+    syncedDone = new Set(saved ? JSON.parse(saved) : []);
+    applyDoneState();
+    updateProgress();
+  }
+}
+
+function applyDoneState() {
+  document.querySelectorAll('.episode').forEach(ep => {
+    ep.classList.toggle('done', syncedDone.has(ep.id));
+  });
+}
+
+async function saveProgress() {
+  const done = [...syncedDone];
+  localStorage.setItem('kk-done', JSON.stringify(done));
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ done })
+    });
+  } catch(e) { /* saved to localStorage at least */ }
+}
+
 // ── DONE STATE ──
 function markDone(ep) {
-  // ep is the .episode element passed directly
   const epId = ep.id;
   const isDone = ep.classList.toggle('done');
-  // Don't auto-collapse — let them keep it open if they want
-  const doneSet = getDoneSet();
-  if (isDone) doneSet.add(epId);
-  else doneSet.delete(epId);
-  localStorage.setItem('kk-done', JSON.stringify([...doneSet]));
+  if (isDone) syncedDone.add(epId);
+  else syncedDone.delete(epId);
   updateProgress();
+  updateDayHeaders();
+  saveProgress();
 }
 
-function getDoneSet() {
-  try {
-    const saved = localStorage.getItem('kk-done');
-    return new Set(saved ? JSON.parse(saved) : []);
-  } catch { return new Set(); }
-}
+function getDoneSet() { return syncedDone; }
 
 function updateProgress() {
-  const doneSet = getDoneSet();
-  const done = doneSet.size;
+  const done = syncedDone.size;
   const fill = document.getElementById('shoot-prog-fill');
   const count = document.getElementById('shoot-prog-count');
   if (fill) fill.style.width = (done / 31 * 100) + '%';
   if (count) count.textContent = done;
 }
 
-function restoreDoneState() {
-  const doneSet = getDoneSet();
-  doneSet.forEach(epId => {
-    const ep = document.getElementById(epId);
-    if (ep) ep.classList.add('done');
+// ── DAY COMPLETION ──
+const DAY_EPISODES = {
+  1: ['ep1','ep7','ep8','ep14','ep18','ep23','ep25','ep29','ep31'],
+  2: ['ep1b','ep2','ep4','ep19','ep26'],
+  3: ['ep3','ep6','ep10','ep12','ep15','ep17','ep20','ep22'],
+  4: ['ep5','ep9','ep11','ep13','ep16','ep21','ep24','ep27','ep28'],
+  5: ['ep30','broll','buffer']
+};
+
+function updateDayHeaders() {
+  document.querySelectorAll('.day-tab').forEach((tab, i) => {
+    const dayNum = i + 1;
+    const eps = DAY_EPISODES[dayNum] || [];
+    const allDone = eps.length > 0 && eps.every(id => syncedDone.has(id));
+    tab.classList.toggle('day-complete', allDone);
+    const base = tab.dataset.label || tab.textContent.replace(' ✓','').trim();
+    tab.dataset.label = base;
+    tab.textContent = allDone ? base + ' ✓' : base;
   });
-  updateProgress();
 }
 
 // ── SCROLL PROGRESS ──
@@ -1286,7 +1338,8 @@ document.querySelectorAll('.ep-pill').forEach(p => {
 // ── INIT ──
 const saved = localStorage.getItem('kk-lang');
 if (saved) setLang(saved);
-restoreDoneState();
+loadProgress().then(() => updateDayHeaders());
+
 </script>
 </body>
 </html>
