@@ -1256,25 +1256,19 @@ function tog(header) {
   header.parentElement.classList.toggle('open');
 }
 
-// ── SHARED SYNC via Google Sheets (JSONP) ──
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwnaRFhcn8lTG1PrmWOc_96Fmzuu8frPDI4-EMznbhyWybPGRFdwYNSeh4CDxBoQ0xq/exec';
+// ── SHARED SYNC via JSONbin ──
+const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/69dc793636566621a8a8d894';
+const JSONBIN_KEY = '$2a$10$1yy30T2h/Pm27AntO7ZOPuTqxf3Pp.jHQq9uGsPvv5LI/2ydrLqBi';
 let syncedDone = new Set();
-
-function jsonp(url) {
-  return new Promise((resolve, reject) => {
-    const cb = 'kk_' + Date.now();
-    const s = document.createElement('script');
-    window[cb] = (data) => { delete window[cb]; s.remove(); resolve(data); };
-    s.onerror = () => { delete window[cb]; s.remove(); reject(); };
-    s.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb;
-    document.head.appendChild(s);
-  });
-}
 
 async function loadProgress() {
   try {
-    const data = await jsonp(SCRIPT_URL);
-    syncedDone = new Set(data.done || []);
+    const res = await fetch(JSONBIN_URL, {
+      headers: { 'X-Master-Key': JSONBIN_KEY }
+    });
+    const json = await res.json();
+    syncedDone = new Set(json.record.done || []);
+    localStorage.setItem('kk-done', JSON.stringify([...syncedDone]));
     applyDoneState();
     updateProgress();
   } catch(e) {
@@ -1294,25 +1288,25 @@ function applyDoneState() {
 async function saveProgress() {
   const done = [...syncedDone];
   localStorage.setItem('kk-done', JSON.stringify(done));
-  // Save via JSONP GET with encoded data
-  const encoded = encodeURIComponent(JSON.stringify({done}));
-  try {
-    await jsonp(SCRIPT_URL + '?method=post&data=' + encoded);
-  } catch(e) {}
+  const res = await fetch(JSONBIN_URL, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Master-Key': JSONBIN_KEY
+    },
+    body: JSON.stringify({ done })
+  });
+  if (!res.ok) throw new Error('Save failed');
+  return res.json();
 }
 
-// Manual sync button
 async function manualSync() {
   const btn = document.getElementById('sync-btn');
   btn.textContent = '⏳';
   btn.disabled = true;
   try {
     await saveProgress();
-    // Verify by reloading
-    const data = await jsonp(SCRIPT_URL);
-    const serverDone = new Set(data.done || []);
-    const match = [...syncedDone].every(id => serverDone.has(id));
-    showToast(match ? '✅ Synced! ' + syncedDone.size + ' episodes saved.' : '⚠️ Partial sync — try again');
+    showToast('✅ Synced! ' + syncedDone.size + ' episodes saved.');
   } catch(e) {
     showToast('❌ Sync failed — check connection');
   }
@@ -1321,21 +1315,17 @@ async function manualSync() {
 }
 
 async function manualLoad() {
-  const btn = document.getElementById('sync-btn');
+  const btn = document.getElementById('load-btn');
   btn.textContent = '⏳';
   btn.disabled = true;
   try {
-    const data = await jsonp(SCRIPT_URL);
-    syncedDone = new Set(data.done || []);
-    localStorage.setItem('kk-done', JSON.stringify([...syncedDone]));
-    applyDoneState();
-    updateProgress();
+    await loadProgress();
     updateDayHeaders();
     showToast('✅ Loaded! ' + syncedDone.size + ' episodes marked done.');
   } catch(e) {
     showToast('❌ Load failed — check connection');
   }
-  btn.textContent = '☁';
+  btn.textContent = '↓';
   btn.disabled = false;
 }
 
