@@ -188,6 +188,24 @@
   .cta-row { display: flex; gap: 8px; align-items: flex-start; }
   .cta-plat { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--cta); min-width: 75px; padding-top: 2px; flex-shrink: 0; }
   .cta-line { font-size: 14px; color: var(--text); font-style: italic; }
+  /* ── SHOOT STATUS BANNER ── */
+  .status-banner {
+    margin: 0 0 0 0;
+    padding: 10px 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.07em;
+    display: flex; align-items: flex-start; gap: 8px;
+    flex-direction: column;
+  }
+  .status-banner.done { background: rgba(74,122,50,0.12); border-left: 4px solid var(--shot); color: var(--shot); }
+  .status-banner.partial { background: rgba(200,134,10,0.12); border-left: 4px solid #c8860a; color: #c8860a; }
+  .status-banner.pending { background: rgba(140,46,106,0.08); border-left: 4px solid var(--cta); color: var(--cta); }
+  .status-banner .sb-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+  .status-banner ul { list-style: none; display: flex; flex-direction: column; gap: 3px; padding: 0; margin: 2px 0 0; }
+  .status-banner li { font-size: 12px; font-weight: 500; text-transform: none; letter-spacing: 0; padding-left: 14px; position: relative; }
+  .status-banner li::before { content: '→'; position: absolute; left: 0; font-size: 10px; top: 1px; }
+
   .note-box { margin-top: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; }
   .note-label { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
   .note-box ul { list-style: none; display: flex; flex-direction: column; gap: 3px; }
@@ -239,6 +257,7 @@
     <a class="ep-pill" href="#ep1">Ep 1</a><a class="ep-pill" href="#ep7">Ep 7</a><a class="ep-pill" href="#ep8">Ep 8</a><a class="ep-pill" href="#ep14">Ep 14</a><a class="ep-pill" href="#ep18">Ep 18</a><a class="ep-pill" href="#ep23">Ep 23</a><a class="ep-pill" href="#ep25">Ep 25</a><a class="ep-pill" href="#ep29">Ep 29</a><a class="ep-pill" href="#ep31">Ep 31</a>
   </div>
   <div class="day-intro">
+    <div class="status-banner done"><span class="sb-title">✅ Day 1 Complete — Apr 12</span><ul><li>All footage shot. Nothing edited yet.</li></ul></div>
     <div data-lang="en"><h2>Day 1 — <span style="color:var(--accent)">Talking Heads</span></h2><p>All on-camera episodes. One setup, 9 episodes. Prepare your key points the night before. Shoot Ep 31 absolutely last.</p></div>
     <div data-lang="ja"><h2>Day 1 — <span style="color:var(--accent)">トーキングヘッド</span></h2><p>全てカメラ正面のエピソード。セッティングは一度。9本まとめて撮影。前日に要点を確認。Ep 31は必ず最後に。</p></div>
     <div class="day-meta">
@@ -516,6 +535,7 @@
     <a class="ep-pill" href="#ep1b">Ep 1 B-roll</a><a class="ep-pill" href="#ep2">Ep 2</a><a class="ep-pill" href="#ep4">Ep 4</a><a class="ep-pill" href="#ep19">Ep 19</a><a class="ep-pill" href="#ep26">Ep 26</a>
   </div>
   <div class="day-intro">
+    <div class="status-banner partial"><span class="sb-title">⚠️ Day 2 Mostly Done — Apr 13</span><ul><li>All footage shot EXCEPT:</li><li>Opening line still needed: "Hi, this brand just opened a location in Tokyo"</li><li>All voiceovers still need to be recorded (scheduled Apr 15)</li></ul></div>
     <div data-lang="en"><h2>Day 2 — <span style="color:var(--accent2)">Outdoor Takamatsu</span></h2><p>Light-dependent day. Shoot Ep 19 (abb hero) in the best light window — plan your morning around that. Grab wide city shots first thing.</p></div>
     <div data-lang="ja"><h2>Day 2 — <span style="color:var(--accent2)">屋外・高松</span></h2><p>光に左右される日。Ep 19（abbのヒーローショット）を最良の光の時間帯に撮影。朝一番で広角の街撮りから始める。</p></div>
     <div class="day-meta">
@@ -677,6 +697,7 @@
     <a class="ep-pill" href="#ep3">Ep 3</a><a class="ep-pill" href="#ep6">Ep 6</a><a class="ep-pill" href="#ep10">Ep 10</a><a class="ep-pill" href="#ep12">Ep 12</a><a class="ep-pill" href="#ep15">Ep 15</a><a class="ep-pill" href="#ep17">Ep 17</a><a class="ep-pill" href="#ep20">Ep 20</a><a class="ep-pill" href="#ep22">Ep 22</a>
   </div>
   <div class="day-intro">
+    <div class="status-banner partial"><span class="sb-title">⚠️ Day 3 In Progress — Apr 14</span><ul><li>Top-down shots: first half of storefront products DONE</li><li>Second half of top-down product shots needed tomorrow (Apr 15)</li><li>Voiceovers for all Day 3 episodes still needed (scheduled Apr 15)</li></ul></div>
     <div data-lang="en"><h2>Day 3 — <span style="color:var(--shot)">Tabletop Macro</span></h2><p>Set up once. All product detail shots. Natural light from the side. Hands in frame throughout. Take your time on Ep 3 — the macro IS the video.</p></div>
     <div data-lang="ja"><h2>Day 3 — <span style="color:var(--shot)">テーブルトップ・マクロ</span></h2><p>セッティングは一度。全て商品ディテール撮影。横からの自然光。手を画面内に入れる。Ep 3に時間をかける — マクロがそのまま動画になる。</p></div>
     <div class="day-meta">
@@ -903,6 +924,7 @@
     <a class="ep-pill" href="#ep5">Ep 5</a><a class="ep-pill" href="#ep9">Ep 9</a><a class="ep-pill" href="#ep11">Ep 11</a><a class="ep-pill" href="#ep13">Ep 13</a><a class="ep-pill" href="#ep16">Ep 16</a><a class="ep-pill" href="#ep21">Ep 21</a><a class="ep-pill" href="#ep24">Ep 24</a><a class="ep-pill" href="#ep27">Ep 27</a><a class="ep-pill" href="#ep28">Ep 28</a>
   </div>
   <div class="day-intro">
+    <div class="status-banner pending"><span class="sb-title">📋 Day 4 Not Started — Apr 15</span><ul><li>Full shoot day still needed</li><li>Also finishing top-down shots + voiceovers this day</li></ul></div>
     <div data-lang="en"><h2>Day 4 — <span style="color:var(--cta)">Brand Story + Interior Detail</span></h2><p>Slower, more deliberate day. Narrated episodes and hidden craft shots. Find the most surprising interior detail across any bag — it carries multiple episodes.</p></div>
     <div data-lang="ja"><h2>Day 4 — <span style="color:var(--cta)">ブランドストーリー + 内側ディテール</span></h2><p>ゆっくり丁寧な日。ナレーションエピソードと職人技の隠れたショット。どのバッグでも最も驚くべき内側のディテールを見つける — 複数のエピソードに使える。</p></div>
     <div class="day-meta">
@@ -1140,6 +1162,7 @@
     <a class="ep-pill" href="#ep30">Ep 30</a><a class="ep-pill" href="#broll">B-roll Bank</a><a class="ep-pill" href="#buffer">Buffer</a>
   </div>
   <div class="day-intro">
+    <div class="status-banner pending"><span class="sb-title">📋 Editing Week Starts Apr 22</span><ul><li>Apr 17: Osaka street shoot — freeze frame style, 7–10 products, depart 9:30AM</li><li>Apr 18: クラファンイベント all day + Airbnb footage cull/organize after</li><li>Apr 19–20: Days off (Matt shoot cancelled)</li><li>Apr 22: Buffer + B-roll + Ep 30 + editing begins</li></ul></div>
     <div data-lang="en"><h2>Day 5 — <span style="color:var(--d5)">Buffer + B-roll + Ep 30</span></h2><p>Post-Osaka makeup day. Ep 30 is the only scripted episode. Protect the rest of the day for reshoots, pickups, and banking B-roll. Do not fill this day with new content.</p></div>
     <div data-lang="ja"><h2>Day 5 — <span style="color:var(--d5)">バッファー + Bロール + Ep 30</span></h2><p>大阪後の補完日。Ep 30だけがスクリプト済みのエピソード。残りの時間は撮り直し、補足撮影、Bロールの蓄積に使う。新しいコンテンツで埋めない。</p></div>
     <div class="day-meta">
