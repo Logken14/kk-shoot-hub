@@ -22,9 +22,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .site-header{position:sticky;top:0;z-index:300;background:var(--header-bg);border-bottom:1px solid rgba(255,255,255,0.08);padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px}
 .header-brand{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:#c8860a;letter-spacing:0.14em;text-transform:uppercase}
 .header-right{display:flex;align-items:center;gap:8px}
-.lang-toggle{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:3px}
-.lang-btn{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;padding:4px 11px;border-radius:16px;border:none;cursor:pointer;transition:all 0.15s;background:transparent;color:rgba(255,255,255,0.5)}
-.lang-btn.active{background:#c8860a;color:#fff}
+.lang-toggle{display:flex;align-items:center;gap:3px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:3px}
+.lang-btn{width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;transition:all 0.18s;background:transparent;display:flex;align-items:center;justify-content:center;font-size:18px;opacity:0.45;padding:0}
+.lang-btn.active{background:rgba(255,255,255,0.15);opacity:1;box-shadow:0 0 0 1.5px rgba(200,134,10,0.7)}
 #sync-btn,#load-btn{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0}
 #sync-btn:hover,#load-btn:hover{background:#c8860a;color:#fff;border-color:#c8860a}
 #sync-btn:disabled,#load-btn:disabled{opacity:0.4;cursor:not-allowed}
@@ -214,9 +214,9 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   <div class="header-right">
     <button id="sync-btn" onclick="manualSync()" title="Sync progress">☁</button>
     <button id="load-btn" onclick="manualLoad()" title="Load latest">↓</button>
-    <div class="lang-toggle" id="langToggle" style="display:none">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+    <div class="lang-toggle" id="langToggle">
+      <button class="lang-btn active" onclick="setLang('en')" title="English">🇺🇸</button>
+      <button class="lang-btn" onclick="setLang('ja')" title="日本語">🇯🇵</button>
     </div>
     <button class="hamburger-btn" id="hamBtn" onclick="toggleNav()">
       <span></span><span></span><span></span>
@@ -552,7 +552,7 @@ function toggleNav(){
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+id));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.id==='nav-'+id));
-  document.getElementById('langToggle').style.display=id==='scripts'?'flex':'none';
+  document.getElementById('langToggle').style.display=id==='scripts'?'flex':'flex';
   document.getElementById('navDropdown').classList.remove('open');
   document.getElementById('hamBtn').classList.remove('open');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -561,7 +561,7 @@ function showPage(id){
 /* ══ SCRIPTS LOGIC ══ */
 function setLang(lang){
   document.body.className='lang-'+lang;
-  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',(lang==='en'&&b.textContent==='EN')||(lang==='ja'&&b.textContent==='日本語'));});
+  document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',(lang==='en'&&b.title==='English')||(lang==='ja'&&b.title==='日本語'));});
   try{localStorage.setItem('kk-lang',lang);}catch(e){}
 }
 function showDay(n){
