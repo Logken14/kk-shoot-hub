@@ -13,7 +13,6 @@
   --cam:#9a6e32;--vo:#2e7a8c;--shot:#4a7a32;--cta:#8c2e6a;
   --header-bg:#141210;
   --done-bg:#f0f7f0;--done-border:#b8d8b8;--done-text:#7a9a7a;
-  --outdoor:#c8a96e;--indoor:#7ecfb3;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;padding-bottom:80px;overflow-x:hidden}
@@ -29,35 +28,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 #sync-btn:hover,#load-btn:hover{background:#c8860a;color:#fff;border-color:#c8860a}
 #sync-btn:disabled,#load-btn:disabled{opacity:0.4;cursor:not-allowed}
 
-/* ── HAMBURGER ── */
-.hamburger-btn{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:all 0.15s;flex-shrink:0;padding:0}
-.hamburger-btn span{display:block;width:16px;height:1.5px;background:currentColor;border-radius:2px;transition:all 0.2s}
-.hamburger-btn:hover{background:#c8860a;color:#fff;border-color:#c8860a}
-.hamburger-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-.hamburger-btn.open span:nth-child(2){opacity:0}
-.hamburger-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-
-/* ── DROPDOWN MENU ── */
-.nav-dropdown{position:fixed;top:56px;right:0;left:0;background:var(--header-bg);border-bottom:1px solid rgba(255,255,255,0.12);z-index:280;display:none;flex-direction:column;gap:0}
-.nav-dropdown.open{display:flex}
-.nav-item{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.75);text-align:left;width:100%;transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.06)}
-.nav-item:last-child{border-bottom:none}
-.nav-item:hover{background:rgba(255,255,255,0.06)}
-.nav-item.active{color:#c8860a}
-.nav-item-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0}
-.nav-item-text{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
-.nav-item-sub{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;margin-top:1px}
-.nav-item-badge{margin-left:auto;font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.1em;padding:3px 8px;border-radius:10px;text-transform:uppercase}
-.badge-done{background:rgba(74,122,50,0.25);color:#7ecf7e}
-.badge-pending{background:rgba(200,134,10,0.2);color:#c8860a}
-.badge-today{background:rgba(140,46,106,0.25);color:#cf7ecf;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
-
-/* ── PAGES ── */
-.page{display:none}
-.page.active{display:block}
-
-/* ── SCRIPTS PAGE (scripts.html styles) ── */
+/* ── SCRIPTS PAGE ── */
 .progress-bar{height:3px;background:rgba(255,255,255,0.15);position:fixed;top:0;left:0;right:0;z-index:400}
 .progress-fill{height:100%;background:#c8860a;width:0%;transition:width 0.1s}
 .shoot-progress{background:var(--header-bg);border-bottom:1px solid rgba(255,255,255,0.08);padding:8px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:56px;z-index:190}
@@ -147,61 +118,6 @@ body.lang-ja [data-lang="ja"]{display:block}
 span[data-lang]{display:none}
 body.lang-en span[data-lang="en"]{display:inline}
 body.lang-ja span[data-lang="ja"]{display:inline}
-
-/* ── OSAKA PAGE ── */
-.osaka-header{padding:0 16px;background:var(--header-bg);border-bottom:1px solid rgba(255,255,255,0.08);position:sticky;top:56px;z-index:190}
-.osaka-meta{padding:16px 0 8px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.osaka-date{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.18em;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:6px}
-.osaka-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.osaka-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;line-height:1.1;color:#fff}
-.osaka-title span{color:var(--outdoor)}
-.osaka-progress-num{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--outdoor);line-height:1;text-align:right}
-.osaka-progress-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-top:2px}
-.osaka-bar-track{height:2px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;margin:10px 0 0}
-.osaka-bar-fill{height:100%;background:linear-gradient(90deg,var(--outdoor),var(--indoor));border-radius:2px;transition:width 0.4s ease;width:0%}
-.osaka-body{padding:0 16px}
-.o-section-hdr{display:flex;align-items:center;gap:10px;padding:24px 0 12px}
-.o-pill{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid}
-.o-pill.outdoor{color:var(--outdoor);border-color:var(--outdoor);background:rgba(200,169,110,0.1)}
-.o-pill.indoor{color:var(--indoor);border-color:var(--indoor);background:rgba(126,207,179,0.1)}
-.o-section-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--text)}
-.o-section-count{margin-left:auto;font-size:11px;color:var(--muted)}
-.o-block{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden;transition:opacity 0.3s}
-.o-block.completed{opacity:0.38}
-.o-block-hdr{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
-.o-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);min-width:48px;letter-spacing:0.04em}
-.o-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;flex:1;line-height:1.3;color:var(--text)}
-.o-tog{font-size:10px;color:var(--muted);transition:transform 0.2s}
-.o-tog.open{transform:rotate(180deg)}
-.o-tasks{display:none;flex-direction:column;gap:6px;border-top:1px solid var(--border);padding:12px 16px 14px}
-.o-tasks.open{display:flex}
-.o-task{display:flex;align-items:flex-start;gap:12px;padding:10px 12px;border-radius:8px;background:var(--surface2);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background 0.15s;border:1px solid transparent}
-.o-task.odone{opacity:0.45}
-.o-task.odone .o-task-text{text-decoration:line-through;color:var(--muted)}
-.o-cb{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--muted);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
-.o-task.odone .o-cb{background:var(--outdoor);border-color:var(--outdoor)}
-.o-task.odone.indoor .o-cb{background:var(--indoor);border-color:var(--indoor)}
-.o-ck{display:none;color:#000;font-size:11px;font-weight:700;line-height:1}
-.o-task.odone .o-ck{display:block}
-.o-task-text{font-family:'DM Mono',monospace;font-size:12px;line-height:1.5;color:var(--text);flex:1}
-.o-tag{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:2px 7px;border-radius:10px;border:1px solid;flex-shrink:0;margin-top:2px}
-.o-tag.loc{color:var(--outdoor);border-color:rgba(200,169,110,0.4)}
-.o-tag.setup{color:var(--muted);border-color:rgba(107,102,96,0.4)}
-.o-tag.shot{color:#a89fcf;border-color:rgba(168,159,207,0.4)}
-.o-tag.home{color:var(--indoor);border-color:rgba(126,207,179,0.4)}
-.o-divider{display:flex;align-items:center;gap:12px;margin:20px 0 8px}
-.o-div-line{flex:1;height:1px;background:var(--border)}
-.o-div-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
-.fixed-events{display:flex;flex-direction:column;gap:6px;margin-bottom:24px}
-.fixed-event{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface)}
-.fixed-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.fixed-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);min-width:48px}
-.fixed-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;flex:1;color:var(--text)}
-.fixed-note{font-size:10px;color:var(--muted)}
-.osaka-bottom{text-align:center;padding:16px;border-radius:10px;border:1px solid var(--border);background:var(--surface);font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:12px}
-.osaka-bottom strong{color:var(--outdoor)}
-.reset-btn{display:block;margin:0 auto;background:none;border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:8px 20px;border-radius:20px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all 0.15s}
-.reset-btn:hover{color:var(--text);border-color:var(--muted)}
 </style>
 </head>
 <body class="lang-en">
@@ -218,43 +134,16 @@ body.lang-ja span[data-lang="ja"]{display:inline}
       <button class="lang-btn active" onclick="setLang('en')" title="English">🇺🇸</button>
       <button class="lang-btn" onclick="setLang('ja')" title="日本語">🇯🇵</button>
     </div>
-    <button class="hamburger-btn" id="hamBtn" onclick="toggleNav()">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
-<!-- DROPDOWN NAV -->
-<nav class="nav-dropdown" id="navDropdown">
-  <button class="nav-item active" id="nav-scripts" onclick="showPage('scripts')">
-    <span class="nav-item-icon">🎬</span>
-    <div style="flex:1;text-align:left">
-      <div class="nav-item-text">Shoot Scripts</div>
-      <div class="nav-item-sub">31 episodes · Days 1–5</div>
-    </div>
-    <span class="nav-item-badge badge-done" id="scripts-badge">0 / 31</span>
-  </button>
-  <button class="nav-item" id="nav-osaka" onclick="showPage('osaka')">
-    <span class="nav-item-icon">🏙️</span>
-    <div style="flex:1;text-align:left">
-      <div class="nav-item-text">Osaka Shoot Day</div>
-      <div class="nav-item-sub">April 18 · Outdoor + Indoor</div>
-    </div>
-    <span class="nav-item-badge badge-today" id="osaka-badge">Today</span>
-  </button>
-</nav>
-
-<!-- ══════════════════════════════════════════════
-     PAGE: SCRIPTS
-══════════════════════════════════════════════ -->
-<div class="page active" id="page-scripts">
-
-<div class="shoot-progress" style="top:56px">
+<!-- SCRIPTS PAGE -->
+<div class="shoot-progress">
   <div class="progress-track"><div class="progress-track-fill" id="shoot-prog-fill"></div></div>
   <div class="progress-label"><span id="shoot-prog-count">0</span> / 31 <span data-lang="en">shot</span><span data-lang="ja">完了</span></div>
 </div>
 
-<div class="day-tabs" style="top:96px">
+<div class="day-tabs">
   <button class="day-tab active" onclick="showDay(1)">Day 1 · Apr 12</button>
   <button class="day-tab" onclick="showDay(2)">Day 2 · Apr 13</button>
   <button class="day-tab" onclick="showDay(3)">Day 3 · Apr 14</button>
@@ -339,7 +228,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   <div class="ep-nav"><a class="ep-pill" href="#ep30">Ep 30</a><a class="ep-pill" href="#broll">B-roll Bank</a><a class="ep-pill" href="#buffer">Buffer</a></div>
   <div class="day-intro">
     <div class="status-banner pending"><span class="sb-title">📋 Day 5 Schedule — Apr 22</span><ul><li>Apr 20: Day 4 full shoot + top-down shots + ALL voiceovers</li><li>Apr 22: Buffer + B-roll bank + Ep 30 + editing continues</li></ul></div>
-    <div data-lang="en"><h2>Day 5 — <span style="color:var(--d5,#7a5a32)">Buffer + B-roll + Ep 30</span></h2><p>Post-Osaka makeup day. Ep 30 is the only scripted episode. Do not fill this day with new content.</p></div>
+    <div data-lang="en"><h2>Day 5 — <span style="color:var(--accent)">Buffer + B-roll + Ep 30</span></h2><p>Post-Osaka makeup day. Ep 30 is the only scripted episode. Do not fill this day with new content.</p></div>
     <div class="day-meta"><span class="day-tag loc">📍 Flexible — workshop or outdoor</span></div>
   </div>
   <div class="episode" id="ep30"><div class="ep-header" onclick="tog(this)"><div class="ep-num">Ep 30 · Brand · Penultimate</div><div class="ep-title-text"><span data-lang="en">Japan already loves this brand. Now they want the world to.</span><span data-lang="ja">日本はすでにこのブランドを愛している。次は世界へ。</span></div><div class="ep-badges"><span class="badge b-cam">Narrated</span></div><span class="ep-toggle">▾</span><div class="ep-check" onclick="event.stopPropagation();markDone(this.parentElement.parentElement)"></div></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Hook + Full Script</div><div data-lang="en"><div class="lines"><p>"138,000 people in Japan have been following this brand on YouTube."</p><p>"That's where this month of videos comes in. I've been the foreigner who found them."</p><p>"Tomorrow — my honest verdict after 31 videos."</p></div></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Follow for the final verdict tomorrow."</span></div></div></div></div></div>
@@ -347,170 +236,19 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   <div class="episode" id="buffer"><div class="ep-header" onclick="tog(this)"><div class="ep-num">Buffer Time · Reshoots + Pickups</div><div class="ep-title-text"><span data-lang="en">Use this time for anything that didn't go right on Days 1–4</span></div><div class="ep-badges"><span class="badge b-out">Protected time</span></div><span class="ep-toggle">▾</span><div class="ep-check" onclick="event.stopPropagation();markDone(this.parentElement.parentElement)"></div></div><div class="ep-body"><div class="note-box"><div class="note-label">📋 Common pickups</div><ul><li>Macro shots that were out of focus or poorly lit</li><li>Talking head takes where you stumbled on a line</li><li>Any product you forgot to shoot</li><li>Outdoor shots that needed better light</li><li>B-roll gaps — if you're short on any product</li></ul></div></div></div>
 </div>
 
-</div><!-- end page-scripts -->
-
-
-<!-- ══════════════════════════════════════════════
-     PAGE: OSAKA
-══════════════════════════════════════════════ -->
-<div class="page" id="page-osaka">
-  <div class="osaka-header">
-    <div class="osaka-meta">
-      <div class="osaka-date">Osaka · Fri April 18, 2026</div>
-      <div class="osaka-title-row">
-        <div class="osaka-title">Osaka<br><span>Shoot Day</span></div>
-        <div style="text-align:right">
-          <div class="osaka-progress-num" id="o-pct">0%</div>
-          <div class="osaka-progress-lbl">Done</div>
-        </div>
-      </div>
-      <div class="osaka-bar-track"><div class="osaka-bar-fill" id="o-bar"></div></div>
-    </div>
-  </div>
-
-  <div class="osaka-body">
-
-    <!-- OUTDOOR -->
-    <div class="o-section-hdr"><div class="o-pill outdoor">Outdoor</div><div class="o-section-title">Street Shoots</div><div class="o-section-count">7 bags</div></div>
-
-    <div class="o-block" id="ob-depart">
-      <div class="o-block-hdr" onclick="oToggle('depart')"><span class="o-time">9:30</span><span class="o-name">🚗 Depart Takamatsu</span><span class="o-tog" id="ot-depart">▼</span></div>
-      <div class="o-tasks open" id="ots-depart">
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">All bags packed in one large carry bag</span><span class="o-tag setup">prep</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">7 outfit tops packed (rolled, one per bag)</span><span class="o-tag setup">prep</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Camera body + lens + memory cards</span><span class="o-tag setup">gear</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Tripod / remote trigger packed</span><span class="o-tag setup">gear</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Laptop in bag for 6pm clock-off</span><span class="o-tag setup">gear</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Slider + RGB lights loaded for indoor shoot</span><span class="o-tag setup">gear</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-park">
-      <div class="o-block-hdr" onclick="oToggle('park')"><span class="o-time">~11:00</span><span class="o-name">🅿️ Arrive + Park</span><span class="o-tog" id="ot-park">▼</span></div>
-      <div class="o-tasks" id="ots-park">
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Park at BooBooPark Coin Parking (Kozu 2-chome, 24hr)</span><span class="o-tag loc">parking</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Drop slider + lights at Airbnb</span><span class="o-tag setup">drop</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Confirm camera: 4K 240fps, exposure locked</span><span class="o-tag setup">camera</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Plan bag order + outfit sequence before leaving</span><span class="o-tag setup">prep</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-s1">
-      <div class="o-block-hdr" onclick="oToggle('s1')"><span class="o-time">11:20</span><span class="o-name">📍 Shoot 1 — Mitsutera / Midosuji</span><span class="o-tog" id="ot-s1">▼</span></div>
-      <div class="o-tasks" id="ots-s1">
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Scout angle: temple entrance + 6-lane boulevard behind</span><span class="o-tag loc">location</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 1 — freeze-frame shot (3–5 takes)</span><span class="o-tag shot">bag 1</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 2 — swap top + bag, repeat (3–5 takes)</span><span class="o-tag shot">bag 2</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Check playback — confirm freeze frame reads clearly</span><span class="o-tag setup">QC</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-s2">
-      <div class="o-block-hdr" onclick="oToggle('s2')"><span class="o-time">11:50</span><span class="o-name">📍 Shoot 2 — Amerika-mura</span><span class="o-tog" id="ot-s2">▼</span></div>
-      <div class="o-tasks" id="ots-s2">
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Scout angle: graffiti wall or crossroads, busy background</span><span class="o-tag loc">location</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 3 — freeze-frame shot (3–5 takes)</span><span class="o-tag shot">bag 3</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 4 — swap top + bag, repeat (3–5 takes)</span><span class="o-tag shot">bag 4</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Check playback before moving on</span><span class="o-tag setup">QC</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-s3">
-      <div class="o-block-hdr" onclick="oToggle('s3')"><span class="o-time">12:20</span><span class="o-name">📍 Shoot 3 — Shinsaibashi Arcade Entrance</span><span class="o-tog" id="ot-s3">▼</span></div>
-      <div class="o-tasks" id="ots-s3">
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Find angle: just outside entrance, depth of arcade behind</span><span class="o-tag loc">location</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 5 — freeze-frame shot (3–5 takes)</span><span class="o-tag shot">bag 5</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Check playback</span><span class="o-tag setup">QC</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-s4">
-      <div class="o-block-hdr" onclick="oToggle('s4')"><span class="o-time">12:50</span><span class="o-name">📍 Shoot 4 — Midosuji Median Strip</span><span class="o-tog" id="ot-s4">▼</span></div>
-      <div class="o-tasks" id="ots-s4">
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Stand on center median, traffic flowing both sides</span><span class="o-tag loc">location</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 6 — freeze-frame shot (3–5 takes)</span><span class="o-tag shot">bag 6</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 7 — hero shot, best bag + outfit combo (3–5 takes)</span><span class="o-tag shot">bag 7</span></div>
-        <div class="o-task outdoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Final playback check — all 7 outdoor bags confirmed</span><span class="o-tag setup">QC</span></div>
-      </div>
-    </div>
-
-    <!-- lunch -->
-    <div class="o-divider"><div class="o-div-line"></div><div class="o-div-lbl">🍜 Lunch break ~1:30 (30 min)</div><div class="o-div-line"></div></div>
-
-    <!-- INDOOR -->
-    <div class="o-section-hdr"><div class="o-pill indoor">Indoor</div><div class="o-section-title">Airbnb Lifestyle</div><div class="o-section-count">7 bags</div></div>
-
-    <div class="o-block" id="ob-isetup">
-      <div class="o-block-hdr" onclick="oToggle('isetup')"><span class="o-time">2:00</span><span class="o-name">🏠 Indoor Setup</span><span class="o-tog" id="ot-isetup">▼</span></div>
-      <div class="o-tasks" id="ots-isetup">
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Set up slider + RGB lights in main shooting area</span><span class="o-tag home">setup</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Pick base light color / temperature for the series</span><span class="o-tag home">lighting</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Choose 2–3 hero spots: table, chair, window, bed</span><span class="o-tag home">setup</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Camera on slider — test pan movement before shooting</span><span class="o-tag home">camera</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-i1">
-      <div class="o-block-hdr" onclick="oToggle('i1')"><span class="o-time">2:15</span><span class="o-name">🛋️ Indoor Bags 1 – 3</span><span class="o-tog" id="ot-i1">▼</span></div>
-      <div class="o-tasks" id="ots-i1">
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 1 — table surface, slider pan-in, morning coffee vibe</span><span class="o-tag shot">bag 1</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 2 — hanging on chair back, book or item nearby</span><span class="o-tag shot">bag 2</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 3 — couch placement, relaxed evening feel</span><span class="o-tag shot">bag 3</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Playback check — confirm slider motion is smooth</span><span class="o-tag home">QC</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-i2">
-      <div class="o-block-hdr" onclick="oToggle('i2')"><span class="o-time">3:00</span><span class="o-name">🛋️ Indoor Bags 4 – 7</span><span class="o-tog" id="ot-i2">▼</span></div>
-      <div class="o-tasks" id="ots-i2">
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 4 — desk setup, open bag lifestyle flat lay</span><span class="o-tag shot">bag 4</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 5 — windowsill with natural light + slider pan</span><span class="o-tag shot">bag 5</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 6 — bed with clean linen, minimal composition</span><span class="o-tag shot">bag 6</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Bag 7 — entrance / door area, walking-in shot</span><span class="o-tag shot">bag 7</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Final playback check — all 7 indoor bags confirmed</span><span class="o-tag home">QC</span></div>
-      </div>
-    </div>
-
-    <div class="o-block" id="ob-wrap">
-      <div class="o-block-hdr" onclick="oToggle('wrap')"><span class="o-time">4:00</span><span class="o-name">📦 Wrap + Pack Down</span><span class="o-tog" id="ot-wrap">▼</span></div>
-      <div class="o-tasks" id="ots-wrap">
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Back up all footage to laptop / external drive</span><span class="o-tag home">backup</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Pack down slider, lights, and all gear</span><span class="o-tag home">pack</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Change into dinner outfit</span><span class="o-tag home">ready</span></div>
-        <div class="o-task indoor" onclick="oTask(this)"><div class="o-cb"><span class="o-ck">✓</span></div><span class="o-task-text">Confirm laptop is in bag for 6pm clock-off</span><span class="o-tag home">ready</span></div>
-      </div>
-    </div>
-
-    <!-- FIXED -->
-    <div class="o-divider"><div class="o-div-line"></div><div class="o-div-lbl">Fixed Schedule</div><div class="o-div-line"></div></div>
-    <div class="fixed-events">
-      <div class="fixed-event"><div class="fixed-dot" style="background:#6b8fcf"></div><span class="fixed-time">4:20</span><span class="fixed-name">Head to friend meetup</span><span class="fixed-note">~40 min travel</span></div>
-      <div class="fixed-event"><div class="fixed-dot" style="background:#a89fcf"></div><span class="fixed-time">5:00</span><span class="fixed-name">Friend meetup + clock off</span><span class="fixed-note">clock off @ 6pm</span></div>
-      <div class="fixed-event"><div class="fixed-dot" style="background:var(--outdoor)"></div><span class="fixed-time">6:30</span><span class="fixed-name">Work dinner 🍽️</span><span class="fixed-note">confirmed</span></div>
-    </div>
-
-    <div class="osaka-bottom"><strong>14 pieces of content</strong> from one day —<br>7 outdoor freeze-frame · 7 indoor lifestyle</div>
-    <button class="reset-btn" onclick="osakaReset()">Reset All Checkboxes</button>
-
-  </div>
-</div><!-- end page-osaka -->
-
-
 <script>
-/* ══ SHARED JSONBIN ══ */
+/* ══ JSONBIN ══ */
 const JURL='https://api.jsonbin.io/v3/b/69dc793636566621a8a8d894';
 const JKEY='$2a$10$1yy30T2h/Pm27AntO7ZOPuTqxf3Pp.jHQq9uGsPvv5LI/2ydrLqBi';
 let syncedDone=new Set();
-let osakaState=[];
 
 async function loadProgress(){
   try{
     const r=await fetch(JURL,{headers:{'X-Master-Key':JKEY}});
     const j=await r.json();
     syncedDone=new Set(j.record.done||[]);
-    osakaState=j.record.osaka||[];
     try{localStorage.setItem('kk-done',JSON.stringify([...syncedDone]));}catch(e){}
-    applyDoneState();applyOsaka();updateProgress();updateOsaka();
+    applyDoneState();updateProgress();updateDayHeaders();
   }catch(e){
     try{const s=localStorage.getItem('kk-done');syncedDone=new Set(s?JSON.parse(s):[]);}catch(e2){syncedDone=new Set();}
     applyDoneState();updateProgress();
@@ -519,7 +257,7 @@ async function loadProgress(){
 async function saveProgress(){
   const done=[...syncedDone];
   try{localStorage.setItem('kk-done',JSON.stringify(done));}catch(e){}
-  const r=await fetch(JURL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JKEY},body:JSON.stringify({done,osaka:osakaState})});
+  const r=await fetch(JURL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JKEY},body:JSON.stringify({done})});
   if(!r.ok)throw new Error('Save failed');
   return r.json();
 }
@@ -531,7 +269,7 @@ async function manualSync(){
 }
 async function manualLoad(){
   const b=document.getElementById('load-btn');b.textContent='⏳';b.disabled=true;
-  try{await loadProgress();updateDayHeaders();showToast('✅ Loaded!');}
+  try{await loadProgress();showToast('✅ Loaded!');}
   catch(e){showToast('❌ Load failed');}
   b.textContent='↓';b.disabled=false;
 }
@@ -540,22 +278,6 @@ function showToast(msg){
   if(!t){t=document.createElement('div');t.id='kk-toast';t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#141210;color:#fff;padding:12px 20px;border-radius:10px;font-family:Syne,sans-serif;font-size:13px;font-weight:700;z-index:9999;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:opacity 0.3s;';document.body.appendChild(t);}
   t.textContent=msg;t.style.opacity='1';
   clearTimeout(t._t);t._t=setTimeout(()=>t.style.opacity='0',3000);
-}
-
-/* ══ NAV ══ */
-function toggleNav(){
-  const btn=document.getElementById('hamBtn');
-  const dd=document.getElementById('navDropdown');
-  const open=dd.classList.toggle('open');
-  btn.classList.toggle('open',open);
-}
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+id));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.id==='nav-'+id));
-  document.getElementById('langToggle').style.display=id==='scripts'?'flex':'flex';
-  document.getElementById('navDropdown').classList.remove('open');
-  document.getElementById('hamBtn').classList.remove('open');
-  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 /* ══ SCRIPTS LOGIC ══ */
@@ -574,7 +296,7 @@ function applyDoneState(){document.querySelectorAll('.episode').forEach(ep=>ep.c
 function markDone(ep){
   const d=ep.classList.toggle('done');
   if(d)syncedDone.add(ep.id);else syncedDone.delete(ep.id);
-  updateProgress();updateDayHeaders();updateScriptsBadge();saveProgress();
+  updateProgress();updateDayHeaders();saveProgress();
 }
 function updateProgress(){
   const d=syncedDone.size;
@@ -590,48 +312,6 @@ function updateDayHeaders(){
     const base=t.dataset.label||(t.textContent.replace(' ✓','').trim());
     t.dataset.label=base;t.textContent=all?base+' ✓':base;
   });
-}
-function updateScriptsBadge(){
-  const b=document.getElementById('scripts-badge');
-  if(b)b.textContent=syncedDone.size+' / 31';
-}
-
-/* ══ OSAKA LOGIC ══ */
-function oToggle(id){
-  const t=document.getElementById('ots-'+id);const tog=document.getElementById('ot-'+id);
-  const open=t.classList.toggle('open');tog.classList.toggle('open',open);
-}
-function oTask(el){
-  el.classList.toggle('odone');
-  syncOsakaState();updateOsaka();saveProgress();
-}
-function syncOsakaState(){
-  osakaState=[];
-  document.querySelectorAll('#page-osaka .o-task').forEach((t,i)=>{osakaState.push(t.classList.contains('odone')?1:0);});
-}
-function applyOsaka(){
-  document.querySelectorAll('#page-osaka .o-task').forEach((t,i)=>{
-    if(osakaState[i]===1)t.classList.add('odone');else t.classList.remove('odone');
-  });
-  updateOsaka();
-}
-function updateOsaka(){
-  const all=document.querySelectorAll('#page-osaka .o-task').length;
-  const done=document.querySelectorAll('#page-osaka .o-task.odone').length;
-  const pct=all?Math.round(done/all*100):0;
-  const pn=document.getElementById('o-pct');const pb=document.getElementById('o-bar');
-  if(pn)pn.textContent=pct+'%';if(pb)pb.style.width=pct+'%';
-  document.querySelectorAll('#page-osaka .o-block').forEach(b=>{
-    const bt=b.querySelectorAll('.o-task');const bd=b.querySelectorAll('.o-task.odone');
-    b.classList.toggle('completed',bd.length===bt.length&&bt.length>0);
-  });
-  const ob=document.getElementById('osaka-badge');
-  if(ob){ob.textContent=pct===100?'Complete':'Today';ob.className='nav-item-badge '+(pct===100?'badge-done':'badge-today');}
-}
-function osakaReset(){
-  if(!confirm('Reset all Osaka checkboxes?'))return;
-  document.querySelectorAll('#page-osaka .o-task').forEach(t=>t.classList.remove('odone'));
-  syncOsakaState();updateOsaka();saveProgress();
 }
 
 /* ══ SCROLL PROGRESS ══ */
@@ -650,7 +330,7 @@ document.querySelectorAll('.ep-pill').forEach(p=>{
 
 /* ══ INIT ══ */
 try{const s=localStorage.getItem('kk-lang');if(s)setLang(s);}catch(e){}
-loadProgress().then(()=>{updateDayHeaders();updateScriptsBadge();});
+loadProgress();
 </script>
 </body>
 </html>
