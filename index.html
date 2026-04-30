@@ -380,10 +380,69 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   .mission-top{flex-direction:column}
   .mission-quote{max-width:100%}
 }
+
 @media(max-width:640px){
-  .stats-grid{grid-template-columns:1fr}
+  /* ── Hero scroll centered ── */
+  .hero-scroll{
+    left:50%;
+    transform:translateX(-50%);
+    align-items:center;
+    width:auto;
+  }
+
+  /* ── Stats: YouTube + TikTok side by side, Instagram full width below ── */
+  .stats-section{padding:56px 20px}
+  .stats-label{margin-bottom:28px}
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto auto;
+  }
+  .stat-card:nth-child(3){
+    grid-column:1 / -1;
+    border-top:1px solid var(--border);
+  }
+  .stat-card{padding:28px 20px;gap:8px}
+  .stat-num{font-size:clamp(36px,10vw,56px)}
+
+  /* ── Sections tighter on mobile ── */
+  .about-section{padding:56px 20px}
+  .mission-section{padding:56px 20px}
+  .mission-top{margin-bottom:36px}
+  .platforms-section{padding:56px 20px}
+  .platforms-label{margin-bottom:24px}
+  .footer{padding:48px 20px 32px}
+  .footer-top{margin-bottom:36px}
+
+  /* ── Platform cards bigger and more tappable ── */
+  .platforms-grid{gap:12px}
+  .platform-card{
+    padding:28px 24px;
+    flex-direction:row;
+    align-items:center;
+    gap:20px;
+    border-radius:4px;
+  }
+  .platform-card::before{border-radius:4px}
+  .platform-icon{flex-shrink:0}
+  .platform-icon svg{width:40px;height:40px}
+  .platform-info{display:flex;flex-direction:column;gap:4px;flex:1}
+  .platform-name{font-size:16px;letter-spacing:0.06em}
+  .platform-handle{font-size:12px}
+  .platform-arrow{
+    font-size:28px;
+    flex-shrink:0;
+    margin-top:0;
+  }
+
+  /* ── Hero buttons stacked ── */
+  .hero-buttons{flex-direction:column;align-items:center;gap:10px}
+  .hero-btn{width:100%;max-width:280px;text-align:center}
+
+  /* ── Pillars single column ── */
   .pillars-grid{grid-template-columns:1fr}
-  .hero-buttons{flex-direction:column;align-items:center}
+
+  /* ── About card hidden on mobile to save space ── */
+  .about-right{display:none}
 }
 </style>
 </head>
@@ -596,24 +655,30 @@ body.lang-ja span[data-lang="ja"]{display:inline}
           <div class="platform-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" fill="#FF0000"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
           </div>
-          <div class="platform-name">YouTube</div>
-          <div class="platform-handle">@KawanishiKabanStudio</div>
+          <div class="platform-info">
+            <div class="platform-name">YouTube</div>
+            <div class="platform-handle">@KawanishiKabanStudio</div>
+          </div>
           <div class="platform-arrow">→</div>
         </a>
         <a class="platform-card" href="https://www.tiktok.com/@kawanishikabanstudio" target="_blank">
           <div class="platform-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z" fill="white"/></svg>
           </div>
-          <div class="platform-name">TikTok</div>
-          <div class="platform-handle">@kawanishikabanstudio</div>
+          <div class="platform-info">
+            <div class="platform-name">TikTok</div>
+            <div class="platform-handle">@kawanishikabanstudio</div>
+          </div>
           <div class="platform-arrow">→</div>
         </a>
         <a class="platform-card" href="https://www.instagram.com/kawanishikaban.global/" target="_blank">
           <div class="platform-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig)"/><path d="M12 7a5 5 0 1 0 0 10A5 5 0 0 0 12 7zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4z" fill="white"/><circle cx="17.5" cy="6.5" r="1.2" fill="white"/></svg>
           </div>
-          <div class="platform-name">Instagram</div>
-          <div class="platform-handle">@kawanishikaban.global</div>
+          <div class="platform-info">
+            <div class="platform-name">Instagram</div>
+            <div class="platform-handle">@kawanishikaban.global</div>
+          </div>
           <div class="platform-arrow">→</div>
         </a>
       </div>
