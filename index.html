@@ -35,13 +35,14 @@ html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.65;overflow-x:hidden}
 
 /* ══ GLOBAL NAV ══ */
-.nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background 0.3s,border-color 0.3s;border-bottom:1px solid transparent}
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 32px;height:80px;display:flex;align-items:center;justify-content:space-between;transition:background 0.3s,border-color 0.3s;border-bottom:1px solid transparent}
 .nav.scrolled{background:rgba(8,7,6,0.92);backdrop-filter:blur(12px);border-bottom-color:var(--border)}
 .nav-left{display:flex;align-items:center;flex-shrink:0}
 .nav-logo{display:flex;align-items:center;cursor:pointer;text-decoration:none;flex-shrink:0}
 .nav-logo svg{height:42px;width:auto}
 .nav-static{position:relative;top:auto;left:auto;right:auto;background:#141210;border-bottom:1px solid rgba(255,255,255,0.1)}
-.nav-cta{display:none}
+.shop-btn{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--black);background:var(--amber);border:none;padding:8px 18px;border-radius:4px;cursor:pointer;text-decoration:none;transition:all 0.2s;white-space:nowrap}
+.shop-btn:hover{background:var(--amber2);color:var(--black)}
 .nav-center{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:40px;align-items:center}
 .nav-link{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,242,238,0.55);background:none;border:none;cursor:pointer;transition:color 0.2s;padding:0;text-decoration:none;line-height:1;white-space:nowrap}
 .nav-link:hover,.nav-link.active{color:#fff}
@@ -381,7 +382,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 }
 
 @media(max-width:640px){
-  .nav-logo img{height:34px}
+  .nav-logo img{height:48px}
   /* ── Hero scroll centered ── */
   .hero-scroll{
     left:50%;
@@ -452,7 +453,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 <nav class="nav" id="main-nav">
   <div class="nav-left">
     <a class="nav-logo" onclick="switchPage('home')" style="cursor:pointer">
-      <img src="web-optimized-logo.png" alt="Kawanishi Kaban" style="height:44px;width:auto;display:block">
+      <img src="web-optimized-logo.png" alt="Kawanishi Kaban" style="height:64px;width:auto;display:block">
     </a>
   </div>
   <div class="nav-center">
@@ -460,6 +461,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
     <button class="nav-link" onclick="switchPage('ig')"><span data-lang="en">IG Guide</span><span data-lang="ja">IGガイド</span></button>
   </div>
   <div class="nav-right">
+    <a class="shop-btn" href="https://kawanishikaban.com" target="_blank"><span data-lang="en">Shop</span><span data-lang="ja">ショップ</span></a>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('en')" title="English">🇺🇸</button>
       <button class="lang-btn" onclick="setLang('ja')" title="日本語">🇯🇵</button>
