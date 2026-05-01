@@ -381,6 +381,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 }
 
 @media(max-width:640px){
+  .nav-logo img{height:34px}
   /* ── Hero scroll centered ── */
   .hero-scroll{
     left:50%;
@@ -451,12 +452,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 <nav class="nav" id="main-nav">
   <div class="nav-left">
     <a class="nav-logo" onclick="switchPage('home')" style="cursor:pointer">
-      <svg viewBox="0 0 140 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="0" y="34" font-family="'Cormorant Garamond', serif" font-size="30" font-weight="600" fill="#f5f2ee" letter-spacing="1">KK</text>
-        <line x1="42" y1="8" x2="42" y2="40" stroke="#c8860a" stroke-width="1.5"/>
-        <text x="49" y="22" font-family="'Syne', sans-serif" font-size="9" font-weight="700" fill="#c8860a" letter-spacing="2.5">KAWANISHI</text>
-        <text x="49" y="36" font-family="'Syne', sans-serif" font-size="9" font-weight="700" fill="rgba(245,242,238,0.45)" letter-spacing="2.5">KABAN</text>
-      </svg>
+      <img src="logo.png" alt="Kawanishi Kaban" style="height:44px;width:auto;display:block">
     </a>
   </div>
   <div class="nav-center">
@@ -487,9 +483,19 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 
   <!-- HERO -->
   <section class="hero">
-    <!-- To swap to video: replace the <img> below with:
-         <video class="hero-media" autoplay muted loop playsinline src="your-video.mp4"></video> -->
-    <img class="hero-media" src="hero-bg.jpg" alt="Kawanishi Kaban bags">
+    <!-- Hero background: poster shows instantly while video loads, fallback img if video fails -->
+    <video
+      class="hero-media"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="hero-bg.jpg"
+    >
+      <source src="https://drive.google.com/uc?export=download&id=1ULe3min5g4vJ-PbgItLjtPKIJxKzItWm" type="video/mp4">
+      <!-- Fallback if video can't load -->
+      <img src="hero-bg.jpg" alt="Kawanishi Kaban" class="hero-media">
+    </video>
     <div class="hero-overlay"></div>
     <div class="hero-grain"></div>
     <div class="hero-content">
