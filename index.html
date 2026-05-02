@@ -121,6 +121,57 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 .stat-num span{color:var(--amber);font-size:0.5em;vertical-align:super}
 .stat-platform{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
 .stat-desc{font-size:13px;color:var(--muted2);margin-top:4px}
+.mini-graph{margin-top:20px;width:100%;cursor:pointer;position:relative}
+.mini-graph:hover .mini-graph-svg{opacity:0.8}
+.mini-graph-hint{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);text-align:right;margin-bottom:6px;transition:color 0.2s;font-weight:600}
+.mini-graph:hover .mini-graph-hint{color:var(--amber2)}
+.mini-graph-svg{width:100%;height:52px;display:block;overflow:visible}
+.mini-graph-footer{display:flex;align-items:center;gap:0;margin-top:6px}
+.mini-graph-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:0.06em}
+.mini-graph-now{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted2);letter-spacing:0.06em;margin-left:auto}
+.mini-graph-trend{font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.08em;margin-left:12px}
+.mini-graph-trend.up{color:#4ade80}
+.mini-graph-trend.down{color:#f87171}
+@keyframes graphPulse{0%,100%{opacity:1;r:3.5}50%{opacity:0.5;r:5.5}}
+.graph-pulse{animation:graphPulse 2s ease-in-out infinite}
+
+/* ══ GRAPH MODAL ══ */
+.graph-modal{position:fixed;inset:0;z-index:900;background:rgba(8,7,6,0.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.graph-modal.open{opacity:1;pointer-events:all}
+.graph-modal-header{padding:24px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0}
+.graph-modal-title{display:flex;align-items:center;gap:16px}
+.graph-modal-platform{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.01em;color:var(--text)}
+.graph-modal-handle{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:0.06em}
+.graph-modal-current{text-align:right}
+.graph-modal-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;line-height:1;letter-spacing:-0.02em}
+.graph-modal-label{font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.graph-modal-close{width:44px;height:44px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0;margin-left:20px}
+.graph-modal-close:hover{background:rgba(255,255,255,0.12);border-color:var(--amber)}
+.graph-modal-body{flex:1;padding:32px;display:flex;flex-direction:column;min-height:0;position:relative}
+.graph-modal-svg-wrap{flex:1;position:relative;min-height:0}
+.graph-modal-svg{width:100%;height:100%;overflow:visible;display:block}
+.graph-modal-footer{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-shrink:0;flex-wrap:wrap;gap:8px}
+.graph-modal-since{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:0.06em}
+.graph-modal-trend{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;color:#4ade80}
+.graph-modal-points{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted2)}
+
+/* tooltip */
+.graph-tooltip{position:fixed;background:#1c1a17;border:1px solid var(--border);border-radius:8px;padding:10px 14px;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:950;min-width:140px}
+.graph-tooltip.visible{opacity:1}
+.graph-tooltip-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.06em;margin-bottom:4px}
+.graph-tooltip-num{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;line-height:1}
+.graph-tooltip-change{font-family:'DM Mono',monospace;font-size:10px;margin-top:4px}
+.graph-tooltip-change.up{color:#4ade80}
+.graph-tooltip-change.down{color:#f87171}
+.graph-tooltip-change.same{color:var(--muted)}
+
+@media(max-width:640px){
+  .graph-modal-header{padding:16px 20px}
+  .graph-modal-platform{font-size:16px}
+  .graph-modal-num{font-size:28px}
+  .graph-modal-body{padding:16px 20px}
+  .graph-tooltip{min-width:120px;padding:8px 12px}
+}
 
 /* ABOUT */
 .about-section{padding:120px 32px;background:var(--black)}
@@ -483,7 +534,8 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   <button class="m-link" onclick="switchPage('home');toggleMobile()"><span data-lang="en">Home</span><span data-lang="ja">ホーム</span></button>
   <button class="m-link" onclick="switchPage('shoot');toggleMobile()"><span data-lang="en">May Short Videos</span><span data-lang="ja">5月ショート動画</span></button>
   <button class="m-link" onclick="switchPage('ig');toggleMobile()"><span data-lang="en">IG Guide</span><span data-lang="ja">IGガイド</span></button>
-  <a class="m-link" href="https://www.youtube.com/@KawanishiKabanStudio" target="_blank">YouTube</a>
+  <a class="m-link" href="https://www.youtube.com/@KawanishiKabanStudio" target="_blank"><span data-lang="en">YouTube</span><span data-lang="ja">YouTube</span></a>
+  <a class="m-link" href="https://kawanishikaban.com" target="_blank"><span data-lang="en">Shop</span><span data-lang="ja">ショップ</span></a>
 </div>
 
 <!-- ══ PAGE: HOME ══ -->
@@ -560,24 +612,61 @@ body.lang-ja span[data-lang="ja"]{display:inline}
     <div class="stats-inner">
       <div class="stats-label"><span data-lang="en">By the numbers</span><span data-lang="ja">数字で見る</span></div>
       <div class="stats-grid">
+
+        <!-- YOUTUBE -->
         <div class="stat-card">
           <div class="stat-type"><span data-lang="en">Subscribers</span><span data-lang="ja">チャンネル登録者</span></div>
           <div class="stat-num" data-target="1710" data-suffix="">0</div>
           <div class="stat-platform">YouTube</div>
           <div class="stat-desc">@KawanishiKabanStudio</div>
+          <div class="mini-graph" onclick="openGraphModal('youtube')" title="Click to expand">
+            <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
+            <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
+              <circle cx="100" cy="24" r="5" fill="#FF0000" class="graph-pulse"/>
+            </svg>
+            <div class="mini-graph-footer">
+              <span class="mini-graph-label">Apr 25 2026</span>
+              <span class="mini-graph-trend up" style="margin-left:auto"><span data-lang="en">Tracking started</span><span data-lang="ja">記録開始</span></span>
+            </div>
+          </div>
         </div>
+
+        <!-- TIKTOK -->
         <div class="stat-card">
           <div class="stat-type"><span data-lang="en">Followers</span><span data-lang="ja">フォロワー</span></div>
           <div class="stat-num" data-target="968" data-suffix="">0</div>
           <div class="stat-platform">TikTok</div>
           <div class="stat-desc">@kawanishikabanstudio</div>
+          <div class="mini-graph" onclick="openGraphModal('tiktok')" title="Click to expand">
+            <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
+            <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
+              <circle cx="100" cy="24" r="5" fill="rgba(245,242,238,0.85)" class="graph-pulse"/>
+            </svg>
+            <div class="mini-graph-footer">
+              <span class="mini-graph-label">Apr 25 2026</span>
+              <span class="mini-graph-trend up" style="margin-left:auto"><span data-lang="en">Tracking started</span><span data-lang="ja">記録開始</span></span>
+            </div>
+          </div>
         </div>
+
+        <!-- INSTAGRAM -->
         <div class="stat-card">
           <div class="stat-type"><span data-lang="en">Followers</span><span data-lang="ja">フォロワー</span></div>
           <div class="stat-num" data-target="133" data-suffix="">0</div>
           <div class="stat-platform">Instagram</div>
           <div class="stat-desc">@kawanishikaban.global</div>
+          <div class="mini-graph" onclick="openGraphModal('instagram')" title="Click to expand">
+            <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
+            <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
+              <circle cx="100" cy="24" r="5" fill="#d6249f" class="graph-pulse"/>
+            </svg>
+            <div class="mini-graph-footer">
+              <span class="mini-graph-label">Apr 25 2026</span>
+              <span class="mini-graph-trend up" style="margin-left:auto"><span data-lang="en">Tracking started</span><span data-lang="ja">記録開始</span></span>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -730,6 +819,38 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   </footer>
 
 </div><!-- end page-home -->
+
+<!-- ══ GRAPH MODAL ══ -->
+<div class="graph-modal" id="graph-modal" onclick="handleModalClick(event)">
+  <div class="graph-modal-header">
+    <div class="graph-modal-title">
+      <div>
+        <div class="graph-modal-platform" id="modal-platform">YouTube</div>
+        <div class="graph-modal-handle" id="modal-handle">@KawanishiKabanStudio</div>
+      </div>
+    </div>
+    <div class="graph-modal-current">
+      <div class="graph-modal-num" id="modal-num" style="color:#FF0000">1,710</div>
+      <div class="graph-modal-label" id="modal-label">Subscribers</div>
+    </div>
+    <button class="graph-modal-close" onclick="closeGraphModal()">✕</button>
+  </div>
+  <div class="graph-modal-body">
+    <div class="graph-modal-svg-wrap" id="modal-svg-wrap">
+      <svg class="graph-modal-svg" id="modal-svg" viewBox="0 0 800 300"></svg>
+    </div>
+    <div class="graph-modal-footer">
+      <span class="graph-modal-since" id="modal-since">Since Jan 2025</span>
+      <span class="graph-modal-points" id="modal-points">3 data points</span>
+      <span class="graph-modal-trend" id="modal-trend">↑ Growing</span>
+    </div>
+  </div>
+</div>
+<div class="graph-tooltip" id="graph-tooltip">
+  <div class="graph-tooltip-date" id="tt-date"></div>
+  <div class="graph-tooltip-num" id="tt-num"></div>
+  <div class="graph-tooltip-change" id="tt-change"></div>
+</div>
 
 <!-- ══ PAGE: SHOOT HUB ══ -->
 <div class="page" id="page-shoot">
@@ -991,6 +1112,230 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 /* ══ INIT ══ */
 try{const s=localStorage.getItem('kk-lang');if(s)setLang(s);}catch(e){}
 loadProgress();
+
+/* ══ GRAPH MODAL DATA ══
+   Each entry: { date: 'MMM DD YYYY', value: number }
+   Tell Mac to update these entries when numbers change.
+═══════════════════════════════════════════════════════ */
+const STAT_HISTORY = {
+  youtube: [
+    { date: 'Apr 25 2026', value: 1710 }
+  ],
+  tiktok: [
+    { date: 'Apr 25 2026', value: 968 }
+  ],
+  instagram: [
+    { date: 'Apr 25 2026', value: 133 }
+  ]
+};
+
+const PLATFORM_CONFIG = {
+  youtube:   { label:'YouTube',   handle:'@KawanishiKabanStudio', type:'Subscribers', color:'#FF0000' },
+  tiktok:    { label:'TikTok',    handle:'@kawanishikabanstudio',  type:'Followers',   color:'rgba(245,242,238,0.85)' },
+  instagram: { label:'Instagram', handle:'@kawanishikaban.global', type:'Followers',   color:'#d6249f' }
+};
+
+function openGraphModal(platform) {
+  const cfg = PLATFORM_CONFIG[platform];
+  const data = STAT_HISTORY[platform];
+  const lastVal = data[data.length - 1].value;
+
+  document.getElementById('modal-platform').textContent = cfg.label;
+  document.getElementById('modal-handle').textContent = cfg.handle;
+  document.getElementById('modal-label').textContent = cfg.type;
+  document.getElementById('modal-num').textContent = lastVal.toLocaleString();
+  document.getElementById('modal-num').style.color = cfg.color;
+
+  const isJa = document.body.classList.contains('lang-ja');
+  document.getElementById('modal-since').textContent = (isJa ? '開始日: ' : 'Since ') + data[0].date;
+  document.getElementById('modal-points').textContent = data.length + (isJa ? ' データポイント' : (' data point' + (data.length !== 1 ? 's' : '')));
+
+  const first = data[0].value;
+  const pct = Math.round(((lastVal - first) / first) * 100);
+  document.getElementById('modal-trend').textContent = (pct >= 0 ? '↑ +' : '↓ ') + pct + (isJa ? '% 開始から' : '% since start');
+
+  drawModalGraph(data, cfg);
+  document.getElementById('graph-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGraphModal() {
+  document.getElementById('graph-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('graph-tooltip').classList.remove('visible');
+}
+
+function handleModalClick(e) {
+  if(e.target === document.getElementById('graph-modal')) closeGraphModal();
+}
+
+function drawModalGraph(data, cfg) {
+  const svg = document.getElementById('modal-svg');
+  svg.innerHTML = '';
+  const W=800, H=300, PAD={top:28,right:40,bottom:44,left:20};
+  const gW=W-PAD.left-PAD.right, gH=H-PAD.top-PAD.bottom;
+  const ns='http://www.w3.org/2000/svg';
+
+  // Only one data point — show single dot with message
+  if(data.length === 1) {
+    const cx = W/2, cy = H/2;
+
+    // Pulsing ring
+    const ring=document.createElementNS(ns,'circle');
+    ring.setAttribute('cx',cx); ring.setAttribute('cy',cy-20);
+    ring.setAttribute('r','20'); ring.setAttribute('fill',cfg.color);
+    ring.setAttribute('opacity','0.1'); ring.setAttribute('class','graph-pulse');
+    svg.appendChild(ring);
+
+    // Dot
+    const dot=document.createElementNS(ns,'circle');
+    dot.setAttribute('cx',cx); dot.setAttribute('cy',cy-20);
+    dot.setAttribute('r','8'); dot.setAttribute('fill',cfg.color);
+    dot.setAttribute('stroke','#080706'); dot.setAttribute('stroke-width','2.5');
+    svg.appendChild(dot);
+
+    // Number label
+    const num=document.createElementNS(ns,'text');
+    num.setAttribute('x',cx); num.setAttribute('y',cy+20);
+    num.setAttribute('text-anchor','middle');
+    num.setAttribute('font-family','Syne,sans-serif');
+    num.setAttribute('font-size','28'); num.setAttribute('font-weight','800');
+    num.setAttribute('fill',cfg.color);
+    num.textContent=data[0].value.toLocaleString();
+    svg.appendChild(num);
+
+    // Date label
+    const date=document.createElementNS(ns,'text');
+    date.setAttribute('x',cx); date.setAttribute('y',cy+46);
+    date.setAttribute('text-anchor','middle');
+    date.setAttribute('font-family','DM Mono,monospace');
+    date.setAttribute('font-size','11'); date.setAttribute('fill','rgba(245,242,238,0.35)');
+    date.textContent=data[0].date + ' — tracking started';
+    svg.appendChild(date);
+
+    // Message below
+    const msg=document.createElementNS(ns,'text');
+    msg.setAttribute('x',cx); msg.setAttribute('y',cy+72);
+    msg.setAttribute('text-anchor','middle');
+    msg.setAttribute('font-family','DM Mono,monospace');
+    msg.setAttribute('font-size','10'); msg.setAttribute('fill','rgba(245,242,238,0.2)');
+    msg.textContent = document.body.classList.contains('lang-ja')
+      ? 'データが追加されるとグラフが成長します'
+      : 'Graph will grow as new data points are added';
+    svg.appendChild(msg);
+    return;
+  }
+
+  // Multiple data points — draw full graph
+  const values=data.map(d=>d.value);
+  const minV=Math.min(...values)*0.85, maxV=Math.max(...values)*1.1;
+
+  function xP(i){return PAD.left+(i/(data.length-1))*gW;}
+  function yP(v){return PAD.top+gH-((v-minV)/(maxV-minV))*gH;}
+
+  const pts=data.map((d,i)=>`${xP(i)},${yP(d.value)}`).join(' ');
+  const fillPts=`${xP(0)},${PAD.top+gH} `+pts+` ${xP(data.length-1)},${PAD.top+gH}`;
+
+  // Defs
+  const defs=document.createElementNS(ns,'defs');
+  const grad=document.createElementNS(ns,'linearGradient');
+  grad.setAttribute('id','mg'); grad.setAttribute('x1','0'); grad.setAttribute('y1','0');
+  grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
+  const s1=document.createElementNS(ns,'stop'); s1.setAttribute('offset','0%');
+  s1.setAttribute('stop-color',cfg.color); s1.setAttribute('stop-opacity','0.28');
+  const s2=document.createElementNS(ns,'stop'); s2.setAttribute('offset','100%');
+  s2.setAttribute('stop-color',cfg.color); s2.setAttribute('stop-opacity','0');
+  grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad); svg.appendChild(defs);
+
+  // Grid lines
+  for(let i=0;i<=4;i++){
+    const y=PAD.top+(gH/4)*i;
+    const gl=document.createElementNS(ns,'line');
+    gl.setAttribute('x1',PAD.left); gl.setAttribute('x2',PAD.left+gW);
+    gl.setAttribute('y1',y); gl.setAttribute('y2',y);
+    gl.setAttribute('stroke','rgba(255,255,255,0.05)'); gl.setAttribute('stroke-width','1');
+    svg.appendChild(gl);
+  }
+
+  // Fill
+  const fill=document.createElementNS(ns,'polygon');
+  fill.setAttribute('points',fillPts); fill.setAttribute('fill','url(#mg)');
+  svg.appendChild(fill);
+
+  // Line
+  const line=document.createElementNS(ns,'polyline');
+  line.setAttribute('points',pts); line.setAttribute('stroke',cfg.color);
+  line.setAttribute('fill','none'); line.setAttribute('stroke-width','2.5');
+  line.setAttribute('stroke-linecap','round'); line.setAttribute('stroke-linejoin','round');
+  svg.appendChild(line);
+
+  // Date labels
+  data.forEach((d,i)=>{
+    const t=document.createElementNS(ns,'text');
+    t.setAttribute('x',xP(i)); t.setAttribute('y',H-6);
+    t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-family','DM Mono,monospace');
+    t.setAttribute('font-size','9'); t.setAttribute('fill','rgba(245,242,238,0.28)');
+    const p=d.date.split(' ');
+    t.textContent=p[0]+' '+p[2].slice(2);
+    svg.appendChild(t);
+  });
+
+  // Dots
+  data.forEach((d,i)=>{
+    const x=xP(i), y=yP(d.value), isLast=i===data.length-1;
+    if(isLast){
+      const ring=document.createElementNS(ns,'circle');
+      ring.setAttribute('cx',x); ring.setAttribute('cy',y); ring.setAttribute('r','12');
+      ring.setAttribute('fill',cfg.color); ring.setAttribute('opacity','0.12');
+      ring.setAttribute('class','graph-pulse'); svg.appendChild(ring);
+    }
+    const dot=document.createElementNS(ns,'circle');
+    dot.setAttribute('cx',x); dot.setAttribute('cy',y);
+    dot.setAttribute('r',isLast?'7':'5');
+    dot.setAttribute('fill',cfg.color);
+    dot.setAttribute('stroke','#080706'); dot.setAttribute('stroke-width','2.5');
+    dot.setAttribute('cursor','pointer');
+    dot.addEventListener('mouseenter',(e)=>showTT(e,d,data[i-1],cfg));
+    dot.addEventListener('mouseleave',hideTT);
+    dot.addEventListener('touchstart',(e)=>{e.preventDefault();showTT(e.touches[0],d,data[i-1],cfg);},{passive:false});
+    dot.addEventListener('touchend',()=>setTimeout(hideTT,2200));
+    svg.appendChild(dot);
+
+    if(isLast){
+      const lbl=document.createElementNS(ns,'text');
+      lbl.setAttribute('x',x); lbl.setAttribute('y',y-16);
+      lbl.setAttribute('text-anchor','middle');
+      lbl.setAttribute('font-family','Syne,sans-serif');
+      lbl.setAttribute('font-size','13'); lbl.setAttribute('font-weight','700');
+      lbl.setAttribute('fill',cfg.color);
+      lbl.textContent=d.value.toLocaleString();
+      svg.appendChild(lbl);
+    }
+  });
+}
+
+function showTT(e, point, prev, cfg) {
+  const tt=document.getElementById('graph-tooltip');
+  document.getElementById('tt-date').textContent=point.date;
+  document.getElementById('tt-num').textContent=point.value.toLocaleString();
+  document.getElementById('tt-num').style.color=cfg.color;
+  const ch=document.getElementById('tt-change');
+  if(prev){
+    const diff=point.value-prev.value;
+    ch.textContent=(diff>=0?'+':'')+diff.toLocaleString()+' from '+prev.date.split(' ')[0];
+    ch.className='graph-tooltip-change '+(diff>0?'up':diff<0?'down':'same');
+  } else {
+    ch.textContent='Starting point'; ch.className='graph-tooltip-change same';
+  }
+  tt.classList.add('visible');
+  const cx=e.clientX||e.pageX, cy=e.clientY||e.pageY;
+  tt.style.left=Math.min(cx+16,window.innerWidth-170)+'px';
+  tt.style.top=(cy-72)+'px';
+}
+
+function hideTT(){document.getElementById('graph-tooltip').classList.remove('visible');}
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeGraphModal();});
 </script>
 </body>
 </html>
