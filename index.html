@@ -440,27 +440,34 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 
 @media(max-width:640px){
   .nav-logo img{height:48px}
-  /* ── Hero scroll centered ── */
-  .hero-scroll{
-    left:50%;
-    transform:translateX(-50%);
-    align-items:center;
-    width:auto;
-  }
 
-  /* ── Stats: YouTube + TikTok side by side, Instagram full width below ── */
-  .stats-section{padding:56px 20px}
-  .stats-label{margin-bottom:28px}
-  .stats-grid{
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:auto auto;
+  /* ── Hero scroll centered ── */
+  .hero-scroll{left:50%;transform:translateX(-50%);align-items:center;width:auto}
+
+  /* ── Stats: single column full width ── */
+  .stats-section{padding:48px 0}
+  .stats-inner{padding:0;max-width:100%}
+  .stats-label{padding:0 24px;margin-bottom:24px}
+  .stats-grid{grid-template-columns:1fr;gap:1px;background:var(--border)}
+  .stat-card{padding:28px 24px 0;background:var(--black2)}
+  .stat-num{font-size:clamp(48px,14vw,72px)}
+
+  /* ── Mini graph tracker: truly full bleed ── */
+  .mini-graph{
+    margin-top:20px;
+    margin-left:-24px;
+    margin-right:-24px;
+    width:calc(100% + 48px);
+    background:rgba(255,255,255,0.05);
+    border-top:1px solid rgba(255,255,255,0.09);
+    padding:14px 24px 18px;
+    box-sizing:border-box;
   }
-  .stat-card:nth-child(3){
-    grid-column:1 / -1;
-    border-top:1px solid var(--border);
-  }
-  .stat-card{padding:28px 20px;gap:8px}
-  .stat-num{font-size:clamp(36px,10vw,56px)}
+  .mini-graph-hint{font-size:10px;letter-spacing:0.12em;margin-bottom:10px}
+  .mini-graph-svg{height:60px}
+  .mini-graph-footer{margin-top:10px}
+  .mini-graph-label{font-size:10px}
+  .mini-graph-trend{font-size:10px}
 
   /* ── Sections tighter on mobile ── */
   .about-section{padding:56px 20px}
@@ -471,26 +478,16 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   .footer{padding:48px 20px 32px}
   .footer-top{margin-bottom:36px}
 
-  /* ── Platform cards bigger and more tappable ── */
+  /* ── Platform cards row layout ── */
   .platforms-grid{gap:12px}
-  .platform-card{
-    padding:28px 24px;
-    flex-direction:row;
-    align-items:center;
-    gap:20px;
-    border-radius:4px;
-  }
+  .platform-card{padding:28px 24px;flex-direction:row;align-items:center;gap:20px;border-radius:4px}
   .platform-card::before{border-radius:4px}
   .platform-icon{flex-shrink:0}
   .platform-icon svg{width:40px;height:40px}
   .platform-info{display:flex;flex-direction:column;gap:4px;flex:1}
   .platform-name{font-size:16px;letter-spacing:0.06em}
   .platform-handle{font-size:12px}
-  .platform-arrow{
-    font-size:28px;
-    flex-shrink:0;
-    margin-top:0;
-  }
+  .platform-arrow{font-size:28px;flex-shrink:0;margin-top:0}
 
   /* ── Hero buttons stacked ── */
   .hero-buttons{flex-direction:column;align-items:center;gap:10px}
@@ -499,7 +496,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
   /* ── Pillars single column ── */
   .pillars-grid{grid-template-columns:1fr}
 
-  /* ── About card hidden on mobile to save space ── */
+  /* ── About card hidden on mobile ── */
   .about-right{display:none}
 }
 </style>
