@@ -619,11 +619,15 @@ body.lang-ja span[data-lang="ja"]{display:inline}
           <div class="mini-graph" onclick="openGraphModal('youtube')" title="Click to expand">
             <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
             <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
-              <circle cx="100" cy="24" r="5" fill="#FF0000" class="graph-pulse"/>
+              <defs><linearGradient id="grad-yt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF0000" stop-opacity="0.2"/><stop offset="100%" stop-color="#FF0000" stop-opacity="0"/></linearGradient></defs>
+              <path d="M10,28 L190,28 L190,48 L10,48 Z" fill="url(#grad-yt)"/>
+              <line x1="10" y1="28" x2="190" y2="28" stroke="#FF0000" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="10" cy="28" r="4" fill="#FF0000" stroke="#080706" stroke-width="2"/>
+              <circle cx="190" cy="28" r="5" fill="#FF0000" stroke="#080706" stroke-width="2" class="graph-pulse"/>
             </svg>
             <div class="mini-graph-footer">
-              <span class="mini-graph-label">Apr 25 2026</span>
-              <span class="mini-graph-trend up" style="margin-left:auto"><span data-lang="en">Tracking started</span><span data-lang="ja">記録開始</span></span>
+              <span class="mini-graph-label">Apr 25</span>
+              <span class="mini-graph-trend" style="margin-left:auto;color:var(--muted)">→ No change</span>
             </div>
           </div>
         </div>
@@ -631,17 +635,21 @@ body.lang-ja span[data-lang="ja"]{display:inline}
         <!-- TIKTOK -->
         <div class="stat-card">
           <div class="stat-type"><span data-lang="en">Followers</span><span data-lang="ja">フォロワー</span></div>
-          <div class="stat-num" data-target="968" data-suffix="">0</div>
+          <div class="stat-num" data-target="1077" data-suffix="">0</div>
           <div class="stat-platform">TikTok</div>
           <div class="stat-desc">@kawanishikabanstudio</div>
           <div class="mini-graph" onclick="openGraphModal('tiktok')" title="Click to expand">
             <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
             <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
-              <circle cx="100" cy="24" r="5" fill="rgba(245,242,238,0.85)" class="graph-pulse"/>
+              <defs><linearGradient id="grad-tt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
+              <path d="M10,40 L190,8 L190,48 L10,48 Z" fill="url(#grad-tt)"/>
+              <line x1="10" y1="40" x2="190" y2="8" stroke="rgba(245,242,238,0.8)" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="10" cy="40" r="4" fill="rgba(245,242,238,0.8)" stroke="#080706" stroke-width="2"/>
+              <circle cx="190" cy="8" r="5" fill="rgba(245,242,238,0.9)" stroke="#080706" stroke-width="2" class="graph-pulse"/>
             </svg>
             <div class="mini-graph-footer">
-              <span class="mini-graph-label">Apr 25 2026</span>
-              <span class="mini-graph-trend up" style="margin-left:auto"><span data-lang="en">Tracking started</span><span data-lang="ja">記録開始</span></span>
+              <span class="mini-graph-label">Apr 25</span>
+              <span class="mini-graph-trend up" style="margin-left:auto">↑ +109</span>
             </div>
           </div>
         </div>
@@ -649,17 +657,21 @@ body.lang-ja span[data-lang="ja"]{display:inline}
         <!-- INSTAGRAM -->
         <div class="stat-card">
           <div class="stat-type"><span data-lang="en">Followers</span><span data-lang="ja">フォロワー</span></div>
-          <div class="stat-num" data-target="133" data-suffix="">0</div>
+          <div class="stat-num" data-target="142" data-suffix="">0</div>
           <div class="stat-platform">Instagram</div>
           <div class="stat-desc">@kawanishikaban.global</div>
           <div class="mini-graph" onclick="openGraphModal('instagram')" title="Click to expand">
             <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
             <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
-              <circle cx="100" cy="24" r="5" fill="#d6249f" class="graph-pulse"/>
+              <defs><linearGradient id="grad-ig" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d6249f" stop-opacity="0.25"/><stop offset="100%" stop-color="#d6249f" stop-opacity="0"/></linearGradient></defs>
+              <path d="M10,38 L190,12 L190,48 L10,48 Z" fill="url(#grad-ig)"/>
+              <line x1="10" y1="38" x2="190" y2="12" stroke="#d6249f" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="10" cy="38" r="4" fill="#d6249f" stroke="#080706" stroke-width="2"/>
+              <circle cx="190" cy="12" r="5" fill="#d6249f" stroke="#080706" stroke-width="2" class="graph-pulse"/>
             </svg>
             <div class="mini-graph-footer">
-              <span class="mini-graph-label">Apr 25 2026</span>
-              <span class="mini-graph-trend up" style="margin-left:auto"><span data-lang="en">Tracking started</span><span data-lang="ja">記録開始</span></span>
+              <span class="mini-graph-label">Apr 25</span>
+              <span class="mini-graph-trend up" style="margin-left:auto">↑ +9</span>
             </div>
           </div>
         </div>
@@ -1116,13 +1128,16 @@ loadProgress();
 ═══════════════════════════════════════════════════════ */
 const STAT_HISTORY = {
   youtube: [
-    { date: 'Apr 25 2026', value: 1710 }
+    { date: 'Apr 25 2026', value: 1710 },
+    { date: 'May 06 2026', value: 1710 }
   ],
   tiktok: [
-    { date: 'Apr 25 2026', value: 968 }
+    { date: 'Apr 25 2026', value: 968 },
+    { date: 'May 06 2026', value: 1077 }
   ],
   instagram: [
-    { date: 'Apr 25 2026', value: 133 }
+    { date: 'Apr 25 2026', value: 133 },
+    { date: 'May 06 2026', value: 142 }
   ]
 };
 
