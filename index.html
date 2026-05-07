@@ -863,116 +863,132 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 
 <!-- ══ PAGE: SHOOT HUB ══ -->
 <div class="page" id="page-shoot">
-  <div class="shoot-top-bar" style="justify-content:flex-end">
-    <div class="shoot-bar-btns">
-      <button class="shoot-bar-btn" id="sync-btn" onclick="manualSync()" title="Sync">☁</button>
-      <button class="shoot-bar-btn" id="load-btn" onclick="manualLoad()" title="Load">↓</button>
+
+<!-- SCHEDULE STYLES -->
+<style>
+.sched-wrap{background:#faf8f5;min-height:100vh;padding-bottom:60px}
+.sched-topbar{height:4px;background:#1A1A1A}
+.sched-header{background:#fff;padding:24px 28px 20px;border-bottom:1px solid #E5E0D8;display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.sched-logo{display:flex;gap:12px;align-items:center}
+.sched-logo-mark{width:42px;height:42px;background:#1A1A1A;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sched-logo-mark span{font-family:'Syne',sans-serif;font-weight:800;font-size:9px;color:#C4956A;letter-spacing:.04em;text-align:center;line-height:1.3}
+.sched-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:#1A1A1A}
+.sched-sub{font-family:'DM Mono',monospace;font-size:10px;color:#999;margin-top:2px}
+.sched-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.sched-badge{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;padding:3px 9px;border-radius:3px;letter-spacing:.05em;text-transform:uppercase}
+.sched-badge.tt{background:#1a1a1a;color:#fff}
+.sched-badge.yt{background:#f00;color:#fff}
+.sched-postnote{font-family:'DM Mono',monospace;font-size:10px;color:#999;margin-top:4px}
+
+.sched-tabs{display:flex;gap:0;border-bottom:1px solid #E5E0D8;background:#fff;overflow-x:auto}
+.sched-tab{font-family:'Syne',sans-serif;font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:12px 20px;cursor:pointer;white-space:nowrap;border-bottom:2.5px solid transparent;color:#999;background:none;border-top:none;border-left:none;border-right:none;transition:all .15s}
+.sched-tab:hover{color:#1A1A1A}
+.sched-tab.active{color:#1A1A1A;border-bottom-color:#C4956A}
+
+.sched-section{display:none;padding:24px 28px 40px}
+.sched-section.active{display:block}
+.sched-sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:.04em;margin-bottom:4px;color:#1A1A1A}
+.sched-sec-sub{font-size:11px;color:#999;font-family:'DM Mono',monospace;margin-bottom:18px}
+
+.legend-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#666}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.high-note{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:10px;color:#999;margin-left:auto}
+.high-stripe{width:3px;height:16px;background:#1565C0;border-radius:2px}
+
+.tbl-wrap{overflow-x:auto}
+table.sched-table{width:100%;border-collapse:collapse;min-width:600px}
+table.sched-table thead th{font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#999;padding:8px 10px;text-align:left;border-bottom:2px solid #1A1A1A}
+table.sched-table tbody tr{border-bottom:1px solid #E5E0D8;transition:filter .1s}
+table.sched-table tbody tr:hover{filter:brightness(.97)}
+table.sched-table td{padding:9px 10px;font-size:12px;vertical-align:top;color:#1A1A1A}
+table.sched-table tr.row-iw{background:#FFF8EE}
+table.sched-table tr.row-ready{background:#fff}
+table.sched-table tr.row-high td:first-child{position:relative}
+table.sched-table tr.row-high td:first-child::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#1565C0}
+.num-cell{font-family:'DM Mono',monospace;font-size:11px;color:#999}
+.ep-label{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:#1A1A1A}
+.ep-label.iw{color:#E65100}
+.title-cell{line-height:1.4;max-width:280px;font-size:12px}
+.date-cell{font-family:'DM Mono',monospace;font-size:11px;color:#666;white-space:nowrap}
+.status-chip{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#E3F2FD;color:#1565C0}
+.chip-dot{width:5px;height:5px;border-radius:50%;background:#1565C0}
+
+.desc-card{border:1px solid #E5E0D8;border-radius:6px;background:#fff;margin-bottom:12px;overflow:hidden}
+.desc-card.iw-card{border-left:4px solid #E65100}
+.desc-card.eng-card{border-left:4px solid #C4956A}
+.dc-header{padding:12px 16px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border-bottom:1px solid #E5E0D8;background:#FAFAF8;flex-wrap:wrap}
+.dc-num{font-family:'DM Mono',monospace;font-size:10px;color:#999}
+.dc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;line-height:1.3;color:#1A1A1A;margin-top:2px}
+.dc-dates{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.dc-date-tag{font-family:'DM Mono',monospace;font-size:10px;padding:3px 8px;border-radius:3px;font-weight:500}
+.dc-date-tag.tt{background:#1a1a1a;color:#fff}
+.dc-date-tag.yt{background:#f00;color:#fff}
+.dc-body{padding:14px 16px;display:grid;gap:14px}
+.dc-plat-title{font-family:'Syne',sans-serif;font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#999;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.dc-plat-title::after{content:'';flex:1;height:1px;background:#E5E0D8}
+.desc-text{font-size:12px;line-height:1.65;color:#1A1A1A;background:#F7F5F1;border-radius:4px;padding:10px 12px;white-space:pre-line;font-family:'DM Sans',sans-serif}
+.hashtags{font-family:'DM Mono',monospace;font-size:11px;color:#8C6E3F;margin-top:6px;line-height:1.6}
+
+@media(max-width:600px){
+  .sched-header,.sched-section{padding-left:16px;padding-right:16px}
+  .high-note{margin-left:0}
+}
+</style>
+
+<div class="sched-wrap">
+  <div class="sched-topbar"></div>
+  <div class="sched-header">
+    <div class="sched-logo">
+      <div class="sched-logo-mark"><span>KK<br>カバン</span></div>
+      <div>
+        <div class="sched-h1"><span data-lang="en">May Posting Schedule</span><span data-lang="ja">5月投稿スケジュール</span></div>
+        <div class="sched-sub"><span data-lang="en">I Found This · May 8–31 · 31 Episodes</span><span data-lang="ja">I Found This · 5月8日〜31日 · 31本</span></div>
+        <div class="sched-badges"><span class="sched-badge tt">TikTok</span><span class="sched-badge yt">YT Shorts</span></div>
+        <div class="sched-postnote"><span data-lang="en">Post time: 05:00 JST · YT Shorts 2 days behind TikTok</span><span data-lang="ja">投稿時間：JST 05:00 · YTショーツはTikTokの2日後</span></div>
+      </div>
     </div>
-  </div>
-  <div class="shoot-progress">
-    <div class="progress-track"><div class="progress-track-fill" id="shoot-prog-fill"></div></div>
-    <div class="progress-counts">
-      <span class="prog-shot">🎬 <span id="shot-count">0</span>/31</span>
-      <span class="prog-edited">✂️ <span id="edit-count">0</span>/31</span>
-    </div>
-  </div>
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot none"></div><span data-lang="en">Not started</span><span data-lang="ja">未着手</span></div>
-    <div class="legend-item"><div class="legend-dot shot"></div>🎬 <span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></div>
-    <div class="legend-item"><div class="legend-dot edited"></div>✂️ <span data-lang="en">Edited &amp; done</span><span data-lang="ja">編集完了</span></div>
-  </div>
-  <div class="day-tabs">
-    <button class="day-tab active" onclick="showDay(1)">Day 1 · Apr 12</button>
-    <button class="day-tab" onclick="showDay(2)">Day 2 · Apr 13</button>
-    <button class="day-tab" onclick="showDay(3)">Day 3 · Apr 14</button>
-    <button class="day-tab" onclick="showDay(4)">Day 4 · Apr 20</button>
-    <button class="day-tab" onclick="showDay(5)">Day 5 · Apr 22</button>
   </div>
 
-  <!-- DAY 1 -->
-  <div class="day-section active" id="day1">
-    <div class="ep-nav"><a class="ep-pill" href="#ep1">Ep 1</a><a class="ep-pill" href="#ep7">Ep 7</a><a class="ep-pill" href="#ep8">Ep 8</a><a class="ep-pill" href="#ep14">Ep 14</a><a class="ep-pill" href="#ep18">Ep 18</a><a class="ep-pill" href="#ep23">Ep 23</a><a class="ep-pill" href="#ep25">Ep 25</a><a class="ep-pill" href="#ep29">Ep 29</a><a class="ep-pill" href="#ep31">Ep 31</a></div>
-    <div class="day-intro">
-      <div class="status-banner done"><span class="sb-title">✅ Day 1 Complete — Apr 12</span><ul><li>All footage shot. Nothing edited yet.</li></ul></div>
-      <div data-lang="en"><h2>Day 1 — <span style="color:var(--s-accent)">Talking Heads</span></h2><p>All on-camera episodes. One setup, 9 episodes. Shoot Ep 31 absolutely last.</p></div>
-      <div data-lang="ja"><h2>Day 1 — <span style="color:var(--s-accent)">トーキングヘッド</span></h2><p>全てカメラ正面。Ep 31は必ず最後に。</p></div>
-      <div class="day-meta"><span class="day-tag loc">📍 Workshop</span><span class="day-tag prod">🎒 abb</span></div>
-    </div>
-    <div class="episode open" id="ep1"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 01 · <span data-lang="en">Series Opener</span><span data-lang="ja">初回</span></div><div class="ep-title-text"><span data-lang="en">The Japanese bag brand the rest of the world hasn't found yet</span><span data-lang="ja">世界がまだ知らない、日本のバッグブランド</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span><span class="badge b-vo">Voiceover</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Hook</div><div data-lang="en"><div class="lines"><p>"There's a bag brand in Japan with 138,000 subscribers on YouTube —"</p><p>"and almost none of them are outside Japan."</p><p class="beat">[pause]</p><p>"I've been working here for six months. I'm just now starting to understand why it's this good."</p></div></div></div><div class="scene vo"><div class="slabel vo">🎙 Voiceover</div><div data-lang="en"><div class="lines"><p>"The brand is called Kawanishi Kaban. Based in Kagawa — the smallest prefecture in Japan."</p><p>"No visible stitching on the body. Setouchi leather on the handle."</p></div></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">TikTok</span><span class="cta-line">"Follow if you want to see what else this brand is hiding."</span></div><div class="cta-row"><span class="cta-plat">YT Shorts</span><span class="cta-line">"Subscribe — tomorrow I'll show you where this brand actually came from."</span></div></div></div><div class="note-box"><div class="note-label">📋 Shoot priorities</div><ul><li>Walk toward camera naturally</li><li>Wide Takamatsu shot behind you</li><li>Macro close-up of bonded seam area</li><li>Handle close-up — Setouchi leather texture</li></ul></div></div></div>
-    <div class="episode" id="ep7"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 07 · Reaction</div><div class="ep-title-text"><span data-lang="en">Western people have some wild assumptions about Japanese bags</span><span data-lang="ja">海外の人が持つ、日本のバッグへの意外な思い込み</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Hook</div><div class="lines"><p>"I've been reading what people outside Japan actually think about Japanese bag brands."</p><p class="beat">[beat]</p><p>"Some of these comments are wild."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Drop your assumption in the comments — I'll tell you if it's true."</span></div></div></div></div></div>
-    <div class="episode" id="ep8"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 08 · Use</div><div class="ep-title-text"><span data-lang="en">What I noticed after one week of daily use</span><span data-lang="ja">1週間毎日使って気づいたこと</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Hook + Script</div><div class="lines"><p>"I've been using this bag every single day for a week. Here's what I actually noticed."</p><p>"First — lighter than it looks. Second — handle position sits forward, arm isn't tired after an hour. Third — holds shape even half empty."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Follow to see how it holds up over a full month."</span></div></div></div></div></div>
-    <div class="episode" id="ep14"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 14 · FAQ</div><div class="ep-title-text"><span data-lang="en">The thing foreigners always ask me about this bag</span><span data-lang="ja">外国人が必ずこのバッグについて聞いてくること</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Hook</div><div class="lines"><p>"Every time I show this bag to someone not from Japan, they ask the same thing."</p><p>"'How much does it cost?' And when I tell them, they go quiet for a second."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What would your first question be about this bag?"</span></div></div></div></div></div>
-    <div class="episode" id="ep18"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 18 · Perspective</div><div class="ep-title-text"><span data-lang="en">What I got wrong about Japanese bags before I moved here</span><span data-lang="ja">日本に来る前、日本のバッグについて私が間違えていたこと</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"Before I moved to Japan, I thought Japanese bags were one of two things — super minimalist and expensive, or regular bags with Japanese text."</p><p>"I was wrong on both. Function-first design. 'Made in Japan' isn't a style — it's a set of standards."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What did you assume about Japanese brands before this?"</span></div></div></div></div></div>
-    <div class="episode" id="ep23"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 23 · Honest Review</div><div class="ep-title-text"><span data-lang="en">Honest things I'd tell someone before buying this bag</span><span data-lang="ja">このバッグを買う前に正直に伝えたいこと</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"I'm going to be straight with you. This bag is not for everyone."</p><p>"Not for interior organization lovers — pockets are outside. Not for visible brand recognition seekers."</p><p>"But if you want something that looks better in person than photos, won't look dated in ten years — this is it."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What do you actually need from a bag?"</span></div></div></div></div></div>
-    <div class="episode" id="ep25"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 25 · Travel</div><div class="ep-title-text"><span data-lang="en">What I wish I knew before moving to Japan with bags</span><span data-lang="ja">バッグを持って日本に来る前に知っておきたかったこと</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"When I moved to Japan, I brought bags from back home. In Japan, how you carry yourself matters — not status, care."</p><p>"My bags felt fine in Canada. Here they felt rough. Not quality — finish. Japanese bags are a category of attention."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What would you pack if you moved abroad for a year?"</span></div></div></div></div></div>
-    <div class="episode" id="ep29"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 29 · Reactions</div><div class="ep-title-text"><span data-lang="en">I've been showing this brand to people for a month — here's what they say</span><span data-lang="ja">1ヶ月間、周りの人にこのブランドを見せてきた</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="ssub">Collect 2–3 real coworker reactions BEFORE shoot day.</div><div class="lines"><p>"Almost every person does the same thing. They take it, feel the weight, look for the stitching."</p><p>"And then: 'Wait — where are the seams?' Every time. Without fail."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What's your first reaction seeing it?"</span></div></div></div></div></div>
-    <div class="episode" id="ep31"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 31 · ⚠️ SHOOT LAST · Finale</div><div class="ep-title-text"><span data-lang="en">One month. 31 videos. Here's the honest verdict.</span><span data-lang="ja">1ヶ月、31本。正直な結論はこれです。</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"One month. 31 videos. I told you I'd show you something new every day, and I did."</p><p>"This is a brand that deserves to be known outside Japan. Not because it's perfect — because it's honest."</p><p>"They're called Kawanishi Kaban. Based in Kagawa, Japan."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Subscribe — this was just the introduction."</span></div></div></div></div></div>
+  <div class="sched-tabs">
+    <button class="sched-tab active" onclick="showSchedTab('schedule')"><span data-lang="en">Schedule</span><span data-lang="ja">スケジュール</span></button>
+    <button class="sched-tab" onclick="showSchedTab('descriptions')"><span data-lang="en">Descriptions &amp; Hashtags</span><span data-lang="ja">説明文＆ハッシュタグ</span></button>
   </div>
 
-  <!-- DAY 2 -->
-  <div class="day-section" id="day2">
-    <div class="ep-nav"><a class="ep-pill" href="#ep1b">Ep 1 B-roll</a><a class="ep-pill" href="#ep2">Ep 2</a><a class="ep-pill" href="#ep4">Ep 4</a><a class="ep-pill" href="#ep19">Ep 19</a><a class="ep-pill" href="#ep26">Ep 26</a></div>
-    <div class="day-intro">
-      <div class="status-banner partial"><span class="sb-title">⚠️ Day 2 Mostly Done — Apr 13</span><ul><li>Opening line still needed</li><li>All voiceovers moved to Apr 20</li></ul></div>
-      <div data-lang="en"><h2>Day 2 — <span style="color:#2e7a8c">Outdoor Takamatsu</span></h2><p>Shoot Ep 19 in the best light window. Grab wide city shots first.</p></div>
-      <div class="day-meta"><span class="day-tag loc">📍 Outdoor Takamatsu</span><span class="day-tag prod">🎒 abb · comame</span></div>
+  <!-- SCHEDULE TAB -->
+  <div class="sched-section active" id="sched-tab-schedule">
+    <div class="sched-sec-title"><span data-lang="en">Remaining May Schedule</span><span data-lang="ja">5月の残りスケジュール</span></div>
+    <div class="sched-sec-sub"><span data-lang="en">May 7–31 · Already posted: Ep01 Ep18 Ep03 Ep08 Ep14 Ep07 Ep07b + Comments video (8 done)</span><span data-lang="ja">5月7日〜31日 · 投稿済：Ep01 Ep18 Ep03 Ep08 Ep14 Ep07 Ep07b + コメント動画（8本完了）</span></div>
+    <div class="legend-row">
+      <div class="leg-item"><div class="leg-dot" style="background:#C4956A"></div><span data-lang="en">English episode</span><span data-lang="ja">英語エピソード</span></div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E65100"></div><span data-lang="en">Iwakura interview</span><span data-lang="ja">岩倉インタビュー</span></div>
+      <div class="high-note"><div class="high-stripe"></div><span data-lang="en">Blue stripe = high-engagement day</span><span data-lang="ja">青ストライプ = 高エンゲージメント日</span></div>
     </div>
-    <div class="episode" id="ep1b"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 1 — B-roll</div><div class="ep-title-text">Wide Takamatsu shots + walking with bag</div><div class="ep-badges"><span class="badge b-out">Outdoor B-roll</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="note-box"><div class="note-label">📋 Shot list</div><ul><li>Early morning for best light</li><li>Wide city shot — reads as Takamatsu</li><li>Walking shot from medium distance</li><li>3–5 min of footage total</li></ul></div></div></div>
-    <div class="episode" id="ep2"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 02 · Place</div><div class="ep-title-text"><span data-lang="en">This brand just opened in Tokyo — here's where it actually started</span><span data-lang="ja">このブランドは東京に進出した — でも始まりはここだった</span></div><div class="ep-badges"><span class="badge b-cam">Narrated</span><span class="badge b-out">Outdoor</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Hook</div><div class="ssub">⚠️ Still needed: opening line</div><div class="lines"><p>"This brand just opened a location in Tokyo."</p><p>"But before Tokyo — there was this." [CUT TO: wide Takamatsu]</p></div></div><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"Kagawa. The smallest prefecture in Japan. What it has is craftsmanship — quietly, for generations."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Follow — tomorrow I'll show you the detail that made people take notice."</span></div></div></div></div></div>
-    <div class="episode" id="ep4"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 04 · Place</div><div class="ep-title-text"><span data-lang="en">The smallest prefecture in Japan is quietly obsessed with craft</span><span data-lang="ja">日本一小さな県が、静かに職人技にこだわっている</span></div><div class="ep-badges"><span class="badge b-out">Outdoor</span><span class="badge b-vo">Voiceover</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"Kagawa produces 90% of Japan's gloves. Birthplace of uchiwa fans — handmade for 400 years."</p><p>"The common thread isn't the product — it's the obsession. Kawanishi Kaban fits into that."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Have you ever heard of Kagawa before this?"</span></div></div></div></div></div>
-    <div class="episode" id="ep19"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 19 · abb Hero ⭐</div><div class="ep-title-text"><span data-lang="en">The bag that started everything for this brand</span><span data-lang="ja">このブランドの全ての始まりとなったバッグ</span></div><div class="ep-badges"><span class="badge b-out">Outdoor · Hero</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="ssub">⭐ Best light of the day. Slow. Cinematic.</div><div class="lines"><p>"This is the abb. No visible seam. No logo. Just the bag."</p><p>"This is what it looks like when a brand stops trying to look like other brands."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What's the first thing you notice about it?"</span></div></div></div></div></div>
-    <div class="episode" id="ep26"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 26 · comame</div><div class="ep-title-text"><span data-lang="en">The bean-shaped bag that travels everywhere</span><span data-lang="ja">どこにでも連れていきたい、豆型バッグ</span></div><div class="ep-badges"><span class="badge b-out">Outdoor · comame</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Script</div><div class="lines"><p>"Most bags try to look serious. This one does not. It's called the comame — 'little bean' in Japanese."</p><p>"The shape isn't decorative. The curved form sits against your body naturally. Keys. Phone. Wallet. Out the door."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Would you go bean-shaped?"</span></div></div></div></div></div>
+    <div class="tbl-wrap">
+      <table class="sched-table">
+        <thead>
+          <tr>
+            <th><span data-lang="en">Day</span><span data-lang="ja">日付</span></th>
+            <th><span data-lang="en">Type</span><span data-lang="ja">種類</span></th>
+            <th><span data-lang="en">Title</span><span data-lang="ja">タイトル</span></th>
+            <th>TikTok</th>
+            <th>YT Shorts</th>
+            <th><span data-lang="en">Status</span><span data-lang="ja">状態</span></th>
+          </tr>
+        </thead>
+        <tbody id="sched-body"></tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- DAY 3 -->
-  <div class="day-section" id="day3">
-    <div class="ep-nav"><a class="ep-pill" href="#ep3">Ep 3</a><a class="ep-pill" href="#ep6">Ep 6</a><a class="ep-pill" href="#ep10">Ep 10</a><a class="ep-pill" href="#ep12">Ep 12</a><a class="ep-pill" href="#ep15">Ep 15</a><a class="ep-pill" href="#ep17">Ep 17</a><a class="ep-pill" href="#ep20">Ep 20</a><a class="ep-pill" href="#ep22">Ep 22</a></div>
-    <div class="day-intro">
-      <div class="status-banner partial"><span class="sb-title">⚠️ Day 3 In Progress — Apr 14</span><ul><li>Top-down shots: first half DONE</li><li>Second half + voiceovers → Apr 20</li></ul></div>
-      <div data-lang="en"><h2>Day 3 — <span style="color:var(--shot)">Tabletop Macro</span></h2><p>Set up once. Natural light from the side. Take your time on Ep 3.</p></div>
-      <div class="day-meta"><span class="day-tag loc">📍 Workshop — Tabletop</span><span class="day-tag prod">🎒 abb · minimon · seowL · lauff · comame</span></div>
-    </div>
-    <div class="episode" id="ep3"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 03 · Craft ⭐</div><div class="ep-title-text"><span data-lang="en">Find the seam. You can't.</span><span data-lang="ja">縫い目を探してみてください。見つかりません。</span></div><div class="ep-badges"><span class="badge b-mac">Tabletop Macro</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene shot"><div class="slabel shot">🎥 Visual</div><div class="ssub">Start at the corner where a seam would normally be. Pan slowly. Say nothing for the first few seconds.</div></div><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"Most bags have visible stitching. The abb doesn't. The entire exterior is bonded."</p><p>"No thread. No seam line. Nothing to catch, snag, or wear out."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Check the outside of your bag. How many seams do you see?"</span></div></div></div></div></div>
-    <div class="episode" id="ep6"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 06 · Material</div><div class="ep-title-text"><span data-lang="en">Why the handle is a different leather than the bag</span><span data-lang="ja">なぜハンドルはバッグ本体と異なるレザーなのか</span></div><div class="ep-badges"><span class="badge b-mac">Macro · abb</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"The body holds shape and resists wear. The handle needs to feel good — and get better over time. One material can't do both. So they used two."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Have you ever noticed a brand doing this before?"</span></div></div></div></div></div>
-    <div class="episode" id="ep10"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 10 · Material</div><div class="ep-title-text"><span data-lang="en">What Cordura actually is</span><span data-lang="ja">コーデュラって実際何なの？</span></div><div class="ep-badges"><span class="badge b-mac">Material</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"Cordura is a type of nylon. But calling it 'nylon' is like calling a sports car 'a vehicle.'"</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Canvas or Cordura — which suits your lifestyle?"</span></div></div></div></div></div>
-    <div class="episode" id="ep12"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 12 · minimon</div><div class="ep-title-text"><span data-lang="en">Small bag. Suspicious amount of pockets.</span><span data-lang="ja">小さいバッグ。不審なほどポケットが多い。</span></div><div class="ep-badges"><span class="badge b-mac">Tabletop · minimon</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"Smaller than it should be. More pockets than it has any right to have. The minimon is for people who have a system."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What do you actually carry every day?"</span></div></div></div></div></div>
-    <div class="episode" id="ep15"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 15 · Comparison</div><div class="ep-title-text"><span data-lang="en">What makes a Japanese tote different from a Western one</span><span data-lang="ja">日本と海外のトートバッグの違い</span></div><div class="ep-badges"><span class="badge b-mac">Comparison</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"Western totes solve one problem: carry things. Japanese totes ask: how does it sit full, sit empty, feel after a long day."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Which detail surprised you most?"</span></div></div></div></div></div>
-    <div class="episode" id="ep17"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 17 · seowL</div><div class="ep-title-text"><span data-lang="en">The backpack built like a portable office</span><span data-lang="ja">持ち歩けるオフィスのように設計されたバックパック</span></div><div class="ep-badges"><span class="badge b-mac">Demo · seowL</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"The question wasn't 'what do we put in a backpack?' It was: 'What does someone need to work anywhere?'"</p><p>"Leather piping on the straps isn't decorative — it reinforces where straps wear fastest."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Do you organize your bag or just throw everything in?"</span></div></div></div></div></div>
-    <div class="episode" id="ep20"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 20 · lauff</div><div class="ep-title-text"><span data-lang="en">The camera bag built for mirrorless shooters</span><span data-lang="ja">ミラーレスカメラを使う人のために作られたカメラバッグ</span></div><div class="ep-badges"><span class="badge b-mac">Real use · lauff</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"The only bag I've used actually designed around mirrorless — not converted from a DSLR bag. Looks like a normal bag outside. This is what I bring to every shoot."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What do you use to carry your camera gear?"</span></div></div></div></div></div>
-    <div class="episode" id="ep22"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 22 · Canvas</div><div class="ep-title-text"><span data-lang="en">Why this canvas bag costs more than a leather one</span><span data-lang="ja">なぜこのキャンバスバッグはレザーより高いのか</span></div><div class="ep-badges"><span class="badge b-mac">Macro · Canvas</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"Most assume canvas is cheaper. Here it's the opposite. Leather hides inconsistencies. Canvas reveals everything. When it's made really well — you can see it."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Canvas or leather — which do you prefer?"</span></div></div></div></div></div>
+  <!-- DESCRIPTIONS TAB -->
+  <div class="sched-section" id="sched-tab-descriptions">
+    <div class="sched-sec-title"><span data-lang="en">Descriptions &amp; Hashtags</span><span data-lang="ja">説明文＆ハッシュタグ</span></div>
+    <div class="sched-sec-sub"><span data-lang="en">Copy-paste ready for TikTok and YouTube Shorts</span><span data-lang="ja">TikTok・YouTubeショーツ用コピペ対応</span></div>
+    <div id="desc-grid"></div>
   </div>
+</div>
 
-  <!-- DAY 4 -->
-  <div class="day-section" id="day4">
-    <div class="ep-nav"><a class="ep-pill" href="#ep5">Ep 5</a><a class="ep-pill" href="#ep9">Ep 9</a><a class="ep-pill" href="#ep11">Ep 11</a><a class="ep-pill" href="#ep13">Ep 13</a><a class="ep-pill" href="#ep16">Ep 16</a><a class="ep-pill" href="#ep21">Ep 21</a><a class="ep-pill" href="#ep24">Ep 24</a><a class="ep-pill" href="#ep27">Ep 27</a><a class="ep-pill" href="#ep28">Ep 28</a></div>
-    <div class="day-intro">
-      <div class="status-banner pending"><span class="sb-title">📋 Day 4 Rescheduled — Apr 20</span><ul><li>Full shoot day still needed</li><li>Also finishing top-down shots + all voiceovers</li></ul></div>
-      <div data-lang="en"><h2>Day 4 — <span style="color:var(--cta)">Brand Story + Interior</span></h2><p>Narrated episodes and hidden craft shots.</p></div>
-      <div class="day-meta"><span class="day-tag loc">📍 Workshop — Interior Macro</span><span class="day-tag prod">🎒 abb · minimon · comame</span></div>
-    </div>
-    <div class="episode" id="ep5"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 05 · Philosophy</div><div class="ep-title-text"><span data-lang="en">The Japanese phrase that runs this company</span><span data-lang="ja">このブランドを動かしている日本語のフレーズ</span></div><div class="ep-badges"><span class="badge b-cam">Narrated</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"There's a phrase this brand uses: 愛されるものづくり — 'making things that are loved.'"</p><p>"Not 'making things that sell.' Making things that are loved. That's what this looks like in practice."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What's one thing you own that you actually love?"</span></div></div></div></div></div>
-    <div class="episode" id="ep9"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 09 · Philosophy</div><div class="ep-title-text"><span data-lang="en">Most brands forget about you the second you pay</span><span data-lang="ja">ほとんどのブランドは購入した瞬間あなたのことを忘れる</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"Most brands have zero interest in you after you buy something."</p><p>"Kawanishi Kaban designs with the full lifespan of a bag in mind. 'What happens to this bag after someone takes it home?'"</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What's the longest you've ever owned a single bag?"</span></div></div></div></div></div>
-    <div class="episode" id="ep11"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 11 · Origin</div><div class="ep-title-text"><span data-lang="en">The brand that started as a factory — and decided to go its own way</span><span data-lang="ja">下請け工場から始まり、自分たちの道を歩み始めたブランド</span></div><div class="ep-badges"><span class="badge b-cam">Narrated</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"Most brands start with a product. This one started with a factory."</p><p>"He didn't have a marketing budget. He started a YouTube channel. 138,000 subscribers later — his own brand, workshop, Tokyo location."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Does knowing the backstory change how you see the bag?"</span></div></div></div></div></div>
-    <div class="episode" id="ep13"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 13 · Craft</div><div class="ep-title-text"><span data-lang="en">What 'made with love' actually looks like</span><span data-lang="ja">「愛情を込めて作る」が実際にどう見えるか</span></div><div class="ep-badges"><span class="badge b-mac">Detail close-ups</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"This detail is inside the bag. Most people will never see it. But someone decided it needed to be right — because it's part of the bag."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"What detail surprised you?"</span></div></div></div></div></div>
-    <div class="episode" id="ep16"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 16 · Philosophy</div><div class="ep-title-text"><span data-lang="en">Our brand has never run a sale — and that's not an accident</span><span data-lang="ja">私たちのブランドはセールをしない — それは偶然ではない</span></div><div class="ep-badges"><span class="badge b-cam">On Camera</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"Our brand has never run a sale. No discount codes. No seasonal markdowns. The price is the price. I find it reassuring."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Would a no-sales policy make you trust a brand more or less?"</span></div></div></div></div></div>
-    <div class="episode" id="ep21"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 21 · Philosophy</div><div class="ep-title-text"><span data-lang="en">Why this brand sells 'imperfect' bags</span><span data-lang="ja">このブランドが「不完全な」バッグを販売する理由</span></div><div class="ep-badges"><span class="badge b-cam">Narrated</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"Some bags don't pass quality check — not because they're broken, but because they don't hit the brand's exact standard."</p><p>"They tell you exactly why the bag didn't pass. You decide if it matters. That's not a discount strategy. That's honesty."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Would you buy an outlet bag if the brand told you exactly what was 'wrong' with it?"</span></div></div></div></div></div>
-    <div class="episode" id="ep24"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 24 · Bag Lab</div><div class="ep-title-text"><span data-lang="en">The sub-brand that experiments with bag design</span><span data-lang="ja">バッグデザインを実験するサブブランド</span></div><div class="ep-badges"><span class="badge b-cam">Narrated</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"Kawanishi Kaban has a side project — Kawanishi Bag Lab. Different shapes, materials, ideas that haven't been proven yet."</p><p>"Every great brand needs a place to fail safely. This is theirs."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Would you try a brand's experimental line?"</span></div></div></div></div></div>
-    <div class="episode" id="ep27"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 27 · Hidden Details</div><div class="ep-title-text"><span data-lang="en">Why Japanese makers obsess over details nobody sees</span><span data-lang="ja">なぜ日本のメーカーは誰も見ないディテールにこだわるのか</span></div><div class="ep-badges"><span class="badge b-mac">Interior macro</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"There's a concept in Japanese manufacturing: monozukuri — the art of making things."</p><p>"The logic: if the parts you can't see are done well, the parts you can see are definitely done well."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Check the inside of your bag right now. What do you see?"</span></div></div></div></div></div>
-    <div class="episode" id="ep28"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 28 · comame</div><div class="ep-title-text"><span data-lang="en">The mini Boston bag built for people who actually use their bag</span><span data-lang="ja">本当にバッグを使う人のためのミニボストンバッグ</span></div><div class="ep-badges"><span class="badge b-mac">Tabletop · comame</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene vo"><div class="slabel vo">🎙 VO</div><div class="lines"><p>"This is the bag for people who use their bag hard. Not displayed. Not rotated. Grabbed every single day."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Mini bag or full-size — which camp are you in?"</span></div></div></div></div></div>
-  </div>
-
-  <!-- DAY 5 -->
-  <div class="day-section" id="day5">
-    <div class="ep-nav"><a class="ep-pill" href="#ep30">Ep 30</a><a class="ep-pill" href="#broll">B-roll</a><a class="ep-pill" href="#buffer">Buffer</a></div>
-    <div class="day-intro">
-      <div class="status-banner pending"><span class="sb-title">📋 Day 5 — Apr 22</span><ul><li>Buffer + B-roll bank + Ep 30</li><li>Editing continues</li></ul></div>
-      <div data-lang="en"><h2>Day 5 — <span style="color:var(--s-accent)">Buffer + B-roll + Ep 30</span></h2><p>Ep 30 is the only scripted episode. Do not fill this day with new content.</p></div>
-      <div class="day-meta"><span class="day-tag loc">📍 Flexible</span></div>
-    </div>
-    <div class="episode" id="ep30"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Ep 30 · Penultimate</div><div class="ep-title-text"><span data-lang="en">Japan already loves this brand. Now they want the world to.</span><span data-lang="ja">日本はすでにこのブランドを愛している。次は世界へ。</span></div><div class="ep-badges"><span class="badge b-cam">Narrated</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="scene cam"><div class="slabel cam">🎬 Full Script</div><div class="lines"><p>"138,000 people in Japan have been following this brand on YouTube."</p><p>"That's where this month of videos comes in. I've been the foreigner who found them."</p><p>"Tomorrow — my honest verdict after 31 videos."</p></div></div><div class="scene cta"><div class="slabel cta">📲 CTA</div><div class="cta-block"><div class="cta-row"><span class="cta-plat">Both</span><span class="cta-line">"Follow for the final verdict tomorrow."</span></div></div></div></div></div>
-    <div class="episode" id="broll"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">B-roll Bank</div><div class="ep-title-text">General B-roll — bags in motion, textures, workshop atmosphere</div><div class="ep-badges"><span class="badge b-out">Freeform</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="note-box"><div class="note-label">📋 Shot list</div><ul><li>Slow pan across bag exterior — sunlight preferred</li><li>Hand picking up bag from flat surface</li><li>Zipper opening — macro</li><li>Leather handle being gripped</li><li>Bag on chair, bench, or table</li><li>Window light hitting bag at an angle</li><li>Walking shot from behind</li><li>Hands holding two bags side by side</li></ul></div></div></div>
-    <div class="episode" id="buffer"><div class="ep-header" onclick="tog(this)"><div class="ep-check-wrap"><div class="ep-check" onclick="event.stopPropagation();markShot(this.closest('.episode'))"></div><div class="ep-edit" onclick="event.stopPropagation();markEdited(this.closest('.episode'))"></div></div><div class="ep-num">Buffer · Reshoots</div><div class="ep-title-text">Use this time for anything that didn't go right on Days 1–4</div><div class="ep-badges"><span class="badge b-out">Protected time</span></div><span class="ep-toggle">▾</span></div><div class="ep-body"><div class="note-box"><div class="note-label">📋 Common pickups</div><ul><li>Macro shots out of focus or poorly lit</li><li>Talking head takes where you stumbled</li><li>Any product you forgot to shoot</li><li>Outdoor shots needing better light</li></ul></div></div></div>
-  </div>
 </div><!-- end page-shoot -->
 
 <!-- ══ PAGE: IG GUIDE ══ -->
@@ -1007,45 +1023,217 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 <div id="kk-toast"></div>
 
 <script>
-/* ══ JSONBIN ══ */
-const JURL='https://api.jsonbin.io/v3/b/69dc793636566621a8a8d894';
-const JKEY='$2a$10$1yy30T2h/Pm27AntO7ZOPuTqxf3Pp.jHQq9uGsPvv5LI/2ydrLqBi';
-let shotDone=new Set(),editDone=new Set();
-
-async function loadProgress(){
-  try{
-    const r=await fetch(JURL,{headers:{'X-Master-Key':JKEY}});
-    if(!r.ok)throw new Error();
-    const j=await r.json();const rec=j.record||{};
-    shotDone=new Set(rec.done||[]);editDone=new Set(rec.edited||[]);
-    try{localStorage.setItem('kk-done',JSON.stringify([...shotDone]));localStorage.setItem('kk-edited',JSON.stringify([...editDone]));}catch(e){}
-    applyStates();updateProgress();updateDayHeaders();
-  }catch(e){
-    try{const s=localStorage.getItem('kk-done');shotDone=new Set(s?JSON.parse(s):[]);const ed=localStorage.getItem('kk-edited');editDone=new Set(ed?JSON.parse(ed):[]);}catch(e2){shotDone=new Set();editDone=new Set();}
-    applyStates();updateProgress();updateDayHeaders();
-    showToast('⚠️ Offline — cached data');
-  }
+/* ══ SCHEDULE TAB SWITCHER ══ */
+function showSchedTab(id) {
+  document.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sched-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sched-tab-' + id).classList.add('active');
+  document.querySelectorAll('.sched-tab').forEach(t => {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes(id)) t.classList.add('active');
+  });
 }
-async function saveProgress(){
-  const done=[...shotDone],edited=[...editDone];
-  try{localStorage.setItem('kk-done',JSON.stringify(done));localStorage.setItem('kk-edited',JSON.stringify(edited));}catch(e){}
-  const r=await fetch(JURL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JKEY},body:JSON.stringify({done,edited})});
-  if(!r.ok)throw new Error();
-}
-async function manualSync(){const b=document.getElementById('sync-btn');b.textContent='⏳';b.disabled=true;try{await saveProgress();showToast('✅ Synced!');}catch(e){showToast('❌ Sync failed');}b.textContent='☁';b.disabled=false;}
-async function manualLoad(){const b=document.getElementById('load-btn');b.textContent='⏳';b.disabled=true;try{await loadProgress();showToast('✅ Loaded!');}catch(e){showToast('❌ Load failed');}b.textContent='↓';b.disabled=false;}
 
-function showToast(msg){const t=document.getElementById('kk-toast');t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>t.style.opacity='0',3000);}
-function applyStates(){document.querySelectorAll('.episode').forEach(ep=>{const id=ep.id,ed=editDone.has(id),sh=shotDone.has(id)&&!ed;ep.classList.toggle('shot-done',sh);ep.classList.toggle('edit-done',ed);});}
-function markShot(ep){const id=ep.id;if(editDone.has(id)){editDone.delete(id);shotDone.delete(id);}else if(shotDone.has(id)){shotDone.delete(id);}else{shotDone.add(id);}applyStates();updateProgress();updateDayHeaders();saveProgress();}
-function markEdited(ep){const id=ep.id;if(editDone.has(id)){editDone.delete(id);}else{shotDone.add(id);editDone.add(id);}applyStates();updateProgress();updateDayHeaders();saveProgress();}
-const TOTAL=31;
-function updateProgress(){const sc=shotDone.size,ec=editDone.size,pct=(ec/TOTAL)*100;const f=document.getElementById('shoot-prog-fill');if(f)f.style.width=pct+'%';const se=document.getElementById('shot-count'),ee=document.getElementById('edit-count');if(se)se.textContent=sc;if(ee)ee.textContent=ec;window._editPct=pct;}
-const DAY_EPS={1:['ep1','ep7','ep8','ep14','ep18','ep23','ep25','ep29','ep31'],2:['ep1b','ep2','ep4','ep19','ep26'],3:['ep3','ep6','ep10','ep12','ep15','ep17','ep20','ep22'],4:['ep5','ep9','ep11','ep13','ep16','ep21','ep24','ep27','ep28'],5:['ep30','broll','buffer']};
-function updateDayHeaders(){document.querySelectorAll('.day-tab').forEach((t,i)=>{const eps=DAY_EPS[i+1]||[];const allSh=eps.length>0&&eps.every(id=>shotDone.has(id)||editDone.has(id));const allEd=eps.length>0&&eps.every(id=>editDone.has(id));t.classList.toggle('day-edited',allEd);t.classList.toggle('day-shot',allSh&&!allEd);if(!t.dataset.label)t.dataset.label=t.textContent.trim();const base=t.dataset.label.replace(/ [✓✂]$/,'');t.dataset.label=base;t.textContent=allEd?base+' ✂':allSh?base+' ✓':base;});}
-function showDay(n){document.querySelectorAll('.day-section').forEach((s,i)=>s.classList.toggle('active',i===n-1));document.querySelectorAll('.day-tab').forEach((t,i)=>t.classList.toggle('active',i===n-1));window.scrollTo({top:0,behavior:'smooth'});}
-function tog(hdr){hdr.parentElement.classList.toggle('open');}
-document.querySelectorAll('.ep-pill').forEach(p=>{p.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(p.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});if(!t.classList.contains('open'))t.classList.add('open');}});});
+function showToast(msg){const t=document.getElementById('kk-toast');if(t){t.textContent=msg;t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>t.style.opacity='0',3000);}}
+
+/* ══ SCHEDULE DATA ══ */
+const schedule = [
+  { day:'May 7',  tt:'Wed May 7',  yt:'Fri May 9',   high:false, iw:false, ep:'Ep 06',     title_en:"Why the handle is a different material than the rest of the bag.",                                    title_ja:"ハンドルが他の部分と異なる素材である理由。" },
+  { day:'May 8',  tt:'Thu May 8',  yt:'Sat May 10',  high:true,  iw:false, ep:'Ep 18',     title_en:"I moved to Japan with two bags. Neither of them were right.",                                          title_ja:"2つのバッグを持って日本に来た。どちらも合わなかった。" },
+  { day:'May 9',  tt:'Fri May 9',  yt:'Sun May 11',  high:false, iw:false, ep:'COMMA',     title_en:"This bag is bean-shaped. The shape is the whole point.",                                               title_ja:"このバッグは豆型。その形こそが全て。" },
+  { day:'May 10', tt:'Sat May 10', yt:'Mon May 12',  high:false, iw:false, ep:'KAGAWA',    title_en:"Kagawa is the smallest prefecture in Japan. Most people come for udon. There's something else.",      title_ja:"香川は日本最小の県。多くはうどん目的。でも他に何かがある。" },
+  { day:'May 11', tt:'Sun May 11', yt:'Tue May 13',  high:false, iw:true,  ep:'IWAKURA 1', title_en:"It takes 4 to 6 months to make one bag. Here's what that actually looks like.",                       title_ja:"1つのバッグを作るのに4〜6ヶ月。それが実際どんな過程か。" },
+  { day:'May 12', tt:'Mon May 12', yt:'Wed May 14',  high:false, iw:false, ep:'FRIENDS',   title_en:"I've been showing people this bag for a month. Their reactions are always the same.",                  title_ja:"1ヶ月間、人々にこのバッグを見せてきた。反応はいつも同じ。" },
+  { day:'May 13', tt:'Tue May 13', yt:'Thu May 15',  high:true,  iw:false, ep:'HARBOR BAY',title_en:"Every brand has the one bag that started it all. For Kawanishi Kaban it's this.",                      title_ja:"全てのブランドには原点となるバッグがある。川西鞄ではこれ。" },
+  { day:'May 14', tt:'Wed May 14', yt:'Fri May 16',  high:true,  iw:false, ep:'LOVED',     title_en:"This brand runs on one internal phrase. The translation is not what you'd expect.",                    title_ja:"このブランドを動かす内部フレーズ。翻訳は想像と違う。" },
+  { day:'May 15', tt:'Thu May 15', yt:'Sat May 17',  high:true,  iw:true,  ep:'IWAKURA 2', title_en:"What's the hardest part of this job that most people never see?",                                      title_ja:"多くの人が見ることのない、この仕事で最も難しいことは？" },
+  { day:'May 16', tt:'Fri May 16', yt:'Sun May 18',  high:false, iw:false, ep:'Ep 10',     title_en:"Have you heard of Cordura? Calling it nylon is like calling a sports car a vehicle.",                  title_ja:"コーデュラを聞いたことは？ナイロンと呼ぶのはスポーツカーを乗り物と呼ぶようなもの。" },
+  { day:'May 17', tt:'Sat May 17', yt:'Mon May 19',  high:false, iw:false, ep:'Ep 15',     title_en:"Japanese tote vs Western tote. They're solving completely different problems.",                         title_ja:"日本のトートvs海外のトート。解決しようとする問題が全く違う。" },
+  { day:'May 18', tt:'Sun May 18', yt:'Tue May 20',  high:false, iw:false, ep:'LIFESPAN',  title_en:"Most brands lose interest in you the moment you buy. This one doesn't.",                               title_ja:"多くのブランドは購入後に興味を失う。このブランドは違う。" },
+  { day:'May 19', tt:'Mon May 19', yt:'Wed May 21',  high:false, iw:true,  ep:'IWAKURA 6', title_en:"The product she's most proud of is still the first bag she ever made.",                                 title_ja:"彼女が最も誇りに思う作品は、今も最初に作ったバッグ。" },
+  { day:'May 20', tt:'Tue May 20', yt:'Thu May 22',  high:true,  iw:false, ep:'NO SALE',   title_en:"This brand has never run a sale. Not once. Here's why that's actually reassuring.",                    title_ja:"このブランドは一度もセールをしたことがない。それが安心な理由。" },
+  { day:'May 21', tt:'Wed May 21', yt:'Fri May 23',  high:true,  iw:false, ep:'13 POCKETS',title_en:"Should you buy this bag? Honest answer — yes. But you should know a few things first.",                title_ja:"このバッグを買うべきか？正直な答え — はい。でもまず知るべきことがある。" },
+  { day:'May 22', tt:'Thu May 22', yt:'Sat May 24',  high:true,  iw:false, ep:'ORIGIN',    title_en:"Most brands start with a product. This one started with a factory.",                                    title_ja:"多くのブランドは製品から始まる。このブランドは工場から始まった。" },
+  { day:'May 23', tt:'Fri May 23', yt:'Sun May 25',  high:false, iw:true,  ep:'IWAKURA 3', title_en:"She's never been abroad. She still designed the bag that works for foreigners.",                        title_ja:"彼女は海外に行ったことがない。それでも外国人に合うバッグを作った。" },
+  { day:'May 24', tt:'Sat May 24', yt:'Mon May 26',  high:false, iw:true,  ep:'IWAKURA 4', title_en:"Things about these bags most people never notice.",                                                      title_ja:"ほとんどの人が気づかない、このバッグのこと。" },
+  { day:'May 25', tt:'Sun May 25', yt:'Tue May 27',  high:false, iw:false, ep:'Ep 17',     title_en:"This backpack was built to be a portable office. The question wasn't what to put in it.",              title_ja:"このバックパックは持ち運べるオフィスとして作られた。問いは何を入れるかではなかった。" },
+  { day:'May 26', tt:'Mon May 26', yt:'Wed May 28',  high:false, iw:true,  ep:'IWAKURA 7', title_en:"What she wants every foreigner to know about Kawanishi Kaban.",                                         title_ja:"彼女が全ての外国人に川西鞄について知ってほしいこと。" },
+  { day:'May 27', tt:'Tue May 27', yt:'Thu May 29',  high:true,  iw:false, ep:'Ep 20',     title_en:"This camera bag was designed for mirrorless — not converted from a DSLR bag.",                         title_ja:"このカメラバッグはミラーレス用に設計された — DSLRバッグの転用ではない。" },
+  { day:'May 28', tt:'Wed May 28', yt:'Fri May 30',  high:true,  iw:false, ep:'MINI MAN',  title_en:"The real story of how the Mini Man was created.",                                                        title_ja:"ミニマンが生まれた本当のストーリー。" },
+  { day:'May 29', tt:'Thu May 29', yt:'Sat May 31',  high:true,  iw:false, ep:'CLUE',      title_en:"Everyone puts stuff at the bottom of their backpack and can't find it. This bag solves that.",         title_ja:"誰もがバックパックの底に物を入れて見つけられない。このバッグはそれを解決する。" },
+  { day:'May 30', tt:'Fri May 30', yt:'Sun Jun 1',   high:false, iw:true,  ep:'IWAKURA 5', title_en:"The bags she uses on her days off vs her work days.",                                                    title_ja:"彼女が休日と仕事日で使うバッグの違い。" },
+  { day:'May 31', tt:'Sat May 31', yt:'Mon Jun 2',   high:false, iw:false, ep:'VERDICT',   title_en:"One month. 31 videos. One brand. Here's my honest verdict.",                                            title_ja:"1ヶ月。31本の動画。1つのブランド。正直な結論。" },
+];
+
+const descriptions = [
+  { ep:'Ep 06', day:'May 7', tt:'Wed May 7', yt:'Fri May 9', iw:false,
+    tt_en:`So why is the handle different from the bag?
+
+The body holds shape and resists water.
+The handle needs to feel good in your hand and get better over time.
+
+One material can't do both things. So they use two.
+
+Have you ever noticed a brand doing this before?
+
+🎒 Kawanishi Kaban — Handmade in Kagawa, Japan
+🛍️ shop.kawanishikaban.com`,
+    tt_ja:`なぜハンドルはバッグと異なる素材なのか？
+
+本体は形を保ち、防水性が必要。
+ハンドルは手に馴染み、使うほど良くなる必要がある。
+
+1つの素材では両立できない。だから2つ使う。
+
+以前、こういうブランドに気づいたことがある？
+
+🎒 川西鞄 — 香川県産ハンドメイド
+🛍️ shop.kawanishikaban.com`,
+    tags:'#madeinjapan #japanesebags #canvasbag #everydaycarry #slowfashion',
+    yt_en:`Most people never think about why a bag's handle looks different from the body. Kawanishi Kaban made this decision deliberately.
+
+The bag body needs to hold its shape and resist water. The leather handle needs to feel good in your hand and actually improve the more you use it. No single material can do both jobs well — so they use two different ones on purpose.
+
+It's a small detail. But it's exactly the kind of decision that separates a bag designed to last from one designed to look good in photos.
+
+📍 Kawanishi Kaban — Takamatsu, Kagawa, Japan
+🎒 Canvas · Cordura · Tuscan leather · Since 2015
+🛍️ shop.kawanishikaban.com
+📸 @kawanishikaban.global`,
+    yt_ja:`ハンドルが本体と違う理由を気にする人はほとんどいない。川西鞄はこの決断を意図的に行った。
+
+本体は形を保ち防水性が必要。レザーのハンドルは手触りが良く、使うほど良くなる必要がある。1つの素材では両立できない。
+
+小さなディテール。でもこれこそが、長く使えるバッグと映えるだけのバッグを分ける決断だ。
+
+📍 川西鞄 — 香川県高松市
+🎒 キャンバス・コーデュラ・トスカーナレザー・2015年〜
+🛍️ shop.kawanishikaban.com`,
+    yt_tags:'#madeinjapan #japanesebags #canvasbag #everydaycarry #slowfashion #kawanishikaban #leatherbag #japanesecraft' },
+  { ep:'VERDICT', day:'May 31', tt:'Sat May 31', yt:'Mon Jun 2', iw:false,
+    tt_en:`One month. 31 videos about one bag brand. Here's my verdict.
+
+It's a brand that makes more sense the longer you look at it.
+
+Most things are the opposite — they look good until you get close. This one looks better the closer you look.
+
+Is it perfect? No. I wish there were more color options.
+
+But the things they got right, they got really right.
+
+138,000 people in Japan already figured this out.
+
+If you've been watching these videos for a whole month — you're already ahead.
+
+What was the one video from this month that really stuck with you?
+
+🎒 Kawanishi Kaban — Kagawa, Japan
+🛍️ shop.kawanishikaban.com`,
+    tt_ja:`1ヶ月。1つのバッグブランドについて31本の動画。私の結論。
+
+見れば見るほど理解が深まるブランド。
+
+ほとんどのものは逆 — 近づくほど粗が見える。このブランドは近づくほど良く見える。
+
+完璧か？いや。カラーの選択肢が増えればと思う。
+
+でも、うまくやったことは本当にうまくやっている。
+
+日本では13万8千人がすでにそれに気づいている。
+
+1ヶ月間このシリーズを見てくれたあなた — 世界より先を行っている。
+
+今月、一番印象に残った動画は？
+
+🎒 川西鞄 — 香川県
+🛍️ shop.kawanishikaban.com`,
+    tags:'#madeinjapan #japanesebags #canvasbag #everydaycarry #slowfashion',
+    yt_en:`One month. 31 videos. One brand. Here's the honest verdict.
+
+Kawanishi Kaban is a brand that makes more sense the longer you look at it. Most things work the other way — they look impressive until you get close. This one gets better the closer you look.
+
+Is it perfect? No. I genuinely wish they offered more color options.
+
+But the things they got right, they got really right. The construction, the materials, the design philosophy, the no-sale policy, the way the handles age.
+
+138,000 people in Japan have already figured this out. If you've been watching these videos for a month — you're already ahead.
+
+📍 Kawanishi Kaban — Takamatsu, Kagawa, Japan
+🎒 Canvas · Cordura · Tuscan leather · Since 2015
+🛍️ shop.kawanishikaban.com`,
+    yt_ja:`1ヶ月。31本の動画。1つのブランド。正直な結論。
+
+川西鞄は見れば見るほど理解が深まるブランドだ。ほとんどのものは逆。近づくほど粗が見える。このブランドは近づくほど良く見える。
+
+完璧か？いや。カラーバリエーションがもっとあればと思う。
+
+でも、正しくやったことは本当に正しくやっている。構造、素材、設計思想、セールなしのポリシー、ハンドルの経年変化。全部一貫している。
+
+📍 川西鞄 — 香川県高松市
+🎒 キャンバス・コーデュラ・トスカーナレザー・2015年〜
+🛍️ shop.kawanishikaban.com`,
+    yt_tags:'#madeinjapan #japanesebags #canvasbag #everydaycarry #slowfashion #kawanishikaban #verdict #japanmade' },
+];
+
+function buildSchedule() {
+  const tbody = document.getElementById('sched-body');
+  if (!tbody) return;
+  const isJa = document.body.classList.contains('lang-ja');
+  tbody.innerHTML = '';
+  schedule.forEach(ep => {
+    const tr = document.createElement('tr');
+    tr.className = [ep.iw ? 'row-iw' : 'row-ready', ep.high ? 'row-high' : ''].filter(Boolean).join(' ');
+    const statusLabel = isJa ? '準備完了' : 'Cut &amp; Ready';
+    const title = isJa ? ep.title_ja : ep.title_en;
+    tr.innerHTML = `
+      <td><div class="num-cell">${ep.day}</div></td>
+      <td><div class="ep-label ${ep.iw ? 'iw' : ''}">${ep.ep}</div></td>
+      <td><div class="title-cell">${title}</div></td>
+      <td><div class="date-cell">${ep.tt}</div></td>
+      <td><div class="date-cell">${ep.yt}</div></td>
+      <td><span class="status-chip"><span class="chip-dot"></span>${statusLabel}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buildDescriptions() {
+  const grid = document.getElementById('desc-grid');
+  if (!grid) return;
+  const isJa = document.body.classList.contains('lang-ja');
+  grid.innerHTML = '';
+  descriptions.forEach(ep => {
+    const card = document.createElement('div');
+    card.className = 'desc-card ' + (ep.iw ? 'iw-card' : 'eng-card');
+    const ttLabel = isJa ? 'TikTok 説明文' : 'TikTok';
+    const ytLabel = isJa ? 'YouTube Shorts 説明文' : 'YouTube Shorts';
+    const ttDesc = isJa ? (ep.tt_ja || ep.tt_en) : ep.tt_en;
+    const ytDesc = isJa ? (ep.yt_ja || ep.yt_en) : ep.yt_en;
+    card.innerHTML = `
+      <div class="dc-header">
+        <div>
+          <div class="dc-num">${isJa ? '日付' : 'Day'} ${ep.day} · ${ep.ep}</div>
+          <div class="dc-title">${isJa ? (ep.title_ja || ep.title_en) : ep.title_en || ep.ep}</div>
+        </div>
+        <div class="dc-dates">
+          <span class="dc-date-tag tt">TikTok ${ep.tt}</span>
+          <span class="dc-date-tag yt">YT ${ep.yt}</span>
+        </div>
+      </div>
+      <div class="dc-body">
+        <div><div class="dc-plat-title">${ttLabel}</div>
+          <div class="desc-text">${ttDesc}</div>
+          <div class="hashtags">${ep.tags || ep.tt_tags || ''}</div></div>
+        <div><div class="dc-plat-title">${ytLabel}</div>
+          <div class="desc-text">${ytDesc}</div>
+          <div class="hashtags">${ep.yt_tags || ep.tags || ''}</div></div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Rebuild schedule when language changes
+const _origSetLang = typeof setLang === 'function' ? setLang : null;
 
 /* ══ PAGE SWITCHING ══ */
 function switchPage(page){
@@ -1082,6 +1270,9 @@ function setLang(lang){
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',(lang==='en'&&b.title==='English')||(lang==='ja'&&b.title==='日本語')));
   document.querySelectorAll('.m-lang-btn').forEach(b=>b.classList.toggle('active',(lang==='en'&&b.textContent.includes('EN'))||(lang==='ja'&&b.textContent.includes('JP'))));
   try{localStorage.setItem('kk-lang',lang);}catch(e){}
+  // Rebuild JS-generated schedule content in new language
+  buildSchedule();
+  buildDescriptions();
 }
 
 /* ══ MOBILE NAV ══ */
@@ -1120,6 +1311,8 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 /* ══ INIT ══ */
 try{const s=localStorage.getItem('kk-lang');if(s)setLang(s);}catch(e){}
+buildSchedule();
+buildDescriptions();
 loadProgress();
 
 /* ══ GRAPH MODAL DATA ══
