@@ -635,21 +635,22 @@ body.lang-ja span[data-lang="ja"]{display:inline}
         <!-- TIKTOK -->
         <div class="stat-card">
           <div class="stat-type"><span data-lang="en">Followers</span><span data-lang="ja">フォロワー</span></div>
-          <div class="stat-num" data-target="1077" data-suffix="">0</div>
+          <div class="stat-num" data-target="1109" data-suffix="">0</div>
           <div class="stat-platform">TikTok</div>
           <div class="stat-desc">@kawanishikabanstudio</div>
           <div class="mini-graph" onclick="openGraphModal('tiktok')" title="Click to expand">
             <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
             <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
               <defs><linearGradient id="grad-tt" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
-              <path d="M10,40 L190,8 L190,48 L10,48 Z" fill="url(#grad-tt)"/>
-              <line x1="10" y1="40" x2="190" y2="8" stroke="rgba(245,242,238,0.8)" stroke-width="1.8" stroke-linecap="round"/>
-              <circle cx="10" cy="40" r="4" fill="rgba(245,242,238,0.8)" stroke="#080706" stroke-width="2"/>
-              <circle cx="190" cy="8" r="5" fill="rgba(245,242,238,0.9)" stroke="#080706" stroke-width="2" class="graph-pulse"/>
+              <path d="M10,42 L100,22 L190,14 L190,48 L10,48 Z" fill="url(#grad-tt)"/>
+              <polyline points="10,42 100,22 190,14" stroke="rgba(245,242,238,0.8)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="10" cy="42" r="4" fill="rgba(245,242,238,0.8)" stroke="#080706" stroke-width="2"/>
+              <circle cx="100" cy="22" r="4" fill="rgba(245,242,238,0.8)" stroke="#080706" stroke-width="2"/>
+              <circle cx="190" cy="14" r="5" fill="rgba(245,242,238,0.9)" stroke="#080706" stroke-width="2" class="graph-pulse"/>
             </svg>
             <div class="mini-graph-footer">
               <span class="mini-graph-label">Apr 25</span>
-              <span class="mini-graph-trend up" style="margin-left:auto">↑ +109</span>
+              <span class="mini-graph-trend up" style="margin-left:auto">↑ +141 total</span>
             </div>
           </div>
         </div>
@@ -657,21 +658,22 @@ body.lang-ja span[data-lang="ja"]{display:inline}
         <!-- INSTAGRAM -->
         <div class="stat-card">
           <div class="stat-type"><span data-lang="en">Followers</span><span data-lang="ja">フォロワー</span></div>
-          <div class="stat-num" data-target="142" data-suffix="">0</div>
+          <div class="stat-num" data-target="164" data-suffix="">0</div>
           <div class="stat-platform">Instagram</div>
           <div class="stat-desc">@kawanishikaban.global</div>
           <div class="mini-graph" onclick="openGraphModal('instagram')" title="Click to expand">
             <div class="mini-graph-hint"><span data-lang="en">Tap to expand ↗</span><span data-lang="ja">タップして拡大 ↗</span></div>
             <svg class="mini-graph-svg" viewBox="0 0 200 48" preserveAspectRatio="none">
               <defs><linearGradient id="grad-ig" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d6249f" stop-opacity="0.25"/><stop offset="100%" stop-color="#d6249f" stop-opacity="0"/></linearGradient></defs>
-              <path d="M10,38 L190,12 L190,48 L10,48 Z" fill="url(#grad-ig)"/>
-              <line x1="10" y1="38" x2="190" y2="12" stroke="#d6249f" stroke-width="1.8" stroke-linecap="round"/>
-              <circle cx="10" cy="38" r="4" fill="#d6249f" stroke="#080706" stroke-width="2"/>
-              <circle cx="190" cy="12" r="5" fill="#d6249f" stroke="#080706" stroke-width="2" class="graph-pulse"/>
+              <path d="M10,40 L100,32 L190,10 L190,48 L10,48 Z" fill="url(#grad-ig)"/>
+              <polyline points="10,40 100,32 190,10" stroke="#d6249f" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="10" cy="40" r="4" fill="#d6249f" stroke="#080706" stroke-width="2"/>
+              <circle cx="100" cy="32" r="4" fill="#d6249f" stroke="#080706" stroke-width="2"/>
+              <circle cx="190" cy="10" r="5" fill="#d6249f" stroke="#080706" stroke-width="2" class="graph-pulse"/>
             </svg>
             <div class="mini-graph-footer">
               <span class="mini-graph-label">Apr 25</span>
-              <span class="mini-graph-trend up" style="margin-left:auto">↑ +9</span>
+              <span class="mini-graph-trend up" style="margin-left:auto">↑ +31 total</span>
             </div>
           </div>
         </div>
@@ -1452,15 +1454,18 @@ loadProgress();
 const STAT_HISTORY = {
   youtube: [
     { date: 'Apr 25 2026', value: 1710 },
-    { date: 'May 06 2026', value: 1710 }
+    { date: 'May 06 2026', value: 1710 },
+    { date: 'May 13 2026', value: 1710 }
   ],
   tiktok: [
     { date: 'Apr 25 2026', value: 968 },
-    { date: 'May 06 2026', value: 1077 }
+    { date: 'May 06 2026', value: 1077 },
+    { date: 'May 13 2026', value: 1109 }
   ],
   instagram: [
     { date: 'Apr 25 2026', value: 133 },
-    { date: 'May 06 2026', value: 142 }
+    { date: 'May 06 2026', value: 142 },
+    { date: 'May 13 2026', value: 164 }
   ]
 };
 
