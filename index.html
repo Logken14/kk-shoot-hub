@@ -424,7 +424,98 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* Prevent page containers creating stacking contexts that trap position:fixed modal */
-#page-home,#page-shoot,#page-ig{transform:none!important;filter:none!important;will-change:unset!important}
+#page-home,#page-shoot,#page-ig,#page-leather{transform:none!important;filter:none!important;will-change:unset!important}
+
+/* ══ LEATHER SCRIPTS PAGE ══ */
+.ls-wrap{background:#faf8f5;min-height:100vh;padding-bottom:80px;color:#1A1A1A}
+.ls-header{background:#1a1a1a;padding:24px 28px 20px;border-bottom:3px solid #d4af37}
+.ls-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#f5f2ee;letter-spacing:-0.01em;margin-bottom:4px}
+.ls-sub{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.06em}
+.ls-tracker-section{padding:24px 28px;border-bottom:1px solid #E5E0D8}
+.ls-tracker-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.ls-tracker-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#1A1A1A}
+.ls-progress-wrap{display:flex;align-items:center;gap:10px}
+.ls-progress-bar{width:160px;height:8px;background:#E5E0D8;border-radius:4px;overflow:hidden}
+.ls-progress-fill{height:100%;background:linear-gradient(90deg,#d4af37,#C4956A);border-radius:4px;transition:width 0.4s ease;width:0%}
+.ls-progress-label{font-family:'DM Mono',monospace;font-size:11px;color:#666;white-space:nowrap}
+.ls-section-label{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#999;margin:16px 0 10px;padding-left:8px;border-left:3px solid #d4af37}
+.ls-tracker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:8px}
+.ls-tracker-card{background:#fff;border:1px solid #E5E0D8;border-radius:6px;overflow:hidden;transition:all 0.25s ease;position:relative}
+.ls-tracker-card.shot{border-color:#f59e0b}
+.ls-tracker-card.done{background:#f0fdf4;border-color:#10b981;opacity:0.75}
+.ls-tracker-card.done .ls-card-title{text-decoration:line-through;color:#999}
+
+/* Card header row — title + checkboxes inline */
+.ls-card-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;background:#fff;border-bottom:1px solid #E5E0D8;transition:background 0.25s}
+.ls-tracker-card.shot .ls-card-header{background:#fffbeb}
+.ls-tracker-card.done .ls-card-header{background:#f0fdf4;border-bottom-color:#bbf7d0}
+.ls-card-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#1A1A1A;line-height:1.3;transition:all 0.25s;flex:1}
+.ls-card-checks{display:flex;gap:8px;flex-shrink:0}
+.ls-check-label{display:flex;align-items:center;gap:5px;cursor:pointer;user-select:none;padding:4px 8px;border-radius:4px;border:1px solid #E5E0D8;background:#fafafa;transition:all 0.2s}
+.ls-check-label:hover{background:#f0f0f0}
+.shoot-label.checked-shoot{background:#fffbeb;border-color:#f59e0b}
+.edit-label.checked-edit{background:#f0fdf4;border-color:#10b981}
+.ls-checkbox{display:none}
+.ls-check-box{width:16px;height:16px;border-radius:3px;border:2px solid #E5E0D8;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;background:#fff}
+.shoot-check:checked ~ .shoot-box{background:#f59e0b;border-color:#f59e0b}
+.edit-check:checked ~ .edit-box{background:#10b981;border-color:#10b981}
+.ls-check-box svg polyline{opacity:0;transition:opacity 0.15s}
+.ls-checkbox:checked ~ .ls-check-box svg polyline{opacity:1}
+.ls-check-text{font-family:'DM Mono',monospace;font-size:9px;color:#666;white-space:nowrap;font-weight:600}
+
+/* Card status strip at bottom */
+.ls-card-status{font-family:'DM Mono',monospace;font-size:9px;color:#bbb;padding:5px 14px;background:#fafafa;letter-spacing:0.04em;transition:all 0.25s}
+.ls-tracker-card.shot .ls-card-status{color:#f59e0b;background:#fffbeb;font-weight:600}
+.ls-tracker-card.done .ls-card-status{color:#10b981;background:#f0fdf4;font-weight:600}
+
+/* Completed notice banner */
+.ls-completed-notice{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;font-size:11px;color:#166534}
+.ls-completed-notice .ls-cn-icon{font-size:16px;flex-shrink:0}
+.ls-completed-notice strong{font-family:'Syne',sans-serif;font-weight:700;font-size:11px}
+.ls-scripts-section{padding:0}
+.ls-scripts-header{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#999;padding:20px 28px 12px;border-bottom:1px solid #E5E0D8;background:#fff;position:sticky;top:80px;z-index:10}
+.ls-wrap .section-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#888;margin:24px 28px 12px;padding-left:8px;border-left:3px solid #d4af37;display:block}
+.ls-wrap main{max-width:100%;padding:0 28px 40px}
+.ls-wrap .product-container{background:#fff;border-radius:6px;margin-bottom:16px;border:1px solid #E5E0D8;overflow:hidden;box-shadow:none}
+.ls-wrap .product-container:hover{box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.ls-wrap .product-header{background:#34495e;color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ls-wrap .product-header.ph-shot{background:#5a4a1b}
+.ls-wrap .product-header.ph-done{background:#1a4731}
+.ph-left{flex:1;min-width:0}
+.ls-wrap .product-header h2{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin:0}
+.ls-wrap .product-header.ph-done h2{text-decoration:line-through;opacity:0.6}
+.ls-wrap .product-header .jp-name{font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;font-family:'DM Mono',monospace}
+.ph-checks{display:flex;gap:8px;flex-shrink:0}
+.ph-check-label{display:flex;align-items:center;gap:5px;cursor:pointer;user-select:none;padding:5px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);transition:all 0.2s}
+.ph-check-label:hover{background:rgba(255,255,255,0.18)}
+.ph-cb{display:none}
+.ph-box{width:16px;height:16px;border-radius:3px;border:2px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;background:transparent}
+.ph-shoot-box.checked{background:#f59e0b;border-color:#f59e0b}
+.ph-edit-box.checked{background:#10b981;border-color:#10b981}
+.ph-box svg polyline{opacity:0;transition:opacity 0.15s}
+.ph-box.checked svg polyline{opacity:1}
+.ph-label-text{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.85);white-space:nowrap;font-weight:600}
+@media(max-width:480px){.ph-label-text{display:none}.ph-check-label{padding:5px 7px}}
+.ls-wrap .scripts-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.ls-wrap .script-column{padding:14px 16px;border-right:1px solid #E5E0D8}
+.ls-wrap .script-column:last-child{border-right:none}
+.ls-wrap .script-column h3{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#999;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #E5E0D8}
+.ls-wrap .script-column p{font-size:12px;line-height:1.7;color:#2c3e50}
+.ls-wrap .script-column strong{font-weight:600;color:#34495e}
+.ls-wrap footer{display:none}
+@media(max-width:768px){
+  .ls-tracker-section,.ls-tracker-header{padding-left:16px;padding-right:16px}
+  .ls-wrap main{padding:0 16px 40px}
+  .ls-wrap .section-label{margin-left:0;margin-right:0}
+  .ls-tracker-grid{grid-template-columns:1fr 1fr}
+  .ls-wrap .scripts-wrapper{grid-template-columns:1fr}
+  .ls-wrap .script-column{border-right:none;border-bottom:1px solid #E5E0D8}
+  .ls-wrap .script-column:last-child{border-bottom:none}
+  .ls-progress-bar{width:100px}
+  .ls-scripts-header{padding:14px 16px 10px;top:80px}
+}
+@media(max-width:480px){.ls-tracker-grid{grid-template-columns:1fr}}
+
 @media(max-width:1024px){
   .nav-center{display:none}
   .hamburger{display:flex}
@@ -680,8 +771,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
     </a>
   </div>
   <div class="nav-center">
-    <button class="nav-link" onclick="switchPage('shoot')"><span data-lang="en">June Scripts</span><span data-lang="ja">6月スクリプト</span></button>
-    <button class="nav-link" onclick="switchPage('ig')"><span data-lang="en">IG Guide</span><span data-lang="ja">IGガイド</span></button>
+    <button class="nav-link" onclick="switchPage('leather')"><span data-lang="en">Leather Scripts</span><span data-lang="ja">レザー動画スクリプト</span></button>
   </div>
   <div class="nav-right">
     <a class="shop-btn" href="https://kawanishikaban.com" target="_blank"><span data-lang="en">Shop</span><span data-lang="ja">ショップ</span></a>
@@ -698,8 +788,7 @@ body.lang-ja span[data-lang="ja"]{display:inline}
 <!-- Mobile Drawer -->
 <div class="mobile-drawer" id="mobile-drawer">
   <button class="m-link" onclick="switchPage('home');toggleMobile()"><span data-lang="en">Home</span><span data-lang="ja">ホーム</span></button>
-  <button class="m-link" onclick="switchPage('shoot');toggleMobile()"><span data-lang="en">June Scripts</span><span data-lang="ja">6月スクリプト</span></button>
-  <button class="m-link" onclick="switchPage('ig');toggleMobile()"><span data-lang="en">IG Guide</span><span data-lang="ja">IGガイド</span></button>
+  <button class="m-link" onclick="switchPage('leather');toggleMobile()"><span data-lang="en">Leather Scripts</span><span data-lang="ja">レザー動画スクリプト</span></button>
   <a class="m-link" href="https://www.youtube.com/@KawanishiKabanStudio" target="_blank"><span data-lang="en">YouTube</span><span data-lang="ja">YouTube</span></a>
   <a class="m-link" href="https://kawanishikaban.com" target="_blank"><span data-lang="en">Shop</span><span data-lang="ja">ショップ</span></a>
 </div>
@@ -1290,9 +1379,11 @@ const descriptions = [
 /* ══ PAGE SWITCHING ══ */
 function switchPage(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
+  const el=document.getElementById('page-'+page);
+  if(el) el.classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
   window.scrollTo({top:0,behavior:'smooth'});
+  if(page==='leather') setTimeout(updateProgress,50);
   const nav=document.getElementById('main-nav');
   const isHome=page==='home';
   // On home: fixed + transparent. On sub-pages: relative + always dark
@@ -1361,7 +1452,68 @@ const observer=new IntersectionObserver((entries)=>{
 },{threshold:0.15});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-/* ══ JUNE SCRIPTS ACCORDION ══ */
+/* ══ LEATHER TRACKER — header integrated ══ */
+const TOTAL_CARDS = 18;
+
+function togglePh(pid, type) {
+  const shootCb = document.getElementById('ph-shoot-' + pid);
+  const editCb  = document.getElementById('ph-edit-'  + pid);
+  const header  = document.getElementById('ph-' + pid);
+  if (!header) return;
+
+  const shot   = shootCb && shootCb.checked;
+  const edited = editCb  && editCb.checked;
+
+  // Update box visual classes
+  const shootBox = header.querySelector('.ph-shoot-box');
+  const editBox  = header.querySelector('.ph-edit-box');
+  if (shootBox) shootBox.classList.toggle('checked', shot);
+  if (editBox)  editBox.classList.toggle('checked', edited);
+
+  // Update header background state
+  header.classList.remove('ph-shot','ph-done');
+  if (shot && edited) header.classList.add('ph-done');
+  else if (shot || edited) header.classList.add('ph-shot');
+
+  // Persist state
+  try {
+    const saved = JSON.parse(localStorage.getItem('kk-ph-tracker') || '{}');
+    saved[pid] = { shoot: shot, edit: edited };
+    localStorage.setItem('kk-ph-tracker', JSON.stringify(saved));
+  } catch(e) {}
+
+  updateProgress();
+}
+
+function updateProgress() {
+  let done = 0;
+  document.querySelectorAll('[id^="ph-"].product-header').forEach(h => {
+    if (h.classList.contains('ph-done')) done++;
+  });
+  const pct = Math.round((done / TOTAL_CARDS) * 100);
+  const fill  = document.getElementById('progress-fill');
+  const label = document.getElementById('progress-label');
+  if (fill)  fill.style.width = pct + '%';
+  if (label) {
+    const isJa = document.body.classList.contains('lang-ja');
+    label.textContent = done + ' / ' + TOTAL_CARDS + ' ' + (isJa ? '完了' : 'complete');
+  }
+}
+
+function loadTrackerState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('kk-ph-tracker') || '{}');
+    Object.keys(saved).forEach(pid => {
+      const s = saved[pid];
+      const shootCb = document.getElementById('ph-shoot-' + pid);
+      const editCb  = document.getElementById('ph-edit-'  + pid);
+      if (shootCb && s.shoot) shootCb.checked = true;
+      if (editCb  && s.edit)  editCb.checked  = true;
+      if (s.shoot || s.edit) togglePh(pid, 'restore');
+    });
+  } catch(e) {}
+}
+
 function toggleScript(id) {
   const card = document.getElementById(id);
   if (card) card.classList.toggle('open');
@@ -1688,986 +1840,705 @@ document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeGraphModal();
 try{const s=localStorage.getItem('kk-lang');if(s)setLang(s);}catch(e){}
 buildSchedule();
 buildDescriptions();
+loadTrackerState();
 
 
 </script>
 
 
 <!-- ══ PAGE: SHOOT HUB ══ -->
-<div class="page" id="page-shoot">
+<div class="page" id="page-leather">
 
+<!-- LEATHER SCRIPTS STYLES injected into head elsewhere — inline here for safety -->
 
-<div class="june-wrap">
-  <div class="june-header">
-    <div class="june-title"><span data-lang="en">June TikTok Scripts</span><span data-lang="ja">6月TikTokスクリプト</span></div>
-    <div class="june-sub">16 <span data-lang="en">Videos · 4 Per Week · Tue / Wed / Fri / Sun · 8PM JST</span><span data-lang="ja">本 · 週4本 · 火/水/金/日 · JST 20:00</span></div>
-    <div class="june-note"><span data-lang="en">Post natively from TikTok app — never browser schedule</span><span data-lang="ja">TikTokアプリから直接投稿 — ブラウザスケジュール不可</span></div>
-  </div>
+<div class="ls-wrap">
 
-  <div class="hook-banner">
-    <div class="hook-banner-title"><span data-lang="en">Hook Rules — Never Break These</span><span data-lang="ja">フックルール — 絶対に破らない</span></div>
-    <div class="hook-rule"><span data-lang="en">Every hook = CURIOSITY GAP (contradiction or mystery) or VISUAL (product in frame 1)</span><span data-lang="ja">全てのフック = 好奇心ギャップ（矛盾・謎）またはビジュアル（フレーム1に製品）</span></div>
-    <div class="hook-rule"><span data-lang="en">Discovery language always: "There's a..." / "I found..." / "Here's what I didn't expect..."</span><span data-lang="ja">発見の言語を常に使う：「There's a...」/「I found...」/「Here's what I didn't expect...」</span></div>
-    <div class="hook-rule never"><span data-lang="en">NEVER: "Our brand..." / "We make..." — always outsider discovery, never brand promotion</span><span data-lang="ja">絶対NG：「Our brand...」/「We make...」— 常に外部発見者視点、ブランド宣伝は絶対NG</span></div>
-    <div class="hook-rule"><span data-lang="en">Verbal follow CTA within first 15 seconds of every video</span><span data-lang="ja">全動画の最初15秒以内にフォローCTAを口頭で</span></div>
-    <div class="hook-rule"><span data-lang="en">End CTA must be specific to the video — never generic</span><span data-lang="ja">終わりのCTAは動画固有のもの — 汎用は絶対NG</span></div>
-  </div>
-
-  <div class="june-section-title"><span data-lang="en">Posting Schedule</span><span data-lang="ja">投稿スケジュール</span></div>
-  <div class="sched-tbl-wrap">
-    <table class="june-table">
-      <thead><tr>
-        <th>#</th>
-        <th><span data-lang="en">Title</span><span data-lang="ja">タイトル</span></th>
-        <th><span data-lang="en">Day</span><span data-lang="ja">曜日</span></th>
-        <th><span data-lang="en">Date</span><span data-lang="ja">日付</span></th>
-        <th><span data-lang="en">Pillar</span><span data-lang="ja">柱</span></th>
-      </tr></thead>
-      <tbody>
-        <tr class="w1" onclick="openScript('v01')"><td><span class="j-num">V01</span></td><td><span class="j-title">The Mistake Philosophy</span></td><td><span class="j-date">Tue</span></td><td><span class="j-date">Jun 3</span></td><td><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></td></tr>
-        <tr class="w1" onclick="openScript('v02')"><td><span class="j-num">V02</span></td><td><span class="j-title">Wallet Discovery</span></td><td><span class="j-date">Wed</span></td><td><span class="j-date">Jun 4</span></td><td><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></td></tr>
-        <tr class="w1" onclick="openScript('v03')"><td><span class="j-num">V03</span></td><td><span class="j-title">Here's What I Didn't Expect</span></td><td><span class="j-date">Fri</span></td><td><span class="j-date">Jun 6</span></td><td><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></td></tr>
-        <tr class="w1" onclick="openScript('v04')"><td><span class="j-num">V04</span></td><td><span class="j-title">Why Would a Brand Design Leather to Get Scratched?</span></td><td><span class="j-date">Sun</span></td><td><span class="j-date">Jun 8</span></td><td><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></td></tr>
-        <tr class="w2" onclick="openScript('v05')"><td><span class="j-num">V05</span></td><td><span class="j-title">The Morning Meeting</span></td><td><span class="j-date">Tue</span></td><td><span class="j-date">Jun 10</span></td><td><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></td></tr>
-        <tr class="w2" onclick="openScript('v06')"><td><span class="j-num">V06</span></td><td><span class="j-title">The Pocket Video</span></td><td><span class="j-date">Wed</span></td><td><span class="j-date">Jun 11</span></td><td><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></td></tr>
-        <tr class="w2" onclick="openScript('v07')"><td><span class="j-num">V07</span></td><td><span class="j-title">The Bag That Almost Didn't Exist</span></td><td><span class="j-date">Fri</span></td><td><span class="j-date">Jun 13</span></td><td><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></td></tr>
-        <tr class="w2" onclick="openScript('v08')"><td><span class="j-num">V08</span></td><td><span class="j-title">The Anti-Gravity Backpack</span></td><td><span class="j-date">Sun</span></td><td><span class="j-date">Jun 15</span></td><td><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></td></tr>
-        <tr class="w3" onclick="openScript('v09')"><td><span class="j-num">V09</span></td><td><span class="j-title">The Bags I Actually Carry Now</span></td><td><span class="j-date">Tue</span></td><td><span class="j-date">Jun 17</span></td><td><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></td></tr>
-        <tr class="w3" onclick="openScript('v10')"><td><span class="j-num">V10</span></td><td><span class="j-title">Pack With Me: Flying to America</span></td><td><span class="j-date">Wed</span></td><td><span class="j-date">Jun 18</span></td><td><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></td></tr>
-        <tr class="w3" onclick="openScript('v11')"><td><span class="j-num">V11</span></td><td><span class="j-title">My Actual Tuesday in Japan</span></td><td><span class="j-date">Fri</span></td><td><span class="j-date">Jun 20</span></td><td><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></td></tr>
-        <tr class="w3" onclick="openScript('v12')"><td><span class="j-num">V12</span></td><td><span class="j-title">The Bag That Survived Everything</span></td><td><span class="j-date">Sun</span></td><td><span class="j-date">Jun 22</span></td><td><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></td></tr>
-        <tr class="w4" onclick="openScript('v13')"><td><span class="j-num">V13</span></td><td><span class="j-title">International Shipping Update</span></td><td><span class="j-date">Tue</span></td><td><span class="j-date">Jun 24</span></td><td><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></td></tr>
-        <tr class="w4" onclick="openScript('v14')"><td><span class="j-num">V14</span></td><td><span class="j-title">The Bag That Takes 4-6 Months to Make</span></td><td><span class="j-date">Wed</span></td><td><span class="j-date">Jun 25</span></td><td><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></td></tr>
-        <tr class="w4" onclick="openScript('v15')"><td><span class="j-num">V15</span></td><td><span class="j-title">Three Times I've Lived in Japan</span></td><td><span class="j-date">Fri</span></td><td><span class="j-date">Jun 27</span></td><td><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></td></tr>
-        <tr class="w4" onclick="openScript('v16')"><td><span class="j-num">V16</span></td><td><span class="j-title">The One Thing I Actually Recommend</span></td><td><span class="j-date">Sun</span></td><td><span class="j-date">Jun 29</span></td><td><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="june-section-title" style="margin-top:24px"><span data-lang="en">Scripts</span><span data-lang="ja">スクリプト</span></div>
-  <div class="scripts-grid">
-
-    <!-- V01 -->
-    <div class="script-card" id="sc-v01">
-      <div class="script-card-header" onclick="toggleScript('sc-v01')">
-        <div class="sc-num">V01</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Mistake Philosophy</span><span data-lang="ja">ミスの哲学</span></div>
-          <div class="sc-tags"><span class="sc-date">Tue Jun 3 · 8PM JST</span><span class="sc-len">~40 sec</span><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"There's a bag that was sitting in a warehouse not selling. One change fixed everything."</span><span data-lang="ja">「倉庫に売れずに眠っていたバッグがあった。1つの変更で全てが変わった。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Show the Minimon in frame 1 — closed, clean shot</span><span data-lang="ja">■ フレーム1にミニモンを映す — 閉じた状態、クリーンなショット</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">This is the Minimon. They had inventory piling up. Nobody was buying it.</span><span data-lang="ja">これがミニモン。在庫が積み上がっていた。誰も買わなかった。</span></p>
-            <p><span data-lang="en">Instead of discounting it or scrapping it — they just asked one question. What's actually wrong with it?</span><span data-lang="ja">値引きも廃棄もせず — ただ1つの問いを立てた。実際に何が問題なのか？</span></p>
-            <p><span data-lang="en">Turned out people wanted a zipper instead of a magnetic snap. They added the zipper. Now it sells.</span><span data-lang="ja">マグネットスナップではなくジッパーが欲しいということだった。ジッパーを追加した。今は売れている。</span></p>
-            <p><span data-lang="en">I've been trying to make content for nine months and struggling with the same thing. Different angles, different formats, different ideas. And watching this company just — change one thing and move forward — that actually helped me. Change the angle. Not the goal.</span><span data-lang="ja">9ヶ月間コンテンツ作りに取り組んで同じことで悩んでいた。違う角度、違うフォーマット、違うアイデア。この会社がただ1つを変えて前に進む姿を見て、本当に助けられた。変えるのは角度。目標じゃない。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Frame 1: Minimon on clean surface, zipper in focus</span><span data-lang="ja">フレーム1：クリーンな面の上のミニモン、ジッパーにピント</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: you holding it, demonstrating zipper vs magnetic</span><span data-lang="ja">カット：あなたが持ち、ジッパーvsマグネットを実演</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: quick montage of you filming different angles</span><span data-lang="ja">カット：異なる角度で撮影するあなたのクイックモンタージュ</span></li>
-            <li data-n="4"><span data-lang="en">End: you on camera, genuine</span><span data-lang="ja">エンド：カメラに向かうあなた、自然な表情</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"What's one thing you'd change about how you work? Drop it below."</span><span data-lang="ja">「仕事のやり方で1つ変えたいことは？コメントで教えて。」</span></div>
-        </div>
-      </div>
+  <div class="ls-header">
+    <div class="ls-title">
+      <span data-lang="en">Leather Products — Video Scripts</span>
+      <span data-lang="ja">レザー製品 動画スクリプト</span>
     </div>
-
-    <!-- V02 -->
-    <div class="script-card" id="sc-v02">
-      <div class="script-card-header" onclick="toggleScript('sc-v02')">
-        <div class="sc-num">V02</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">Wallet Discovery</span><span data-lang="ja">財布の発見</span></div>
-          <div class="sc-tags"><span class="sc-date">Wed Jun 4 · 8PM JST</span><span class="sc-len">~40 sec</span><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"Six months of daily use. This wallet still smells brand new."</span><span data-lang="ja">「毎日6ヶ月使っても、この財布はまだ新品の匂いがする。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open: close-up of wallet being opened — green sand leather visible</span><span data-lang="ja">■ オープン：財布を開けるクローズアップ — グリーンサンドレザーを映す</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">This is the RicchyL. Green sand leather. I've used it every single day since I started working here. It still smells exactly like the day I got it.</span><span data-lang="ja">これがリッチーL。グリーンサンドレザー。ここで働き始めてから毎日使っている。もらった日と全く同じ匂いがする。</span></p>
-            <p><span data-lang="en">But look at these spots — the leather is getting darker in certain places from all the use and wear. And honestly those spots look cool. You can see exactly where this wallet has lived.</span><span data-lang="ja">でもこのスポットを見て — 使い続けることで特定の場所のレザーが濃くなっている。正直このスポットはかっこいい。この財布がどこで生きてきたかが見える。</span></p>
-            <p><span data-lang="en">Cheap wallets wear down and look worse. This one just looks more like mine.</span><span data-lang="ja">安い財布は劣化して見苦しくなる。これはただ、より自分らしくなっていく。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: close-up of wallet being opened, green sand leather color</span><span data-lang="ja">オープン：財布を開けるクローズアップ、グリーンサンドレザーの色</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: genuine smell reaction — natural, don't overdo it</span><span data-lang="ja">カット：匂いへの自然なリアクション — 大げさにしない</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: show the darkening spots — run finger across them</span><span data-lang="ja">カット：濃くなったスポットを見せる — 指でなぞる</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: full wallet in natural light</span><span data-lang="ja">カット：自然光の中の財布全体</span></li>
-            <li data-n="5"><span data-lang="en">End: you looking at camera, honest expression</span><span data-lang="ja">エンド：カメラを見るあなた、正直な表情</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"How long have you kept your longest wallet? Drop the number."</span><span data-lang="ja">「一番長く使った財布は何年？数字を教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V03 -->
-    <div class="script-card" id="sc-v03">
-      <div class="script-card-header" onclick="toggleScript('sc-v03')">
-        <div class="sc-num">V03</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">Here's What I Didn't Expect</span><span data-lang="ja">予想外だったこと</span></div>
-          <div class="sc-tags"><span class="sc-date">Fri Jun 6 · 8PM JST</span><span class="sc-len">~50 sec</span><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"Nine months working at a Japanese bag company. Here's what actually surprised me."</span><span data-lang="ja">「日本のバッグ会社で9ヶ月働いた。本当に驚いたことがある。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ You on camera, direct eye contact from frame 1</span><span data-lang="ja">■ フレーム1からカメラに直接目線</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">I thought I'd come here, film bags, post videos, build an audience. That was the plan.</span><span data-lang="ja">バッグを撮影して動画を投稿してオーディエンスを作る。それが計画だった。</span></p>
-            <p><span data-lang="en">What I didn't expect was watching my boss genuinely light up when fans sent him gifts. People traveling across Japan just to meet the people who make these bags by hand.</span><span data-lang="ja">予想外だったのは、ファンからプレゼントが届いた時の上司の本物の笑顔。手作りのバッグを作る人たちに会うためだけに日本中から来る人々。</span></p>
-            <p><span data-lang="en">I see that level of connection and honestly — I'm a little jealous. Not of the numbers. Of the fact that people care that much. That's what I'm building toward here. And that's why I keep showing up.</span><span data-lang="ja">そのレベルのつながりを見て正直少し羨ましい。数字じゃなく、人々がそこまで気にかけるという事実に。それが僕のここでの目標。だから続けている。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: you direct to camera, honest expression</span><span data-lang="ja">オープン：カメラに直接、正直な表情</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: workshop — hands, tools, the people in the space</span><span data-lang="ja">カット：工房 — 手、道具、空間にいる人々</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: any footage of fan interaction or gifts if available</span><span data-lang="ja">カット：ファンとのやり取りやプレゼントの映像があれば</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: you back on camera, quieter moment</span><span data-lang="ja">カット：カメラに戻るあなた、静かな瞬間</span></li>
-            <li data-n="5"><span data-lang="en">End: workshop wide shot, morning light</span><span data-lang="ja">エンド：工房の引きショット、朝の光</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"What made you actually care about a brand for the first time? Tell me in the comments."</span><span data-lang="ja">「初めてブランドを本当に好きになったのはいつ？コメントで教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V04 -->
-    <div class="script-card" id="sc-v04">
-      <div class="script-card-header" onclick="toggleScript('sc-v04')">
-        <div class="sc-num">V04</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">Why Would a Brand Design Leather to Get Scratched?</span><span data-lang="ja">なぜブランドは傷つくレザーを設計するのか？</span></div>
-          <div class="sc-tags"><span class="sc-date">Sun Jun 8 · 8PM JST</span><span class="sc-len">~40 sec</span><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"Why would a brand intentionally design leather to get scratched?"</span><span data-lang="ja">「なぜブランドは意図的に傷つくレザーを設計するのか？」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open on finger dragging across sand leather — scratch appearing in frame 1</span><span data-lang="ja">■ フレーム1でサンドレザーに指を引く — 傷が現れる</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">This is sand leather. The surface is intentionally roughened. Scratches blend in instead of standing out.</span><span data-lang="ja">これがサンドレザー。表面は意図的に粗くされている。傷が目立つのではなく、馴染んでいく。</span></p>
-            <p><span data-lang="en">The color changes the longer you use it — darker, richer, more uniquely yours.</span><span data-lang="ja">使えば使うほど色が変わる — 濃く、豊かに、より自分だけのものに。</span></p>
-            <p><span data-lang="en">Cheap leather hides in a store and falls apart in your hands. This leather is designed to age in yours.</span><span data-lang="ja">安いレザーは店では映えて、あなたの手の中で崩れる。このレザーはあなたの手の中でエイジングするように設計されている。</span></p>
-            <p><span data-lang="en">The scratches aren't damage. They're evidence.</span><span data-lang="ja">傷はダメージじゃない。証拠だ。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: finger scratching sand leather, scratch appearing in frame</span><span data-lang="ja">オープン：サンドレザーに指で傷をつける、フレームに傷が現れる</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: showing scratch blending in</span><span data-lang="ja">カット：傷が馴染む様子を見せる</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: comparison if available — new vs aged</span><span data-lang="ja">カット：可能なら比較 — 新品vs経年変化</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: full product shot, bright background</span><span data-lang="ja">カット：明るい背景で製品全体のショット</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, direct</span><span data-lang="ja">エンド：カメラに向かうあなた、直接</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Would you actually want a bag that shows wear? Yes or no."</span><span data-lang="ja">「使い込みが見えるバッグが欲しい？YesかNoで。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V05 -->
-    <div class="script-card" id="sc-v05">
-      <div class="script-card-header" onclick="toggleScript('sc-v05')">
-        <div class="sc-num">V05</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Morning Meeting</span><span data-lang="ja">朝のミーティング</span></div>
-          <div class="sc-tags"><span class="sc-date">Tue Jun 10 · 8PM JST</span><span class="sc-len">~50 sec</span><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"This Japanese company starts every single workday by reading out loud together. As a team."</span><span data-lang="ja">「この日本の会社は毎日チームで声に出して読むことから始まる。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Show the printed packet or the circle gathering</span><span data-lang="ja">■ 印刷されたパケットまたは輪になって集まる様子を映す</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">Before anyone opens a laptop. Before any messages get checked. The whole team stands in a circle.</span><span data-lang="ja">誰もパソコンを開く前。メッセージを確認する前。チーム全員が輪になって立つ。</span></p>
-            <p><span data-lang="en">We have a printed packet with a theme on it — something like 'using your energy in the right place' or 'making things that are loved.' We read it out loud together. Then everyone goes around and shares one thought.</span><span data-lang="ja">テーマが書かれたプリントがある — 「エネルギーを正しい場所に使う」や「愛されるものを作る」といった内容。全員で声に出して読む。そして一人ずつ一つの考えをシェアする。</span></p>
-            <p><span data-lang="en">I've done this almost every day for nine months. And I still think about what gets said in that circle while I'm editing hours later. Whatever is in these bags — the care that went into them — I think it starts here.</span><span data-lang="ja">9ヶ月間ほぼ毎日これをやってきた。何時間後に編集をしていても、その輪で言われたことをまだ考えている。このバッグに込められたもの — その丁寧さ — はここから始まると思う。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: close-up of the printed packet</span><span data-lang="ja">オープン：印刷されたパケットのクローズアップ</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: the workshop space before work starts — the quiet</span><span data-lang="ja">カット：仕事が始まる前の工房 — 静けさ</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: you on camera, reflective</span><span data-lang="ja">カット：カメラのあなた、内省的な様子</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: bags on shelves — the product these people make</span><span data-lang="ja">カット：棚のバッグ — この人たちが作る製品</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, direct</span><span data-lang="ja">エンド：カメラに向かうあなた、直接</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Does your company do anything like this? I'm genuinely curious."</span><span data-lang="ja">「あなたの会社でもこういうことをしている？本当に気になる。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V06 -->
-    <div class="script-card" id="sc-v06">
-      <div class="script-card-header" onclick="toggleScript('sc-v06')">
-        <div class="sc-num">V06</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Pocket Video</span><span data-lang="ja">ポケット動画</span></div>
-          <div class="sc-tags"><span class="sc-date">Wed Jun 11 · 8PM JST</span><span class="sc-len">~30 sec</span><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">VISUAL ONLY — no voiceover, no talking</span><span data-lang="ja">ビジュアルのみ — ナレーションなし、セリフなし</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ On-screen text sequence — bag: Grabe</span><span data-lang="ja">■ 画面テキストシーケンス — バッグ：グラベ</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">On-Screen Text Sequence</span><span data-lang="ja">画面テキストシーケンス</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">Bag closed: <strong>"13 pockets."</strong></span><span data-lang="ja">バッグ閉じた状態：<strong>「13個のポケット。」</strong></span></p>
-            <p><span data-lang="en">Front pocket: <strong>"Front. Fast access."</strong></span><span data-lang="ja">フロントポケット：<strong>「フロント。素早いアクセス。」</strong></span></p>
-            <p><span data-lang="en">Side pocket: <strong>"Side. Water bottle."</strong></span><span data-lang="ja">サイドポケット：<strong>「サイド。ボトル用。」</strong></span></p>
-            <p><span data-lang="en">Main interior: <strong>"Main. Everything."</strong></span><span data-lang="ja">メインインテリア：<strong>「メイン。全て入る。」</strong></span></p>
-            <p><span data-lang="en">Interior zipper: <strong>"Hidden zipper."</strong></span><span data-lang="ja">インテリアジッパー：<strong>「隠しジッパー。」</strong></span></p>
-            <p><span data-lang="en">Slip pockets: <strong>"Cards. Phone. Keys."</strong></span><span data-lang="ja">スリップポケット：<strong>「カード。スマホ。カギ。」</strong></span></p>
-            <p><span data-lang="en">Final: <strong>"Grabe. Kagawa, Japan."</strong></span><span data-lang="ja">最後：<strong>「グラベ。香川県、日本。」</strong></span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Bright surface, natural light, slow deliberate movements</span><span data-lang="ja">明るい面、自然光、ゆっくりと意図的な動き</span></li>
-            <li data-n="2"><span data-lang="en">Each pocket gets its own moment — don't rush</span><span data-lang="ja">各ポケットに独自の時間を — 急がない</span></li>
-            <li data-n="3"><span data-lang="en">Silence + minimal rhythmic music</span><span data-lang="ja">無音＋ミニマルなリズミカルな音楽</span></li>
-            <li data-n="4"><span data-lang="en">Shoot 4K, slight slow motion on opening movements</span><span data-lang="ja">4K撮影、開く動きにわずかなスローモーション</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — On Screen Final Frame Only</span><span data-lang="ja">CTA — 最終フレームの画面表示のみ</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Which pocket did you need most?"</span><span data-lang="ja">「一番必要なポケットはどれ？」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V07 -->
-    <div class="script-card" id="sc-v07">
-      <div class="script-card-header" onclick="toggleScript('sc-v07')">
-        <div class="sc-num">V07</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Bag That Almost Didn't Exist</span><span data-lang="ja">存在しなかったかもしれないバッグ</span></div>
-          <div class="sc-tags"><span class="sc-date">Fri Jun 13 · 8PM JST</span><span class="sc-len">~50 sec</span><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"This bag almost never existed. Here's the one decision that changed that."</span><span data-lang="ja">「このバッグはほぼ存在しなかった。全てを変えた1つの決断がある。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open on bag in frame — clean hero shot</span><span data-lang="ja">■ フレーム内のバッグ — クリーンなヒーローショット</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">When this company first started they were only making bags for other brands. Their name wasn't on anything. Just producing, shipping, moving on.</span><span data-lang="ja">この会社が始まった頃、他のブランドのためだけにバッグを作っていた。自分たちの名前はどこにもなかった。ただ作って、出荷して、次へ。</span></p>
-            <p><span data-lang="en">At some point the founder made a decision — I want to be responsible for what I make. I want my name on it. Not for ego. Because if your name is on something, you actually care about whether it lasts.</span><span data-lang="ja">ある時点で創業者が決断した — 自分が作るものに責任を持ちたい。名前を入れたい。エゴのためじゃない。名前が入っていれば、本当に長持ちするかどうかを気にかけるから。</span></p>
-            <p><span data-lang="en">That shift is why these bags are still being designed the way they are. Every pocket, every material, every detail — it exists because someone decided to care about what happened after the bag left the building.</span><span data-lang="ja">その転換が今もこのデザインの理由。全てのポケット、素材、ディテール — バッグが工房を出た後のことを気にかけると誰かが決めたから存在する。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: tight shot of the KK logo tag on a bag</span><span data-lang="ja">オープン：バッグのKKロゴタグのタイトショット</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: workshop — production, hands, detail work</span><span data-lang="ja">カット：工房 — 生産、手、ディテール作業</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: you on camera, discovery tone</span><span data-lang="ja">カット：カメラのあなた、発見のトーン</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: finished bag — clean and beautiful</span><span data-lang="ja">カット：完成したバッグ — クリーンで美しい</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, direct close</span><span data-lang="ja">エンド：カメラに向かうあなた、直接的なクローズ</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Would you buy something differently if you knew the maker's name was on the line? Drop your answer."</span><span data-lang="ja">「作り手の名前がかかっていると知ったら、買い方が変わる？答えをコメントで。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V08 -->
-    <div class="script-card" id="sc-v08">
-      <div class="script-card-header" onclick="toggleScript('sc-v08')">
-        <div class="sc-num">V08</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Anti-Gravity Backpack</span><span data-lang="ja">反重力バックパック</span></div>
-          <div class="sc-tags"><span class="sc-date">Sun Jun 15 · 8PM JST</span><span class="sc-len">~50 sec</span><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"This bag changed how I think about carrying things."</span><span data-lang="ja">「このバッグが物を持ち運ぶことへの考え方を変えた。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ VISUAL HOOK: Backpack on table, slow zoom out</span><span data-lang="ja">■ ビジュアルフック：テーブルのバックパック、ゆっくりズームアウト</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">Every bag I've used my whole life puts the heaviest items at the bottom. This one does the opposite on purpose.</span><span data-lang="ja">これまで使ってきた全てのバッグは最も重いものを底に入れる。これは意図的に逆。</span></p>
-            <p><span data-lang="en">When weight sits low it pulls your body away from center. You end up compensating without even realizing it.</span><span data-lang="ja">重さが低い位置にあると体の重心からずれる。気づかないうちに補正している。</span></p>
-            <p><span data-lang="en">This backpack puts the heavy stuff up top — closer to your center of gravity. The bag sits with you instead of against you.</span><span data-lang="ja">このバックパックは重いものを上 — 重心に近い場所に入れる。バッグが体と一体になる。逆らわない。</span></p>
-            <p><span data-lang="en">I didn't fully believe it until I took it on a four hour hike. The anti-gravity thing actually works.</span><span data-lang="ja">4時間のハイキングに持っていくまで完全には信じなかった。反重力というのは本当に効く。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: backpack on table, zoom out slowly</span><span data-lang="ja">オープン：テーブルのバックパック、ゆっくりズームアウト</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: demonstration — heavy item going in at the top</span><span data-lang="ja">カット：デモ — 重いものを上に入れる</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: you wearing it, side profile showing how it sits</span><span data-lang="ja">カット：着用したあなた、バッグの収まりを示すサイドプロファイル</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: trail or outdoor path — natural carry</span><span data-lang="ja">カット：山道や屋外の道 — 自然な持ち方</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, direct</span><span data-lang="ja">エンド：カメラに向かうあなた、直接</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Have you ever used something that worked completely differently than you expected? Tell me what it was."</span><span data-lang="ja">「全く予想と違う使い心地のものを使ったことがある？コメントで教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V09 -->
-    <div class="script-card" id="sc-v09">
-      <div class="script-card-header" onclick="toggleScript('sc-v09')">
-        <div class="sc-num">V09</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Bags I Actually Carry Now</span><span data-lang="ja">今実際に使っているバッグ</span></div>
-          <div class="sc-tags"><span class="sc-date">Tue Jun 17 · 8PM JST</span><span class="sc-len">~45 sec</span><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"I work at a bag company. For the first few months I only got interested in the wallets and the backpacks."</span><span data-lang="ja">「バッグ会社で働いている。最初の数ヶ月は財布とバックパックにしか興味がなかった。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open: you holding wallet and backpack — clear in frame</span><span data-lang="ja">■ オープン：財布とバックパックを持つあなた — フレームにはっきり映る</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">I figured those were the only things I'd actually use day to day. But then I started shooting videos outside with other bags from the lineup. And something shifted.</span><span data-lang="ja">日常的に使うのはそれだけだと思っていた。でも他のラインナップのバッグで屋外撮影を始めたら、何かが変わった。</span></p>
-            <p><span data-lang="en">The Grabe Mini Cordura. The Abb Cordura with a shoulder strap. Both of them fit really well. There's so much room to just throw your daily stuff in without thinking about it.</span><span data-lang="ja">グラベミニコーデュラ。ショルダーストラップ付きのアブコーデュラ。どちらも本当にフィットする。日常の荷物を考えずに放り込めるスペースがある。</span></p>
-            <p><span data-lang="en">And I don't usually have a strong opinion about this type of bag — especially as a guy. But honestly these fit in a way where I could actually see myself wearing them every day.</span><span data-lang="ja">このタイプのバッグには強い意見がなかった — 特に男として。でも正直、毎日持ちたいと思えるフィット感がある。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: you holding wallet and backpack</span><span data-lang="ja">オープン：財布とバックパックを持つあなた</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: you out with the Grabe Mini or Abb Cordura on a shoot</span><span data-lang="ja">カット：撮影でグラベミニまたはアブコーデュラを持って外出</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: bag being worn naturally with shoulder strap</span><span data-lang="ja">カット：ショルダーストラップで自然に着用</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: interior — showing the space and capacity</span><span data-lang="ja">カット：インテリア — スペースと容量を見せる</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, relaxed with the bag</span><span data-lang="ja">エンド：バッグと一緒にリラックスしたあなた</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Tote or backpack for everyday use — which one are you?"</span><span data-lang="ja">「日常使いはトートかバックパックか — あなたはどっち？」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V10 -->
-    <div class="script-card" id="sc-v10">
-      <div class="script-card-header" onclick="toggleScript('sc-v10')">
-        <div class="sc-num">V10</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">Pack With Me: What I'm Bringing to America</span><span data-lang="ja">一緒に荷造り：アメリカに持っていくもの</span></div>
-          <div class="sc-tags"><span class="sc-date">Wed Jun 18 · 8PM JST</span><span class="sc-len">~45 sec</span><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"I'm flying back to America in August. This is the bag I'm trusting with everything."</span><span data-lang="ja">「8月にアメリカに飛ぶ。全てを任せるバッグがこれ。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open: Seowi on a table — clean, big, ready</span><span data-lang="ja">■ オープン：テーブルのセオウィ — クリーン、大きい、準備完了</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">This is the Seowi. The biggest backpack in the Seow series. 22 liters. Two compartments. Fits a 16-inch laptop.</span><span data-lang="ja">これがセオウィ。セオウシリーズ最大のバックパック。22リットル。2つのコンパートメント。16インチのラップトップが入る。</span></p>
-            <p><span data-lang="en">I'm bringing this carry-on only — no checked bag. Camera gear, laptop, everything I need for shoots. And my daily bag around Portland.</span><span data-lang="ja">これだけで機内持ち込み — 預け荷物なし。カメラ機材、ラップトップ、撮影に必要な全て。ポートランドでの日常バッグにもなる。</span></p>
-            <p><span data-lang="en">I've been using this thing here in Japan and the fact that I trust it enough to take it across the Pacific — that says something.</span><span data-lang="ja">日本で使い続けて、太平洋を渡るほど信頼できる — それが全てを語っている。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: Seowi on surface, zoom in slightly — show the scale</span><span data-lang="ja">オープン：面のセオウィ、わずかにズームイン — スケールを見せる</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: overhead packing sequence — items going in one by one</span><span data-lang="ja">カット：オーバーヘッドの荷造りシーケンス — 一つずつ入れていく</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: bag closed, full and ready</span><span data-lang="ja">カット：バッグを閉めた状態、満杯で準備完了</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: you picking it up, natural carry</span><span data-lang="ja">カット：あなたが持ち上げる、自然な持ち方</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, direct</span><span data-lang="ja">エンド：カメラに向かうあなた、直接</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"What's the one thing you never travel without? Drop it below."</span><span data-lang="ja">「旅行に絶対持っていくものは？コメントで教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V11 -->
-    <div class="script-card" id="sc-v11">
-      <div class="script-card-header" onclick="toggleScript('sc-v11')">
-        <div class="sc-num">V11</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">My Actual Tuesday in Japan</span><span data-lang="ja">日本での実際の火曜日</span></div>
-          <div class="sc-tags"><span class="sc-date">Fri Jun 20 · 8PM JST</span><span class="sc-len">~55 sec</span><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"It's currently 5:45am in Japan. This is what my day looks like working at a Japanese company."</span><span data-lang="ja">「今、日本の朝5時45分。日本の会社で働く一日はこんな感じ。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Film yourself at 5:45am — phone footage, raw</span><span data-lang="ja">■ 朝5時45分の自分を撮影 — スマホ映像、生のまま</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">5:45 — walking the dog. 6:30 — at the gym. 8:40 — heading to work.</span><span data-lang="ja">5:45 — 犬の散歩。6:30 — ジム。8:40 — 出勤。</span></p>
-            <p><span data-lang="en">9:00 — morning circle. The whole team reads something together and shares one thought before anyone touches a laptop.</span><span data-lang="ja">9:00 — 朝の輪。誰もパソコンを触る前にチーム全員で何かを読んで一つの考えをシェアする。</span></p>
-            <p><span data-lang="en">9:30 until noon I'm editing. Noon — lunch. Afternoons I'm out shooting. Bags, products, whatever needs to get done.</span><span data-lang="ja">9:30から正午まで編集。正午 — ランチ。午後は撮影に出る。バッグ、製品、やるべきことを全部。</span></p>
-            <p><span data-lang="en">I get home genuinely tired. And I genuinely don't mind.</span><span data-lang="ja">帰宅すると本当に疲れている。そして本当に嫌じゃない。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: phone footage at 5:45am — dark, real, raw</span><span data-lang="ja">オープン：5:45の朝のスマホ映像 — 暗い、リアル、生のまま</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: dog walk, quick</span><span data-lang="ja">カット：犬の散歩、短く</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: gym or heading out</span><span data-lang="ja">カット：ジムまたは外出</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: you editing — bags visible in background</span><span data-lang="ja">カット：編集するあなた — 背景にバッグ</span></li>
-            <li data-n="5"><span data-lang="en">Cut to: afternoon shoot — you out with a bag and camera</span><span data-lang="ja">カット：午後の撮影 — バッグとカメラを持って外出</span></li>
-            <li data-n="6"><span data-lang="en">End: you on camera, end of day energy, relaxed</span><span data-lang="ja">エンド：カメラのあなた、一日の終わりのエネルギー、リラックス</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"What does your Tuesday actually look like? Tell me in the comments."</span><span data-lang="ja">「あなたの実際の火曜日はどんな感じ？コメントで教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V12 -->
-    <div class="script-card" id="sc-v12">
-      <div class="script-card-header" onclick="toggleScript('sc-v12')">
-        <div class="sc-num">V12</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Bag That Survived Everything</span><span data-lang="ja">全てを乗り越えたバッグ</span></div>
-          <div class="sc-tags"><span class="sc-date">Sun Jun 22 · 8PM JST</span><span class="sc-len">~45 sec</span><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"I've been using this bag every single day for nine months. Here's what it looks like now."</span><span data-lang="ja">「このバッグを9ヶ月間毎日使っている。今どんな状態か見せる。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open: close-up of the bag — worn in, used, real</span><span data-lang="ja">■ オープン：バッグのクローズアップ — 使い込まれた、リアル</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">Not a review. Not a promo. Just — here's a bag after nine months of actual daily use.</span><span data-lang="ja">レビューじゃない。プロモーションじゃない。ただ — 9ヶ月間実際に毎日使ったバッグの現状。</span></p>
-            <p><span data-lang="en">The Lauff camera shoulder bag. I've taken it to shoots, on business trips, hiking, to the gym, everywhere.</span><span data-lang="ja">ラウフカメラショルダーバッグ。撮影、出張、ハイキング、ジム、どこにでも持っていった。</span></p>
-            <p><span data-lang="en">The Cordura hasn't frayed. The zipper works exactly like day one. The leather strap has darkened and softened right where my hand grips it.</span><span data-lang="ja">コーデュラはほつれていない。ジッパーは初日と全く同じように動く。レザーストラップは手が握る部分だけ濃くなり柔らかくなった。</span></p>
-            <p><span data-lang="en">I genuinely thought I'd notice it wearing down at some point. Nine months in — I'm still waiting.</span><span data-lang="ja">どこかで劣化に気づくだろうと本当に思っていた。9ヶ月経って — まだ待っている。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: close-up detail of the bag after real use</span><span data-lang="ja">オープン：実際の使用後のバッグのクローズアップディテール</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: specific wear points — strap, zipper, base</span><span data-lang="ja">カット：特定の摩耗ポイント — ストラップ、ジッパー、底</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: you using it naturally — not a demo, just real use</span><span data-lang="ja">カット：自然に使うあなた — デモじゃなくリアルな使用</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: comparison shot if possible — new version vs yours</span><span data-lang="ja">カット：可能なら比較ショット — 新品 vs あなたのもの</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, genuine</span><span data-lang="ja">エンド：カメラのあなた、自然な表情</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"What's the longest you've used one bag before replacing it? Drop the number."</span><span data-lang="ja">「1つのバッグを替える前に最長で何年使った？数字を教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V13 -->
-    <div class="script-card" id="sc-v13">
-      <div class="script-card-header" onclick="toggleScript('sc-v13')">
-        <div class="sc-num">V13</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">International Shipping Update</span><span data-lang="ja">海外配送アップデート</span></div>
-          <div class="sc-tags"><span class="sc-date">Tue Jun 24 · 8PM JST</span><span class="sc-len">~45 sec</span><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"People have been asking me for months where to buy these bags. Here's where things actually stand."</span><span data-lang="ja">「何ヶ月もどこで買えるか聞かれている。実際の状況はこうだ。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open: phone showing real comments asking about shipping</span><span data-lang="ja">■ オープン：配送について質問するリアルなコメントを映すスマホ</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">We've now had people buy from America. From Singapore. From Europe. Real orders getting to real people.</span><span data-lang="ja">アメリカ、シンガポール、ヨーロッパから購入者が出てきた。リアルな注文がリアルな人に届いている。</span></p>
-            <p><span data-lang="en">Every single bag is originally designed here in Takamatsu, Kagawa — that's where the ideas come from, that's where the brand lives. And now those bags are getting to people outside Japan.</span><span data-lang="ja">全てのバッグは香川県高松市でオリジナルデザインされている — アイデアが生まれる場所、ブランドが生きる場所。そして今、そのバッグが日本国外の人に届いている。</span></p>
-            <p><span data-lang="en">Shipping costs depend on the product and box size. Worth checking before you order. The link is in my bio.</span><span data-lang="ja">送料は製品と箱のサイズによる。注文前に確認する価値がある。リンクはプロフィールに。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: real comments on phone screen</span><span data-lang="ja">オープン：スマホ画面のリアルなコメント</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: you on camera, calm and direct</span><span data-lang="ja">カット：カメラのあなた、落ち着いて直接的</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: your best bag footage from the month</span><span data-lang="ja">カット：今月のベストバッグ映像</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: close-up of KK logo — made here, going everywhere</span><span data-lang="ja">カット：KKロゴのクローズアップ — ここで作られ、世界へ</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, simple</span><span data-lang="ja">エンド：カメラのあなた、シンプルに</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Comment the country you're watching from. I want to see where this reaches."</span><span data-lang="ja">「視聴している国をコメントして。どこまで届いているか見たい。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V14 -->
-    <div class="script-card" id="sc-v14">
-      <div class="script-card-header" onclick="toggleScript('sc-v14')">
-        <div class="sc-num">V14</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The Bag That Takes 4-6 Months to Make</span><span data-lang="ja">製作に4〜6ヶ月かかるバッグ</span></div>
-          <div class="sc-tags"><span class="sc-date">Wed Jun 25 · 8PM JST</span><span class="sc-len">~50 sec</span><span class="j-pillar p-brand"><span data-lang="en">Brand Philosophy</span><span data-lang="ja">ブランド哲学</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"I asked how long it takes to make one of these bags. The answer stopped me."</span><span data-lang="ja">「このバッグを作るのにどのくらいかかるか聞いた。答えに言葉を失った。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open: you on camera, reaction to an answer you just heard</span><span data-lang="ja">■ オープン：今聞いた答えへのリアクション</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">Four to six months. From first sketch to finished bag. Not because they're slow. Because they draw it, make it, look at it, remake it, look at it again.</span><span data-lang="ja">4〜6ヶ月。最初のスケッチから完成品まで。遅いからじゃない。描いて、作って、見て、作り直して、また見る。</span></p>
-            <p><span data-lang="en">The product you can buy right now went through that entire process before it ever existed.</span><span data-lang="ja">今購入できる製品は、存在する前にその全プロセスを経ている。</span></p>
-            <p><span data-lang="en">Most things you own were designed in a few weeks and optimized for price. These were designed over months and optimized for the person who's going to use it for the next twenty years.</span><span data-lang="ja">あなたが持っているほとんどのものは数週間で設計されて価格を最適化している。これは数ヶ月かけて設計されて、次の20年間使う人のために最適化されている。</span></p>
-            <p><span data-lang="en">You can feel the difference when you pick one up. I couldn't explain why at first. Now I know.</span><span data-lang="ja">手に取った時に違いを感じる。最初はなぜか説明できなかった。今はわかる。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: you on camera, genuine reaction</span><span data-lang="ja">オープン：カメラのあなた、自然なリアクション</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: design sketches or planning materials if available</span><span data-lang="ja">カット：可能ならデザインスケッチや計画資料</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: construction process — any workshop footage</span><span data-lang="ja">カット：制作プロセス — 工房の映像</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: finished bag, clean and perfect</span><span data-lang="ja">カット：完成したバッグ、クリーンで完璧</span></li>
-            <li data-n="5"><span data-lang="en">End: you holding the finished bag, direct to camera</span><span data-lang="ja">エンド：完成品を持つあなた、カメラに直接</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"What's the longest you've ever waited for something worth having? Drop it below."</span><span data-lang="ja">「価値あるものを手に入れるために最長でどのくらい待った？コメントで教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V15 -->
-    <div class="script-card" id="sc-v15">
-      <div class="script-card-header" onclick="toggleScript('sc-v15')">
-        <div class="sc-num">V15</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">Three Times I've Lived in Japan</span><span data-lang="ja">日本に住んだ3回</span></div>
-          <div class="sc-tags"><span class="sc-date">Fri Jun 27 · 8PM JST</span><span class="sc-len">~60 sec</span><span class="j-pillar p-foreigner"><span data-lang="en">Foreigner in Japan</span><span data-lang="ja">日本の外国人</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"I've lived in Japan three separate times. And each time it meant something completely different."</span><span data-lang="ja">「日本に3回別々に住んだ。そして毎回全く異なる意味があった。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ You on camera, Takamatsu visible behind you</span><span data-lang="ja">■ カメラのあなた、後ろに高松が見える</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">First time — high school exchange student. I was just exposed to the culture, the people, the food. Everything was new and exciting.</span><span data-lang="ja">1回目 — 高校の交換留学生。文化、人々、食べ物に触れただけ。全てが新しくてワクワクしていた。</span></p>
-            <p><span data-lang="en">Second time — I came back to travel with my brother. I got to show him the places I loved. That felt different — sharing something that meant something to me.</span><span data-lang="ja">2回目 — 弟と旅行するために戻った。好きな場所を見せることができた。それは違った感覚 — 自分にとって意味のあるものをシェアすること。</span></p>
-            <p><span data-lang="en">Third time is now. Living here, paying bills, actually building something. And that's different again.</span><span data-lang="ja">3回目が今。ここに住んで、家賃を払って、実際に何かを作っている。それはまた違う。</span></p>
-            <p><span data-lang="en">But one thing has never changed — my desire to share this country's culture and mindset. Being able to share Japan's craftsmanship through video — and talk about the thinking behind these bags — that genuinely excites me.</span><span data-lang="ja">でも1つだけ変わらないこと — この国の文化と考え方をシェアしたいという気持ち。動画で日本の職人技をシェアして、このバッグの背景にある考えを話す — それが本当に自分を興奮させる。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: you on camera, relaxed — Takamatsu context behind you</span><span data-lang="ja">オープン：カメラのあなた、リラックス — 高松のコンテキストが後ろに</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: streets of Takamatsu, your actual neighborhood</span><span data-lang="ja">カット：高松の街並み、実際の近所</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: workshop — the people, the space</span><span data-lang="ja">カット：工房 — 人々、空間</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: Seto Inland Sea if accessible</span><span data-lang="ja">カット：可能なら瀬戸内海</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, direct and genuine</span><span data-lang="ja">エンド：カメラのあなた、直接的で自然</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Have you ever gone back to a place and experienced it completely differently? Tell me where."</span><span data-lang="ja">「以前訪れた場所に戻って全く違う体験をしたことがある？どこか教えて。」</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- V16 -->
-    <div class="script-card" id="sc-v16">
-      <div class="script-card-header" onclick="toggleScript('sc-v16')">
-        <div class="sc-num">V16</div>
-        <div class="sc-meta">
-          <div class="sc-title"><span data-lang="en">The One Thing I Actually Recommend</span><span data-lang="ja">本当におすすめする1つのこと</span></div>
-          <div class="sc-tags"><span class="sc-date">Sun Jun 29 · 8PM JST</span><span class="sc-len">~55 sec</span><span class="j-pillar p-product"><span data-lang="en">Product Showcase</span><span data-lang="ja">製品紹介</span></span></div>
-        </div>
-        <div class="sc-toggle">▾</div>
-      </div>
-      <div class="script-body">
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Hook — First 3 Seconds</span><span data-lang="ja">フック — 最初の3秒</span></div>
-          <div class="sc-hook"><span data-lang="en">"People always ask me which bag they should buy from this brand. My answer always surprises them."</span><span data-lang="ja">「このブランドでどのバッグを買うべきかいつも聞かれる。答えはいつも相手を驚かせる。」</span></div>
-          <div class="sc-visual-note"><span data-lang="en">■ Open: you on camera, slight smile — conversational</span><span data-lang="ja">■ オープン：カメラのあなた、わずかな笑み — 会話的なトーン</span></div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Body</span><span data-lang="ja">本文</span></div>
-          <div class="sc-body-text">
-            <p><span data-lang="en">There are so many bags to choose from and honestly it depends on what functionality you want. But if I had to point someone somewhere to start — I'd say the wallets.</span><span data-lang="ja">バッグは選択肢が多くて、正直どんな機能が欲しいかによる。でもどこかから始めるなら — 財布と言う。</span></p>
-            <p><span data-lang="en">Four completely different wallets. The RicchyL — compact long wallet, L-shaped zipper, movable card pocket. The RicchyL Mini — same concept, smaller form. The RicchyL Premium — metal plate detail. The Woll — L-shaped folding wallet, water-repellent leather, newer Bag Lab design.</span><span data-lang="ja">4つの全く異なる財布。リッチーL — コンパクトな長財布、L字ジッパー、可動式カードポケット。リッチーLミニ — 同じコンセプト、小さいサイズ。リッチーLプレミアム — メタルプレートディテール。ウォル — L字折り財布、撥水レザー、新しいバッグラボデザイン。</span></p>
-            <p><span data-lang="en">I've been using the RicchyL in green sand leather every single day for nine months. Still in perfect condition. Start there. Then work your way to a bag.</span><span data-lang="ja">グリーンサンドレザーのリッチーLを9ヶ月間毎日使っている。まだ完璧な状態。まずそこから始めて。それからバッグへ。</span></p>
-          </div>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">Visual Notes</span><span data-lang="ja">映像メモ</span></div>
-          <ol class="sc-visuals">
-            <li data-n="1"><span data-lang="en">Open: you on camera, direct — conversational energy</span><span data-lang="ja">オープン：カメラのあなた、直接的 — 会話的なエネルギー</span></li>
-            <li data-n="2"><span data-lang="en">Cut to: all four wallets laid out — flat lay, clean surface</span><span data-lang="ja">カット：4つの財布を並べた — フラットレイ、クリーンな面</span></li>
-            <li data-n="3"><span data-lang="en">Cut to: close-up of each one — RicchyL, Mini, Premium, Woll</span><span data-lang="ja">カット：それぞれのクローズアップ — リッチーL、ミニ、プレミアム、ウォル</span></li>
-            <li data-n="4"><span data-lang="en">Cut to: your personal RicchyL — the worn in green one</span><span data-lang="ja">カット：あなた個人のリッチーL — 使い込んだグリーン</span></li>
-            <li data-n="5"><span data-lang="en">End: you on camera, direct</span><span data-lang="ja">エンド：カメラのあなた、直接的</span></li>
-          </ol>
-        </div>
-        <div class="sc-section">
-          <div class="sc-section-label"><span data-lang="en">CTA — Spoken + On Screen</span><span data-lang="ja">CTA — 口頭＋画面表示</span></div>
-          <div class="sc-cta-box"><span data-lang="en">"Which wallet would you actually use? Drop the one that caught your eye."</span><span data-lang="ja">「実際に使いたい財布はどれ？気になったものをコメントで。」</span></div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- end scripts-grid -->
-</div><!-- end june-wrap -->
-</div><!-- end page-shoot -->
-
-<!-- ══ PAGE: IG GUIDE ══ -->
-<div class="page" id="page-ig">
-
-
-<div class="ig-strategy">
-  <div class="igs-header">
-    <div class="igs-title"><span data-lang="en">Instagram Strategy Guide</span><span data-lang="ja">Instagramストラテジーガイド</span></div>
-    <div class="igs-sub">@kawanishikaban.global · <span data-lang="en">Daily posting · 12:00 PM JST</span><span data-lang="ja">毎日投稿 · JST 12:00</span></div>
-    <div class="igs-tag"><span data-lang="en">Brand exposure and desire-building for the international audience</span><span data-lang="ja">国際オーディエンスへのブランド露出と欲求構築</span></div>
-  </div>
-
-  <!-- POSTING RHYTHM -->
-  <div class="igs-section">
-    <div class="igs-section-title"><span data-lang="en">Posting Rhythm</span><span data-lang="ja">投稿リズム</span></div>
-    <div class="rhythm-grid">
-      <div class="rhythm-card primary">
-        <div class="rc-label"><span data-lang="en">Daily</span><span data-lang="ja">毎日</span></div>
-        <div class="rc-title"><span data-lang="en">Post at 12:00 PM JST</span><span data-lang="ja">JST 12:00に投稿</span></div>
-        <div class="rc-desc"><span data-lang="en">Reels on most days. Carousels once per week.</span><span data-lang="ja">ほぼ毎日リール。週1回カルーセル。</span></div>
-      </div>
-      <div class="rhythm-card secondary">
-        <div class="rc-label"><span data-lang="en">Weekly</span><span data-lang="ja">週次</span></div>
-        <div class="rc-title"><span data-lang="en">1 Carousel</span><span data-lang="ja">カルーセル1本</span></div>
-        <div class="rc-desc"><span data-lang="en">8–10 slides · one bag · one location · one shoot day · no splice technique</span><span data-lang="ja">8〜10枚 · バッグ1つ · ロケーション1つ · 撮影日1日 · スプライス不使用</span></div>
-      </div>
-      <div class="rhythm-card tertiary">
-        <div class="rc-label"><span data-lang="en">Every Shoot Day</span><span data-lang="ja">撮影日ごと</span></div>
-        <div class="rc-title"><span data-lang="en">Stories</span><span data-lang="ja">ストーリーズ</span></div>
-        <div class="rc-desc"><span data-lang="en">BTS, polls, behind the scenes. Brings followers along in real time.</span><span data-lang="ja">BTS、投票、舞台裏。フォロワーをリアルタイムで連れていく。</span></div>
-      </div>
-    </div>
-
-    <div class="igs-section-title" style="margin-top:8px"><span data-lang="en">Three Reel Formats — Rotate Between These</span><span data-lang="ja">3つのリールフォーマット — これを回す</span></div>
-    <div class="format-grid">
-      <div class="format-card">
-        <div><div class="fc-name"><span data-lang="en">Cinematic Carry</span><span data-lang="ja">シネマティックキャリー</span></div><div class="fc-desc"><span data-lang="en">Person or Mac carrying bag in real Japan environment. Fast cuts, no talking, music-driven. Model shoots.</span><span data-lang="ja">リアルな日本の環境でバッグを持ち歩く。速いカット、セリフなし、音楽主導。モデル撮影。</span></div></div>
-        <div class="fc-len">15–30s</div>
-        <div class="fc-drive drive-feel">FEEL + ACQUIRE</div>
-      </div>
-      <div class="format-card">
-        <div><div class="fc-name"><span data-lang="en">Detail Close-Up</span><span data-lang="ja">ディテールクローズアップ</span></div><div class="fc-desc"><span data-lang="en">Extreme close-up of one design element only. Material, hardware, stitching, texture. No talking. Music carries it.</span><span data-lang="ja">1つのデザイン要素だけを超クローズアップ。素材、金具、ステッチ、質感。セリフなし。</span></div></div>
-        <div class="fc-len">15–20s</div>
-        <div class="fc-drive drive-learn">LEARN + FEEL</div>
-      </div>
-      <div class="format-card">
-        <div><div class="fc-name"><span data-lang="en">BTS / Office</span><span data-lang="ja">BTS / オフィス</span></div><div class="fc-desc"><span data-lang="en">Behind the scenes of the workshop, shoot days, the process. Ambient sound. Authentic and human.</span><span data-lang="ja">工房・撮影日・制作過程の舞台裏。環境音。本物らしく、人間的に。</span></div></div>
-        <div class="fc-len">20–40s</div>
-        <div class="fc-drive drive-bond">BOND + LEARN</div>
-      </div>
+    <div class="ls-sub">
+      <span data-lang="en">Kawanishi Kaban · Takamatsu, Kagawa</span>
+      <span data-lang="ja">川西鞄スタジオ · 香川県高松市</span>
     </div>
   </div>
 
-  <!-- DISTRIBUTION CHECKLIST -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">Distribution Checklist — Run Before Every Post</span><span data-lang="ja">配信チェックリスト — 毎回投稿前に確認</span></div>
-    <div class="checklist">
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">Caption body contains at least 2 searchable keywords naturally written (see keyword bank below)</span><span data-lang="ja">キャプション本文に検索可能なキーワードを自然に2つ以上含む（下記キーワードバンク参照）</span></div>
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">ALT text written in Advanced Settings → Accessibility with 2–3 target keywords</span><span data-lang="ja">詳細設定 → アクセシビリティでALTテキストにキーワード2〜3個記入</span></div>
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">Location tag added: Takamatsu, Kagawa</span><span data-lang="ja">位置情報タグ追加：高松市、香川県</span></div>
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">3–5 hashtags placed IN the caption (not in comments)</span><span data-lang="ja">ハッシュタグ3〜5個をキャプション内に（コメントではなく）</span></div>
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">Subtitles added to Reels (helps algorithm index content)</span><span data-lang="ja">リールに字幕追加（アルゴリズムによるコンテンツインデックスを助ける）</span></div>
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">Post time: 12:00 PM JST</span><span data-lang="ja">投稿時間：JST 12:00</span></div>
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">CTA matches this post type (Shop / Save / Engage — see rotation)</span><span data-lang="ja">CTAが投稿タイプに一致（購入/保存/エンゲージ — ローテーション参照）</span></div>
-      <div class="check-item"><div class="check-box">✓</div><span data-lang="en">First frame has visible hook text</span><span data-lang="ja">フレーム1に見えるフックテキストがある</span></div>
+  <!-- PROGRESS TRACKER -->
+  <div class="ls-tracker-section" style="padding:20px 28px">
+    <div class="ls-tracker-header" style="margin-bottom:12px">
+      <div class="ls-tracker-title">
+        <span data-lang="en">Shoot Progress</span>
+        <span data-lang="ja">撮影進捗</span>
+      </div>
+      <div class="ls-progress-wrap">
+        <div class="ls-progress-bar"><div class="ls-progress-fill" id="progress-fill"></div></div>
+        <div class="ls-progress-label" id="progress-label">0 / 18 <span data-lang="en">complete</span><span data-lang="ja">完了</span></div>
+      </div>
     </div>
-  </div>
-
-  <!-- KEYWORD BANK -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">Keyword Bank — Embed Naturally in Every Caption</span><span data-lang="ja">キーワードバンク — 毎回キャプションに自然に埋め込む</span></div>
-    <div style="font-size:12px;color:#666;margin-bottom:12px"><span data-lang="en">Instagram is now a search engine. Use at least 2 per post — as natural language, not hashtags.</span><span data-lang="ja">Instagramは今や検索エンジン。毎投稿2つ以上使う — ハッシュタグではなく自然な言葉として。</span></div>
-    <div class="kw-grid">
+    <div class="ls-completed-notice">
+      <span class="ls-cn-icon">✅</span>
       <div>
-        <div class="kw-col-title"><span data-lang="en">Primary</span><span data-lang="ja">プライマリ</span></div>
-        <div class="kw-list">
-          <div class="kw-item">Japanese bag</div>
-          <div class="kw-item">made in Japan</div>
-          <div class="kw-item">handmade in Japan</div>
-          <div class="kw-item">Japanese craftsmanship</div>
-          <div class="kw-item">canvas tote</div>
-          <div class="kw-item">Cordura bag</div>
-        </div>
-      </div>
-      <div>
-        <div class="kw-col-title"><span data-lang="en">Secondary</span><span data-lang="ja">セカンダリ</span></div>
-        <div class="kw-list">
-          <div class="kw-item">buy it for life</div>
-          <div class="kw-item">Kagawa Japan</div>
-          <div class="kw-item">Takamatsu Japan</div>
-          <div class="kw-item">functional bag design</div>
-          <div class="kw-item">slow fashion</div>
-          <div class="kw-item">Japanese tote</div>
-        </div>
+        <strong><span data-lang="en">Canvas &amp; Cordura bag videos — already complete</span><span data-lang="ja">キャンバス・コーデュラバッグ動画 — 撮影・編集済み</span></strong>
+        <div style="margin-top:2px;font-size:10px;opacity:0.75"><span data-lang="en">This tracker covers leather &amp; accessory products only. Check off each product as you film and edit below.</span><span data-lang="ja">このトラッカーはレザー・アクセサリー製品のみ対象。下のスクリプトを読みながら撮影・編集済みにチェックを。</span></div>
       </div>
     </div>
   </div>
 
-  <!-- CAPTION FORMULA -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">Caption Formula</span><span data-lang="ja">キャプション構成</span></div>
-    <div class="cap-formula">
-      <div class="cap-row">
-        <div class="cap-num">1</div>
-        <div class="cap-body">
-          <div class="cap-label"><span data-lang="en">Hook</span><span data-lang="ja">フック</span></div>
-          <div class="cap-example"><span data-lang="en">Visual hook or paradox — 12 words max. Specific number + unexpected verb wins. e.g. "12 pockets. Zero excuses."</span><span data-lang="ja">視覚的フックまたは逆説 — 最大12語。具体的な数字＋意外な動詞が勝つ。例：「12個のポケット。言い訳なし。」</span></div>
+  <!-- SCRIPTS REFERENCE -->
+  <div class="ls-scripts-section">
+    <div class="ls-scripts-header">
+      <span data-lang="en">Script Reference</span>
+      <span data-lang="ja">スクリプト参照</span>
+    </div>
+
+        <!-- Name Card Cases -->
+        <h2 class="section-label">Name Card Cases</h2>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-seam-m-sand">
+                <div class="ph-left">
+                    <h2>Seam M - Sand Leather</h2>
+                    <div class="jp-name">シームM・サンドレザーver.</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('seam-m-sand','shoot')">
+                        <input type="checkbox" id="ph-shoot-seam-m-sand" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('seam-m-sand','edit')">
+                        <input type="checkbox" id="ph-edit-seam-m-sand" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「これがカワニシカバンの名刺入れ、シームM。サンドレザー仕様です。」<br><strong>0:03</strong> 「素材には、オリジナル素材"サンドレザー"を採用。表面を毛羽立たせた独特の質感で、傷が目立ちにくいのも特徴です。」<br><strong>0:12</strong> 「最大の特徴は、大容量なのにスリムなこと。名刺は約30枚収納でき、中身の量に合わせて自然に厚みが変わる設計です。」<br><strong>0:22</strong> 「内側は2つのポケット構造。手前のポケットは指を掛けやすい形状で、名刺もスムーズに取り出せます。」<br><strong>0:31</strong> 「表から見えないスナップボタン付き。名刺をたくさん入れても、きれいなフォルムを保ちます。」<br><strong>0:38</strong> 「さりげないロゴの刻印や、革の色に合わせたステッチなど、細部まで丁寧に仕上げました。」<br><strong>0:45</strong> 「四つ折りのお札や小銭を入れれば、ミニ財布として使うこともできます。」<br><strong>0:50</strong> 「専用の赤いギフトボックスに入れてお届け。使うほど表情が変わる、サンドレザーの名刺入れです。」<br><strong>0:57</strong> 「毎日に寄り添う、レザーの名刺入れ。シームMです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's business card case, Seam M. Sand Leather version. <br><strong>0:03</strong> Features our original Sand Leather—scratches stay less visible thanks to its unique raised texture. <br><strong>0:12</strong> Spacious yet slim: holds about 30 cards with thickness that adjusts naturally to contents. <br><strong>0:22</strong> Two interior pockets—the front pocket's grip-friendly shape makes card retrieval smooth. <br><strong>0:31</strong> Hidden snap button keeps cards organized even when full. <br><strong>0:38</strong> Subtle logo embossing and leather-matched stitching show meticulous craftsmanship throughout. <br><strong>0:45</strong> Fold bills or add coins—doubles as a mini wallet. <br><strong>0:50</strong> Arrives in a special red gift box. A card case that evolves in character with use. <br><strong>0:57</strong> Leather card case that stays with you daily. This is Seam M.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-num">2–3</div>
-        <div class="cap-body">
-          <div class="cap-label"><span data-lang="en">Product + Place</span><span data-lang="ja">製品＋場所</span></div>
-          <div class="cap-example"><span data-lang="en">Product name + 1 spec + place (always include Kagawa or Takamatsu). e.g. "The Grabe. 13 pockets. Takamatsu, Japan."</span><span data-lang="ja">製品名＋仕様1つ＋場所（香川または高松を必ず含める）。例：「グラベ。13個のポケット。香川県高松市。」</span></div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-seam-m-lischio">
+                <div class="ph-left">
+                    <h2>Seam M - Toscano Lischio</h2>
+                    <div class="jp-name">シームM・リスシオレザー</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('seam-m-lischio','shoot')">
+                        <input type="checkbox" id="ph-shoot-seam-m-lischio" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('seam-m-lischio','edit')">
+                        <input type="checkbox" id="ph-edit-seam-m-lischio" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンの名刺入れ、シームMです。」<br><strong>0:03</strong> 「無駄を削ぎ落とした、シンプルなデザイン。素材には、イタリア・フィレンツェの名門タンナーが手掛ける"トスカーノ リスシオレザー"を採用しました。」<br><strong>0:12</strong> 「最大の特徴は、大容量なのにスリムなこと。名刺は約30枚収納でき、中身の量に合わせて自然に厚みが変わる設計です。」<br><strong>0:22</strong> 「内側は2つのポケット構造。手前のポケットは指を掛けやすい形状で、名刺もスムーズに取り出せます。」<br><strong>0:31</strong> 「表から見えないスナップボタン付き。名刺をたくさん入れても、きれいなフォルムを保ちます。」<br><strong>0:38</strong> 「革の色に合わせたステッチや、さりげないロゴの刻印など、細部まで丁寧に仕上げました。」<br><strong>0:45</strong> 「四つ折りのお札や小銭を入れれば、ミニ財布として使うこともできます。」<br><strong>0:50</strong> 「専用の赤いギフトボックスに入れてお届け。使うほどに風合いが深まる、レザーの名刺入れです。」<br><strong>0:57</strong> 「長く寄り添う、一枚の革から。シームMです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Kawanishi Kaban's business card case, Seam M. <br><strong>0:03</strong> Minimalist design made from Toscano Lischio Leather—crafted by a prestigious Florentine tannery. <br><strong>0:12</strong> Spacious yet slim: holds about 30 cards with thickness that adjusts naturally to contents. <br><strong>0:22</strong> Two interior pockets—the front pocket's grip-friendly shape makes card retrieval smooth. <br><strong>0:31</strong> Hidden snap button keeps cards organized even when full. <br><strong>0:38</strong> Leather-matched stitching and subtle logo embossing show meticulous craftsmanship. <br><strong>0:45</strong> Fold bills or add coins—doubles as a mini wallet. <br><strong>0:50</strong> Arrives in a special red gift box. Character deepens beautifully with use. <br><strong>0:57</strong> Lasting companionship from a single sheet of leather. This is Seam M.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-num">4</div>
-        <div class="cap-body">
-          <div class="cap-label"><span data-lang="en">Emotion</span><span data-lang="ja">感情</span></div>
-          <div class="cap-example"><span data-lang="en">Emotional reason to own it — embed searchable keywords here naturally. e.g. "Built for the person who buys once and keeps it forever."</span><span data-lang="ja">所有する感情的な理由 — ここに検索キーワードを自然に埋め込む。例：「一度買ってずっと使い続ける人のために作られた。」</span></div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-seam-m-wash">
+                <div class="ph-left">
+                    <h2>Seam M - Wash</h2>
+                    <div class="jp-name">シームM・ウォッシュ</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('seam-m-wash','shoot')">
+                        <input type="checkbox" id="ph-shoot-seam-m-wash" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('seam-m-wash','edit')">
+                        <input type="checkbox" id="ph-edit-seam-m-wash" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンの名刺入れ、シームM・ウォッシュです。」<br><strong>0:03</strong> 「洗い加工を施すことで、一点一点異なる表情に。革本来の風合いを楽しめる、特別な仕上がりです。」<br><strong>0:11</strong> 「素材には、イタリア・フィレンツェの名門タンナーが手掛ける"トスカーノ リスシオレザー"を採用。やわらかな手触りと、使うほど深まる風合いが魅力です。」<br><strong>0:21</strong> 「コンパクトながら、名刺は約20枚収納可能。内側は2つのポケット構造で、名刺も整理して収められます。」<br><strong>0:30</strong> 「開閉はスナップボタン式。四つ折りのお札を入れれば、ミニ財布として使うこともできます。」<br><strong>0:38</strong> 「カラーは、レッド・ワイン・ブラックの3色展開。洗い加工ならではの表情は、一点ごとに異なります。」<br><strong>0:46</strong> 「使い始めから手になじみ、使うほどに味わいが深まるレザーです。」<br><strong>0:52</strong> 「革の個性を楽しむ、名刺入れ。シームM・ウォッシュです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Kawanishi Kaban's business card case, Seam M Wash. <br><strong>0:03</strong> Wash treatment gives each piece unique character—celebrating leather's natural patina. <br><strong>0:11</strong> Made with Toscano Lischio Leather—soft touch with deepening character over time. <br><strong>0:21</strong> Compact yet holds about 20 cards in two organized interior pockets. <br><strong>0:30</strong> Snap closure. Add folded bills for mini wallet functionality. <br><strong>0:38</strong> Available in Red, Wine, and Black—each wash-treated piece is one-of-a-kind. <br><strong>0:46</strong> Feels great from day one, deepening in character with every use. <br><strong>0:52</strong> A card case that celebrates leather's individuality. This is Seam M Wash.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-num">5</div>
-        <div class="cap-body">
-          <div class="cap-label"><span data-lang="en">CTA</span><span data-lang="ja">CTA</span></div>
-          <div class="cap-example"><span data-lang="en">Rotate: Shop / Save / Engage. e.g. "Save this for your next bag search."</span><span data-lang="ja">ローテーション：購入/保存/エンゲージ。例：「次のバッグ探しのために保存を。」</span></div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-seam-m-foil">
+                <div class="ph-left">
+                    <h2>Seam M - Foil</h2>
+                    <div class="jp-name">シームM・箔</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('seam-m-foil','shoot')">
+                        <input type="checkbox" id="ph-shoot-seam-m-foil" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('seam-m-foil','edit')">
+                        <input type="checkbox" id="ph-edit-seam-m-foil" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンの名刺入れ、シームM・箔です。」<br><strong>0:03</strong> 「上品なクロムレザーに、シルバーの箔押しロゴ。さりげない存在感が、ビジネスシーンに映えるデザインです。」<br><strong>0:11</strong> 「クロムレザーは、経年変化が起こりにくい素材。きれいな表情を長く保ち、毎日の仕事に寄り添います。」<br><strong>0:20</strong> 「コンパクトながら、名刺は約30枚収納可能。中身の量に合わせて自然に厚みが変わるので、すっきりとしたフォルムを保ちます。」<br><strong>0:30</strong> 「ポケットは2つ。手前のポケットは指を掛けやすい形状で、名刺もスムーズに取り出せます。」<br><strong>0:38</strong> 「表から見えないスナップボタン付き。名刺をたくさん入れても、きれいに閉じられる設計です。」<br><strong>0:45</strong> 「お札と小銭を分けて入れれば、ミニ財布として使うこともできます。」<br><strong>0:50</strong> 「専用の赤いギフトボックスに入れてお届け。自分用にも、贈り物にも選ばれている名刺入れです。」<br><strong>0:57</strong> 「美しく持ち、美しく渡す。シームM・箔です。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Kawanishi Kaban's business card case, Seam M Foil. <br><strong>0:03</strong> Refined chrome leather with silver foil-pressed logo—subtle presence that shines in business. <br><strong>0:11</strong> Chrome leather resists aging, keeping its clean appearance for years of daily work. <br><strong>0:20</strong> Compact yet holds about 30 cards with thickness adjusting naturally—streamlined form. <br><strong>0:30</strong> Two pockets: the front pocket's finger-friendly shape makes card retrieval smooth. <br><strong>0:38</strong> Hidden snap button keeps cards organized and secure. <br><strong>0:45</strong> Separate bills and coins for mini wallet function. <br><strong>0:50</strong> Arrives in a special red gift box—chosen for personal use and gifting alike. <br><strong>0:57</strong> Carry beauty, give beauty. This is Seam M Foil.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="cap-row">
-        <div class="cap-num">6</div>
-        <div class="cap-body">
-          <div class="cap-label"><span data-lang="en">Hashtags</span><span data-lang="ja">ハッシュタグ</span></div>
-          <div class="cap-example"><span data-lang="en">3–5 max. Always-on 4 + 1 rotating. In caption not comments.</span><span data-lang="ja">最大3〜5個。常時4個＋ローテーション1個。コメントではなくキャプション内に。</span></div>
+
+        <!-- Key Cases -->
+        <h2 class="section-label">Key Cases</h2>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-katie">
+                <div class="ph-left">
+                    <h2>Katie</h2>
+                    <div class="jp-name">ケイティ</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('katie','shoot')">
+                        <input type="checkbox" id="ph-shoot-katie" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('katie','edit')">
+                        <input type="checkbox" id="ph-edit-katie" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのキーケース、ケイティです。」<br><strong>0:03</strong> 「無駄を削ぎ落とした、静かなデザイン。表からスナップボタンが見えない設計で、革の美しさを引き立てました。」<br><strong>0:11</strong> 「素材には、イタリア・フィレンツェの名門タンナーが手掛ける"トスカーノ リスシオレザー"を採用。やわらかな手触りと、使うほど深まる風合いが魅力です。」<br><strong>0:21</strong> 「5連のキーホルダーのうち、1つは大きめのリングを採用。スマートキーも収納しやすい設計です。」<br><strong>0:30</strong> 「反対側には取り外し可能なキーリングを配置。用途に合わせて使い分けることができます。」<br><strong>0:37</strong> 「内側にはポケットを1つ備え、カードや折りたたんだお札も収納可能。さりげないロゴの刻印が、上品なアクセントになっています。」<br><strong>0:47</strong> 「カラーは、レッド・ワイン・ブラックの3色展開。年齢や性別を問わず、長く使えるデザインです。」<br><strong>0:55</strong> 「専用ボックスに入れてお届けします。毎日に寄り添う、レザーキーケース。ケイティです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Kawanishi Kaban's key case, Katie. <br><strong>0:03</strong> Quiet, minimalist design—hidden snap buttons showcase leather's beauty. <br><strong>0:11</strong> Made with Toscano Lischio Leather from a prestigious Florentine tannery—soft touch with deepening character. <br><strong>0:21</strong> Of 5 key rings, one is oversized for smart keys. <br><strong>0:30</strong> Removable key ring on the opposite side for flexible use. <br><strong>0:37</strong> One interior pocket for cards and folded bills—subtle logo adds refined detail. <br><strong>0:47</strong> Available in Red, Wine, and Black—timeless across all ages and styles. <br><strong>0:55</strong> Delivered in a dedicated box. A leather key case for daily companionship. This is Katie.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-katie-wash">
+                <div class="ph-left">
+                    <h2>Katie Wash</h2>
+                    <div class="jp-name">ケイティ・ウォッシュ</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('katie-wash','shoot')">
+                        <input type="checkbox" id="ph-shoot-katie-wash" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('katie-wash','edit')">
+                        <input type="checkbox" id="ph-edit-katie-wash" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのキーケース、ケイティ・ウォッシュです。」<br><strong>0:03</strong> 「洗い加工を施すことで、一点一点異なる表情に。革本来の風合いを楽しめる、特別な仕上がりです。」<br><strong>0:11</strong> 「素材には、イタリア・フィレンツェの名門タンナーが手掛ける"トスカーノ リスシオレザー"を採用。やわらかな手触りと、使うほど深まる風合いが魅力です。」<br><strong>0:21</strong> 「5連のキーホルダーのうち、1つは大きめのリングを採用。スマートキーも収納しやすい設計です。」<br><strong>0:30</strong> 「内側にはポケットを1つ配置。カードや折りたたんだお札も収納できます。」<br><strong>0:37</strong> 「スナップボタンでしっかり閉じられるので、鍵をすっきり持ち歩けます。」<br><strong>0:43</strong> 「カラーは、レッド・ワイン・ブラックの3色展開。洗い加工ならではの表情は、一点ごとに異なります。」<br><strong>0:51</strong> 「使うほど手になじみ、風合いが深まるレザーです。」<br><strong>0:56</strong> 「革の個性を楽しむ、キーケース。ケイティ・ウォッシュです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Kawanishi Kaban's key case, Katie Wash. <br><strong>0:03</strong> Wash treatment creates unique character on each piece—celebrating leather's natural patina. <br><strong>0:11</strong> Made with Toscano Lischio Leather—soft touch with deepening character over time. <br><strong>0:21</strong> Of 5 key rings, one oversized for smart keys. <br><strong>0:30</strong> One interior pocket for cards and folded bills. <br><strong>0:37</strong> Snap closure keeps keys tidy. <br><strong>0:43</strong> Available in Red, Wine, and Black—each wash-treated piece is one-of-a-kind. <br><strong>0:51</strong> Feels better every time you use it—character deepens naturally. <br><strong>0:56</strong> A key case that celebrates leather's individuality. This is Katie Wash.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-katie-sand">
+                <div class="ph-left">
+                    <h2>Katie - Sand Leather</h2>
+                    <div class="jp-name">ケイティ・サンドレザー</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('katie-sand','shoot')">
+                        <input type="checkbox" id="ph-shoot-katie-sand" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('katie-sand','edit')">
+                        <input type="checkbox" id="ph-edit-katie-sand" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのキーケース、ケイティ。サンドレザー仕様です。」<br><strong>0:03</strong> 「素材には、オリジナル素材"サンドレザー"を採用。表面を毛羽立たせた独特の質感で、傷が目立ちにくいのも特徴です。」<br><strong>0:12</strong> 「製品づくりの過程で生まれる革を活かした、サステナブルなレザー。その素材を引き立てるため、表からスナップが見えない、すっきりとしたデザインに仕上げました。」<br><strong>0:22</strong> 「5連のキーホルダーのうち、1つは大きめのリングを採用。スマートキーも収納しやすく、反対側のキーリングは取り外して使うこともできます。」<br><strong>0:32</strong> 「内側にはポケットを1つ備え、カードや折りたたんだお札も収納可能。毎日の持ち歩きにも便利です。」<br><strong>0:40</strong> 「革の色に合わせたステッチや、さりげないロゴの刻印など、細部まで丁寧に仕上げました。」<br><strong>0:47</strong> 「カラーは、キャメル・ネイビー・グレー・グリーンの4色展開。使うほど表情が変わる、サンドレザーならではの風合いも楽しめます。」<br><strong>0:56</strong> 「毎日に寄り添う、レザーキーケース。ケイティです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Kawanishi Kaban's key case, Katie. Sand Leather version. <br><strong>0:03</strong> Features our original Sand Leather material. The raised surface creates a unique texture where scratches are less visible. <br><strong>0:12</strong> Sustainable leather made from scraps generated during production. A clean, minimalist design lets this material shine—hidden snap buttons. <br><strong>0:22</strong> Of 5 key rings, one is oversized for smart keys. The opposite key ring is removable for flexible use. <br><strong>0:32</strong> One interior pocket for cards and folded bills—convenient for everyday carry. <br><strong>0:40</strong> Stitching that matches the leather color and subtle logo show meticulous craftsmanship. <br><strong>0:47</strong> Available in Camel, Navy, Gray, and Green. Experience the unique character that evolves with Sand Leather. <br><strong>0:56</strong> A leather key case that stays with you every day. This is Katie.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-keith">
+                <div class="ph-left">
+                    <h2>Keith - Water-Resistant</h2>
+                    <div class="jp-name">キース・撥水レザーver.</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('keith','shoot')">
+                        <input type="checkbox" id="ph-shoot-keith" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('keith','edit')">
+                        <input type="checkbox" id="ph-edit-keith" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのキーケース、キース。撥水レザー仕様です。」<br><strong>0:03</strong> 「スマートキーや家の鍵、カードキーまで。鍵まわりの持ち物を、ひとつにまとめるために生まれました。」<br><strong>0:11</strong> 「最大の特徴は、背面の伸縮ポケット。厚みのあるスマートキーにもフィットし、スムーズに出し入れできます。」<br><strong>0:20</strong> 「L字ファスナーを開くと、内側には4つのキーホルダーとカードポケットを配置。免許証やICカードも一緒に持ち歩けます。」<br><strong>0:30</strong> 「素材には、オリジナル撥水レザー"モリス"を採用。本革の質感を楽しみながら、水にも気兼ねなく使えます。」<br><strong>0:39</strong> 「裏地には、中身が見やすいカーキグレーのナイロンツイルを使用。細部まで使いやすさにこだわりました。」<br><strong>0:47</strong> 「カラーは、ブラック・キャメル・グレーの3色展開。毎日使うものだからこそ、扱いやすく仕上げています。」<br><strong>0:55</strong> 「鍵まわりを、ひとつにまとめる。キースです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Kawanishi Kaban's key case, Keith. Water-resistant leather version. <br><strong>0:03</strong> Smart keys, house keys, card keys—born to organize everything on your keychain in one place. <br><strong>0:11</strong> The standout feature: an expandable back pocket that fits thick smart keys with smooth access. <br><strong>0:20</strong> Open the L-shaped zipper to find 4 key rings and a card pocket inside. Carry your license and IC cards too. <br><strong>0:30</strong> Features our original water-resistant Morris Leather—enjoy real leather texture with water-worry-free durability. <br><strong>0:39</strong> The lining is khaki-gray nylon twill for easy visibility. Every detail prioritizes usability. <br><strong>0:47</strong> Available in Black, Camel, and Gray—practical for daily use. <br><strong>0:55</strong> Organize your entire keychain in one place. This is Keith.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charms & Accessories -->
+        <h2 class="section-label">Charms & Accessories</h2>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-abe-charm">
+                <div class="ph-left">
+                    <h2>Abe Charm</h2>
+                    <div class="jp-name">アベチャーム</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('abe-charm','shoot')">
+                        <input type="checkbox" id="ph-shoot-abe-charm" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('abe-charm','edit')">
+                        <input type="checkbox" id="ph-edit-abe-charm" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのアベチャームです。」<br><strong>0:03</strong> 「アベベを、もっと使いやすく。サイドのナスカンとDカンの間に取り付けるだけで、バッグの開口部が大きく開き、荷物をスムーズに出し入れできます。」<br><strong>0:13</strong> 「素材には、日本を代表する"栃木レザー"を採用。丈夫で使うほど風合いが深まり、革ならではの経年変化も楽しめます。」<br><strong>0:22</strong> 「仕上げは、職人による手作業。コバ磨きから縫製まで、一つひとつ丁寧に仕上げています。」<br><strong>0:30</strong> 「もちろん、キーホルダーとして使うのもおすすめ。鍵を取り付けてバッグの内側に固定すれば、バッグの中で迷子になりにくくなります。」<br><strong>0:40</strong> 「重さは約13g。カラーは、キャメルとブラックの2色展開です。」<br><strong>0:46</strong> 「アベベはもちろん、さまざまなバッグにも取り付け可能。小さなレザーアクセサリーとしても楽しめます。」<br><strong>0:54</strong> 「小さな工夫で、バッグはもっと使いやすく。アベチャームです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's Abe Charm. <br><strong>0:03</strong> Make Abe easier to use: attach between the side carabiner and D-ring for wider opening and smooth access. <br><strong>0:13</strong> Made with Tochigi Leather—durable with deepening character and authentic aging. <br><strong>0:22</strong> Hand-finished by craftsmen from edge polishing to stitching. <br><strong>0:30</strong> Also works as a key holder: attach keys and secure inside the bag to prevent loss. <br><strong>0:40</strong> Just 13 grams. Available in Camel and Black. <br><strong>0:46</strong> Works with Abe and any other bag. Enjoy as a small leather accessory too. <br><strong>0:54</strong> Small tweaks make your bag easier to use. This is Abe Charm.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-dcan-charm">
+                <div class="ph-left">
+                    <h2>D-Can Charm</h2>
+                    <div class="jp-name">Dカンチャーム</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('dcan-charm','shoot')">
+                        <input type="checkbox" id="ph-shoot-dcan-charm" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('dcan-charm','edit')">
+                        <input type="checkbox" id="ph-edit-dcan-charm" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのDカンチャームです。」<br><strong>0:03</strong> 「バッグに、もうひとつ便利さを。鍵やパスケースを取り付けられる、本革製のチャームです。」<br><strong>0:10</strong> 「素材には、日本を代表する"栃木レザー"を採用。丈夫で使うほど風合いが深まり、革ならではの経年変化も楽しめます。」<br><strong>0:20</strong> 「D字型の金具には、鍵やパスケースなどを自由に取り付け可能。バッグに機能性とアクセントをプラスできます。」<br><strong>0:29</strong> 「仕上げは、職人による手作業。コバ磨きや縫製まで、一つひとつ丁寧に仕上げています。」<br><strong>0:37</strong> 「スナップボタンで簡単に取り付けられるので、バッグはもちろん、ベルトループにも装着可能。重さは約13gと軽量です。」<br><strong>0:47</strong> 「カラーは、キャメルとブラックの2色展開。バッグに合わせて、自分らしくカスタマイズできます。」<br><strong>0:55</strong> 「小さなパーツで、使いやすさはもっと広がる。Dカンチャームです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's D-Can Charm. <br><strong>0:03</strong> Add more utility to your bag: attach keys or card cases to this genuine leather charm. <br><strong>0:10</strong> Made with Tochigi Leather—durable with deepening character and authentic aging. <br><strong>0:20</strong> D-shaped hardware lets you attach keys, card cases, and more. Add function and style to your bag. <br><strong>0:29</strong> Hand-finished by craftsmen from edge polishing to stitching. <br><strong>0:37</strong> Snap-button attachment works on bags, belts, and more—just 13 grams. <br><strong>0:47</strong> Available in Camel and Black. Customize to match your bag. <br><strong>0:55</strong> Small piece, expanded versatility. This is the D-Can Charm.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-cord-clip">
+                <div class="ph-left">
+                    <h2>Leather Cord Clip</h2>
+                    <div class="jp-name">レザーコードクリップ</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('cord-clip','shoot')">
+                        <input type="checkbox" id="ph-shoot-cord-clip" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('cord-clip','edit')">
+                        <input type="checkbox" id="ph-edit-cord-clip" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのレザーコードクリップです。」<br><strong>0:03</strong> 「イヤホンや充電ケーブルなど、絡まりがちなコードをすっきりまとめる、本革製のコードクリップです。」<br><strong>0:11</strong> 「バッグや財布をつくる過程で生まれる革を活かした、サステナブルなアイテム。小さな革まで大切に使い切りたいという想いから生まれました。」<br><strong>0:21</strong> 「従来モデルより約1cm長くリニューアル。少し太めのケーブルはもちろん、リュックの余ったショルダーテープをまとめるバンドとしても活躍します。」<br><strong>0:31</strong> 「素材には、サンドレザーやリスシオレザーなど、バッグにも使われる本革を採用。使うほどに風合いが深まり、革ならではの経年変化も楽しめます。」<br><strong>0:41</strong> 「1個約5gと軽量。カラーはランダムに3個セットでお届けするので、どの組み合わせになるかも楽しみのひとつです。」<br><strong>0:50</strong> 「専用ラッピング入りで、ちょっとした贈り物にもおすすめ。毎日使うものだからこそ、上質な革を。」<br><strong>0:57</strong> 「日常を、すっきり整える。レザーコードクリップです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's Leather Cord Clip. <br><strong>0:03</strong> Genuine leather organizer for tangled earbuds, cables, and cords. <br><strong>0:11</strong> Made from production scraps—sustainable with a commitment to use every scrap thoughtfully. <br><strong>0:21</strong> Upgraded about 1cm longer for thicker cables and backpack straps. <br><strong>0:31</strong> Uses premium leather like Sand and Lischio—character deepens with authentic aging. <br><strong>0:41</strong> Just 5 grams each. Arrive in random 3-piece sets for fun surprises. <br><strong>0:50</strong> Comes with dedicated packaging—perfect for gifting. Quality leather for daily essentials. <br><strong>0:57</strong> Keep your everyday organized and tidy. This is the Leather Cord Clip.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-shoulder-strap">
+                <div class="ph-left">
+                    <h2>Leather Shoulder Strap</h2>
+                    <div class="jp-name">レザーショルダーパーツ</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('shoulder-strap','shoot')">
+                        <input type="checkbox" id="ph-shoot-shoulder-strap" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('shoulder-strap','edit')">
+                        <input type="checkbox" id="ph-edit-shoulder-strap" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「いつものバッグを、もっと上品に。レザーショルダーパーツです。」<br><strong>0:03</strong> 「カワニシカバンのミニトートに合わせて設計した、栃木レザー製のショルダーパーツ。付け替えるだけで、バッグの印象がぐっと変わります。」<br><strong>0:12</strong> 「素材には、日本を代表する"栃木レザー"を採用。約3mm厚の一枚革を使用し、使うほど体になじみ、美しい艶が育っていきます。」<br><strong>0:22</strong> 「幅は21mm。肩への負担と見た目のバランスを考えたサイズで、長さ調整も細かくできるので、自分に合ったフィット感で使えます。」<br><strong>0:32</strong> 「取り付けはナスカンでワンタッチ。バッグに合わせて気軽に付け替えられます。」<br><strong>0:38</strong> 「帆布シリーズにはキャメル、コーデュラ®シリーズにはブラックがおすすめ。バッグの持ち手と同じレザーを使っているので、統一感のある仕上がりです。」<br><strong>0:48</strong> 「コマメやミニモンなど、小ぶりなトートバッグとの相性も抜群。細部まで丁寧に仕上げています。」<br><strong>0:56</strong> 「手持ちも、肩掛けも、思いのままに。レザーショルダーパーツです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Make your bag more refined. This is the Leather Shoulder Strap. <br><strong>0:03</strong> Designed for Kawanishi Kaban's mini totes—swap it out and transform your bag's entire look. <br><strong>0:12</strong> Made with Tochigi Leather—3mm thick, softens and develops beautiful gloss with use. <br><strong>0:22</strong> 21mm width balances comfort and appearance. Fine-tuned adjustments fit everyone perfectly. <br><strong>0:32</strong> One-touch carabiner attachment makes swapping between bags easy. <br><strong>0:38</strong> Camel pairs beautifully with canvas; Black with Cordura®—matches bag handles for cohesion. <br><strong>0:48</strong> Perfect with compact totes like Komame and Minimon. Meticulous finishing throughout. <br><strong>0:56</strong> Hand-carry or shoulder-carry—your choice. This is the Leather Shoulder Strap.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-handle-cover">
+                <div class="ph-left">
+                    <h2>Handle Cover - Sand Leather</h2>
+                    <div class="jp-name">ハンドルカバー・サンドレザー</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('handle-cover','shoot')">
+                        <input type="checkbox" id="ph-shoot-handle-cover" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('handle-cover','edit')">
+                        <input type="checkbox" id="ph-edit-handle-cover" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「バッグの持ち手が手に食い込む…。そんな悩みから生まれたのが、このハンドルカバーです。」<br><strong>0:04</strong> 「スナップボタンで簡単に取り付けられ、バッグに合わせて気軽に付け替えができます。」<br><strong>0:10</strong> 「最大の特徴は、5mm厚のクッション材。さらに内側には牛革スエードを重ね、やさしい握り心地に仕上げました。」<br><strong>0:19</strong> 「素材には、オリジナル素材"サンドレザー"を採用。表面を毛羽立たせた独特の質感で、傷が目立ちにくいのも特徴です。」<br><strong>0:28</strong> 「クッションが荷重を分散するので、重い荷物の日でも手や肩への負担をやわらげます。」<br><strong>0:35</strong> 「シンプルなバッグに、さりげないアクセントを添えてくれるのも魅力です。」<br><strong>0:41</strong> 「カラーは、キャメル・ネイビー・グレー・グリーンの4色。アソート仕様なので、どの色が届くかは開けてからのお楽しみです。」<br><strong>0:50</strong> 「オリジナルパッケージ入りで、ギフトにもおすすめ。小さなパーツで、大きな快適を。ハンドルカバーです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> Your bag handle digging in? This Handle Cover was born to solve that. <br><strong>0:04</strong> Easy snap-button attachment—swap between bags freely. <br><strong>0:10</strong> 5mm cushioning layer with cow suede inside for a gentle grip. <br><strong>0:19</strong> Uses our Sand Leather with a unique raised texture—scratches stay invisible. <br><strong>0:28</strong> The padding distributes weight—reduces hand and shoulder strain even with heavy loads. <br><strong>0:35</strong> Adds subtle style to simple bags. <br><strong>0:41</strong> Camel, Navy, Gray, Green in assorted packs—fun surprise when it arrives. <br><strong>0:50</strong> Original packaging included—perfect for gifting. Small piece, big comfort. This is the Handle Cover.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-smartphone-case">
+                <div class="ph-left">
+                    <h2>Leather Smartphone Case</h2>
+                    <div class="jp-name">レザースマホケース</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('smartphone-case','shoot')">
+                        <input type="checkbox" id="ph-shoot-smartphone-case" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('smartphone-case','edit')">
+                        <input type="checkbox" id="ph-edit-smartphone-case" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのレザースマホケースです。」<br><strong>0:03</strong> 「スマホと財布だけを持って、身軽に出かけたい。そんな声から生まれた、ミニマルなレザーケースです。」<br><strong>0:11</strong> 「スマートフォンはもちろん、カワニシカバンの長財布『リッチーL』も収納できるサイズ設計。縦長のすっきりとしたフォルムに仕上げました。」<br><strong>0:21</strong> 「素材には、オリジナル素材"サンドレザー"を採用。表面を毛羽立たせた独特の質感で、傷が目立ちにくいのも特徴です。」<br><strong>0:30</strong> 「上部と両サイドが大きく開くファスナー構造で、中身の出し入れもスムーズ。スナップ部分には、コードクリップのデザインを取り入れました。」<br><strong>0:40</strong> 「本体にはショルダー用のDカンを装備。別売りのショルダーパーツを組み合わせれば、自分らしいスタイルで持ち歩けます。」<br><strong>0:48</strong> 「カラーは、キャメル・ネイビー・グレー・グリーンの4色展開。グレーはブラック金具、その他の3色はシルバー金具を組み合わせています。」<br><strong>0:57</strong> 「必要なものだけを、美しく持ち歩く。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's Leather Smartphone Case. <br><strong>0:03</strong> Carry just your phone and wallet for a lighter journey—minimal leather design. <br><strong>0:11</strong> Sized for phones and our Richie L wallet. Vertical, streamlined form. <br><strong>0:21</strong> Uses Sand Leather with a unique raised texture—scratches stay invisible. <br><strong>0:30</strong> Wide zippered opening on top and sides for smooth access. Snap details echo our Cord Clip. <br><strong>0:40</strong> Built-in D-ring for shoulder options—pair with our Strap for your own style. <br><strong>0:48</strong> Camel, Navy, Gray, Green—Gray with black hardware, others with silver. <br><strong>0:57</strong> Carry only what you need—beautifully.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coin Cases -->
+        <h2 class="section-label">Coin Cases</h2>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-pillow">
+                <div class="ph-left">
+                    <h2>Pillow Coin Case</h2>
+                    <div class="jp-name">ピロー</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('pillow','shoot')">
+                        <input type="checkbox" id="ph-shoot-pillow" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('pillow','edit')">
+                        <input type="checkbox" id="ph-edit-pillow" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのコインケース、ピローです。」<br><strong>0:03</strong> 「名前の通り、枕のような、ふっくらとしたフォルム。縫い目を見せないノンステッチ仕立てで、革の美しさを引き立てました。」<br><strong>0:12</strong> 「素材には、イタリア・フィレンツェの名門タンナーが手掛ける"トスカーノ リスシオレザー"を採用。やわらかな手触りと、使うほど深まる風合いが魅力です。」<br><strong>0:22</strong> 「コンパクトながら、収納力も十分。コインは約30枚、お札は折りたたんで収納でき、カードも1枚入ります。」<br><strong>0:32</strong> 「中央のスナップボタンが、さりげないアクセント。これひとつで、ミニ財布としても活躍します。」<br><strong>0:40</strong> 「重さは約50g。キャッシュレス派のサブウォレットとしてもおすすめです。」<br><strong>0:46</strong> 「カラーは、レッド・ワイン・ブラックの3色展開。贈り物にも選ばれているアイテムです。」<br><strong>0:54</strong> 「小さくても、細部まで美しく。ピローです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's Pillow Coin Case. <br><strong>0:03</strong> True to its name—pillow-like, rounded form. Non-stitch construction lets leather's beauty shine. <br><strong>0:12</strong> Made with Toscano Lischio Leather—soft touch with deepening character over time. <br><strong>0:22</strong> Compact yet spacious: holds about 30 coins, folded bills, and one card. <br><strong>0:32</strong> A subtle center snap adds just the right accent. Works wonderfully as a mini wallet. <br><strong>0:40</strong> About 50 grams—perfect as a secondary wallet for those going cashless. <br><strong>0:46</strong> Red, Wine, Black—a popular gift choice. <br><strong>0:54</strong> Small but beautiful in every detail. This is Pillow.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-pillow-sand">
+                <div class="ph-left">
+                    <h2>Pillow - Sand Leather</h2>
+                    <div class="jp-name">ピロー・サンドレザーver.</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('pillow-sand','shoot')">
+                        <input type="checkbox" id="ph-shoot-pillow-sand" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('pillow-sand','edit')">
+                        <input type="checkbox" id="ph-edit-pillow-sand" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのコインケース、ピロー。サンドレザー仕様です。」<br><strong>0:03</strong> 「縫い目を見せない、ノンステッチ仕立て。枕のような、ふっくらとしたフォルムが特徴です。」<br><strong>0:11</strong> 「素材には、オリジナル素材"サンドレザー"を採用。表面を毛羽立たせた独特の質感で、傷が目立ちにくいのも特徴です。」<br><strong>0:20</strong> 「このアイテムは、製品づくりの過程で生まれる革を活かして生まれた、サステナブルなレザーアイテムです。」<br><strong>0:28</strong> 「コンパクトながら、収納力も十分。コインは約30枚、お札は折りたたんで収納でき、カードも1枚入ります。」<br><strong>0:38</strong> 「重さは約50g。ポケットにもすっきり収まるサイズ感です。」<br><strong>0:43</strong> 「カラーは、キャメル・ネイビー・グレー・グリーンの4色展開。使うほど表情が変わる、サンドレザーならではの風合いも楽しめます。」<br><strong>0:53</strong> 「革を大切に使い切る想いから生まれた、小さなレザーアイテム。ピローです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's Pillow Coin Case. Sand Leather version. <br><strong>0:03</strong> Non-stitch construction—pillow-like, rounded form. <br><strong>0:11</strong> Uses our Sand Leather with a unique raised texture—scratches less visible. <br><strong>0:20</strong> A sustainable piece made from production scraps. <br><strong>0:28</strong> Compact yet spacious: about 30 coins, folded bills, and one card. <br><strong>0:38</strong> About 50 grams—fits neatly in a pocket. <br><strong>0:43</strong> Camel, Navy, Gray, Green—unique character evolves with Sand Leather. <br><strong>0:53</strong> A small leather piece born from a commitment to waste nothing. This is Pillow.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-coin-neck">
+                <div class="ph-left">
+                    <h2>Leather Coin Neck</h2>
+                    <div class="jp-name">レザーコインネック</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('coin-neck','shoot')">
+                        <input type="checkbox" id="ph-shoot-coin-neck" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('coin-neck','edit')">
+                        <input type="checkbox" id="ph-edit-coin-neck" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのレザーコインネックです。」<br><strong>0:03</strong> 「小銭入れを、"身につける"。ネックレスのように首から下げて持ち歩ける、新しいスタイルのコインケースです。」<br><strong>0:11</strong> 「素材には、イタリア・フィレンツェの名門タンナーが手掛ける"トスカーノ リスシオレザー"を採用。やわらかさと耐久性を兼ね備え、使うほどに風合いが深まります。」<br><strong>0:21</strong> 「内側は2つのポケット構造。本体にはコイン約30枚、ふた側には折りたたんだお札を収納できます。」<br><strong>0:30</strong> 「カードも1枚収納可能。必要なものをコンパクトに持ち歩けます。」<br><strong>0:36</strong> 「スナップボタン付きなので、動いても中身が飛び出しにくい設計です。」<br><strong>0:41</strong> 「首紐は最長約45cmまで長さ調整が可能。ファッションのアクセントとしても自然になじみます。」<br><strong>0:49</strong> 「カラーは、レッド・ワイン・ブラックの3色展開。身軽に持ち歩ける、小さなレザーアイテムです。」<br><strong>0:57</strong> 「自由に身につける、レザーコインケース。レザーコインネックです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's Leather Coin Neck. <br><strong>0:03</strong> Wear your coin case like a necklace—a new way to carry essentials hands-free. <br><strong>0:11</strong> Made with Toscano Lischio Leather—combines softness and durability with deepening character. <br><strong>0:21</strong> Two interior pockets: about 30 coins in the main body, folded bills in the flap. <br><strong>0:30</strong> Also holds one card. Carry essentials in compact style. <br><strong>0:36</strong> Snap buttons keep contents secure even during movement. <br><strong>0:41</strong> Adjustable neck cord up to about 45cm—works as a fashion accent. <br><strong>0:49</strong> Red, Wine, Black—a small leather piece for light, free traveling. <br><strong>0:57</strong> A coin case you wear freely. This is the Leather Coin Neck.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-container">
+            <div class="product-header" id="ph-coin-neck-sand">
+                <div class="ph-left">
+                    <h2>Leather Coin Neck - Sand Leather</h2>
+                    <div class="jp-name">レザーコインネック・サンドレザーver.</div>
+                </div>
+                <div class="ph-checks">
+                    <label class="ph-check-label" onclick="togglePh('coin-neck-sand','shoot')">
+                        <input type="checkbox" id="ph-shoot-coin-neck-sand" class="ph-cb">
+                        <span class="ph-box ph-shoot-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Filmed</span><span data-lang="ja">撮影済</span></span>
+                    </label>
+                    <label class="ph-check-label" onclick="togglePh('coin-neck-sand','edit')">
+                        <input type="checkbox" id="ph-edit-coin-neck-sand" class="ph-cb">
+                        <span class="ph-box ph-edit-box">
+                            <svg width="10" height="10" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </span>
+                        <span class="ph-label-text"><span data-lang="en">Edited</span><span data-lang="ja">編集済</span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="scripts-wrapper">
+                <div class="script-column">
+                    <h3>Japanese</h3>
+                    <p><strong>0:00</strong> 「カワニシカバンのレザーコインネック。サンドレザー仕様です。」<br><strong>0:03</strong> 「小銭入れを、"首から下げる"。身につけて持ち歩ける、新しいスタイルのコインケースです。」<br><strong>0:11</strong> 「素材には、オリジナル素材"サンドレザー"を採用。表面を毛羽立たせた独特の質感で、傷が目立ちにくいのも特徴です。」<br><strong>0:20</strong> 「内側は2つのポケット構造。本体にはコイン約30枚、ふた側には折りたたんだお札を収納できます。」<br><strong>0:29</strong> 「カードも1枚収納可能。必要なものをコンパクトに持ち歩けます。」<br><strong>0:35</strong> 「スナップボタン付きなので、動いても中身が飛び出しにくい設計です。」<br><strong>0:40</strong> 「首紐は最長約45cmまで長さ調整が可能。首から下げるだけでなく、バッグに取り付けるなど、使い方も自由です。」<br><strong>0:49</strong> 「カラーは、キャメル・ネイビー・グレー・グリーンの4色展開。使うほど表情が変わる、サンドレザーの質感も魅力です。」<br><strong>0:57</strong> 「自由に身につける、レザーコインケース。レザーコインネックです。」</p>
+                </div>
+                <div class="script-column">
+                    <h3>English</h3>
+                    <p><strong>0:00</strong> This is Kawanishi Kaban's Leather Coin Neck. Sand Leather version. <br><strong>0:03</strong> Hang your coin case from your neck—a new way to carry essentials hands-free. <br><strong>0:11</strong> Uses our Sand Leather with a unique raised texture—scratches less visible. <br><strong>0:20</strong> Two interior pockets: about 30 coins in the main body, folded bills in the flap. <br><strong>0:29</strong> Also holds one card. Carry essentials in compact style. <br><strong>0:35</strong> Snap buttons keep contents secure during movement. <br><strong>0:40</strong> Adjustable neck cord up to 45cm—wear it, attach it to a bag, use however you want. <br><strong>0:49</strong> Camel, Navy, Gray, Green—unique character evolves with Sand Leather. <br><strong>0:57</strong> A coin case you wear freely. This is the Leather Coin Neck.</p>
+                </div>
+            </div>
+        </div>
+
+    
   </div>
 
-  <!-- HASHTAG SYSTEM -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">Hashtag System</span><span data-lang="ja">ハッシュタグシステム</span></div>
-    <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1A1A1A;margin-bottom:8px"><span data-lang="en">Always-on — every post, no exceptions</span><span data-lang="ja">常時使用 — 全投稿、例外なし</span></div>
-    <div class="ht-always">
-      <span class="ht-tag always">#madeinjapan</span>
-      <span class="ht-tag always">#slowfashion</span>
-      <span class="ht-tag always">#everydaycarry</span>
-      <span class="ht-tag always">#canvasbag</span>
-    </div>
-    <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C4956A;margin-bottom:8px"><span data-lang="en">Rotating — pick 1 per post</span><span data-lang="ja">ローテーション — 投稿ごとに1つ選ぶ</span></div>
-    <div class="ht-rotate">
-      <span class="ht-tag rotate">#leatherbag</span>
-      <span class="ht-tag rotate">#kagawa</span>
-      <span class="ht-tag rotate">#takamatsu</span>
-      <span class="ht-tag rotate">#japanesecraft</span>
-      <span class="ht-tag rotate">#minimalbag</span>
-      <span class="ht-tag rotate">#onebagtravel</span>
-      <span class="ht-tag rotate">#edc</span>
-      <span class="ht-tag rotate">#cordurabag</span>
-    </div>
-    <div style="font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#c0392b;margin-bottom:8px"><span data-lang="en">Never use</span><span data-lang="ja">絶対使わない</span></div>
-    <div class="ht-never">
-      <span class="ht-tag never">#viralreels</span>
-      <span class="ht-tag never">#fashion</span>
-      <span class="ht-tag never">#bags</span>
-      <span class="ht-tag never">#instagood</span>
-      <span class="ht-tag never">#photooftheday</span>
-    </div>
-  </div>
-
-  <!-- CTA ROTATION -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">CTA Rotation</span><span data-lang="ja">CTAローテーション</span></div>
-    <div style="font-size:12px;color:#666;margin-bottom:12px"><span data-lang="en">Never use the same type twice in a row. Never run more than 2 Engage CTAs in a row.</span><span data-lang="ja">同じタイプを連続で使わない。エンゲージCTAを2回以上連続で使わない。</span></div>
-    <table class="cta-table">
-      <thead><tr><th><span data-lang="en">Type</span><span data-lang="ja">種類</span></th><th><span data-lang="en">Example CTA</span><span data-lang="ja">例</span></th><th><span data-lang="en">Signal</span><span data-lang="ja">シグナル</span></th></tr></thead>
-      <tbody>
-        <tr><td><span class="cta-type">SEND</span></td><td><span data-lang="en">Send this to someone who needs a better bag.</span><span data-lang="ja">もっと良いバッグが必要な人に送って。</span></td><td><span class="cta-signal"><span data-lang="en">Shares — highest</span><span data-lang="ja">シェア — 最高</span></span></td></tr>
-        <tr><td><span class="cta-type">SAVE</span></td><td><span data-lang="en">Save this before your next bag search.</span><span data-lang="ja">次のバッグ探しの前に保存を。</span></td><td><span class="cta-signal"><span data-lang="en">Saves — high</span><span data-lang="ja">保存 — 高</span></span></td></tr>
-        <tr><td><span class="cta-type">COMMENT</span></td><td><span data-lang="en">Canvas or leather? / Which color? / Where would you take this?</span><span data-lang="ja">キャンバスかレザー？/ どの色？/ どこに持っていく？</span></td><td><span class="cta-signal"><span data-lang="en">Comments</span><span data-lang="ja">コメント</span></span></td></tr>
-        <tr><td><span class="cta-type">FOLLOW</span></td><td><span data-lang="en">Follow for more from Kagawa, Japan.</span><span data-lang="ja">香川からもっと見るにはフォローを。</span></td><td><span class="cta-signal"><span data-lang="en">Follows — growth</span><span data-lang="ja">フォロー — 成長</span></span></td></tr>
-        <tr><td><span class="cta-type">DM</span></td><td><span data-lang="en">Comment JAPAN for the link. (purchase-intent posts only)</span><span data-lang="ja">リンクはJAPANとコメントを（購買意図投稿のみ）</span></td><td><span class="cta-signal"><span data-lang="en">DMs — conversion</span><span data-lang="ja">DM — コンバージョン</span></span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- CAROUSEL FORMAT -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">Carousel Format Guide</span><span data-lang="ja">カルーセルフォーマットガイド</span></div>
-    <div class="format-card" style="margin-bottom:12px;display:block;padding:14px 16px">
-      <div class="fc-desc" style="margin-bottom:10px"><span data-lang="en">8–10 slides · One bag · One location · One shoot day · No splice technique · Add music to push into Reels feed · Caption leads with FEELING not product specs</span><span data-lang="ja">8〜10枚 · バッグ1つ · ロケーション1つ · 撮影日1日 · スプライス不使用 · 音楽追加でリールフィードへ · キャプションは仕様ではなく感情から始める</span></div>
-    </div>
-    <div class="igs-section-title" style="font-size:9px;padding:0 0 8px"><span data-lang="en">Shot Order — Every Carousel</span><span data-lang="ja">ショット順 — 全カルーセル</span></div>
-    <div class="carousel-shots">
-      <div class="carousel-shot"><div class="cs-num">1</div><span data-lang="en">Hook detail close-up — text overlay on negative space</span><span data-lang="ja">フックとなるクローズアップ — ネガティブスペースにテキストオーバーレイ</span></div>
-      <div class="carousel-shot"><div class="cs-num">2</div><span data-lang="en">Environmental wide — bag small in frame, location context</span><span data-lang="ja">環境の引きショット — フレーム内でバッグを小さく、ロケーションのコンテキスト</span></div>
-      <div class="carousel-shot"><div class="cs-num">3</div><span data-lang="en">Hero product shot — bag fills 60% of frame</span><span data-lang="ja">ヒーロー製品ショット — バッグがフレームの60%を占める</span></div>
-      <div class="carousel-shot"><div class="cs-num">4</div><span data-lang="en">Texture macro — extreme close-up of material</span><span data-lang="ja">テクスチャーマクロ — 素材の超クローズアップ</span></div>
-      <div class="carousel-shot"><div class="cs-num">5</div><span data-lang="en">Hardware / detail — zipper, handles, stitching</span><span data-lang="ja">金具/ディテール — ジッパー、ハンドル、ステッチ</span></div>
-      <div class="carousel-shot"><div class="cs-num">6</div><span data-lang="en">Hand interaction — bag being picked up or held naturally</span><span data-lang="ja">手のインタラクション — バッグを自然に持ち上げるか持っている</span></div>
-      <div class="carousel-shot"><div class="cs-num">7</div><span data-lang="en">Carry shot — bag worn or carried, lower body only</span><span data-lang="ja">キャリーショット — バッグを着用または持ち歩く、下半身のみ</span></div>
-      <div class="carousel-shot"><div class="cs-num">8</div><span data-lang="en">Interior shot — bag open from above</span><span data-lang="ja">インテリアショット — 上からバッグを開けた状態</span></div>
-      <div class="carousel-shot"><div class="cs-num">9–10</div><span data-lang="en">Final beauty shot + CTA slide</span><span data-lang="ja">最終ビューティーショット＋CTAスライド</span></div>
-    </div>
-  </div>
-
-  <!-- FOUR PILLARS -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">Four Brand Pillars — Every Post Hits At Least One</span><span data-lang="ja">4つのブランド柱 — 全投稿が少なくとも1つを打つ</span></div>
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pc-name"><span data-lang="en">Place</span><span data-lang="ja">場所</span></div>
-        <div class="pc-what"><span data-lang="en">Kagawa / Takamatsu / Setouchi / Japan. Always mention location. Use as SEO keyword.</span><span data-lang="ja">香川/高松/瀬戸内/日本。常に場所を言及。SEOキーワードとして使う。</span></div>
-        <div class="pc-example"><span data-lang="en">"Handmade in Takamatsu, Kagawa."</span><span data-lang="ja">「香川県高松市でハンドメイド。」</span></div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-name"><span data-lang="en">Craft</span><span data-lang="ja">職人技</span></div>
-        <div class="pc-what"><span data-lang="en">Handmade / Tuscan leather / Cordura / canvas / construction details. Inside-out build, material close-ups, workshop BTS.</span><span data-lang="ja">ハンドメイド/トスカーナレザー/コーデュラ/キャンバス/構造の詳細。</span></div>
-        <div class="pc-example"><span data-lang="en">"No visible stitching on the exterior."</span><span data-lang="ja">「外装に縫い目なし。」</span></div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-name"><span data-lang="en">Durability</span><span data-lang="ja">耐久性</span></div>
-        <div class="pc-what"><span data-lang="en">10+ years / built to be used / cost per use. Mac's wallet after 6 months. Bag after 9 months daily use.</span><span data-lang="ja">10年以上/使うために作られた/使用コスト。6ヶ月後の財布、9ヶ月毎日使ったバッグ。</span></div>
-        <div class="pc-example"><span data-lang="en">"Nine months. Still waiting for it to show wear."</span><span data-lang="ja">「9ヶ月。まだ劣化を待っている。」</span></div>
-      </div>
-      <div class="pillar-card">
-        <div class="pc-name"><span data-lang="en">Contrast</span><span data-lang="ja">対比</span></div>
-        <div class="pc-what"><span data-lang="en">Quiet hidden place → global-quality product. Japanese vs Western design. Why this matters to someone in Canada or Singapore.</span><span data-lang="ja">静かな隠れた場所 → グローバル品質の製品。日本 vs 西洋のデザイン。</span></div>
-        <div class="pc-example"><span data-lang="en">"The smallest prefecture. Some of the most thoughtful bags."</span><span data-lang="ja">「最小の県。最も思慮深いバッグ。」</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- HARD NOs -->
-  <div class="igs-section" style="padding-top:0">
-    <div class="igs-section-title"><span data-lang="en">Hard No's — Never Post These</span><span data-lang="ja">絶対NG — これは投稿しない</span></div>
-    <div class="hard-nos">
-      <div class="hard-no"><span data-lang="en">Corporate language or AI-sounding lines</span><span data-lang="ja">企業的な言葉やAIっぽい文章</span></div>
-      <div class="hard-no"><span data-lang="en">Fake reactions — "This. Is. INSANE."</span><span data-lang="ja">嘘くさいリアクション</span></div>
-      <div class="hard-no"><span data-lang="en">Japanese text on @kawanishikaban.global — English only</span><span data-lang="ja">@kawanishikaban.globalに日本語テキスト — 英語のみ</span></div>
-      <div class="hard-no"><span data-lang="en">Large product-name text overlays dominating the frame (e.g. "ABB" in huge white letters)</span><span data-lang="ja">フレームを支配する大きな製品名テキストオーバーレイ</span></div>
-      <div class="hard-no"><span data-lang="en">Splice carousels where text bleeds off frame edges</span><span data-lang="ja">テキストがフレームの端からはみ出すスプライスカルーセル</span></div>
-      <div class="hard-no"><span data-lang="en">More than 5 hashtags per post</span><span data-lang="ja">1投稿に5個以上のハッシュタグ</span></div>
-      <div class="hard-no"><span data-lang="en">Hashtags in the comments instead of the caption</span><span data-lang="ja">キャプションではなくコメントにハッシュタグ</span></div>
-      <div class="hard-no"><span data-lang="en">Dark moody backgrounds — always bright, airy, natural light</span><span data-lang="ja">暗くムーディーな背景 — 常に明るく、風通しが良く、自然光</span></div>
-      <div class="hard-no"><span data-lang="en">Direct "buy this now" CTAs — the sell is always embedded in story</span><span data-lang="ja">直接的な「今すぐ買って」CTA — 販売は常にストーリーに埋め込む</span></div>
-    </div>
-  </div>
-
-</div><!-- end ig-strategy -->
-</div><!-- end page-ig -->
+</div><!-- end ls-wrap -->
+</div><!-- end page-leather -->
 
 
 
